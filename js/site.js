@@ -416,7 +416,7 @@
       'Wandlamp Torii (wandlamp)':       { hout: 1, papier: 1 },
       'Tafellamp Take (tafellamp)':      { hout: 1, papier: 1,
                                            blad: ['Geen blad', 'Bamboeblad'] },
-      'Stalamp De Stijl':                { tape: 1, vast: 'effen Japans papier zonder vezels' },
+      'Tafellamp De Stijl':                { tape: 1, vast: 'effen Japans papier zonder vezels' },
       'Wandlamp De Stijl':               { tape: 1, vast: 'effen Japans papier zonder vezels' },
       'Lamp op maat':                    { hout: 1, papier: 1, blad: 1, afmeting: 1 }
     };
