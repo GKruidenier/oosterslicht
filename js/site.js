@@ -111,6 +111,10 @@
     var build = function () {
       dialog = document.createElement('dialog');
       dialog.className = 'lightbox';
+      /* Een dialoogvenster zonder naam wordt door een schermlezer aangekondigd
+         als alleen "dialoog", zonder te zeggen wat er te zien is. De naam
+         wordt per opening bijgewerkt in open() en openInfo(). */
+      dialog.setAttribute('aria-label', 'Foto op ware grootte');
       dialog.innerHTML =
         '<img class="lightbox__img" alt="">' +
         '<div class="lightbox__info" data-lb="info" hidden>' +
@@ -171,6 +175,8 @@
         onChange = cb || null;
         dialog.querySelector('[data-lb="info"]').hidden = true;
         label.hidden = false;
+        dialog.setAttribute('aria-label', 'Foto op ware grootte, ' +
+          slides.length + (slides.length === 1 ? ' foto' : ' foto’s'));
         render();
         dialog.showModal();
       },
@@ -192,6 +198,9 @@
         label.hidden = true;
         dialog.querySelector('[data-lb="prev"]').hidden = true;
         dialog.querySelector('[data-lb="next"]').hidden = true;
+        dialog.setAttribute('aria-label', opties.titel
+          ? opties.titel + ' — close-up'
+          : 'Materiaal van dichtbij');
 
         dialog.showModal();
       }

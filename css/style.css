@@ -588,8 +588,13 @@ p:last-child {
   color: #fff;
 }
 
+/* De rand is bij een omlijnde knop het enige wat hem als knop herkenbaar
+   maakt, dus die valt onder WCAG 1.4.11 en moet 3:1 halen. Met --c-line was
+   dat 1,32:1 op de papierkleur en 1,10:1 op de donkerste sectie: vrijwel
+   onzichtbaar. --c-wood haalt 3,42:1 in het slechtste geval en is dezelfde
+   kleur als de focusring, dus het blijft één familie. */
 .btn--ghost {
-  border-color: var(--c-line);
+  border-color: var(--c-wood);
   color: var(--c-ink-soft);
 }
 
