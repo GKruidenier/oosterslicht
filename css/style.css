@@ -905,6 +905,47 @@ p:last-child {
 
 /* --- Productraster -------------------------------------------------------- */
 
+/* --- Filterknoppen op de collectiepagina ---------------------------------- */
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.filter {
+  padding: 0.6rem 1.1rem;
+  font-size: var(--fs-small);
+  color: var(--c-ink-soft);
+  background: none;
+  border: 1px solid var(--c-line-control);
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+  transition: color var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    background-color var(--dur-fast) var(--ease);
+}
+
+.filter:hover {
+  color: var(--c-ink);
+  background: color-mix(in srgb, var(--c-wood) 10%, transparent);
+}
+
+/* De actieve staat leunt niet alleen op kleur: de knop wordt gevuld, zodat
+   het verschil ook zichtbaar is als kleuren wegvallen. */
+.filter[aria-pressed='true'] {
+  background: var(--c-ink);
+  border-color: var(--c-ink);
+  color: var(--c-bg);
+}
+
+.filters__count {
+  margin: calc(clamp(2rem, 4vw, 3rem) * -1 + 0.25rem) 0 clamp(2rem, 4vw, 3rem);
+  font-size: var(--fs-small);
+  color: var(--c-muted);
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));

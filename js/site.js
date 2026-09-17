@@ -634,6 +634,53 @@
     }
   }
 
+  /* --- Filter op soort lamp (collectiepagina) ------------------------------ */
+
+  (function () {
+    var balk = document.querySelector('[data-filters]');
+    if (!balk) return;
+
+    var kaarten = [].slice.call(document.querySelectorAll('.card[data-soort]'));
+    if (!kaarten.length) return;
+
+    var knoppen = [].slice.call(balk.querySelectorAll('[data-filter]'));
+    var teller = document.querySelector('[data-filter-count]');
+
+    // Pas tonen als de JavaScript draait; anders staan alle lampen er al en
+    // zouden de knoppen niets doen.
+    balk.hidden = false;
+
+    var toon = function (soort) {
+      var zichtbaar = 0;
+      kaarten.forEach(function (kaart) {
+        var mee = soort === 'alle' || kaart.getAttribute('data-soort') === soort;
+        kaart.hidden = !mee;
+        if (mee) zichtbaar++;
+      });
+
+      knoppen.forEach(function (knop) {
+        knop.setAttribute('aria-pressed',
+          String(knop.getAttribute('data-filter') === soort));
+      });
+
+      if (teller) {
+        // role="status" leest dit voor, zodat ook zonder zicht duidelijk is
+        // dat de lijst korter is geworden.
+        teller.textContent = zichtbaar === kaarten.length
+          ? kaarten.length + ' lampen'
+          : zichtbaar + ' van de ' + kaarten.length + ' lampen';
+      }
+    };
+
+    knoppen.forEach(function (knop) {
+      knop.addEventListener('click', function () {
+        toon(knop.getAttribute('data-filter'));
+      });
+    });
+
+    toon('alle');
+  })();
+
   /* --- Foutmelding na een mislukte verzending ----------------------------- */
 
   /* contact.php stuurt bij een fout terug naar contact.html?fout=1. De melding
