@@ -302,13 +302,6 @@ p:last-child {
   display: none;
 }
 
-/* Gecentreerd label: moet block-level flex zijn, anders doet margin auto niets. */
-.label--center {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
 /* Accent-woord in koppen: cursief, iets warmer */
 .accent {
   font-style: italic;
