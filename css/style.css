@@ -986,83 +986,9 @@ p:last-child {
 
 /* Een product op zijn eigen pagina heeft geen buren, dus ook geen scheidslijn
    erboven en geen ruimte om van die lijn af te komen. */
-/* Categorie-ankers zitten op de kaartjes zelf; zonder deze marge landt zo'n
-   sprong onder de plakkende header. */
-.card[id] {
-  scroll-margin-top: calc(var(--header-h) + 1.5rem);
-}
-
 .product--single {
   border-top: 0;
   padding-block-start: 0;
-}
-
-/* --- Categorieknoppen (kies een lampsoort) -------------------------------- */
-
-.categories {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: clamp(1.25rem, 4vw, 3rem);
-}
-
-.category {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.9rem;
-  width: min(100%, 9.5rem);
-  text-align: center;
-}
-
-.category__figure {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: min(9rem, 30vw);
-  aspect-ratio: 1;
-  padding: 1.1rem;
-  border-radius: 50%;
-  background: color-mix(in srgb, var(--c-bg-alt) 80%, transparent);
-  border: 1px solid var(--c-line);
-  overflow: hidden;
-  transition: background-color var(--dur) var(--ease),
-    border-color var(--dur) var(--ease), transform var(--dur) var(--ease);
-}
-
-.category:hover .category__figure,
-.category:focus-visible .category__figure {
-  background: color-mix(in srgb, var(--c-wood) 14%, transparent);
-  border-color: var(--c-wood);
-  transform: translateY(-4px);
-}
-
-/* Flex-item met definitieve containerhoogte: hier resolveert max-height: 100%
-   wel. Als grid-item met een auto-rij deed hij dat niet, en stak de foto
-   ruim buiten de cirkel. */
-.category__figure img {
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-}
-
-.category__name {
-  font-size: var(--fs-label);
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--c-ink);
-}
-
-.category__count {
-  display: block;
-  margin-top: 0.25rem;
-  font-size: 0.75rem;
-  letter-spacing: 0;
-  text-transform: none;
-  color: var(--c-muted);
 }
 
 /* --- Fotoslider ----------------------------------------------------------- */
