@@ -398,18 +398,18 @@
 
     /* --- Alleen de velden tonen die voor de gekozen lamp gelden -------------
 
-       Wat er per lamp te kiezen valt, staat in de productbeschrijving. Een
-       Torii krijgt altijd kozo unryu, dus een papierkeuze aanbieden is geen
-       keuze maar een valkuil; De Stijl-lampen hebben geen houtsoortkeuze en
-       wél een tapekleur. De sleutels komen letterlijk overeen met de teksten
-       van de <option>-elementen in het lampmenu. */
+       Wat er per lamp te kiezen valt, staat in de productbeschrijving. Elke
+       lamp uit de Japanse collectie kan met elke papiersoort worden gemaakt;
+       De Stijl-lampen hebben geen hout- of papierkeuze en wél een tapekleur.
+       De sleutels komen letterlijk overeen met de teksten van de
+       <option>-elementen in het lampmenu. */
     var LAMPVELDEN = {
       'Ronde Lamp Yin (vloerlamp)':      { hout: 1, papier: 1 },
       'Vierkante Lamp Yang (vloerlamp)': { hout: 1, papier: 1 },
-      'Hanglamp Kawa (hanglamp)':        { hout: 1, vast: 'kozo washi zonder vezel' },
+      'Hanglamp Kawa (hanglamp)':        { hout: 1, papier: 1 },
       'Lamp Koyo (wandlamp)':            { hout: 1, papier: 1, blad: 1, afmeting: 1 },
-      'Wandlamp Torii (wandlamp)':       { hout: 1, vast: 'kozo unryu' },
-      'Tafellamp Take (tafellamp)':      { hout: 1, vast: 'Japans papier met bamboemotief' },
+      'Wandlamp Torii (wandlamp)':       { hout: 1, papier: 1 },
+      'Tafellamp Take (tafellamp)':      { hout: 1, papier: 1 },
       'Stalamp De Stijl':                { tape: 1, vast: 'effen Japans papier zonder vezels' },
       'Wandlamp De Stijl':               { tape: 1, vast: 'effen Japans papier zonder vezels' },
       'Lamp op maat':                    { hout: 1, papier: 1, blad: 1, afmeting: 1 }
