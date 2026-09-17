@@ -1,0 +1,23 @@
+# Bronfoto's: originelen uit de camera, geen websitebestanden. Ze blijven op
+# schijf staan, maar horen niet in de repository — de site gebruikt de
+# geoptimaliseerde .webp-versies in assets/img.
+fotos_claude_website/
+
+# Originelen waarvan een geoptimaliseerde .webp in assets/img staat. Ze zijn
+# hierheen verplaatst, niet verwijderd; ONGEBRUIKTE-BESTANDEN.txt somt op
+# welke. De site vraagt geen van deze bestanden op.
+_originelen/
+
+# Gedownloade skill (impeccable). Externe code van
+# https://github.com/pbakaus/impeccable, opnieuw op te halen wanneer nodig.
+.claude/skills/
+
+# Tijdelijke werkbestanden
+*.tmp
+.lampdata.json
+.lampblokken.json
+
+# Systeemrommel
+.DS_Store
+Thumbs.db
+desktop.ini

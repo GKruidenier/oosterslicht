@@ -1,0 +1,2523 @@
+/* ==========================================================================
+   OostersLicht — stylesheet
+   Vormtaal: grote lichte display-serif, warm papierwit, veel lucht,
+   asymmetrische composities, dunne lijnen, donkere footer.
+   ========================================================================== */
+
+/* --- Fonts ---------------------------------------------------------------- */
+
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 300 500;
+  font-display: swap;
+  src: url('../assets/fonts/cormorant-garamond-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 300 500;
+  font-display: swap;
+  src: url('../assets/fonts/cormorant-garamond-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('../assets/fonts/inter-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('../assets/fonts/inter-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* --- Design tokens -------------------------------------------------------- */
+
+:root {
+  /* Oppervlakken — warm papierwit, geïnspireerd op washi */
+  --c-bg: #f7f4ee;
+  --c-bg-alt: #efeae1;
+  --c-bg-deep: #e7e0d4;
+  --c-card: #fffdf9;
+
+  /* Inkt */
+  --c-ink: #1c1a17;
+  --c-ink-soft: #3a3630;
+  /* #666057 haalt 4.5:1 op alle vier de oppervlakken, ook op --c-bg-deep. */
+  --c-muted: #666057;
+  --c-on-dark: #f2ede4;
+  --c-on-dark-muted: #a49c90;
+
+  /* Lijnen en accenten */
+  --c-line: #ddd6c9;
+  --c-line-soft: #e9e3d8;
+  --c-line-dark: #3b352c;
+  --c-wood: #8b7355;
+  --c-wood-deep: #6d5842;
+  --c-glow: #e0bd8a;
+
+  /* De Stijl */
+  --c-ds-red: #c8102e;
+  --c-ds-yellow: #f0b323;
+  --c-ds-blue: #1b3f8b;
+  --c-ds-black: #14120f;
+
+  /* Typografie */
+  --font-display: 'Cormorant Garamond', 'Times New Roman', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+
+  --fs-display-xl: clamp(2.75rem, 5vw, 5rem);
+  --fs-display-l: clamp(2.5rem, 5.5vw, 5rem);
+  --fs-h2: clamp(2rem, 4vw, 3.5rem);
+  --fs-h3: clamp(1.5rem, 2.4vw, 2.125rem);
+  --fs-lead: clamp(1.0625rem, 1.15vw, 1.1875rem);
+  --fs-body: 1rem;
+  --fs-small: 0.875rem;
+  --fs-label: 0.6875rem;
+
+  /* Ruimte — ruimtelijk (density 3/10) */
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-s: 1.25rem;
+  --space-m: 2rem;
+  --space-l: 3rem;
+  --space-xl: 4.5rem;
+  --space-2xl: 7rem;
+  --space-3xl: 10rem;
+
+  /* Maatvoering */
+  --wrap: 1440px;
+  --wrap-wide: 1680px;
+  --wrap-text: 68ch;
+  --gutter: clamp(1.25rem, 5vw, 5rem);
+  --section-y: clamp(4.5rem, 11vw, 10rem);
+  --header-h: 5rem;
+
+  --radius: 2px;
+  --radius-img: 3px;
+  --radius-pill: 999px;
+
+  /* Beweging */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 180ms;
+  --dur: 320ms;
+  --dur-slow: 620ms;
+
+  --z-header: 100;
+  --z-menu: 200;
+}
+
+/* --- Reset en basis ------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  background-color: var(--c-bg);
+}
+
+/* Washi-textuur over de hele pagina.
+   Eén vaste laag achter de inhoud in plaats van background-attachment: fixed
+   per sectie: dat laatste wordt door iOS Safari genegeerd en maakt scrollen
+   schokkerig. Zo sluit de textuur overal naadloos aan en blijft scrollen vloeiend. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: url('../assets/img/nieuw_kozo.webp');
+  background-position: center;
+  /* Vaste maat in plaats van cover. Met cover schaalt de vezel mee met het
+     venster: op een 1280-laptop is de korrel half zo groot als op een
+     2560-scherm, waardoor papier daar als vlekken op een muur leest. Papier
+     heeft een absolute maat. 2200px is breder dan vrijwel elk venster, dus
+     de tegel hoeft in de praktijk niet te herhalen en er ontstaat geen naad;
+     het beeld zelf sluit namelijk niet naadloos op zichzelf aan. */
+  background-size: 2200px auto;
+  background-repeat: repeat;
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+body {
+  margin: 0;
+  background: transparent;
+  color: var(--c-ink-soft);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.7;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Het hidden-attribuut werkt via display:none uit de browserstylesheet, en
+   verliest het van elke eigen display-regel. Zonder deze regel blijven
+   verborgen knoppen zichtbaar en klikbaar terwijl ze niets meer doen. */
+[hidden] {
+  display: none !important;
+}
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+::selection {
+  background: var(--c-wood);
+  color: #fff;
+}
+
+/* Focus — altijd zichtbaar, nooit weggehaald */
+:focus-visible {
+  outline: 2px solid var(--c-wood);
+  outline-offset: 3px;
+  border-radius: var(--radius);
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--gutter);
+  top: -100px;
+  z-index: 999;
+  background: var(--c-ink);
+  color: var(--c-on-dark);
+  padding: 0.85rem 1.5rem;
+  font-size: var(--fs-small);
+  transition: top var(--dur-fast) var(--ease);
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* --- Typografie ----------------------------------------------------------- */
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  color: var(--c-ink);
+  margin: 0;
+  letter-spacing: -0.015em;
+  line-height: 1.06;
+  text-wrap: balance;
+}
+
+h2 {
+  font-size: var(--fs-h2);
+}
+
+h3 {
+  font-size: var(--fs-h3);
+  line-height: 1.15;
+}
+
+p {
+  margin: 0 0 1.15em;
+  text-wrap: pretty;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+.lead {
+  font-size: var(--fs-lead);
+  line-height: 1.75;
+  color: var(--c-ink-soft);
+  max-width: var(--wrap-text);
+}
+
+.muted {
+  color: var(--c-muted);
+}
+
+/* Klein kapitaal-label — het terugkerende ritme-element van de site */
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7em;
+  font-family: var(--font-body);
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+  margin: 0 0 var(--space-s);
+}
+
+.label::before {
+  content: '';
+  width: 1.75rem;
+  height: 1px;
+  background: var(--c-wood);
+  flex: none;
+}
+
+.label--plain::before {
+  display: none;
+}
+
+/* Gecentreerd label: moet block-level flex zijn, anders doet margin auto niets. */
+.label--center {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Accent-woord in koppen: cursief, iets warmer */
+.accent {
+  font-style: italic;
+  color: var(--c-wood-deep);
+}
+
+/* --- Layout --------------------------------------------------------------- */
+
+.wrap {
+  width: 100%;
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.wrap--wide {
+  max-width: var(--wrap-wide);
+}
+
+.wrap--text {
+  max-width: calc(var(--wrap-text) + var(--gutter) * 2);
+}
+
+.section {
+  padding-block: var(--section-y);
+}
+
+/* Half-transparant, zodat de washi-textuur eronder blijft doorschijnen. */
+.section--alt {
+  background: color-mix(in srgb, var(--c-bg-alt) 86%, transparent);
+}
+
+.section--deep {
+  background: color-mix(in srgb, var(--c-bg-deep) 86%, transparent);
+}
+
+.section--tight {
+  padding-block: clamp(3rem, 6vw, 5.5rem);
+}
+
+.section__head {
+  margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.section__head--split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-m);
+  align-items: end;
+}
+
+@media (min-width: 900px) {
+  .section__head--split {
+    grid-template-columns: 1.2fr 1fr;
+    gap: var(--space-xl);
+  }
+}
+
+.section__title {
+  font-size: var(--fs-h2);
+}
+
+/* --- Header --------------------------------------------------------------- */
+
+/* Bovenaan de pagina blijft de header volledig transparant, zodat de
+   washi-textuur van body::before ononderbroken doorloopt. Een half-dekkende
+   balk met blur wist die textuur juist plaatselijk uit en leest daardoor als
+   een opgeplakte strook. Pas bij scrollen krijgt de header een eigen
+   oppervlak, wanneer er inhoud onderdoor moet schuiven. */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--dur) var(--ease),
+    background-color var(--dur) var(--ease);
+}
+
+.site-header.is-stuck {
+  border-bottom-color: var(--c-line-soft);
+  background: color-mix(in srgb, var(--c-bg) 82%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* Met een open mobiel menu hangt er een dekkend paneel onder de header;
+   een doorzichtige balk daarboven zou daar los van staan. */
+.site-header:has(.nav.is-open) {
+  background: var(--c-bg);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-m);
+  min-height: var(--header-h);
+}
+
+.site-header__logo {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.site-header__logo img {
+  width: auto;
+  height: clamp(1.5rem, 2.4vw, 1.9rem);
+}
+
+/* Navigatie — pill-vorm met omlijnde actieve staat, zoals de referentie */
+.nav__list {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav__link {
+  display: block;
+  padding: 0.6rem 1.05rem;
+  font-size: var(--fs-small);
+  color: var(--c-ink-soft);
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+  transition: color var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    background-color var(--dur-fast) var(--ease);
+}
+
+.nav__link:hover {
+  color: var(--c-ink);
+  background: color-mix(in srgb, var(--c-wood) 10%, transparent);
+}
+
+.nav__link[aria-current='page'] {
+  border-color: var(--c-ink);
+  color: var(--c-ink);
+}
+
+/* Hogere specificiteit dan .btn, dat verderop in dit bestand staat en
+   anders display:inline-flex zou terugzetten. */
+.site-header .site-header__cta {
+  display: none;
+}
+
+@media (min-width: 1100px) {
+  .site-header .site-header__cta {
+    display: inline-flex;
+  }
+}
+
+/* Mobiel menu */
+.nav-toggle {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background: none;
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-pill);
+  align-items: center;
+}
+
+.nav-toggle__bar,
+.nav-toggle::before,
+.nav-toggle::after {
+  content: '';
+  display: block;
+  width: 17px;
+  height: 1px;
+  background: var(--c-ink);
+  transition: transform var(--dur) var(--ease), opacity var(--dur-fast) var(--ease);
+}
+
+.nav-toggle[aria-expanded='true']::before {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.nav-toggle[aria-expanded='true'] .nav-toggle__bar {
+  opacity: 0;
+}
+
+.nav-toggle[aria-expanded='true']::after {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+@media (max-width: 979px) {
+  .nav {
+    position: fixed;
+    inset: var(--header-h) 0 auto 0;
+    z-index: var(--z-menu);
+    background: var(--c-bg);
+    border-bottom: 1px solid var(--c-line);
+    padding: var(--space-s) var(--gutter) var(--space-l);
+    transform: translateY(-8px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease),
+      visibility var(--dur);
+  }
+
+  .nav.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .nav__list {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .nav__link {
+    padding: 1rem 0;
+    border: 0;
+    border-bottom: 1px solid var(--c-line-soft);
+    border-radius: 0;
+    font-size: 1.05rem;
+  }
+
+  .nav__link[aria-current='page'] {
+    color: var(--c-wood-deep);
+  }
+}
+
+@media (min-width: 980px) {
+  .nav-toggle {
+    display: none;
+  }
+
+  .nav {
+    display: block !important;
+  }
+}
+
+/* --- Knoppen -------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75em;
+  min-height: 48px;
+  padding: 0.9rem 1.8rem;
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  border: 1px solid var(--c-ink);
+  border-radius: var(--radius-pill);
+  background: none;
+  color: var(--c-ink);
+  transition: background-color var(--dur) var(--ease),
+    color var(--dur) var(--ease), border-color var(--dur) var(--ease),
+    transform var(--dur-fast) var(--ease);
+}
+
+.btn:hover {
+  background: var(--c-ink);
+  color: var(--c-bg);
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn--solid {
+  background: var(--c-ink);
+  color: var(--c-bg);
+}
+
+.btn--solid:hover {
+  background: var(--c-wood-deep);
+  border-color: var(--c-wood-deep);
+  color: #fff;
+}
+
+.btn--ghost {
+  border-color: var(--c-line);
+  color: var(--c-ink-soft);
+}
+
+.btn--ghost:hover {
+  border-color: var(--c-ink);
+  background: var(--c-ink);
+  color: var(--c-bg);
+}
+
+.btn--light {
+  border-color: color-mix(in srgb, var(--c-on-dark) 40%, transparent);
+  color: var(--c-on-dark);
+}
+
+.btn--light:hover {
+  background: var(--c-on-dark);
+  border-color: var(--c-on-dark);
+  color: var(--c-ink);
+}
+
+.btn__icon {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  transition: transform var(--dur) var(--ease);
+}
+
+.btn:hover .btn__icon {
+  transform: translate(2px, -2px);
+}
+
+/* Klein vierkant pijlknopje — uit de referentie */
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex: none;
+  background: var(--c-ink);
+  color: var(--c-bg);
+  border: 1px solid var(--c-ink);
+  border-radius: var(--radius);
+  transition: background-color var(--dur) var(--ease),
+    color var(--dur) var(--ease);
+}
+
+.icon-btn svg {
+  width: 15px;
+  height: 15px;
+  transition: transform var(--dur) var(--ease);
+}
+
+.icon-btn:hover {
+  background: var(--c-wood-deep);
+  border-color: var(--c-wood-deep);
+}
+
+.icon-btn:hover svg {
+  transform: translate(2px, -2px);
+}
+
+/* Tekstlink met onderlijn-animatie */
+.link-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55em;
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: var(--c-ink);
+  /* Verticale ruimte zodat het tikdoel de 24px-ondergrens haalt,
+     zonder de tekstregel te breken (inline links in lopende tekst). */
+  padding-block: 0.4rem;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 100% 1px;
+  background-position: 0 calc(100% - 0.35rem);
+  background-repeat: no-repeat;
+  transition: background-size var(--dur) var(--ease);
+}
+
+.link-line:hover {
+  background-size: 0% 1px;
+}
+
+.link-line svg {
+  width: 13px;
+  height: 13px;
+}
+
+/* --- Roterend zegel ------------------------------------------------------- */
+
+.seal {
+  position: relative;
+  width: clamp(6.5rem, 9vw, 8.5rem);
+  aspect-ratio: 1;
+  flex: none;
+  display: grid;
+  place-items: center;
+}
+
+/* Het zegel stond permanent te draaien. Op een pagina die rust belooft is een
+   eindeloos bewegend element in de ooghoek het onrustigste wat er kan staan,
+   en het zette de onderste woorden steeds op hun kop. Nu staat het stil. */
+.seal__ring {
+  position: absolute;
+  inset: 0;
+}
+
+.seal__ring text {
+  font-family: var(--font-body);
+  font-size: 8.2px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  fill: var(--c-muted);
+}
+
+.seal__mark {
+  width: 34%;
+  opacity: 0.85;
+}
+
+
+/* --- Hero ----------------------------------------------------------------- */
+
+.hero {
+  position: relative;
+  padding-block: clamp(1.5rem, 4vw, 3.5rem) clamp(2.5rem, 6vw, 5rem);
+  overflow: hidden;
+}
+
+.hero__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2.5rem, 5vw, 4rem);
+  align-items: center;
+}
+
+/* Naast elkaar kreeg de tekstkolom meer breedte dan haar regellengte gebruikt,
+   waardoor er een leeg dal tussen tekst en foto ontstond. De foto krijgt nu het
+   grotere deel: dat sluit het gat en geeft het beeld meer aanwezigheid. */
+@media (min-width: 900px) {
+  .hero {
+    display: flex;
+    align-items: center;
+    /* Niet de volle schermhoogte: dan sluit de hero exact af op de vouw en
+       lijkt de pagina daar te eindigen. Deze marge laat de volgende sectie
+       net zichtbaar en nodigt uit tot scrollen zonder pijltje of animatie. */
+    min-height: calc(100svh - var(--header-h) - 5rem);
+  }
+
+  .hero__inner {
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: clamp(2.5rem, 4.5vw, 4.5rem);
+  }
+}
+
+.hero__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-m);
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+/* Op smalle schermen duwde het zegel het bijschrift naar een tweede regel,
+   waardoor twee blokjes kapitalen naast elkaar gingen rommelen. */
+@media (max-width: 599px) {
+  .seal {
+    width: 5.25rem;
+  }
+
+  .hero__eyebrow {
+    gap: var(--space-s);
+  }
+
+  .hero__eyebrow .label {
+    letter-spacing: 0.14em;
+  }
+}
+
+.hero__title {
+  font-size: var(--fs-display-xl);
+  font-weight: 300;
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+  margin: 0 0 clamp(1.25rem, 2.5vw, 2rem);
+  color: var(--c-ink);
+}
+
+.hero__title .accent {
+  display: block;
+}
+
+.hero__text {
+  font-size: var(--fs-lead);
+  line-height: 1.75;
+  color: var(--c-ink-soft);
+  max-width: 42ch;
+  margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-s);
+}
+
+.hero__media {
+  position: relative;
+}
+
+/* Een liggend beeld (3:2) vult de kolom in de breedte en blijft daarbij ruim
+   binnen de schermhoogte, dus hier is geen hoogtebegrenzing of uitsnede
+   nodig: de foto is heel en sluit netjes aan op de kolomranden. */
+.hero__media img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-img);
+}
+
+/* --- Kenmerken-triplet ---------------------------------------------------- */
+
+.features {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 4vw, 3.5rem);
+}
+
+@media (min-width: 720px) {
+  .features {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.feature {
+  padding-top: var(--space-s);
+  border-top: 1px solid var(--c-line);
+}
+
+.feature__title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--c-ink);
+  margin: 0 0 0.6rem;
+  line-height: 1.2;
+}
+
+.feature__text {
+  font-size: var(--fs-small);
+  line-height: 1.7;
+  color: var(--c-muted);
+  margin: 0;
+}
+
+/* --- Split (beeld naast tekst) -------------------------------------------- */
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .split {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .split--wide-media {
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+
+  .split--wide-body {
+    grid-template-columns: 0.85fr 1.15fr;
+  }
+
+  .split--reverse .split__media {
+    order: 2;
+  }
+}
+
+.split + .split {
+  margin-top: clamp(3.5rem, 8vw, 7rem);
+}
+
+.split__photo {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-img);
+}
+
+.split__photo--tall {
+  aspect-ratio: 3 / 4;
+}
+
+.split__body h2,
+.split__body h3 {
+  margin-bottom: var(--space-s);
+}
+
+/* --- Productraster -------------------------------------------------------- */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+  gap: clamp(1.75rem, 3vw, 3rem) clamp(1.25rem, 2vw, 2rem);
+}
+
+.grid--two {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+}
+
+.card__media {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-img);
+  background: var(--c-bg-alt);
+}
+
+.card__media img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+.card:hover .card__media img {
+  transform: scale(1.035);
+}
+
+/* Uitsnede-foto's staan op transparant: die niet bijsnijden maar tonen */
+.card__media--cutout {
+  background: linear-gradient(180deg, var(--c-bg-alt), var(--c-bg-deep));
+  display: grid;
+  place-items: center;
+  padding: clamp(1.25rem, 2.5vw, 2.25rem);
+}
+
+.card__media--cutout img {
+  aspect-ratio: auto;
+  max-height: 22rem;
+  width: auto;
+  object-fit: contain;
+}
+
+.card__foot {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-s);
+  padding-top: var(--space-xs);
+  border-top: 1px solid var(--c-line);
+}
+
+.card__name {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 400;
+  color: var(--c-ink);
+  margin: 0 0 0.25rem;
+  line-height: 1.2;
+}
+
+.card__meta {
+  display: block;
+  font-size: var(--fs-small);
+  color: var(--c-muted);
+}
+
+/* Prijs op een overzichtskaartje: het getal waar de bezoeker op scant. */
+.card__price {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: var(--c-ink);
+}
+
+/* Een product op zijn eigen pagina heeft geen buren, dus ook geen scheidslijn
+   erboven en geen ruimte om van die lijn af te komen. */
+/* Categorie-ankers zitten op de kaartjes zelf; zonder deze marge landt zo'n
+   sprong onder de plakkende header. */
+.card[id] {
+  scroll-margin-top: calc(var(--header-h) + 1.5rem);
+}
+
+.product--single {
+  border-top: 0;
+  padding-block-start: 0;
+}
+
+/* --- Categorieknoppen (kies een lampsoort) -------------------------------- */
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(1.25rem, 4vw, 3rem);
+}
+
+.category {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  width: min(100%, 9.5rem);
+  text-align: center;
+}
+
+.category__figure {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: min(9rem, 30vw);
+  aspect-ratio: 1;
+  padding: 1.1rem;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--c-bg-alt) 80%, transparent);
+  border: 1px solid var(--c-line);
+  overflow: hidden;
+  transition: background-color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+
+.category:hover .category__figure,
+.category:focus-visible .category__figure {
+  background: color-mix(in srgb, var(--c-wood) 14%, transparent);
+  border-color: var(--c-wood);
+  transform: translateY(-4px);
+}
+
+/* Flex-item met definitieve containerhoogte: hier resolveert max-height: 100%
+   wel. Als grid-item met een auto-rij deed hij dat niet, en stak de foto
+   ruim buiten de cirkel. */
+.category__figure img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.category__name {
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c-ink);
+}
+
+.category__count {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--c-muted);
+}
+
+/* --- Fotoslider ----------------------------------------------------------- */
+
+.slider {
+  position: relative;
+  margin: 0;
+  border-radius: var(--radius-img);
+  background: linear-gradient(170deg, var(--c-bg-alt), var(--c-bg-deep));
+  overflow: hidden;
+}
+
+/* 2:3 — de verhouding waarin de meeste foto's zijn genomen. Staande foto's
+   vullen het kader precies; liggende detailfoto's krijgen ruimte boven en
+   onder. Er wordt nergens bijgesneden. */
+.slider__track {
+  position: relative;
+  aspect-ratio: 2 / 3;
+}
+
+/* Absoluut gepositioneerd: zo tellen de slides niet mee voor de hoogte van de
+   track. Als grid-items in een auto-rij rekte de hoogste foto de track op en
+   werd de aspect-ratio genegeerd. */
+.slider__slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  /* contain, niet cover: de originele verhouding blijft behouden en er valt
+     nooit een stuk lamp buiten beeld. */
+  object-fit: contain;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--dur-slow) var(--ease-out);
+}
+
+/* Uitsnedes staan op transparant en krijgen wat lucht rondom. */
+.slider__slide--cutout {
+  padding: clamp(1rem, 3vw, 2.5rem);
+}
+
+.slider__slide.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.slider__btn {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  display: none;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--c-line);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--c-bg) 88%, transparent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: var(--c-ink);
+  transition: background-color var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease);
+}
+
+.slider.is-ready .slider__btn {
+  display: grid;
+}
+
+.slider__btn:hover {
+  background: var(--c-bg);
+  border-color: var(--c-ink);
+}
+
+.slider__btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.slider__btn--prev {
+  left: 0.85rem;
+}
+
+.slider__btn--next {
+  right: 0.85rem;
+}
+
+.slider__count {
+  position: absolute;
+  left: 0.85rem;
+  bottom: 0.85rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--c-bg) 88%, transparent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--c-ink);
+}
+
+.slider__caption {
+  position: absolute;
+  right: 0.85rem;
+  bottom: 0.85rem;
+  /* Nooit over de teller linksonder heen lopen. */
+  max-width: calc(100% - 7.5rem);
+  padding: 0.35rem 0.8rem;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--c-bg) 88%, transparent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  font-size: 0.8125rem;
+  color: var(--c-muted);
+  text-align: right;
+}
+
+/* Melding wanneer een keuze geen foto's heeft */
+.slider__empty {
+  position: absolute;
+  inset: auto 1rem 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--c-bg) 94%, transparent);
+  border: 1px solid var(--c-line);
+  font-size: var(--fs-small);
+  color: var(--c-ink-soft);
+}
+
+/* --- Materiaalkiezer bij een lamp ----------------------------------------- */
+
+/* SLAPEND — het .chooser-component (t/m .chooser__options) hoort bij het
+   fotofilter in js/site.js en wordt door geen enkele markup gebruikt. Bewaard
+   omdat het af is en direct werkt zodra er foto's per houtsoort zijn; de
+   voorwaarden staan bij applyFilter in js/site.js.
+   Let op: .chooser__note verderop is WEL in gebruik (lampencollectie.html),
+   ondanks de naam — die hoort niet bij dit blok en moet blijven staan. */
+.chooser {
+  margin: var(--space-m) 0 0;
+  padding: var(--space-s) 0 0;
+  border-top: 1px solid var(--c-line);
+}
+
+.chooser__group {
+  border: 0;
+  margin: 0 0 var(--space-s);
+  padding: 0;
+}
+
+.chooser__legend {
+  padding: 0;
+  margin-bottom: 0.6rem;
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+
+.chooser__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+/* Keuzeknop als chip; de radio zelf blijft bedienbaar voor toetsenbord. */
+.chip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 44px;
+  padding: 0.55rem 1.1rem;
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-pill);
+  background: var(--c-card);
+  font-size: var(--fs-small);
+  color: var(--c-ink);
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease),
+    background-color var(--dur-fast) var(--ease);
+}
+
+.chip input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.chip__swatch {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--c-line);
+}
+
+.chip:hover {
+  border-color: var(--c-wood);
+}
+
+.chip:has(input:checked) {
+  border-color: var(--c-ink);
+  background: color-mix(in srgb, var(--c-wood) 12%, var(--c-card));
+  font-weight: 500;
+}
+
+.chip:has(input:focus-visible) {
+  outline: 2px solid var(--c-wood);
+  outline-offset: 2px;
+}
+
+/* Uitgeschakelde keuze: zichtbaar aanwezig, maar niet te kiezen. */
+.chip--disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  background: transparent;
+  border-style: dashed;
+}
+
+.chip--disabled:hover {
+  border-color: var(--c-line);
+}
+
+.chooser__note {
+  margin: 0.35rem 0 0;
+  font-size: 0.8125rem;
+  color: var(--c-muted);
+}
+
+/* --- Lichtbak ------------------------------------------------------------- */
+
+/* Alleen tonen als het dialoogvenster daadwerkelijk open is. Zonder de
+   [open]-selector overschrijft display:grid de browserregel
+   dialog:not([open]) { display: none } en valt de lichtbak niet te sluiten. */
+.lightbox:not([open]) {
+  display: none;
+}
+
+.lightbox[open] {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: clamp(1rem, 4vw, 3rem);
+  background: color-mix(in srgb, var(--c-ink) 92%, transparent);
+  border: 0;
+}
+
+.lightbox::backdrop {
+  background: color-mix(in srgb, var(--c-ink) 92%, transparent);
+}
+
+.lightbox__img {
+  max-width: 100%;
+  max-height: 80vh;
+  width: auto;
+  object-fit: contain;
+  border-radius: var(--radius-img);
+}
+
+/* Naam en omschrijving bij een materiaal uit het wiel. */
+.lightbox__info {
+  max-width: 46ch;
+  margin-top: var(--space-m);
+  text-align: center;
+  color: var(--c-on-dark);
+}
+
+.lightbox__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 300;
+  color: var(--c-on-dark);
+  margin: 0 0 0.6rem;
+}
+
+.lightbox__desc {
+  font-size: var(--fs-lead);
+  line-height: 1.7;
+  color: var(--c-on-dark-muted);
+  margin: 0;
+}
+
+/* Bij een materiaal mag de foto kleiner: naam en tekst moeten er ook bij. */
+.lightbox__info:not([hidden]) ~ .lightbox__img,
+.lightbox:has(.lightbox__info:not([hidden])) .lightbox__img {
+  max-height: 52vh;
+}
+
+.lightbox__bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-s);
+  margin-top: var(--space-s);
+  color: var(--c-on-dark);
+  font-size: var(--fs-small);
+}
+
+.lightbox__btn {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid color-mix(in srgb, var(--c-on-dark) 40%, transparent);
+  border-radius: 50%;
+  background: none;
+  color: var(--c-on-dark);
+  transition: background-color var(--dur-fast) var(--ease);
+}
+
+.lightbox__btn:hover {
+  background: color-mix(in srgb, var(--c-on-dark) 18%, transparent);
+}
+
+.lightbox__btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.slider__zoom {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  display: none;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--c-line);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--c-bg) 88%, transparent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: var(--c-ink);
+}
+
+.slider.is-ready .slider__zoom,
+.slider .slider__zoom {
+  display: grid;
+}
+
+.slider__zoom:hover {
+  background: var(--c-bg);
+  border-color: var(--c-ink);
+}
+
+.slider__zoom svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* --- Lijstrijen met pijl -------------------------------------------------- */
+
+.rows {
+  border-top: 1px solid var(--c-line);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-m);
+  padding: clamp(1.25rem, 2.5vw, 1.9rem) 0;
+  border-bottom: 1px solid var(--c-line);
+  transition: padding-inline var(--dur) var(--ease),
+    background-color var(--dur) var(--ease);
+}
+
+.row:hover {
+  padding-inline: clamp(0.5rem, 1.5vw, 1.25rem);
+  background: color-mix(in srgb, var(--c-wood) 7%, transparent);
+}
+
+.row__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.2vw, 1.9rem);
+  font-weight: 400;
+  color: var(--c-ink);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.row__meta {
+  display: block;
+  font-size: var(--fs-small);
+  color: var(--c-muted);
+  margin-top: 0.2rem;
+}
+
+.row__arrow {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  color: var(--c-muted);
+  transition: transform var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+
+.row:hover .row__arrow {
+  transform: translate(3px, -3px);
+  color: var(--c-ink);
+}
+
+/* --- Galerij (mozaïek) ---------------------------------------------------- */
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(0.75rem, 1.5vw, 1.25rem);
+}
+
+@media (min-width: 900px) {
+  .gallery {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.gallery__item {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-img);
+  background: var(--c-bg-alt);
+}
+
+.gallery__item img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+.gallery__item--wide {
+  grid-column: span 2;
+}
+
+.gallery__item--wide img {
+  aspect-ratio: 3 / 2;
+}
+
+.gallery__item:hover img {
+  transform: scale(1.04);
+}
+
+.gallery__caption {
+  position: absolute;
+  left: 0.85rem;
+  bottom: 0.85rem;
+  background: color-mix(in srgb, var(--c-bg) 92%, transparent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: var(--c-ink);
+  padding: 0.4rem 0.85rem;
+  font-size: 0.8125rem;
+  border-radius: var(--radius);
+}
+
+/* --- Citaat --------------------------------------------------------------- */
+
+.quote {
+  max-width: 24ch;
+  font-family: var(--font-display);
+  font-size: var(--fs-display-l);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--c-ink);
+  margin: 0;
+}
+
+.quote--center {
+  max-width: 20ch;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.quote__cite {
+  display: block;
+  margin-top: var(--space-m);
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  font-style: normal;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+
+/* --- Symbolen (zen, yin/yang) --------------------------------------------- */
+
+.symbol {
+  width: clamp(7rem, 12vw, 11rem);
+  height: auto;
+  margin-inline: auto;
+  opacity: 0.9;
+}
+
+.split__symbols {
+  display: flex;
+  justify-content: center;
+  gap: clamp(2rem, 5vw, 4rem);
+}
+
+.symbol-card {
+  margin: 0;
+  text-align: center;
+}
+
+.symbol-card img {
+  width: clamp(5rem, 8vw, 7.5rem);
+  height: auto;
+  margin-inline: auto;
+  opacity: 0.9;
+}
+
+.symbol-card figcaption {
+  margin-top: var(--space-xs);
+  font-size: var(--fs-label);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+
+/* --- Donkere band --------------------------------------------------------- */
+
+.band-dark {
+  background: var(--c-ink);
+  color: var(--c-on-dark);
+}
+
+.band-dark h2,
+.band-dark h3,
+.band-dark .quote {
+  color: var(--c-on-dark);
+}
+
+.band-dark .label {
+  color: var(--c-on-dark-muted);
+}
+
+.band-dark .label::before {
+  background: var(--c-glow);
+}
+
+.band-dark .lead,
+.band-dark p {
+  color: var(--c-on-dark-muted);
+}
+
+.band-dark .quote__cite {
+  color: var(--c-on-dark-muted);
+}
+
+/* --- Footer --------------------------------------------------------------- */
+
+.site-footer {
+  background: var(--c-ink);
+  color: var(--c-on-dark);
+  padding-block: clamp(3.5rem, 7vw, 6rem) var(--space-l);
+}
+
+.site-footer__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2.5rem, 5vw, 4rem);
+  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+  border-bottom: 1px solid var(--c-line-dark);
+}
+
+@media (min-width: 760px) {
+  .site-footer__grid {
+    grid-template-columns: 1.6fr 1fr 1fr;
+  }
+}
+
+@media (min-width: 1100px) {
+  .site-footer__grid {
+    grid-template-columns: 2fr 1fr 1fr 1.2fr;
+  }
+}
+
+.site-footer__logo {
+  width: auto;
+  height: 1.75rem;
+  margin-bottom: var(--space-s);
+  filter: invert(1) brightness(1.6);
+}
+
+.site-footer__tagline {
+  font-size: var(--fs-small);
+  color: var(--c-on-dark-muted);
+  max-width: 34ch;
+  margin: 0;
+}
+
+.site-footer__title {
+  font-family: var(--font-body);
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-on-dark);
+  margin: 0 0 var(--space-s);
+}
+
+.site-footer__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Tikdoel minstens 44px hoog, ook al is de tekst maar 17px. */
+.site-footer__list a,
+.site-footer__contact a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: var(--fs-small);
+  color: var(--c-on-dark-muted);
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.site-footer__list a:hover,
+.site-footer__contact a:hover {
+  color: var(--c-on-dark);
+}
+
+.site-footer__contact {
+  display: flex;
+  flex-direction: column;
+  font-size: var(--fs-small);
+  line-height: 44px;
+  color: var(--c-on-dark-muted);
+}
+
+.site-footer__contact p {
+  margin: 0;
+}
+
+.site-footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-s);
+  padding-top: var(--space-m);
+  font-size: 0.8125rem;
+  color: var(--c-on-dark-muted);
+}
+
+.site-footer__bottom p {
+  margin: 0;
+}
+
+/* --- Pagina-kop (subpagina's) --------------------------------------------- */
+
+.page-head {
+  padding-block: clamp(3rem, 7vw, 6rem) clamp(2.5rem, 5vw, 4rem);
+}
+
+.page-head__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-m);
+  align-items: end;
+}
+
+@media (min-width: 900px) {
+  .page-head__inner {
+    grid-template-columns: 1.3fr 1fr;
+    gap: var(--space-xl);
+  }
+}
+
+.page-head__title {
+  font-size: var(--fs-display-l);
+  font-weight: 300;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+
+.page-head__text {
+  font-size: var(--fs-lead);
+  line-height: 1.75;
+  color: var(--c-ink-soft);
+  margin: 0;
+}
+
+/* Kruimelpad */
+.crumbs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--fs-small);
+  color: var(--c-muted);
+  margin-bottom: var(--space-s);
+}
+
+.crumbs a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+}
+
+.crumbs a:hover {
+  color: var(--c-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.crumbs svg {
+  width: 11px;
+  height: 11px;
+  opacity: 0.5;
+}
+
+/* --- Productdetail (collectiepagina) -------------------------------------- */
+
+.product {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 4vw, 4rem);
+  padding-block: clamp(3rem, 6vw, 5.5rem);
+  border-top: 1px solid var(--c-line);
+  scroll-margin-top: calc(var(--header-h) + 1rem);
+}
+
+@media (min-width: 900px) {
+  .product {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+
+  .product:nth-child(even) .product__media {
+    order: 2;
+  }
+}
+
+.product__media {
+  background: linear-gradient(170deg, var(--c-bg-alt), var(--c-bg-deep));
+  border-radius: var(--radius-img);
+  display: grid;
+  place-items: center;
+  padding: clamp(1.5rem, 3vw, 3rem);
+  overflow: hidden;
+}
+
+/* Ook hier als kindselector: anders wint deze regel (0,1,1) van
+   .slider__slide (0,1,0) en krijgen slides max-height: 30rem + width: auto. */
+.product__media > img {
+  max-height: 30rem;
+  width: auto;
+  object-fit: contain;
+}
+
+.product__media--photo {
+  padding: 0;
+  background: none;
+}
+
+/* .product__media centreert zijn kind; een slider zou daardoor tot zijn
+   inhoud krimpen. Expliciete breedte, met een bovengrens zodat de foto niet
+   de hele kolomhoogte opslokt op brede schermen. */
+.product__media .slider {
+  width: 100%;
+  max-width: 23rem;
+}
+
+/* Alleen een directe losse foto bijsnijden. Als kindselector, anders wint deze
+   regel (0,2,1) van .slider__slide--cutout (0,1,0) en worden uitsnedes in een
+   slider alsnog bijgesneden. */
+.product__media--photo > img {
+  width: 100%;
+  max-height: none;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.product__title {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  margin: 0 0 var(--space-s);
+}
+
+.product__specs {
+  margin: var(--space-m) 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--c-line);
+}
+
+.product__specs div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem var(--space-s);
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--c-line);
+  font-size: var(--fs-small);
+}
+
+.product__specs dt {
+  min-width: 9rem;
+  color: var(--c-muted);
+  margin: 0;
+}
+
+.product__specs dd {
+  margin: 0;
+  color: var(--c-ink);
+  flex: 1;
+}
+
+.product__actions {
+  margin-top: var(--space-m);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-s);
+}
+
+/* --- Materiaalstalen ------------------------------------------------------ */
+
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 9rem), 1fr));
+  gap: clamp(1rem, 2vw, 1.75rem);
+}
+
+.swatch {
+  margin: 0;
+}
+
+.swatch img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--radius-img);
+}
+
+.swatch figcaption {
+  margin-top: 0.6rem;
+  font-size: var(--fs-small);
+  color: var(--c-ink);
+}
+
+.swatch small {
+  display: block;
+  color: var(--c-muted);
+  font-size: 0.8125rem;
+}
+
+/* --- Materiaalwielen ------------------------------------------------------ */
+
+.wheels {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+@media (min-width: 860px) {
+  .wheels {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.wheel-block__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: 400;
+  margin: 0 0 0.4rem;
+}
+
+.wheel-block__text {
+  font-size: var(--fs-small);
+  color: var(--c-muted);
+  margin: 0 0 var(--space-m);
+  max-width: 44ch;
+}
+
+.wheel {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(100%, 22rem);
+  margin-inline: auto;
+}
+
+.wheel__svg {
+  width: 100%;
+  height: auto;
+}
+
+.wheel__segment {
+  stroke: var(--c-bg);
+  stroke-width: 2;
+  cursor: pointer;
+  transform-origin: 150px 150px;
+  transition: transform var(--dur) var(--ease);
+}
+
+.wheel__segment:hover,
+.wheel__segment.is-active {
+  transform: scale(1.04);
+}
+
+.wheel__segment:focus {
+  outline: none;
+}
+
+.wheel__segment:focus-visible {
+  outline: none;
+  stroke: var(--c-wood-deep);
+  stroke-width: 4;
+}
+
+.wheel__center {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 44%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--c-bg);
+  box-shadow: 0 0 0 1px var(--c-line);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  padding: 0.9rem;
+  text-align: center;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.wheel__center-name {
+  font-family: var(--font-body);
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c-ink);
+  margin: 0;
+}
+
+.wheel__center-desc {
+  max-width: 17ch;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--c-muted);
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wheel__segment {
+    transition: none;
+  }
+
+  .wheel__segment:hover,
+  .wheel__segment.is-active {
+    transform: none;
+    stroke: var(--c-ink);
+    stroke-width: 4;
+  }
+}
+
+/* --- Stappen (maakproces) ------------------------------------------------- */
+
+.steps {
+  counter-reset: step;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 4vw, 3.5rem);
+}
+
+@media (min-width: 760px) {
+  .steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1100px) {
+  .steps {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.step {
+  counter-increment: step;
+  padding-top: var(--space-s);
+  border-top: 1px solid var(--c-line);
+}
+
+.step::before {
+  content: counter(step, decimal-leading-zero);
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--c-wood);
+  line-height: 1;
+  margin-bottom: 0.75rem;
+}
+
+.step h3 {
+  font-size: 1.35rem;
+  margin: 0 0 0.5rem;
+}
+
+.step p {
+  font-size: var(--fs-small);
+  color: var(--c-muted);
+  margin: 0;
+}
+
+/* --- Formulier ------------------------------------------------------------ */
+
+.form {
+  display: grid;
+  gap: var(--space-s);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.field label {
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: var(--c-ink);
+}
+
+.field .req {
+  color: var(--c-ds-red);
+}
+
+.field input,
+.field textarea,
+.field select {
+  /* Zonder deze twee regels gaat een <select> op zijn langste optie staan
+     ("Vierkante Lamp Yang (vloerlamp)" = 323px). Samen met de padding van
+     .lamp-block liep het bestelblok op een telefoon 34 tot 49px buiten het
+     scherm, en omdat body overflow-x verbergt was dat deel onbereikbaar.
+     min-width:0 is nodig omdat een formulierelement anders zijn min-content
+     breedte als bodem houdt, ook met width:100%. */
+  width: 100%;
+  min-width: 0;
+  font: inherit;
+  font-size: var(--fs-body);
+  color: var(--c-ink);
+  background: var(--c-card);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius);
+  padding: 0.85rem 1rem;
+  min-height: 48px;
+  transition: border-color var(--dur-fast) var(--ease),
+    box-shadow var(--dur-fast) var(--ease);
+}
+
+.field textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+/* De prijsregel in het specificatielijstje krijgt iets meer gewicht dan de
+   technische regels erboven, zonder eruit te springen. Laatste kind, want de
+   prijs staat in elk product als onderste rij. */
+.product__specs > div:last-child dd {
+  font-weight: 500;
+  color: var(--c-ink);
+}
+
+/* Een aantalveld hoort smal te zijn; zonder deze grens rekt width:100% het
+   over de hele kolom uit en suggereert het een lang antwoord. */
+.field input[type='number'] {
+  max-width: 7rem;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+  outline: none;
+  border-color: var(--c-wood);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-wood) 22%, transparent);
+}
+
+.field__hint {
+  font-size: 0.8125rem;
+  color: var(--c-muted);
+}
+
+@media (min-width: 640px) {
+  .form__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-s);
+  }
+}
+
+/* --- Formulier: groepen en keuzekaarten ----------------------------------- */
+
+.fieldset {
+  border: 0;
+  margin: 0 0 var(--space-xl);
+  padding: 0;
+}
+
+.fieldset__legend {
+  display: block;
+  width: 100%;
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: 400;
+  color: var(--c-ink);
+  padding: 0 0 var(--space-s);
+  margin-bottom: var(--space-m);
+  border-bottom: 1px solid var(--c-line);
+}
+
+/* Keuzekaart met radio */
+.choices {
+  display: grid;
+  gap: var(--space-s);
+}
+
+@media (min-width: 640px) {
+  .choices {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.choice {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 1.15rem 1.35rem;
+  background: var(--c-card);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease),
+    background-color var(--dur-fast) var(--ease);
+}
+
+.choice:hover {
+  border-color: var(--c-wood);
+}
+
+.choice input {
+  margin: 0.25rem 0 0;
+  accent-color: var(--c-wood-deep);
+  width: 18px;
+  height: 18px;
+  flex: none;
+}
+
+.choice__text {
+  font-size: var(--fs-small);
+  line-height: 1.6;
+  color: var(--c-ink);
+}
+
+.choice:has(input:checked) {
+  border-color: var(--c-ink);
+  background: color-mix(in srgb, var(--c-wood) 8%, var(--c-card));
+}
+
+.choice:has(input:focus-visible) {
+  outline: 2px solid var(--c-wood);
+  outline-offset: 2px;
+}
+
+/* Herhaalbaar lampblok */
+/* Melding van het vangnet in js/site.js; verdwijnt mee zodra dat weg kan. */
+.form-notice {
+  margin: 0 0 var(--space-m);
+  padding: var(--space-s);
+  background: var(--c-card);
+  border: 1px solid var(--c-wood);
+  border-left-width: 3px;
+  border-radius: var(--radius);
+  color: var(--c-ink);
+}
+
+.lamp-block {
+  padding: var(--space-m);
+  margin-bottom: var(--space-s);
+  background: var(--c-card);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius);
+}
+
+/* Op smalle schermen kost 2 x 32px padding te veel van de regelbreedte. */
+@media (max-width: 599px) {
+  .lamp-block {
+    padding: var(--space-s);
+  }
+}
+
+.lamp-block__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-s);
+  margin-bottom: var(--space-s);
+}
+
+.lamp-block__title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--c-ink);
+  margin: 0;
+}
+
+.lamp-block .field + .field {
+  margin-top: var(--space-s);
+}
+
+.btn-text {
+  background: none;
+  border: 0;
+  padding: 0.5rem 0;
+  font-size: var(--fs-small);
+  color: var(--c-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  min-height: 44px;
+}
+
+.btn-text:hover {
+  color: var(--c-ink);
+}
+
+/* Honeypot — onzichtbaar voor mensen, wel voor bots */
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Melding */
+.notice {
+  padding: 1.15rem 1.35rem;
+  margin-bottom: var(--space-m);
+  background: color-mix(in srgb, var(--c-glow) 22%, var(--c-card));
+  border: 1px solid color-mix(in srgb, var(--c-wood) 35%, transparent);
+  border-radius: var(--radius);
+  font-size: var(--fs-small);
+  color: var(--c-ink-soft);
+}
+
+.notice p {
+  margin: 0;
+}
+
+/* Contact-kolommen */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2.5rem, 5vw, 4.5rem);
+  align-items: start;
+}
+
+@media (min-width: 960px) {
+  .contact-grid {
+    grid-template-columns: 1.5fr 1fr;
+  }
+}
+
+.contact-aside {
+  padding: var(--space-m);
+  background: var(--c-bg-alt);
+  border-radius: var(--radius);
+  position: sticky;
+  top: calc(var(--header-h) + 1.5rem);
+}
+
+.contact-aside dl {
+  margin: 0;
+}
+
+.contact-aside dt {
+  font-size: var(--fs-label);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+  margin-top: var(--space-s);
+}
+
+.contact-aside dd {
+  margin: 0.3rem 0 0;
+  font-size: var(--fs-body);
+  color: var(--c-ink);
+}
+
+/* Bel- en mailkoppelingen groot genoeg om aan te tikken. */
+.contact-aside dd a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--c-line);
+  transition: text-decoration-color var(--dur-fast) var(--ease);
+}
+
+.contact-aside dd a:hover {
+  text-decoration-color: var(--c-ink);
+}
+
+.contact-aside dt:first-child {
+  margin-top: 0;
+}
+
+/* --- De Stijl-accenten ---------------------------------------------------- */
+
+.destijl-bars {
+  display: flex;
+  height: 6px;
+  margin-bottom: var(--space-m);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.destijl-bars span {
+  display: block;
+}
+
+.destijl-bars span:nth-child(1) {
+  flex: 3;
+  background: var(--c-ds-red);
+}
+
+.destijl-bars span:nth-child(2) {
+  flex: 1;
+  background: var(--c-ds-yellow);
+}
+
+.destijl-bars span:nth-child(3) {
+  flex: 2;
+  background: var(--c-ds-blue);
+}
+
+.destijl-bars span:nth-child(4) {
+  flex: 1;
+  background: var(--c-ds-black);
+}
+
+/* Mondriaan-achtig compositieblok */
+.mondriaan {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 1fr 0.6fr;
+  gap: 5px;
+  background: var(--c-ds-black);
+  padding: 5px;
+  aspect-ratio: 3 / 4;
+  border-radius: var(--radius-img);
+}
+
+.mondriaan span {
+  background: var(--c-bg);
+}
+
+.mondriaan span:nth-child(1) {
+  grid-row: span 2;
+  background: var(--c-card);
+}
+
+.mondriaan span:nth-child(2) {
+  background: var(--c-ds-red);
+}
+
+.mondriaan span:nth-child(4) {
+  background: var(--c-ds-yellow);
+}
+
+.mondriaan span:nth-child(5) {
+  grid-column: span 2;
+  background: var(--c-ds-blue);
+}
+
+/* --- Scroll-onthulling ---------------------------------------------------- */
+
+/* Alleen verbergen als JS daadwerkelijk draait: zonder script blijft
+   de pagina gewoon zichtbaar in plaats van leeg. */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
+}
+
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+[data-reveal-delay='1'] {
+  transition-delay: 70ms;
+}
+
+[data-reveal-delay='2'] {
+  transition-delay: 140ms;
+}
+
+[data-reveal-delay='3'] {
+  transition-delay: 210ms;
+}
+
+[data-reveal-delay='4'] {
+  transition-delay: 280ms;
+}
+
+/* --- Toegankelijkheid: minder beweging ------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* --- Print ---------------------------------------------------------------- */
+
+@media print {
+  .site-header,
+  .nav-toggle,
+  .seal,
+  .skip-link {
+    display: none;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+}

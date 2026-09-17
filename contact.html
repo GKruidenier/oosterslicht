@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact &amp; bestellen — OostersLicht</title>
+<meta name="description" content="Een lamp bestellen of een vraag stellen aan Jelle Kruidenier van OostersLicht. Vul het formulier in of bel tijdens kantooruren.">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="icon" href="assets/favicon.png" type="image/png" sizes="512x512">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preload" href="assets/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<script>document.documentElement.classList.add('js')</script>
+<link rel="stylesheet" href="css/style.css?v=26">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OostersLicht">
+<meta property="og:title" content="Contact &amp; bestellen — OostersLicht">
+<meta property="og:description" content="Een lamp bestellen of een vraag stellen.">
+<meta property="og:image" content="assets/img/werkplaats.webp">
+<script src="js/site.js?v=26" defer></script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Doorgaan naar hoofdinhoud</a>
+
+<header class="site-header">
+  <div class="wrap wrap--wide site-header__inner">
+    <a class="site-header__logo" href="index.html" aria-label="OostersLicht, naar de homepagina">
+      <img src="assets/img/logo.webp" alt="OostersLicht" width="1600" height="298">
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu openen">
+      <span class="nav-toggle__bar"></span>
+    </button>
+    <nav class="nav" id="site-nav" aria-label="Hoofdnavigatie">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="index.html">Home</a></li>
+        <li><a class="nav__link" href="lampencollectie.html">Collectie</a></li>
+        <li><a class="nav__link" href="collectie-de-stijl.html">De Stijl</a></li>
+        <li><a class="nav__link" href="maakproces.html">Maakproces</a></li>
+        <li><a class="nav__link" href="contact.html" aria-current="page">Contact</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn--ghost site-header__cta" href="#formulier">
+      Naar het formulier
+      <svg class="btn__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12 12 4M12 4H5.5M12 4v6.5"/></svg>
+    </a>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="page-head">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Kruimelpad">
+        <a href="index.html">Home</a>
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg>
+        <span aria-current="page">Contact &amp; bestellen</span>
+      </nav>
+
+      <div class="page-head__inner">
+        <div>
+          <p class="label">Contact</p>
+          <h1 class="page-head__title">Neem contact op<br><span class="accent">met Jelle</span></h1>
+        </div>
+        <p class="page-head__text">
+          Enthousiast over een lamp, een eigen idee, of een andere vraag? Vul het
+          formulier in. Bellen tijdens kantooruren kan ook.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight" id="formulier">
+    <div class="wrap">
+      <div class="contact-grid">
+
+        <div>
+          <!-- contact.php staat op je eigen hosting en mailt de inzending door.
+               Er komt geen externe dienst aan te pas. Let op: dit werkt alleen op
+               een server die PHP draait, niet bij het lokaal openen van de site. -->
+          <form class="form" action="contact.php" method="post" data-form>
+
+            <!-- contact.php stuurt hierheen terug als het versturen mislukt.
+                 Standaard verborgen; js/site.js toont hem bij ?fout=1. -->
+            <p class="form-notice" id="form-fout" role="alert" hidden>
+              Het versturen is helaas niet gelukt. Probeer het zo nog eens, of mail
+              je bericht rechtstreeks naar
+              <a href="mailto:info@oosterslicht.nl">info@oosterslicht.nl</a>.
+            </p>
+
+            <fieldset class="fieldset">
+              <legend class="fieldset__legend">Waarvoor neem je contact op?</legend>
+              <div class="choices">
+                <label class="choice">
+                  <input type="radio" name="onderwerp-type" value="bestellen" checked>
+                  <span class="choice__text">Ik wil een of meer lampen bestellen — uit de collectie en/of op maat</span>
+                </label>
+                <label class="choice">
+                  <input type="radio" name="onderwerp-type" value="vraag">
+                  <span class="choice__text">Ik heb een vraag</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset class="fieldset" data-order-block>
+              <legend class="fieldset__legend">Wat wil je bestellen?</legend>
+
+              <div data-lamp-list>
+                <div class="lamp-block">
+                  <div class="lamp-block__head">
+                    <h3 class="lamp-block__title">Lamp 1</h3>
+                    <button class="btn-text" type="button" data-remove-lamp hidden>Verwijder deze lamp</button>
+                  </div>
+
+                  <div class="field">
+                    <label for="lamp">Lamp <span class="req" aria-hidden="true">*</span></label>
+                    <select id="lamp" name="lamp[1]" data-required>
+                      <option value="">Kies een lamp</option>
+                      <optgroup label="Japanse collectie">
+                        <option>Ronde Lamp Yin (vloerlamp)</option>
+                        <option>Vierkante Lamp Yang (vloerlamp)</option>
+                        <option>Hanglamp Kawa (hanglamp)</option>
+                        <option>Lamp Koyo (wandlamp)</option>
+                        <option>Wandlamp Torii (wandlamp)</option>
+                        <option>Tafellamp Take (tafellamp)</option>
+                      </optgroup>
+                      <optgroup label="Collectie De Stijl">
+                        <option>Stalamp De Stijl</option>
+                        <option>Wandlamp De Stijl</option>
+                      </optgroup>
+                      <optgroup label="Anders">
+                        <option>Lamp op maat</option>
+                      </optgroup>
+                    </select>
+                  </div>
+
+                  <div class="field">
+                    <label for="afmeting">Afmeting</label>
+                    <select id="afmeting" name="afmeting[1]">
+                      <option>Standaard</option>
+                      <option>Klein</option>
+                      <option>In overleg</option>
+                    </select>
+                    <span class="field__hint">De Lamp Koyo is er in twee maten: standaard 40 × 25 × 15 cm en klein 30 × 20 × 12 cm.</span>
+                  </div>
+
+                  <div class="field">
+                    <label for="aantal">Aantal <span class="req" aria-hidden="true">*</span></label>
+                    <input id="aantal" name="aantal[1]" type="number" min="1" max="20" step="1" value="1" inputmode="numeric" data-required>
+                  </div>
+
+                  <div class="field">
+                    <label for="houtsoort">Houtsoort <span class="req" aria-hidden="true">*</span></label>
+                    <select id="houtsoort" name="houtsoort[1]" data-required>
+                      <option value="">Kies een houtsoort</option>
+                      <option>Esdoorn</option>
+                      <option>Es</option>
+                      <option>Iep</option>
+                      <option>Kers</option>
+                      <option>Noten</option>
+                      <option>Eiken</option>
+                      <option>In overleg</option>
+                    </select>
+                    <span class="field__hint">Welke soorten voor een lamp beschikbaar zijn, staat bij de omschrijving in de collectie.</span>
+                  </div>
+
+                  <div class="field">
+                    <label for="papier">Japans papier <span class="req" aria-hidden="true">*</span></label>
+                    <select id="papier" name="papier[1]" data-required>
+                      <option value="">Kies een papiersoort</option>
+                      <option>Kozo washi — wit en egaal</option>
+                      <option>Unryu kozo — met lange vezels</option>
+                      <option>Kinwashi — geliger, &ldquo;goudpapier&rdquo;</option>
+                      <option>In overleg</option>
+                    </select>
+                    <span class="field__hint">De collectie De Stijl gebruikt altijd effen Japans papier, zonder vezels.</span>
+                  </div>
+
+                  <div class="field">
+                    <label for="blad">Blad in het papier</label>
+                    <select id="blad" name="blad[1]">
+                      <option>Geen blad</option>
+                      <option>Bamboeblad</option>
+                      <option>Ginkgoblad</option>
+                      <option>Herfstblad (esdoorn)</option>
+                    </select>
+                  </div>
+
+                  <div class="field">
+                    <label for="tape">Kleur van de tape — alleen De Stijl</label>
+                    <select id="tape" name="tape[1]">
+                      <option value="">Niet van toepassing</option>
+                      <option>Primaire kleuren (rood, geel, blauw)</option>
+                      <option>Grijstinten</option>
+                    </select>
+                  </div>
+
+                  <div class="field">
+                    <label for="detaillering">Eventuele custom detaillering</label>
+                    <textarea id="detaillering" name="detaillering[1]" rows="3" placeholder="Bijvoorbeeld een afwijkende maat of een specifiek motief"></textarea>
+                    <span class="field__hint">Bij een lamp op maat worden vorm en detaillering met je afgestemd in overleg met de maker.</span>
+                  </div>
+                </div>
+              </div>
+
+              <button class="btn btn--ghost" type="button" data-add-lamp hidden>
+                Nog een lamp toevoegen
+              </button>
+            </fieldset>
+
+            <fieldset class="fieldset">
+              <legend class="fieldset__legend">Jouw gegevens</legend>
+
+              <div class="form__row">
+                <div class="field">
+                  <label for="voornaam">Voornaam <span class="req" aria-hidden="true">*</span></label>
+                  <input id="voornaam" name="voornaam" type="text" autocomplete="given-name" required>
+                </div>
+                <div class="field">
+                  <label for="achternaam">Achternaam</label>
+                  <input id="achternaam" name="achternaam" type="text" autocomplete="family-name">
+                </div>
+              </div>
+
+              <div class="field" style="margin-top:var(--space-s)">
+                <label for="email">E-mailadres <span class="req" aria-hidden="true">*</span></label>
+                <input id="email" name="email" type="email" autocomplete="email" required>
+              </div>
+
+              <div class="field" style="margin-top:var(--space-s)">
+                <label for="onderwerp">Onderwerp</label>
+                <input id="onderwerp" name="onderwerp" type="text">
+              </div>
+
+              <div class="field" style="margin-top:var(--space-s)">
+                <label for="bericht">Bericht <span class="req" aria-hidden="true">*</span></label>
+                <textarea id="bericht" name="bericht" rows="6" required></textarea>
+              </div>
+
+              <div class="honeypot" aria-hidden="true">
+                <label for="website">Laat dit veld leeg</label>
+                <input id="website" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
+              </div>
+            </fieldset>
+
+            <button class="btn btn--solid" type="submit">
+              Verzenden
+              <svg class="btn__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12 12 4M12 4H5.5M12 4v6.5"/></svg>
+            </button>
+
+            <p class="field__hint" style="margin-top:var(--space-s)">
+              Velden met <span class="req" aria-hidden="true">*</span> zijn verplicht.
+            </p>
+          </form>
+        </div>
+
+        <aside class="contact-aside">
+          <h2 class="site-footer__title" style="color:var(--c-ink)">Direct contact</h2>
+          <dl>
+            <dt>Telefoon</dt>
+            <dd><a href="tel:+31612345678">+31 (0) 6 12345678</a></dd>
+            <dt>E-mail</dt>
+            <dd><a href="mailto:info@oosterslicht.nl">info@oosterslicht.nl</a></dd>
+            <dt>Werkplaats</dt>
+            <dd>Driebergen-Rijsenburg</dd>
+            <dt>Bereikbaar</dt>
+            <dd>Tijdens kantooruren</dd>
+          </dl>
+
+          <hr style="border:0;border-top:1px solid var(--c-line);margin:var(--space-m) 0">
+
+          <p class="field__hint">
+            Twijfel je over houtsoort of papier? Bekijk eerst de
+            <a class="link-line" href="lampencollectie.html#materialen">materialen</a>
+            of lees over
+            <a class="link-line" href="maakproces.html">het maakproces</a>.
+          </p>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap wrap--wide">
+    <div class="site-footer__grid">
+      <div>
+        <img class="site-footer__logo" src="assets/img/logo.webp" alt="OostersLicht" width="1600" height="298" loading="lazy">
+        <p class="site-footer__tagline">
+          Handgemaakte lampen van massief hout en Japans papier, uit de werkplaats in
+          Driebergen-Rijsenburg.
+        </p>
+      </div>
+      <div>
+        <h2 class="site-footer__title">Collecties</h2>
+        <ul class="site-footer__list">
+          <li><a href="lampencollectie.html">Japanse collectie</a></li>
+          <li><a href="collectie-de-stijl.html">Collectie De Stijl</a></li>
+          <li><a href="maakproces.html">Het maakproces</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="site-footer__title">Informatie</h2>
+        <ul class="site-footer__list">
+          <li><a href="contact.html">Contact &amp; bestellen</a></li>
+          <li><a href="lampencollectie.html#materialen">Materialen</a></li>
+          <li><a href="maakproces.html">De maker</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="site-footer__title">Contact</h2>
+        <div class="site-footer__contact">
+          <p><a href="tel:+31612345678">+31 (0) 6 12345678</a></p>
+          <p><a href="mailto:info@oosterslicht.nl">info@oosterslicht.nl</a></p>
+          <p>Driebergen-Rijsenburg</p>
+        </div>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <p>&copy; 2026 OostersLicht. Alle rechten voorbehouden.</p>
+      <p>Handgemaakt in Nederland</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
