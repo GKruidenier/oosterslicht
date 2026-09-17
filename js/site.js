@@ -402,14 +402,20 @@
        lamp uit de Japanse collectie kan met elke papiersoort worden gemaakt;
        De Stijl-lampen hebben geen hout- of papierkeuze en wél een tapekleur.
        De sleutels komen letterlijk overeen met de teksten van de
-       <option>-elementen in het lampmenu. */
+       <option>-elementen in het lampmenu.
+
+       Een waarde van 1 betekent: veld tonen met alle opties. Staat er een
+       lijst, dan blijven alleen die opties over — de Take krijgt wel een
+       blad, maar alleen bamboe, terwijl de Koyo uit vier soorten kan
+       kiezen. */
     var LAMPVELDEN = {
       'Ronde Lamp Yin (vloerlamp)':      { hout: 1, papier: 1 },
       'Vierkante Lamp Yang (vloerlamp)': { hout: 1, papier: 1 },
       'Hanglamp Kawa (hanglamp)':        { hout: 1, papier: 1 },
       'Lamp Koyo (wandlamp)':            { hout: 1, papier: 1, blad: 1, afmeting: 1 },
       'Wandlamp Torii (wandlamp)':       { hout: 1, papier: 1 },
-      'Tafellamp Take (tafellamp)':      { hout: 1, papier: 1 },
+      'Tafellamp Take (tafellamp)':      { hout: 1, papier: 1,
+                                           blad: ['Geen blad', 'Bamboeblad'] },
       'Stalamp De Stijl':                { tape: 1, vast: 'effen Japans papier zonder vezels' },
       'Wandlamp De Stijl':               { tape: 1, vast: 'effen Japans papier zonder vezels' },
       'Lamp op maat':                    { hout: 1, papier: 1, blad: 1, afmeting: 1 }
@@ -430,10 +436,28 @@
 
       block.querySelectorAll('[data-veld]').forEach(function (veld) {
         var sleutel = veld.getAttribute('data-veld');
+        var regel = regels ? regels[sleutel] : null;
         // Zonder gekozen lamp alleen de vaste velden tonen; dat is rustiger
         // dan alles tonen en daarna de helft weghalen.
-        var toon = !!ALTIJD[sleutel] || (regels ? !!regels[sleutel] : false);
+        var toon = !!ALTIJD[sleutel] || !!regel;
         veld.hidden = !toon;
+
+        // Opties binnen het veld beperken wanneer de regel een lijst is.
+        var toegestaan = Array.isArray(regel) ? regel : null;
+        veld.querySelectorAll('select').forEach(function (sel) {
+          var eersteVrij = null;
+          [].slice.call(sel.options).forEach(function (opt) {
+            var mag = !toegestaan || toegestaan.indexOf(opt.text) !== -1;
+            opt.hidden = !mag;
+            opt.disabled = !mag;
+            if (mag && eersteVrij === null) eersteVrij = opt.index;
+          });
+          // Stond er een keuze die nu niet meer mag, val terug op de eerste.
+          if (sel.selectedIndex >= 0 && sel.options[sel.selectedIndex] &&
+              sel.options[sel.selectedIndex].disabled && eersteVrij !== null) {
+            sel.selectedIndex = eersteVrij;
+          }
+        });
 
         veld.querySelectorAll('input, select, textarea').forEach(function (el) {
           if (!toon) {
