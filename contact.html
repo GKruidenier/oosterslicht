@@ -11,13 +11,13 @@
 <link rel="preload" href="assets/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.classList.add('js')</script>
-<link rel="stylesheet" href="css/style.css?v=28">
+<link rel="stylesheet" href="css/style.css?v=29">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OostersLicht">
 <meta property="og:title" content="Contact &amp; bestellen — OostersLicht">
 <meta property="og:description" content="Een lamp bestellen of een vraag stellen.">
 <meta property="og:image" content="assets/img/werkplaats.webp">
-<script src="js/site.js?v=28" defer></script>
+<script src="js/site.js?v=30" defer></script>
 </head>
 <body>
 
@@ -112,7 +112,7 @@
                     <button class="btn-text" type="button" data-remove-lamp hidden>Verwijder deze lamp</button>
                   </div>
 
-                  <div class="field">
+                  <div class="field" data-veld="lamp">
                     <label for="lamp">Lamp <span class="req" aria-hidden="true">*</span></label>
                     <select id="lamp" name="lamp[1]" data-required>
                       <option value="">Kies een lamp</option>
@@ -134,7 +134,9 @@
                     </select>
                   </div>
 
-                  <div class="field">
+                  <p class="field__hint" data-vast hidden></p>
+
+                  <div class="field" data-veld="afmeting">
                     <label for="afmeting">Afmeting</label>
                     <select id="afmeting" name="afmeting[1]">
                       <option>Standaard</option>
@@ -144,12 +146,12 @@
                     <span class="field__hint">De Lamp Koyo is er in twee maten: standaard 40 × 25 × 15 cm en klein 30 × 20 × 12 cm.</span>
                   </div>
 
-                  <div class="field">
+                  <div class="field" data-veld="aantal">
                     <label for="aantal">Aantal <span class="req" aria-hidden="true">*</span></label>
                     <input id="aantal" name="aantal[1]" type="number" min="1" max="20" step="1" value="1" inputmode="numeric" data-required>
                   </div>
 
-                  <div class="field">
+                  <div class="field" data-veld="hout">
                     <label for="houtsoort">Houtsoort <span class="req" aria-hidden="true">*</span></label>
                     <select id="houtsoort" name="houtsoort[1]" data-required>
                       <option value="">Kies een houtsoort</option>
@@ -164,7 +166,7 @@
                     <span class="field__hint">Welke soorten voor een lamp beschikbaar zijn, staat bij de omschrijving in de collectie.</span>
                   </div>
 
-                  <div class="field">
+                  <div class="field" data-veld="papier">
                     <label for="papier">Japans papier <span class="req" aria-hidden="true">*</span></label>
                     <select id="papier" name="papier[1]" data-required>
                       <option value="">Kies een papiersoort</option>
@@ -176,7 +178,7 @@
                     <span class="field__hint">De collectie De Stijl gebruikt altijd effen Japans papier, zonder vezels.</span>
                   </div>
 
-                  <div class="field">
+                  <div class="field" data-veld="blad">
                     <label for="blad">Blad in het papier</label>
                     <select id="blad" name="blad[1]">
                       <option>Geen blad</option>
@@ -186,7 +188,7 @@
                     </select>
                   </div>
 
-                  <div class="field">
+                  <div class="field" data-veld="tape">
                     <label for="tape">Kleur van de tape — alleen De Stijl</label>
                     <select id="tape" name="tape[1]">
                       <option value="">Niet van toepassing</option>
@@ -195,7 +197,7 @@
                     </select>
                   </div>
 
-                  <div class="field">
+                  <div class="field" data-veld="detaillering">
                     <label for="detaillering">Eventuele custom detaillering</label>
                     <textarea id="detaillering" name="detaillering[1]" rows="3" placeholder="Bijvoorbeeld een afwijkende maat of een specifiek motief"></textarea>
                     <span class="field__hint">Bij een lamp op maat worden vorm en detaillering met je afgestemd in overleg met de maker.</span>

@@ -69,6 +69,11 @@
 
   /* Lijnen en accenten */
   --c-line: #ddd6c9;
+  /* Rand van invoervelden. --c-line haalt daar maar 1,42:1 tegen de vulling,
+     terwijl WCAG 1.4.11 er 3:1 vraagt: bij een invoerveld is de rand het enige
+     wat aangeeft waar je moet typen. Deze waarde haalt 3,28:1 en blijft warm
+     grijs, zodat het rustig blijft over zestien velden. */
+  --c-line-control: #928c83;
   --c-line-soft: #e9e3d8;
   --c-line-dark: #3b352c;
   --c-wood: #8b7355;
@@ -2042,7 +2047,7 @@ p:last-child {
   font-size: var(--fs-body);
   color: var(--c-ink);
   background: var(--c-card);
-  border: 1px solid var(--c-line);
+  border: 1px solid var(--c-line-control);
   border-radius: var(--radius);
   padding: 0.85rem 1rem;
   min-height: 48px;

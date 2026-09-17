@@ -396,6 +396,85 @@
     var orderBlock = form.querySelector('[data-order-block]');
     var reasons = form.querySelectorAll('input[name="onderwerp-type"]');
 
+    /* --- Alleen de velden tonen die voor de gekozen lamp gelden -------------
+
+       Wat er per lamp te kiezen valt, staat in de productbeschrijving. Een
+       Torii krijgt altijd kozo unryu, dus een papierkeuze aanbieden is geen
+       keuze maar een valkuil; De Stijl-lampen hebben geen houtsoortkeuze en
+       wél een tapekleur. De sleutels komen letterlijk overeen met de teksten
+       van de <option>-elementen in het lampmenu. */
+    var LAMPVELDEN = {
+      'Ronde Lamp Yin (vloerlamp)':      { hout: 1, papier: 1 },
+      'Vierkante Lamp Yang (vloerlamp)': { hout: 1, papier: 1 },
+      'Hanglamp Kawa (hanglamp)':        { hout: 1, vast: 'kozo washi zonder vezel' },
+      'Lamp Koyo (wandlamp)':            { hout: 1, papier: 1, blad: 1, afmeting: 1 },
+      'Wandlamp Torii (wandlamp)':       { hout: 1, vast: 'kozo unryu' },
+      'Tafellamp Take (tafellamp)':      { hout: 1, vast: 'Japans papier met bamboemotief' },
+      'Stalamp De Stijl':                { tape: 1, vast: 'effen Japans papier zonder vezels' },
+      'Wandlamp De Stijl':               { tape: 1, vast: 'effen Japans papier zonder vezels' },
+      'Lamp op maat':                    { hout: 1, papier: 1, blad: 1, afmeting: 1 }
+    };
+
+    // Deze velden gelden altijd, ongeacht de lamp.
+    var ALTIJD = { lamp: 1, aantal: 1, detaillering: 1 };
+
+    var syncVelden = function (block) {
+      if (!block) return;
+      var select = block.querySelector('[data-veld="lamp"] select');
+      if (!select) return;
+
+      var gekozen = select.value || (select.selectedIndex > 0
+        ? select.options[select.selectedIndex].text : '');
+      var regels = LAMPVELDEN[gekozen] || null;
+      var bestelt = orderBlock ? !orderBlock.hidden : true;
+
+      block.querySelectorAll('[data-veld]').forEach(function (veld) {
+        var sleutel = veld.getAttribute('data-veld');
+        // Zonder gekozen lamp alleen de vaste velden tonen; dat is rustiger
+        // dan alles tonen en daarna de helft weghalen.
+        var toon = !!ALTIJD[sleutel] || (regels ? !!regels[sleutel] : false);
+        veld.hidden = !toon;
+
+        veld.querySelectorAll('input, select, textarea').forEach(function (el) {
+          if (!toon) {
+            // Verplicht uitzetten, anders blokkeert een verborgen veld het
+            // versturen; en terugzetten op de beginwaarde, anders reist een
+            // oude keuze mee. Bij een <select> is dat de eerste optie en niet
+            // een lege string: menu's als Afmeting en Blad hebben geen lege
+            // optie, en die zouden dan blanco opengaan zodra ze weer
+            // verschijnen.
+            el.required = false;
+            if (el.tagName === 'SELECT') el.selectedIndex = 0;
+            else if (el.type !== 'number') el.value = '';
+          } else if (el.hasAttribute('data-required')) {
+            el.required = bestelt;
+          }
+        });
+      });
+
+      var vast = block.querySelector('[data-vast]');
+      if (vast) {
+        if (regels && regels.vast) {
+          vast.textContent = 'Deze lamp wordt altijd gemaakt met ' + regels.vast + '.';
+          vast.hidden = false;
+        } else {
+          vast.textContent = '';
+          vast.hidden = true;
+        }
+      }
+    };
+
+    var syncAlleBlokken = function () {
+      form.querySelectorAll('.lamp-block').forEach(syncVelden);
+    };
+
+    // Gedelegeerd, zodat het ook werkt voor blokken die later worden bijgezet.
+    form.addEventListener('change', function (e) {
+      if (e.target.matches('[data-veld="lamp"] select')) {
+        syncVelden(e.target.closest('.lamp-block'));
+      }
+    });
+
     var syncReason = function () {
       var ordering = form.querySelector('input[name="onderwerp-type"]:checked');
       if (!orderBlock || !ordering) return;
@@ -406,6 +485,9 @@
       orderBlock.querySelectorAll('[data-required]').forEach(function (el) {
         el.required = isOrder;
       });
+      // Daarna pas de per-lamp regels, die required voor verborgen velden
+      // weer uitzetten.
+      syncAlleBlokken();
     };
 
     reasons.forEach(function (r) {
@@ -442,8 +524,19 @@
 
       var filled = [];
       if (pick(form.querySelector('#lamp'), params.get('lamp'))) filled.push('lamp');
-      if (pick(form.querySelector('#houtsoort'), params.get('hout'))) filled.push('houtsoort');
-      if (pick(form.querySelector('#papier'), params.get('papier'))) filled.push('papier');
+
+      // De lampkeuze bepaalt welke velden er zijn; daarna pas de rest invullen,
+      // anders zetten we een waarde in een veld dat voor deze lamp niet geldt.
+      syncAlleBlokken();
+
+      var zichtbaar = function (el) {
+        var veld = el && el.closest('[data-veld]');
+        return !!veld && !veld.hidden;
+      };
+      var hout = form.querySelector('#houtsoort');
+      var papier = form.querySelector('#papier');
+      if (zichtbaar(hout) && pick(hout, params.get('hout'))) filled.push('houtsoort');
+      if (zichtbaar(papier) && pick(papier, params.get('papier'))) filled.push('papier');
 
       if (!filled.length) return;
 
@@ -500,6 +593,7 @@
         if (remove) remove.hidden = false;
 
         list.appendChild(clone);
+        syncVelden(clone);
         var firstField = clone.querySelector('select, input');
         if (firstField) firstField.focus();
       });
