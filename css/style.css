@@ -2002,6 +2002,45 @@ p:last-child {
   }
 }
 
+/* --- Paginakop met sfeerfoto --- */
+
+/* Op de twee collectiepagina's stond de sfeerfoto in een eigen sectie tussen
+   de kop en de modellen. Dat kostte een half scherm: je moest bijna twee
+   schermen scrollen voor je de eerste lamp zag, terwijl dat nu net is
+   waarvoor je die pagina opent. De foto staat nu naast de kop, waar hij geen
+   eigen rij meer kost. Op een telefoon valt hij eronder.
+
+   De tekst staat daarbij in een kolom onder elkaar in plaats van kop links en
+   inleiding rechts; naast een foto is er geen ruimte voor drie kolommen. */
+@media (min-width: 900px) {
+  .page-head__inner--media {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+}
+
+.page-head__tekst > * + * {
+  margin-top: var(--space-s);
+}
+
+.page-head__foto {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-img);
+}
+
+/* Met een foto in de kop hoeft er onder die kop geen volle marge meer bij:
+   de foto sluit het blok al af. Samen met een kleinere aanloop van de sectie
+   eronder scheelt dat ruim honderd pixels voor de eerste lamp in beeld komt.
+   De marges zijn kleiner, niet weg — de pagina moet lucht houden. */
+.page-head:has(.page-head__inner--media) {
+  padding-block-end: clamp(1rem, 2vw, 1.5rem);
+}
+
+.page-head:has(.page-head__inner--media) + .section {
+  padding-block-start: clamp(2rem, 3.5vw, 3rem);
+}
+
 .page-head__title {
   font-size: var(--fs-display-l);
   font-weight: 300;
