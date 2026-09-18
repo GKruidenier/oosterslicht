@@ -142,6 +142,11 @@
   --fs-hero-min: 2.75rem;
   --fs-hero-max: 4.5rem;
 
+  /* Waar het licht in de herofoto zit, als deel van de hoogte. Gemeten op het
+     zwaartepunt van de helderste pixels, niet geschat. Vervang je de foto,
+     dan hoort deze waarde mee te veranderen. */
+  --licht-y: 0.592;
+
   /* Het woordmerk is donkere inkt op transparant. Op een lichte pagina kan
      het zo staan; op de donkere band moet het omgekeerd. Bij een donker palet
      draait die verhouding om, en dan wisselen deze twee waarden van plek. */
@@ -809,18 +814,10 @@ p:last-child {
    losse ensō in het midden. Die is vervallen — het echte logo doet hetzelfde
    werk in één beeld, en twee merktekens boven elkaar is er één te veel. */
 
-/* De maat staat op de hoogte en niet op de breedte: het woordmerk is ruim vijf
-   keer zo breed als hoog, dus een breedte in vw laat de letters op een groot
-   scherm uit hun verband groeien. Op deze hoogte staat hij een slag boven de
-   1,9rem van de koptekst — genoeg om niet als tweede kopregel te lezen, klein
-   genoeg om de kop zijn eigen aanloop te laten houden. */
-.hero__logo {
-  display: block;
-  width: auto;
-  height: clamp(1.75rem, 4.5vw, 2.5rem);
-  margin-bottom: clamp(1.25rem, 4vw, 2rem);
-  filter: var(--logo-filter);
-}
+/* De maat van het woordmerk staat op de hoogte en niet op de breedte: het merk
+   is ruim vijf keer zo breed als hoog, dus een breedte in vw laat de letters op
+   een groot scherm uit hun verband groeien. De regels zelf staan verderop, bij
+   de tekst van de hero. */
 
 /* --- Hero ----------------------------------------------------------------- */
 
@@ -896,17 +893,6 @@ p:last-child {
     max-height: max(58svh, 47.6vw);
     margin-bottom: clamp(1.25rem, 2.5vw, 1.5rem);
   }
-
-  /* Deze maat kwam uit de opzet waarin het merk klein en dicht op de kop
-     stond. Op 1,8rem stond het hier vlak onder de koptekst op bijna dezelfde
-     hoogte (29 tegen 24 pixels) en las het als een herhaling. 2,3rem houdt
-     dezelfde verhouding aan als op een breed scherm, ruim anderhalf maal de
-     koptekst, en blijft klein genoeg om de kop op een breed maar laag scherm
-     niet onder de vouw te duwen. */
-  .hero__logo {
-    height: 2.3rem;
-    margin-bottom: 1.1rem;
-  }
 }
 
 .hero__wrap {
@@ -925,10 +911,6 @@ p:last-child {
   max-width: var(--hero-breedte);
 }
 
-.hero__text {
-  width: fit-content;
-  max-width: 34ch;
-}
 
 /* --- Hero, de band met tekst erin --- */
 
@@ -1013,24 +995,47 @@ p:last-child {
     max-width: none;
   }
 
-  /* De wrap vult de hele band, zodat het zegel linksboven en de tekst
-     linksonder in dezelfde kolom staan. */
+  /* De wrap vult de hele band. De tekst stond linksonder, in de hoek; nu
+     staat hij op de hoogte van het licht.
+
+     Die hoogte is geen smaak maar een meting: het zwaartepunt van de
+     helderste pixels in take_decor ligt op 0,592 van de hoogte van de foto,
+     en bij deze opzet is de foto precies zo hoog als de band. De kap van de
+     lamp en het tekstblok delen daardoor één horizon, in plaats van dat de
+     tekst in de onderhoek hangt en het beeld daarboven zijn eigen gang gaat.
+
+     Het blok wordt gecentreerd en daarna verschoven over het verschil tussen
+     die horizon en het midden. Zo hoeft er niets over de hoogte van de
+     inhoud bekend te zijn en blijft het kloppen in elke letterset. */
   .hero__wrap {
     position: absolute;
     inset: 0;
     margin-inline: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+    display: grid;
     padding-block: clamp(2rem, 3.5vw, 3rem) clamp(2.5rem, 5vw, 5rem);
   }
 
-  /* De koptekst zet het merk op 2,4vw. Op die maat stond het hier vlak
-     onder hetzelfde beeldmerk en las het als een herhaling; groter leest het
-     als de aanhef van dit blok. */
-  .hero__logo {
-    height: clamp(2.5rem, 3.3vw, 4rem);
-    margin-bottom: clamp(1.1rem, 1.8vw, 1.6rem);
+  /* De kop komt op de hoogte van het licht te staan. Drie termen:
+
+     1. het verschil tussen de horizon en het midden van de band;
+     2. de helft van het verschil tussen de onder- en de bovenmarge, want
+        align-self centreert binnen de opvulling en die is niet symmetrisch;
+     3. de afstand van het midden van het blok naar het midden van de kop,
+        want het is de kop die op de horizon hoort en niet het blok.
+
+     Die derde term hangt aan de korpsgrootte van de kop en niet aan een vast
+     aantal pixels. Daardoor klopt hij in alle vijf de lettersets en op elke
+     schermbreedte — nagemeten: de benodigde correctie was in alle vijf
+     precies gelijk. */
+  .hero__content {
+    grid-area: 1 / 1;
+    justify-self: start;
+    align-self: center;
+    transform: translateY(calc(
+      (var(--licht-y) - 0.5) * var(--band-h)
+      + (clamp(2.5rem, 5vw, 5rem) - clamp(2rem, 3.5vw, 3rem)) / 2
+      + 0.175 * clamp(var(--fs-hero-min), 5vw, var(--fs-hero-max))
+    ));
   }
 }
 
@@ -1045,11 +1050,35 @@ p:last-child {
   font-weight: var(--fw-display);
   line-height: 1;
   letter-spacing: var(--ls-display-tight);
-  /* De alinea eronder hoort bij de kop en niet bij de knoppen: de kop laat
-     haar dichtbij, de alinea duwt de knoppen ver weg. Even grote gaten maken
-     van vier onderdelen één rij losse regels. */
-  margin: 0 0 clamp(0.6rem, 1.1vw, 0.9rem);
+  /* Deze afstand kwam eerst van de alinea eronder. Nu die weg is, staat hij
+     hier: de knoppen zijn een volgende handeling en horen los van de kop. */
+  margin: 0 0 clamp(1.9rem, 3.4vw, 2.9rem);
   color: var(--c-ink);
+}
+
+/* Hier is een ensō geprobeerd als tweede merkteken in de hero, los van de
+   naam. Hij viel af: de O van het woordmerk in de koptekst íís deze cirkel,
+   dus waar je hem ook neerzet staat er honderd pixels verderop al een. Het
+   teken staat wel waar het iets toevoegt — in het diptiek verderop op deze
+   pagina, met de uitleg erbij. */
+
+/* Het woordmerk boven de kop. De hoogte hangt aan dezelfde formule als de
+   kop, zodat de verhouding tussen merk en kop op elke breedte gelijk blijft.
+   0,30 en niet 0,46 zoals de gezette naam had: een penseelmerk is een dichte
+   vorm en weegt op gelijke hoogte zwaarder dan letters. */
+.hero__logo {
+  display: block;
+  width: auto;
+  /* De factor is anderhalf keer 0,56, de maat waarop het merk even breed was
+     als de naam die hier eerst in letters stond. Het merk mag nu duidelijk
+     boven de kop uit komen in plaats van ermee gelijk te lopen.
+
+     De ondergrens is er voor de telefoon: bij een mincho blijft de kop daar
+     op 35 pixels steken en zou het merk kleiner worden dan bij de andere
+     lettersets. */
+  height: max(2rem, calc(clamp(var(--fs-hero-min), 5vw, var(--fs-hero-max)) * 0.84));
+  margin: 0 0 clamp(0.6rem, 1.1vw, 0.95rem);
+  filter: var(--logo-filter);
 }
 
 /* "Houten lampen die rust uitstralen" is één zin: een onderwerp met een
@@ -1072,17 +1101,10 @@ p:last-child {
   border-color: var(--c-wood-deep);
 }
 
-.hero__text {
-  font-size: var(--fs-lead);
-  color: var(--c-ink-soft);
-  /* Op 1,75 stond deze regel te ijl onder een kop die net gewicht heeft
-     gekregen. De maat is ruim genoeg dat de zin op een breed scherm op één
-     regel staat; wordt het blok smaller, dan breekt hij in tweeën. */
-  line-height: 1.55;
-  max-width: 56ch;
-  text-wrap: balance;
-  margin: 0 0 clamp(1.75rem, 3.2vw, 2.75rem);
-}
+/* Hier stond de opmaak van de regel onder de kop ("Met de hand gemaakt van
+   massief hout en Japans papier"). Die regel is uit de hero; wat er staat is
+   nu naam, belofte en twee knoppen. Het materiaalverhaal staat op de
+   collectiepagina en in de voettekst. */
 
 .hero__actions {
   display: flex;
@@ -2171,8 +2193,14 @@ p:last-child {
    "Complementaire krachten" op twee, waardoor de knoppen eronder anders
    achtendertig pixels uit elkaar zouden staan. 2,2em is twee regels bij de
    regelafstand van 1,1 die .quote meekrijgt. */
+/* Deze twee koppen horen allebei op één regel te staan. De maat is daarop
+   gemeten en niet op het oog gekozen: "Heelheid en Eenvoud" is de langste van
+   de twee, en Shippori Mincho zet hem bijna dertig procent breder dan
+   Cormorant. In de paneelkolom van 288 pixels past die letter tot 27,8 px;
+   daar zit deze bovengrens net onder, zodat alle vijf de lettersets het
+   halen. min-height houdt de twee panelen gelijk uitgelijnd. */
 .quote--panel {
-  font-size: clamp(1.75rem, 2.4vw, 2.25rem);
+  font-size: clamp(1.3rem, 1.85vw, 1.7rem);
   min-height: 2.2em;
   margin: 0;
 }
