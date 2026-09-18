@@ -465,12 +465,21 @@
        blad, maar alleen bamboe, terwijl de Koyo uit vier soorten kan
        kiezen. */
     var LAMPVELDEN = {
-      'Ronde Lamp Yin (vloerlamp)':      { hout: 1, papier: 1 },
-      'Vierkante Lamp Yang (vloerlamp)': { hout: 1, papier: 1 },
-      'Hanglamp Kawa (hanglamp)':        { hout: 1, papier: 1 },
+      /* De houtsoorten komen uit de specificatie op de productpagina en zijn
+         per lamp verschillend: alleen de Koyo wordt in alle zes gemaakt. Bij
+         de Yin en de Yang gaat de keuze over de kap; de detaillering is daar
+         altijd esdoorn, wat de regel onder het menu vermeldt. "In overleg"
+         staat overal bij, want elke pagina zegt "andere soorten op aanvraag".
+
+         Het papier is bij elke Japanse lamp vrij te kiezen uit alle drie. */
+      'Ronde Lamp Yin (vloerlamp)':      { hout: ['Noten', 'In overleg'], papier: 1,
+                                           vast: 'een detaillering van esdoornhout' },
+      'Vierkante Lamp Yang (vloerlamp)': { hout: ['Kers', 'Iep', 'In overleg'], papier: 1,
+                                           vast: 'een detaillering van esdoornhout' },
+      'Hanglamp Kawa (hanglamp)':        { hout: ['Esdoorn', 'In overleg'], papier: 1 },
       'Lamp Koyo (wandlamp)':            { hout: 1, papier: 1, blad: 1, afmeting: 1 },
-      'Wandlamp Torii (wandlamp)':       { hout: 1, papier: 1 },
-      'Tafellamp Take (tafellamp)':      { hout: 1, papier: 1,
+      'Wandlamp Torii (wandlamp)':       { hout: ['Noten', 'In overleg'], papier: 1 },
+      'Tafellamp Take (tafellamp)':      { hout: ['Noten', 'In overleg'], papier: 1,
                                            blad: ['Geen blad', 'Bamboeblad'] },
       'Tafellamp De Stijl':                { tape: 1, vast: 'effen Japans papier zonder vezels' },
       'Wandlamp De Stijl':               { tape: 1, vast: 'effen Japans papier zonder vezels' },
@@ -485,7 +494,7 @@
 
     // Deze velden gelden altijd, ongeacht de lamp.
     var ALTIJD = { lamp: 1, aantal: 1, detaillering: 1 };
-    var ALTIJD_OPMAAT = { lamp: 1 };
+    var ALTIJD_OPMAAT = { lamp: 1, aantal: 1 };
 
     var syncVelden = function (block) {
       if (!block) return;
@@ -511,7 +520,8 @@
         veld.querySelectorAll('select').forEach(function (sel) {
           var eersteVrij = null;
           [].slice.call(sel.options).forEach(function (opt) {
-            var mag = !toegestaan || toegestaan.indexOf(opt.text) !== -1;
+            var mag = !toegestaan || opt.value === '' ||
+                      toegestaan.indexOf(opt.text) !== -1;
             opt.hidden = !mag;
             opt.disabled = !mag;
             if (mag && eersteVrij === null) eersteVrij = opt.index;
@@ -625,6 +635,10 @@
       var papier = form.querySelector('#papier');
       if (zichtbaar(hout) && pick(hout, params.get('hout'))) filled.push('houtsoort');
       if (zichtbaar(papier) && pick(papier, params.get('papier'))) filled.push('papier');
+
+      // Nog een keer, voor het geval de URL een soort noemde die voor deze lamp
+      // niet gemaakt wordt; die valt dan terug op de keuzeprompt.
+      syncAlleBlokken();
 
       if (!filled.length) return;
 
