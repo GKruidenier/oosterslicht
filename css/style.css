@@ -2305,20 +2305,32 @@ p:last-child {
 
 /* --- Stappen (maakproces) ------------------------------------------------- */
 
-/* De foto staat tussen de sectiekop en de stappen, over de volle breedte van
-   de kolom. Hij hoorde bij een stuk tekst over duurzaam hout dat eruit is;
-   hier illustreert hij stap twee, de houtbewerking. De hoogte is begrensd,
-   anders duwt een liggende foto van 16:9 de stappen van het scherm. */
-.steps__photo {
-  margin: 0 0 clamp(2rem, 4vw, 3.5rem);
+/* Een liggende foto als plaat in de kolom, in haar eigen verhouding.
+
+   Hier stond eerst een vaste 16:9 met een hoogtegrens. Die twee bijten
+   elkaar: het kader werd door de grens lager dan de verhouding vraagt, en
+   object-fit: cover sneed het verschil eraf — op een breed scherm bleef er
+   nog geen helft van de foto over, precies door het midden. Bij een
+   sfeerfoto waar de lampen van het plafond tot de vloer staan, sneuvelt dan
+   het onderwerp.
+
+   Daarom geen bijsnijden maar een smallere kolom: de foto houdt haar eigen
+   verhouding en de breedtegrens houdt de hoogte in de hand. */
+.band-photo {
+  max-width: 58rem;
+  margin-inline: auto;
 }
 
-.steps__photo img {
+.band-photo img {
+  display: block;
   width: 100%;
-  max-height: min(26rem, 45svh);
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
+  height: auto;
   border-radius: var(--radius-img);
+}
+
+/* Boven de vier stappen hoort er lucht onder. */
+.band-photo--steps {
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
 }
 
 .steps {
