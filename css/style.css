@@ -376,11 +376,17 @@ p:last-child {
   margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
 }
 
+/* Vanaf de bovenkant uitlijnen, zodat de eerste regel van de inleiding op
+   dezelfde hoogte begint als het label ernaast. Met align-items: end lijnden
+   alleen de onderkanten uit en begon de inleiding halverwege het label — op
+   een kop van twee regels naast een inleiding van vijf stak ze er bovenuit en
+   hing ze aan niets vast. De twee kolommen schelen in hoogte nu nog geen tien
+   pixels, dus ook onderaan lopen ze vrijwel gelijk. */
 .section__head--split {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-m);
-  align-items: end;
+  align-items: start;
 }
 
 @media (min-width: 900px) {

@@ -615,7 +615,11 @@
         veld.hidden = isOrder;
         veld.querySelectorAll('input, select, textarea').forEach(function (el) {
           if (isOrder) el.value = '';
+          // Uitschakelen, niet alleen verbergen: een verborgen veld wordt
+          // meegestuurd, en een verborgen verplicht veld blokkeert het
+          // versturen zonder dat iemand ziet waarom.
           el.disabled = isOrder;
+          el.required = !isOrder;
         });
       });
 

@@ -69,12 +69,13 @@ $bestelling = ($soort === 'bestellen');
 // Minimale controle. De browser controleert dit ook al, maar een POST kan
 // buiten het formulier om binnenkomen.
 //
-// Bij een bestelling mag het bericht leeg blijven: de lampgegevens hieronder
-// zeggen dan al wat er nodig is. Bij een vraag is het bericht juist het enige
-// wat er staat, dus daar moet wel iets in.
+// Bij een bestelling mogen onderwerp en bericht leeg blijven: het onderwerpveld
+// staat er niet eens, en de lampgegevens hieronder zeggen al wat er nodig is.
+// Bij een vraag is dit juist alles wat er staat, dus moeten ze allebei gevuld
+// zijn.
 $emailOk = filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
 if ($voornaam === '' || $achternaam === '' || !$emailOk
-    || (!$bestelling && $bericht === '')) {
+    || (!$bestelling && ($bericht === '' || $onderwerp === ''))) {
     header('Location: ' . $FOUT, true, 303);
     exit;
 }
