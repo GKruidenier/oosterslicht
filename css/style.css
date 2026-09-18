@@ -2000,9 +2000,11 @@ p:last-child {
 .duality__panel {
   position: relative;
   display: grid;
-  /* Vanaf de bovenkant, niet gecentreerd: zo staan de twee helften altijd op
-     dezelfde lijn, ook wanneer de ene open is en de andere niet. */
-  align-content: start;
+  /* Beide panelen hebben dezelfde minimumhoogte, dus houdt centreren de twee
+     helften op dezelfde lijn, ook wanneer de ene open is en de andere niet. */
+  align-content: center;
+  justify-items: center;
+  text-align: center;
   padding: clamp(2.75rem, 5vw, 4.5rem) var(--gutter);
   overflow: hidden;
 }
@@ -2041,7 +2043,7 @@ p:last-child {
      extra breedte als lucht aan de rechterkant terecht. */
   .duality__inner {
     grid-template-columns: minmax(0, 18rem) 0rem;
-    justify-content: start;
+    justify-content: center;
     column-gap: 0;
     transition: grid-template-columns var(--dur-slow) var(--ease),
       column-gap var(--dur-slow) var(--ease);
@@ -2067,10 +2069,11 @@ p:last-child {
 .duality__mark {
   display: flex;
   align-items: flex-end;
+  justify-content: center;
   min-height: 7rem;
   margin-bottom: var(--space-s);
   transition: transform var(--dur) var(--ease);
-  transform-origin: left bottom;
+  transform-origin: center bottom;
 }
 
 .duality__enso {
@@ -2111,6 +2114,7 @@ p:last-child {
 .duality__toggle {
   display: flex;
   width: fit-content;
+  margin-inline: auto;
   align-items: center;
   gap: 0.6em;
   margin-top: var(--space-m);
@@ -2125,7 +2129,7 @@ p:last-child {
   text-transform: uppercase;
   color: var(--c-muted);
   cursor: pointer;
-  text-align: left;
+  text-align: center;
   transition: color var(--dur-fast) var(--ease);
 }
 
@@ -2890,6 +2894,58 @@ p:last-child {
 /* Boven de vier stappen hoort er lucht onder. */
 .band-photo--steps {
   margin-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+
+/* De vier stappen lezen als een lijst naast de werkplaatsfoto: het oog gaat
+   één kolom af in plaats van vier smalle kolommen langs. De foto blijft bij
+   het scrollen staan zolang de stappen langslopen. */
+@media (min-width: 900px) {
+  .proces {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: clamp(2.5rem, 5vw, 4.5rem);
+    align-items: start;
+  }
+
+  /* De foto is liggend gefotografeerd: een staande uitsnede zou de handen en
+     de schaaf half wegsnijden. Hij houdt dus zijn eigen verhouding en blijft
+     in beeld staan terwijl de vier stappen ernaast langsschuiven. */
+  .proces .band-photo--steps {
+    align-self: stretch;
+    margin-bottom: 0;
+  }
+
+  .proces .band-photo--steps img {
+    position: sticky;
+    top: calc(var(--header-h, 5rem) + 2rem);
+    aspect-ratio: 3 / 2;
+  }
+
+  .proces .steps {
+    grid-template-columns: 1fr;
+    gap: clamp(1.75rem, 3vw, 2.5rem);
+  }
+
+  /* In één kolom staat het nummer naast de stap in plaats van erboven: dat
+     scheelt een regel per stap en houdt de lijst even hoog als de foto. */
+  .proces .step {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: clamp(1rem, 1.5vw, 1.5rem);
+  }
+
+  .proces .step::before {
+    grid-row: span 2;
+    font-size: 1.3rem;
+    margin-bottom: 0;
+    line-height: 1.5;
+  }
+
+  /* Eén kolom wordt snel te breed om prettig te lezen; de regels blijven
+     daarom op dezelfde lengte als elders op de site. */
+  .proces .step p {
+    max-width: 48ch;
+  }
 }
 
 .materialen-link {
