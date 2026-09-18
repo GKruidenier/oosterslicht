@@ -47,6 +47,7 @@ assets/img/hanglamp_plant.jpg
 assets/img/hero-yang-opstelling.jpg
 assets/img/hero-yang-opstelling.webp
 assets/img/impact_kozobark.jpg
+assets/img/impact_kozobark.webp
 assets/img/inzet_eikenhout.jpg
 assets/img/inzet_esdoornhout.jpg
 assets/img/inzet_essenhout.jpg

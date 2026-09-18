@@ -2372,6 +2372,14 @@ p:last-child {
   margin-bottom: clamp(2rem, 4vw, 3.5rem);
 }
 
+.steps__link {
+  margin: clamp(2rem, 4vw, 3rem) 0 0;
+}
+
+.materialen-link {
+  margin: clamp(2rem, 4vw, 3rem) 0 0;
+}
+
 /* --- Ingesloten film ------------------------------------------------------ */
 
 /* De film staat in de fotokolom van een split, op de plek waar anders een
@@ -2881,9 +2889,12 @@ p:last-child {
 /* --- Print ---------------------------------------------------------------- */
 
 @media print {
+  /* Een ingesloten film wordt op papier een leeg kader met een bijschrift
+     eronder dat naar iets verwijst wat er niet staat. */
   .site-header,
   .nav-toggle,
-  .skip-link {
+  .skip-link,
+  .video {
     display: none;
   }
 
