@@ -1257,9 +1257,73 @@ p:last-child {
 
 /* Een product op zijn eigen pagina heeft geen buren, dus ook geen scheidslijn
    erboven en geen ruimte om van die lijn af te komen. */
-.product--single {
+.product.product--single {
   border-top: 0;
   padding-block-start: 0;
+}
+
+/* Boven het product staat alleen nog het kruimelpad, dus de sectie hoeft daar
+   geen volle marge meer aan toe te voegen. Zo begint de lamp hoog in beeld. */
+.section--tight:has(.product--single) {
+  padding-block-start: clamp(1rem, 2vw, 1.75rem);
+}
+
+/* Op een losse lamppagina stond de naam in de paginakop, met een halve
+   schermhoogte lucht tussen die naam en de foto met de gegevens eronder. Je
+   las de lamp dus in twee keer. Naam, inleiding, gegevens en knop staan nu in
+   een kolom naast de foto, zodat het in een oogopslag samenhangt.
+
+   De naam staat in de bron boven de foto en de gegevens eronder. Op een
+   telefoon, waar de drie blokken onder elkaar vallen, lees je zo eerst welke
+   lamp dit is, dan het beeld, dan de maten en de prijs. Op een breed scherm
+   schuiven kop en gegevens met grid-gebieden naar de linkerkolom en vult de
+   foto rechts beide rijen. */
+@media (min-width: 900px) {
+  .product--single {
+    align-items: start;
+    grid-template-columns: 1fr 1.05fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      'kop foto'
+      'gegevens foto';
+    column-gap: clamp(2rem, 4vw, 4rem);
+    row-gap: 0;
+  }
+
+  .product--single .product__head {
+    grid-area: kop;
+  }
+
+  .product--single .product__media {
+    grid-area: foto;
+  }
+
+  .product--single .product__body {
+    grid-area: gegevens;
+  }
+}
+
+/* De naam van de lamp. Kleiner dan in de paginakop, want hij staat nu naast
+   de foto en niet meer alleen op een lege regel. */
+.product__title {
+  font-size: clamp(2.25rem, 4vw, 3.25rem);
+  font-weight: 300;
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+
+.product__intro {
+  font-size: var(--fs-lead);
+  line-height: 1.75;
+  color: var(--c-ink-soft);
+  margin: var(--space-s) 0 0;
+}
+
+/* Zonder de naam houdt de paginakop alleen het kruimelpad over; de ruime
+   marge eronder was er voor een kop die er niet meer staat. */
+.page-head:not(:has(.page-head__inner)) {
+  padding-block: clamp(1.5rem, 3vw, 2.25rem) 0;
 }
 
 /* --- Fotoslider ----------------------------------------------------------- */
@@ -2031,6 +2095,16 @@ p:last-child {
 .product__media .slider {
   width: 100%;
   max-width: 23rem;
+}
+
+/* Ruimer dan in de collectierij: hier is de foto het onderwerp van de pagina.
+   De bovengrens is niet alleen een breedte maar ook de schermhoogte: het
+   kader is 2:3, dus een foto van 31rem breed wordt 46rem hoog en valt op een
+   laptopscherm onder de vouw. De tweede term rekent uit hoe breed de foto mag
+   zijn om met alles erboven binnen het scherm te blijven; op een hoog scherm
+   wint de 31rem. */
+.product--single .product__media .slider {
+  max-width: min(31rem, calc((100svh - var(--header-h) - 13rem) / 1.5));
 }
 
 /* Alleen een directe losse foto bijsnijden. Als kindselector, anders wint deze
