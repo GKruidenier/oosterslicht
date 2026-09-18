@@ -11,7 +11,7 @@
 <link rel="preload" href="assets/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.classList.add('js')</script>
-<link rel="stylesheet" href="css/style.css?v=53">
+<link rel="stylesheet" href="css/style.css?v=62">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OostersLicht">
 <meta property="og:title" content="Japanse collectie — OostersLicht">
@@ -194,26 +194,27 @@
 
   <section class="section section--deep" id="materialen">
     <div class="wrap">
-      <div class="section__head section__head--split">
-        <div>
-          <h2 class="section__title">Hout en papier</h2>
-        </div>
+      <div class="section__head section__head--wheels">
+        <p class="label label--plain">Materialen</p>
+        <h2 class="section__title">Hout en <span class="accent">papier</span></h2>
         <p class="lead">
-          Bij het bestellen stemmen we houtsoort, papier en detaillering af op je wensen.
-          Welke houtsoorten voor een bepaalde lamp beschikbaar zijn, staat bij de
-          omschrijving.
+          Bij het bestellen stemmen we houtsoort, papier en detaillering af op je
+          wensen. Welke houtsoorten voor een bepaalde lamp beschikbaar zijn, staat
+          bij de omschrijving.
         </p>
       </div>
 
       <div class="wheels">
-        <div class="wheel-block" data-reveal>
-          <h3 class="wheel-block__title">De houtsoorten</h3>
-          <p class="wheel-block__text">
-            Zes soorten, elk met een eigen nerf en kleur. Klik er een aan om het
-            hout van dichtbij te zien.
-          </p>
-          <div class="wheel" data-wheel>
-            <svg class="wheel__svg" viewBox="0 0 300 300" role="group">
+        <div class="wheel-block" data-wheel data-reveal>
+          <div class="wheel-block__head">
+            <h3 class="wheel-block__title">De houtsoorten</h3>
+            <p class="wheel-block__text">
+              Elk met een eigen nerf en kleur. Klik een soort aan om het hout
+              van dichtbij te zien.
+            </p>
+          </div>
+          <div class="wheel">
+            <svg class="wheel__svg" viewBox="4 4 292 292" role="group">
               <defs>
                 <pattern id="hout-esdoorn" patternUnits="userSpaceOnUse" x="0" y="0" width="300" height="300"><image href="assets/img/inzet_esdoornhout.webp" x="0" y="0" width="300" height="300" preserveAspectRatio="xMidYMid slice"></image></pattern>
                 <pattern id="hout-es" patternUnits="userSpaceOnUse" x="0" y="0" width="300" height="300"><image href="assets/img/inzet_essenhout.webp" x="0" y="0" width="300" height="300" preserveAspectRatio="xMidYMid slice"></image></pattern>
@@ -230,20 +231,25 @@
               <path class="wheel__segment" style="fill:url(#hout-eiken)" data-name="Eiken" data-desc="Stevig, met een open en herkenbare nerf." role="button" tabindex="0" aria-label="Eiken: Stevig, met een open en herkenbare nerf." d="M28.756,80.000 A140,140 0 0 1 150.000,10.000 L150.000,80.000 A70,70 0 0 0 89.378,115.000 Z"></path>
             </svg>
             <div class="wheel__center">
-              <p class="wheel__center-name" data-wheel-name>Zes houtsoorten</p>
-              <p class="wheel__center-desc" data-wheel-desc>Klik voor een close-up</p>
+              <p class="wheel__center-mark">Hout</p>
             </div>
+          </div>
+          <div class="wheel-readout">
+            <p class="wheel-readout__name" data-wheel-name></p>
+            <p class="wheel-readout__desc" data-wheel-desc>Kies een soort voor een close-up.</p>
           </div>
         </div>
 
-        <div class="wheel-block" data-reveal data-reveal-delay="1">
-          <h3 class="wheel-block__title">Het Japanse papier</h3>
-          <p class="wheel-block__text">
-            Drie soorten, die elk een ander effect geven in het licht. Elke soort
-            past bij elke lamp uit deze collectie.
-          </p>
-          <div class="wheel" data-wheel>
-            <svg class="wheel__svg" viewBox="0 0 300 300" role="group">
+        <div class="wheel-block" data-wheel data-reveal data-reveal-delay="1">
+          <div class="wheel-block__head">
+            <h3 class="wheel-block__title">Het Japanse papier</h3>
+            <p class="wheel-block__text">
+              Elk geeft een ander effect in het licht. Alle drie passen ze bij
+              elke lamp uit de collectie.
+            </p>
+          </div>
+          <div class="wheel">
+            <svg class="wheel__svg" viewBox="4 4 292 292" role="group">
               <defs>
                 <pattern id="papier-kozo" patternUnits="userSpaceOnUse" x="0" y="0" width="300" height="300"><image href="assets/img/traditioneel_wit_moerbei_kozo_2.webp" x="0" y="0" width="300" height="300" preserveAspectRatio="xMidYMid slice"></image></pattern>
                 <pattern id="papier-unryu" patternUnits="userSpaceOnUse" x="0" y="0" width="300" height="300"><image href="assets/img/unryu_moerbei_kozo_papier.webp" x="0" y="0" width="300" height="300" preserveAspectRatio="xMidYMid slice"></image></pattern>
@@ -254,9 +260,12 @@
               <path class="wheel__segment" style="fill:url(#papier-kinwashi)" data-name="Kinwashi" data-desc="Met manillahennep, iets geliger van kleur." role="button" tabindex="0" aria-label="Kinwashi: Met manillahennep, iets geliger van kleur." d="M28.756,220.000 A140,140 0 0 1 150.000,10.000 L150.000,80.000 A70,70 0 0 0 89.378,185.000 Z"></path>
             </svg>
             <div class="wheel__center">
-              <p class="wheel__center-name" data-wheel-name>Drie papiersoorten</p>
-              <p class="wheel__center-desc" data-wheel-desc>Klik voor een close-up</p>
+              <p class="wheel__center-mark">Papier</p>
             </div>
+          </div>
+          <div class="wheel-readout">
+            <p class="wheel-readout__name" data-wheel-name></p>
+            <p class="wheel-readout__desc" data-wheel-desc>Kies een soort voor een close-up.</p>
           </div>
         </div>
       </div>

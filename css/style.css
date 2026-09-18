@@ -390,6 +390,20 @@ p:last-child {
   }
 }
 
+/* De twee wielen eronder vormen een symmetrisch paar; een kop die naar links
+   of rechts uitwijkt vecht daarmee. Deze staat daarom gecentreerd boven het
+   midden van dat paar. */
+.section__head--wheels {
+  max-width: 44rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.section__head--wheels .lead {
+  max-width: 48ch;
+  margin: var(--space-s) auto 0;
+}
+
 .section__title {
   font-size: var(--fs-h2);
 }
@@ -2361,12 +2375,41 @@ p:last-child {
   display: grid;
   grid-template-columns: 1fr;
   gap: clamp(2.5rem, 6vw, 4.5rem);
+  max-width: 56rem;
+  margin-inline: auto;
+  text-align: center;
 }
 
+/* Vanaf twee kolommen scheidt een haarlijn de twee wielen, in dezelfde dunne
+   lijnentaal als de rest van de site; een kader eromheen zou zwaarder wegen
+   dan de foto's in de wielen zelf. */
 @media (min-width: 860px) {
   .wheels {
     grid-template-columns: 1fr 1fr;
+    gap: 0;
   }
+
+  /* Kop, wiel en uitleg delen hun rijhoogte met de kolom ernaast, zodat de
+     twee wielen op dezelfde hoogte staan ook als de ene inleiding een regel
+     langer afbreekt dan de andere. */
+  @supports (grid-template-rows: subgrid) {
+    .wheels {
+      grid-template-rows: auto auto auto;
+    }
+
+    .wheel-block {
+      display: grid;
+      grid-template-rows: subgrid;
+      grid-row: span 3;
+    }
+  }
+}
+
+/* Kop, tekst, wiel en uitleg staan op één middenas, zodat elk blok symmetrisch
+   om zijn eigen wiel hangt. */
+.wheel-block > * {
+  width: min(100%, 24rem);
+  margin-inline: auto;
 }
 
 .wheel-block__title {
@@ -2378,17 +2421,22 @@ p:last-child {
 
 .wheel-block__text {
   font-size: var(--fs-small);
+  line-height: 1.65;
   color: var(--c-muted);
-  margin: 0 0 var(--space-m);
-  max-width: 44ch;
+  margin: 0;
 }
 
 .wheel {
   position: relative;
   display: grid;
   place-items: center;
-  width: min(100%, 22rem);
-  margin-inline: auto;
+  margin-block: var(--space-m) var(--space-s);
+}
+
+/* Het wiel blijft smaller dan de tekstmaat eromheen; op volle kolombreedte
+   ging het de kop en de uitleg overheersen. */
+.wheel-block > .wheel {
+  width: min(100%, 21rem);
 }
 
 .wheel__svg {
@@ -2396,16 +2444,26 @@ p:last-child {
   height: auto;
 }
 
+/* Zonder scheidingslijn: de nerven van de zes foto's verschillen genoeg om de
+   segmenten uit elkaar te houden, en een lichte lijn ertussen trok juist de
+   aandacht weg van het hout. De lijn komt alleen terug bij toetsenbordfocus. */
 .wheel__segment {
-  stroke: var(--c-bg);
-  stroke-width: 2;
+  stroke: none;
   cursor: pointer;
   transform-origin: 150px 150px;
-  transition: transform var(--dur) var(--ease);
+  transition: transform var(--dur) var(--ease),
+    opacity var(--dur-fast) var(--ease);
+}
+
+/* Zonder scheidingslijnen is het opschuiven alleen niet te zien: de andere
+   soorten treden daarom terug zodra er een gekozen is. */
+.wheel:has(.wheel__segment.is-active) .wheel__segment:not(.is-active) {
+  opacity: 0.5;
 }
 
 .wheel__segment:hover,
 .wheel__segment.is-active {
+  opacity: 1;
   transform: scale(1.04);
 }
 
@@ -2439,22 +2497,43 @@ p:last-child {
   pointer-events: none;
 }
 
-.wheel__center-name {
+/* Het hart van het wiel draagt alleen nog de naam van de materiaalgroep. De
+   omschrijving van de gekozen soort staat onder het wiel, waar hij op een
+   leesbare maat past in plaats van in zeventien tekens per regel. */
+.wheel__center-mark {
   font-family: var(--font-body);
   font-size: var(--fs-label);
   font-weight: 500;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--c-ink);
+  color: var(--c-muted);
   margin: 0;
 }
 
-.wheel__center-desc {
-  max-width: 17ch;
-  font-size: 0.75rem;
-  line-height: 1.4;
+/* Een vaste hoogte, zodat de langste omschrijving de pagina niet laat
+   verspringen terwijl je over de segmenten beweegt. */
+.wheel-readout {
+  min-height: 6.5rem;
+}
+
+.wheel-readout__name:empty {
+  display: none;
+}
+
+.wheel-readout__name {
+  font-family: var(--font-display);
+  font-size: clamp(1.375rem, 1.7vw, 1.75rem);
+  line-height: 1.2;
+  color: var(--c-ink);
+  margin: 0 0 0.35rem;
+}
+
+.wheel-readout__desc {
+  font-size: var(--fs-small);
+  line-height: 1.6;
   color: var(--c-muted);
-  margin: 0;
+  max-width: 34ch;
+  margin: 0 auto;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2462,11 +2541,11 @@ p:last-child {
     transition: none;
   }
 
+  /* Het terugtreden van de andere segmenten blijft de aanwijzer; alleen het
+     opschuiven vervalt. */
   .wheel__segment:hover,
   .wheel__segment.is-active {
     transform: none;
-    stroke: var(--c-ink);
-    stroke-width: 4;
   }
 }
 
