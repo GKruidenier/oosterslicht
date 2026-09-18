@@ -597,11 +597,30 @@
       }
     });
 
+    var berichtVeld = form.querySelector('#bericht');
+    var berichtSter = form.querySelector('[data-req-bericht]');
+
     var syncReason = function () {
       var ordering = form.querySelector('input[name="onderwerp-type"]:checked');
       if (!orderBlock || !ordering) return;
       var isOrder = ordering.value === 'bestellen';
       orderBlock.hidden = !isOrder;
+
+      /* Bij een bestelling vertelt het blok hierboven al waar het over gaat:
+         een onderwerpregel is dan dubbelop en het bericht mag leeg blijven.
+         Bij een vraag is het bericht juist het enige wat er staat, dus daar
+         blijft het verplicht. Uitschakelen en niet alleen verbergen, want een
+         verborgen veld wordt gewoon meegestuurd. */
+      form.querySelectorAll('[data-alleen-vraag]').forEach(function (veld) {
+        veld.hidden = isOrder;
+        veld.querySelectorAll('input, select, textarea').forEach(function (el) {
+          if (isOrder) el.value = '';
+          el.disabled = isOrder;
+        });
+      });
+
+      if (berichtVeld) berichtVeld.required = !isOrder;
+      if (berichtSter) berichtSter.hidden = isOrder;
       // Verplichte velden uitschakelen als het blok verborgen is,
       // anders blokkeert native validatie het versturen.
       orderBlock.querySelectorAll('[data-required]').forEach(function (el) {

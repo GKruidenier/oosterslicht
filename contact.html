@@ -17,7 +17,7 @@
 <meta property="og:title" content="Contact &amp; bestellen — OostersLicht">
 <meta property="og:description" content="Een lamp bestellen of een vraag stellen.">
 <meta property="og:image" content="assets/img/werkplaats.webp">
-<script src="js/site.js?v=41" defer></script>
+<script src="js/site.js?v=42" defer></script>
 </head>
 <body>
 
@@ -230,8 +230,8 @@
                   <input id="voornaam" name="voornaam" type="text" autocomplete="given-name" required>
                 </div>
                 <div class="field">
-                  <label for="achternaam">Achternaam</label>
-                  <input id="achternaam" name="achternaam" type="text" autocomplete="family-name">
+                  <label for="achternaam">Achternaam <span class="req" aria-hidden="true">*</span></label>
+                  <input id="achternaam" name="achternaam" type="text" autocomplete="family-name" required>
                 </div>
               </div>
 
@@ -240,13 +240,19 @@
                 <input id="email" name="email" type="email" autocomplete="email" required>
               </div>
 
-              <div class="field" style="margin-top:var(--space-s)">
+              <!-- Bij een bestelling zegt het blok hierboven al waar het over gaat;
+                   dan is een onderwerpregel dubbelop. js/site.js verbergt hem daar.
+                   Zonder JavaScript blijft hij gewoon staan, en hij is optioneel. -->
+              <div class="field" data-alleen-vraag style="margin-top:var(--space-s)">
                 <label for="onderwerp">Onderwerp</label>
                 <input id="onderwerp" name="onderwerp" type="text">
               </div>
 
+              <!-- Verplicht in de opmaak, want zonder JavaScript kan dit het enige
+                   zijn wat iemand kwijt wil. Bij een bestelling zet js/site.js het
+                   terug naar optioneel: de lampgegevens vertellen het verhaal al. -->
               <div class="field" style="margin-top:var(--space-s)">
-                <label for="bericht">Bericht <span class="req" aria-hidden="true">*</span></label>
+                <label for="bericht">Bericht <span class="req" data-req-bericht aria-hidden="true">*</span></label>
                 <textarea id="bericht" name="bericht" rows="6" required></textarea>
               </div>
 

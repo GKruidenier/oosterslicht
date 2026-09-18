@@ -60,13 +60,21 @@ function veld($naam) {
 $voornaam   = veld('voornaam');
 $achternaam = veld('achternaam');
 $email      = veld('email');
-$onderwerp  = veld('onderwerp-type');
+$soort      = veld('onderwerp-type');
+$onderwerp  = veld('onderwerp');
 $bericht    = trim((string)($_POST['bericht'] ?? ''));
+
+$bestelling = ($soort === 'bestellen');
 
 // Minimale controle. De browser controleert dit ook al, maar een POST kan
 // buiten het formulier om binnenkomen.
+//
+// Bij een bestelling mag het bericht leeg blijven: de lampgegevens hieronder
+// zeggen dan al wat er nodig is. Bij een vraag is het bericht juist het enige
+// wat er staat, dus daar moet wel iets in.
 $emailOk = filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
-if ($voornaam === '' || $achternaam === '' || !$emailOk || $bericht === '') {
+if ($voornaam === '' || $achternaam === '' || !$emailOk
+    || (!$bestelling && $bericht === '')) {
     header('Location: ' . $FOUT, true, 303);
     exit;
 }
@@ -182,7 +190,12 @@ foreach (verzamelUploads($_FILES['bestanden'] ?? null) as $bestand) {
 $regels = [];
 $regels[] = 'Naam        : ' . $voornaam . ' ' . $achternaam;
 $regels[] = 'E-mail      : ' . $email;
-$regels[] = 'Onderwerp   : ' . ($onderwerp !== '' ? $onderwerp : 'niet opgegeven');
+$regels[] = 'Soort       : ' . ($bestelling ? 'bestelling' : 'vraag');
+// Het onderwerpveld werd hiervoor helemaal niet gelezen: wat iemand daar
+// intikte verdween. Bij een bestelling staat het veld er niet meer.
+if ($onderwerp !== '') {
+    $regels[] = 'Onderwerp   : ' . $onderwerp;
+}
 $regels[] = '';
 
 $lampen = $_POST['lamp'] ?? [];
@@ -232,16 +245,18 @@ if ($bijlagenGeweigerd) {
     $regels[] = '';
 }
 
-$regels[] = '--- Bericht ---';
-$regels[] = $bericht;
-$regels[] = '';
+if ($bericht !== '') {
+    $regels[] = '--- Bericht ---';
+    $regels[] = $bericht;
+    $regels[] = '';
+}
 $regels[] = '---';
 $regels[] = 'Verstuurd via het formulier op oosterslicht.nl';
 $regels[] = 'Datum: ' . date('d-m-Y H:i');
 
 $body = implode("\n", $regels);
 
-$titel = ($onderwerp === 'bestellen' ? 'Bestelling' : 'Vraag')
+$titel = ($bestelling ? 'Bestelling' : 'Vraag')
        . ' via de website - ' . $voornaam . ' ' . $achternaam;
 
 // Codering expliciet, anders komen accenten en het euroteken verminkt aan.
