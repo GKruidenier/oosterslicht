@@ -32,6 +32,15 @@ $AFZENDER   = 'noreply@oosterslicht.nl';
  * in te vullen. Dan blijft alles ook in de domeinmailbox staan.
  */
 
+// Krijgt de bezoeker een bevestiging van zijn eigen aanvraag? Op false
+// zetten schakelt hem uit; er verandert verder niets.
+$BEVESTIGING = true;
+
+// Het adres dat in die bevestiging staat als iemand wil reageren. Zet hier
+// geen noreply-adres neer: dan schrijft iemand met een aanvulling in het
+// luchtledige. Het mag hetzelfde adres zijn als $ONTVANGER.
+$ANTWOORDADRES = $ONTVANGER;
+
 $BEDANKT = 'bedankt.html';
 $FOUT    = 'contact.html?fout=1#formulier';
 
@@ -261,6 +270,11 @@ $regels[] = 'Datum: ' . date('d-m-Y H:i');
 
 $body = implode("\n", $regels);
 
+// De platte versie apart houden: hieronder wordt $body bij bijlagen
+// omgebouwd tot een multipart-bericht, en die vorm is onbruikbaar voor
+// de bevestiging aan de bezoeker.
+$samenvatting = $body;
+
 $titel = ($bestelling ? 'Bestelling' : 'Vraag')
        . ' via de website - ' . $voornaam . ' ' . $achternaam;
 
@@ -312,6 +326,63 @@ $verzonden = mail(
     implode("\r\n", $headers),
     '-f' . $AFZENDER
 );
+
+/* --- Bevestiging aan de bezoeker ---------------------------------------
+ *
+ * Alleen versturen als de aanvraag zelf is aangenomen. Een bevestiging van
+ * iets dat nooit is aangekomen is erger dan helemaal geen bevestiging.
+ *
+ * Mislukt deze mail wel, dan merkt de bezoeker daar niets van en gaat hij
+ * gewoon naar de bedankpagina. Zijn aanvraag ligt er immers; hem een fout
+ * voorschotelen zou hem laten denken dat er niets verstuurd is.
+ *
+ * Auto-Submitted vertelt mailservers dat dit een automatisch antwoord is,
+ * zodat een afwezigheidsmelding aan de andere kant geen pingpong begint.
+ */
+if ($BEVESTIGING && $verzonden) {
+    $bregels = [];
+    $bregels[] = 'Dag ' . $voornaam . ',';
+    $bregels[] = '';
+    $bregels[] = $bestelling
+        ? 'Dank voor je bestelling. Hij is goed aangekomen en ik neem zo snel'
+        : 'Dank voor je bericht. Het is goed aangekomen en ik laat zo snel';
+    $bregels[] = $bestelling
+        ? 'mogelijk contact met je op.'
+        : 'mogelijk van me horen.';
+    $bregels[] = '';
+    $bregels[] = 'Hieronder staat wat je hebt ingestuurd, zodat je het kunt nalezen.';
+    $bregels[] = 'Klopt er iets niet, of wil je iets aanvullen? Antwoord dan op deze';
+    $bregels[] = 'mail, of schrijf naar ' . $ANTWOORDADRES . '.';
+    $bregels[] = '';
+    $bregels[] = str_repeat('-', 62);
+    $bregels[] = '';
+    $bregels[] = $samenvatting;
+    $bregels[] = '';
+    $bregels[] = 'Hartelijke groet,';
+    $bregels[] = 'OostersLicht';
+
+    $btitel = $bestelling
+        ? 'Je bestelling bij OostersLicht'
+        : 'Je bericht aan OostersLicht';
+
+    $bheaders = [
+        'From: OostersLicht <' . $AFZENDER . '>',
+        'Reply-To: ' . $ANTWOORDADRES,
+        'MIME-Version: 1.0',
+        'Content-Type: text/plain; charset=UTF-8',
+        'Content-Transfer-Encoding: 8bit',
+        'Auto-Submitted: auto-replied',
+        'X-Auto-Response-Suppress: All',
+    ];
+
+    mail(
+        $email,
+        '=?UTF-8?B?' . base64_encode($btitel) . '?=',
+        implode("\n", $bregels),
+        implode("\r\n", $bheaders),
+        '-f' . $AFZENDER
+    );
+}
 
 header('Location: ' . ($verzonden ? $BEDANKT : $FOUT), true, 303);
 exit;
