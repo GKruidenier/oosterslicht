@@ -409,6 +409,39 @@
     });
   });
 
+  /* --- Diptiek: ensō en yin/yang ------------------------------------------ */
+
+  /* Zweven opent een paneel via CSS alleen; dat werkt niet op een
+     aanraakscherm en zegt een schermlezer niets. Deze knop maakt dezelfde
+     tekst bereikbaar met een tik en met Enter, en meldt de stand. */
+  document.querySelectorAll('.duality__toggle').forEach(function (knop) {
+    var paneel = knop.closest('.duality__panel');
+    if (!paneel) return;
+
+    /* Zonder muis staat de tekst open (zie de (hover: none)-regels in de
+       stylesheet); de knop doet hem daar dus juist dicht. */
+    var geenMuis = window.matchMedia('(hover: none)');
+    knop.setAttribute('aria-expanded', geenMuis.matches ? 'true' : 'false');
+
+    knop.addEventListener('click', function () {
+      if (geenMuis.matches) {
+        var dicht = paneel.toggleAttribute('data-dicht');
+        knop.setAttribute('aria-expanded', dicht ? 'false' : 'true');
+      } else {
+        var open = paneel.toggleAttribute('data-open');
+        knop.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+    });
+
+    /* Wisselt iemand van aanraken naar een muis (of draait een tablet om),
+       dan klopt de gemelde stand anders niet meer met wat er staat. */
+    geenMuis.addEventListener('change', function (e) {
+      paneel.removeAttribute('data-open');
+      paneel.removeAttribute('data-dicht');
+      knop.setAttribute('aria-expanded', e.matches ? 'true' : 'false');
+    });
+  });
+
   /* --- Contactformulier ---------------------------------------------------- */
 
   var form = document.querySelector('[data-form]');

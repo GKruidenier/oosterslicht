@@ -1077,10 +1077,6 @@ p:last-child {
     grid-template-columns: 0.85fr 1.15fr;
   }
 
-  .split--reverse .split__media {
-    order: 2;
-  }
-
   /* Beeld rechts én in de brede kolom, met de tekst links in de smalle.
      Met --reverse kon dat niet: die verplaatst het beeld naar de tweede
      kolom nadat de sporen al verdeeld zijn, dus kreeg juist de tekst de
@@ -1905,12 +1901,6 @@ p:last-child {
   opacity: 0.9;
 }
 
-.split__symbols {
-  display: flex;
-  justify-content: center;
-  gap: clamp(2rem, 5vw, 4rem);
-}
-
 .symbol-card {
   margin: 0;
   text-align: center;
@@ -1959,6 +1949,309 @@ p:last-child {
 
 .band-dark .quote__cite {
   color: var(--c-on-dark-muted);
+}
+
+/* --- Diptiek: ensō en yin/yang ---------------------------------------- */
+
+/* Twee panelen die het scherm delen: links zwart met de ensō, rechts de
+   gewone paginakleur met het taijitu. Ze stonden hiervoor als twee losse
+   secties onder elkaar, terwijl ze over hetzelfde gaan: de twee tekens waar
+   het merk op rust. Naast elkaar laten ze zien dat het om een paar gaat. */
+
+.duality__panels {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 900px) {
+  .duality__panels {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Het paneel dat je aanwijst neemt ruimte van het andere: daar schuift de
+   uitleg naast het citaat open. Pas vanaf 1200 pixels: daaronder zou de
+   uitlegkolom smaller worden dan de tekst die erin moet, en dan valt hij
+   afgeknipt weg in plaats van open. Daaronder klapt hij naar beneden open. */
+@media (min-width: 1200px) {
+  .duality__panels {
+    transition: grid-template-columns var(--dur-slow) var(--ease);
+  }
+
+  .duality__panels:has(.duality__panel--enso:hover),
+  .duality__panels:has(.duality__panel--enso:focus-within),
+  .duality__panels:has(.duality__panel--enso[data-open]) {
+    grid-template-columns: 1.7fr 1fr;
+  }
+
+  .duality__panels:has(.duality__panel--yinyang:hover),
+  .duality__panels:has(.duality__panel--yinyang:focus-within),
+  .duality__panels:has(.duality__panel--yinyang[data-open]) {
+    grid-template-columns: 1fr 1.7fr;
+  }
+}
+
+.duality__panel {
+  position: relative;
+  display: grid;
+  /* Vanaf de bovenkant, niet gecentreerd: zo staan de twee helften altijd op
+     dezelfde lijn, ook wanneer de ene open is en de andere niet. */
+  align-content: start;
+  padding: clamp(2.75rem, 5vw, 4.5rem) var(--gutter);
+  overflow: hidden;
+}
+
+/* Een ondergrens zodat het openen de rest van de pagina niet verschuift.
+   Tussen 900 en 1200 valt de uitleg naar beneden open en moet die hoogte er
+   al zijn (gemeten: 580 pixels op 1000). Daarboven schuift hij opzij en is
+   alleen de kop bepalend (gemeten: 507 op 1440, 470 op 1200). */
+@media (min-width: 900px) and (max-width: 1199px) {
+  .duality__panel {
+    min-height: 37rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .duality__panel {
+    min-height: 32rem;
+  }
+}
+
+.duality__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* De uitleg schuift horizontaal open, naast het citaat in plaats van eronder.
+   De tweede kolom gaat van nul naar een vaste maat en niet naar een fractie:
+   bij een fractie hangt de eindbreedte af van wat er overblijft, en dan werd
+   de tekst er tien pixels afgeknipt. Nu is de kolom precies zo breed als de
+   alinea's erin, en past het citaat zich aan. */
+@media (min-width: 1200px) {
+  /* De tekstkolom heeft een eigen maat en rekt niet mee met het paneel. Stond
+     hij op 1fr, dan groeide hij mee zodra het paneel breder werd en werd de
+     uitleg ernaast tot tegen de buitenrand geduwd, ver van de kop waar hij bij
+     hoort. Met justify-content houden beide kolommen zich links, en komt de
+     extra breedte als lucht aan de rechterkant terecht. */
+  .duality__inner {
+    grid-template-columns: minmax(0, 18rem) 0rem;
+    justify-content: start;
+    column-gap: 0;
+    transition: grid-template-columns var(--dur-slow) var(--ease),
+      column-gap var(--dur-slow) var(--ease);
+  }
+
+  /* De uitlegkolom groeit mee met het scherm in plaats van op een vaste maat
+     te blijven staan, zodat de alinea's de ruimte vullen die het paneel erbij
+     krijgt. De bovengrens houdt de regel onder de vijfenzeventig tekens. */
+  .duality__panel:hover .duality__inner,
+  .duality__panel:focus-within .duality__inner,
+  .duality__panel[data-open] .duality__inner {
+    grid-template-columns: minmax(0, 18rem) clamp(16rem, 24vw, 26rem);
+    column-gap: clamp(2rem, 3vw, 3rem);
+  }
+}
+
+.duality__hoofd {
+  min-width: 0;
+}
+
+/* Één gedeelde hoogte voor de tekens, zodat de labels eronder in beide
+   panelen op dezelfde lijn beginnen. */
+.duality__mark {
+  display: flex;
+  align-items: flex-end;
+  min-height: 7rem;
+  margin-bottom: var(--space-s);
+  transition: transform var(--dur) var(--ease);
+  transform-origin: left bottom;
+}
+
+.duality__enso {
+  width: clamp(4.5rem, 7vw, 6.5rem);
+  height: auto;
+  opacity: 0.9;
+  /* De ensō is zwarte inkt; omgekeerd wordt hij de witte cirkel die ook in
+     het logo staat. */
+  filter: invert(1);
+}
+
+.duality__taijitu {
+  width: clamp(4.5rem, 7vw, 6.5rem);
+  height: auto;
+  color: var(--c-ink);
+  opacity: 0.9;
+}
+
+.duality__panel:hover .duality__mark,
+.duality__panel:focus-within .duality__mark {
+  transform: scale(1.06);
+}
+
+/* Het citaat en de kop dragen dezelfde maat: het zijn twee kanten van één
+   gedachte en geen kop met een onderschrift. */
+/* Twee regels gereserveerd: "Onvolmaaktheid" past op één regel en
+   "Complementaire krachten" op twee, waardoor de knoppen eronder anders
+   achtendertig pixels uit elkaar zouden staan. 2,2em is twee regels bij de
+   regelafstand van 1,1 die .quote meekrijgt. */
+.quote--panel {
+  font-size: clamp(1.75rem, 2.4vw, 2.25rem);
+  min-height: 2.2em;
+  margin: 0;
+}
+
+/* Flex in plaats van inline-flex: anders gaan de knop en de link eronder op
+   één regel staan, omdat .link-line inline-flex is. */
+.duality__toggle {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  gap: 0.6em;
+  margin-top: var(--space-m);
+  padding: 0.6rem 0;
+  min-height: 2.75rem;
+  background: none;
+  border: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+  cursor: pointer;
+  text-align: left;
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.band-dark .duality__toggle {
+  color: var(--c-on-dark-muted);
+}
+
+.duality__panel:hover .duality__toggle {
+  color: var(--c-ink);
+}
+
+.band-dark.duality__panel:hover .duality__toggle {
+  color: var(--c-on-dark);
+}
+
+/* De pijl wijst de kant op waar de uitleg vandaan komt: naar rechts wanneer
+   hij ernaast openschuift, naar beneden wanneer hij eronder valt. Open draait
+   hij een halve slag, en betekent hij "weer dicht". */
+.duality__chevron {
+  --chevron-richting: 90deg;
+  width: 1rem;
+  height: 1rem;
+  flex: none;
+  transform: rotate(var(--chevron-richting));
+  transition: transform var(--dur) var(--ease);
+}
+
+@media (min-width: 1200px) {
+  .duality__chevron {
+    --chevron-richting: 0deg;
+  }
+}
+
+/* Op een smal scherm is er geen ruimte naast het citaat, dus valt de uitleg
+   daar onder de knop open in plaats van ernaast. */
+.duality__more {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows var(--dur) var(--ease),
+    opacity var(--dur) var(--ease);
+}
+
+.duality__more-inner {
+  overflow: hidden;
+}
+
+@media (min-width: 1200px) {
+  .duality__more {
+    display: block;
+    /* Tegenover het citaat in plaats van tegen de bovenrand van het paneel;
+       anders hangt de uitleg los boven de tekst waar hij bij hoort. */
+    align-self: center;
+    overflow: hidden;
+    transition: opacity var(--dur-slow) var(--ease);
+  }
+
+  /* Een vaste breedte houdt de alinea's opgemaakt terwijl de kolom eromheen
+     naar nul krimpt; zonder deze regel zou elke regel tot één letter breed
+     worden samengeperst en het blok metershoog. */
+  .duality__more-inner {
+    width: clamp(16rem, 24vw, 26rem);
+    overflow: visible;
+  }
+}
+
+.duality__more p {
+  margin: var(--space-s) 0 0;
+  font-size: var(--fs-small);
+  line-height: 1.7;
+  color: var(--c-muted);
+}
+
+.duality__more p:first-child {
+  margin-top: 0;
+}
+
+.band-dark .duality__more p {
+  color: var(--c-on-dark-muted);
+}
+
+/* Zweven, toetsenbordfocus en een klik openen hetzelfde paneel. Zweven alleen
+   zou het op een aanraakscherm onbereikbaar maken, en focus-within zorgt dat
+   je er met Tab ook komt. */
+.duality__panel:hover .duality__more,
+.duality__panel:focus-within .duality__more,
+.duality__panel[data-open] .duality__more {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.duality__panel:hover .duality__chevron,
+.duality__panel:focus-within .duality__chevron,
+.duality__panel[data-open] .duality__chevron {
+  transform: rotate(calc(var(--chevron-richting) + 180deg));
+}
+
+/* Zonder muis is er geen zweven, dus staat de tekst daar meteen open; de knop
+   blijft staan om hem weer dicht te kunnen doen. */
+@media (hover: none) {
+  .duality__panel .duality__more {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+
+  .duality__panel .duality__chevron {
+    transform: rotate(calc(var(--chevron-richting) + 180deg));
+  }
+
+  .duality__panel[data-dicht] .duality__more {
+    grid-template-rows: 0fr;
+    opacity: 0;
+  }
+
+  .duality__panel[data-dicht] .duality__chevron {
+    transform: rotate(var(--chevron-richting));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .duality__panels,
+  .duality__inner,
+  .duality__more,
+  .duality__chevron,
+  .duality__mark {
+    transition: none;
+  }
+
+  .duality__panel:hover .duality__mark,
+  .duality__panel:focus-within .duality__mark {
+    transform: none;
+  }
 }
 
 /* --- Footer --------------------------------------------------------------- */

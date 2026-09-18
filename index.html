@@ -11,13 +11,13 @@
 <link rel="preload" href="assets/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.classList.add('js')</script>
-<link rel="stylesheet" href="css/style.css?v=66">
+<link rel="stylesheet" href="css/style.css?v=83">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OostersLicht">
 <meta property="og:title" content="OostersLicht — handgemaakte lampen van hout en Japans papier">
 <meta property="og:description" content="Ambachtelijke lampen van massief hout en Japans washi-papier. Handgemaakt in Driebergen-Rijsenburg.">
 <meta property="og:image" content="assets/img/vloerlamp-cilinder-raam.webp">
-<script src="js/site.js?v=37" defer></script>
+<script src="js/site.js?v=38" defer></script>
 </head>
 <body>
 
@@ -132,12 +132,13 @@
     <div class="wrap">
       <div class="section__head section__head--split">
         <div>
-          <p class="label">Twee collecties</p>
+          <p class="label">Collecties en maatwerk</p>
           <h2 class="section__title">Oost ontmoet<br><span class="accent">Nederland</span></h2>
         </div>
         <p class="lead">
           Naast de Japanse collectie is er een reeks lampen die haar vorm ontleent aan
-          De Stijl — dezelfde ambachtelijke opbouw, een heel ander ritme.
+          De Stijl — dezelfde ambachtelijke opbouw, een heel ander ritme. En past geen
+          van beide, dan maken we een lamp op maat.
         </p>
       </div>
 
@@ -181,6 +182,25 @@
             </span>
           </div>
         </a>
+
+        <a class="card" href="contact.html" data-reveal data-reveal-delay="2">
+          <!-- De lamp staat verticaal in het midden van deze staande foto, dus
+               de standaarduitsnede van het kader laat haar heel. -->
+          <div class="card__media">
+            <img src="assets/img/torii_2.webp"
+                 alt="Wandlamp Torii van notenhout met Japans papier, brandend tegen een witte muur naast een plant"
+                 width="1066" height="1600" loading="lazy">
+          </div>
+          <div class="card__foot">
+            <div>
+              <h3 class="card__name">Lamp op maat</h3>
+              <span class="card__meta">Ontworpen voor jouw ruimte</span>
+            </div>
+            <span class="icon-btn" aria-hidden="true">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12 12 4M12 4H5.5M12 4v6.5"/></svg>
+            </span>
+          </div>
+        </a>
       </div>
     </div>
   </section>
@@ -218,63 +238,86 @@
     </div>
   </section>
 
-  <!-- Donkere band met citaat -->
-  <section class="section band-dark">
-    <div class="wrap">
-      <div class="split">
-        <div data-reveal>
-          <p class="label">Zen</p>
-          <blockquote class="quote">
-            De cirkel is niet gesloten — daar zit de mens in.
-            <cite class="quote__cite">De ensō in het logo</cite>
-          </blockquote>
-        </div>
-        <div data-reveal data-reveal-delay="1">
-          <p class="lead">
-            De zencirkel die de eerste letter van het logo vormt, staat voor heelheid en
-            eenvoud. Maar de cirkel is net niet dicht. Die opening biedt een
-            ontsnapping: je hoeft niet volmaakt te zijn.
-          </p>
-          <p class="lead">
-            De lampen van OostersLicht staan voor diezelfde heelheid en eenvoud — en
-            doen recht aan de opening in de cirkel.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- De twee tekens: ensō en yin/yang, naast elkaar als diptiek -->
+  <section class="duality" aria-labelledby="duality-kop">
+    <h2 class="visueel-verborgen" id="duality-kop">De twee tekens achter OostersLicht</h2>
 
-  <!-- Yin en Yang -->
-  <section class="section">
-    <div class="wrap">
-      <div class="split split--reverse">
-        <div class="split__media" data-reveal>
-          <div class="split__symbols">
-            <figure class="symbol-card">
-              <img src="assets/img/yin.webp" alt="Kalligrafie van het teken Yin" width="164" height="184" loading="lazy">
-              <figcaption>Yin</figcaption>
-            </figure>
-            <figure class="symbol-card">
-              <img src="assets/img/yang.webp" alt="Kalligrafie van het teken Yang" width="193" height="184" loading="lazy">
-              <figcaption>Yang</figcaption>
-            </figure>
+    <div class="duality__panels">
+      <article class="duality__panel duality__panel--enso band-dark" data-reveal>
+        <div class="duality__inner">
+          <div class="duality__hoofd">
+            <div class="duality__mark">
+              <img class="duality__enso" src="assets/img/zen-cirkel.webp" alt=""
+                   width="200" height="202" loading="lazy">
+            </div>
+            <p class="label">Zen</p>
+            <h3 class="quote quote--panel">Onvolmaaktheid</h3>
+
+            <button class="duality__toggle" type="button"
+                    aria-expanded="false" aria-controls="duality-meer-enso">
+              <span class="duality__toggle-tekst">Wat de ensō betekent</span>
+              <svg class="duality__chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5"/></svg>
+            </button>
+          </div>
+
+          <div class="duality__more" id="duality-meer-enso">
+            <div class="duality__more-inner">
+              <p>
+                De zencirkel die de eerste letter van het logo vormt, staat voor
+                heelheid en eenvoud. Maar de cirkel is net niet dicht. Die opening
+                biedt een ontsnapping: je hoeft niet volmaakt te zijn.
+              </p>
+              <p>
+                De lampen van OostersLicht staan voor diezelfde heelheid en eenvoud —
+                en doen recht aan de opening in de cirkel.
+              </p>
+            </div>
           </div>
         </div>
-        <div class="split__body" data-reveal data-reveal-delay="1">
-          <p class="label">Yin en Yang</p>
-          <h2>Twee krachten,<br>één evenwicht</h2>
-          <p class="lead">
-            Licht en donker, hard en zacht — complementaire krachten die altijd naar
-            balans zoeken. In een snelle, hectische wereld wil OostersLicht een rustpunt
-            zijn. Die rust zit in de zachtheid van het licht door het Japanse papier, in
-            het ambacht en in de eenvoud waarmee de lampen gemaakt zijn.
-          </p>
-          <a class="link-line" href="maakproces.html">
-            Lees hoe een lamp ontstaat
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12 12 4M12 4H5.5M12 4v6.5"/></svg>
-          </a>
+      </article>
+
+      <article class="duality__panel duality__panel--yinyang" data-reveal data-reveal-delay="1">
+        <div class="duality__inner">
+          <div class="duality__hoofd">
+            <div class="duality__mark">
+              <!-- Het taijitu als vector: één vorm die de donkere helft en de
+                   donkere stip tekent, met de lichte stip als uitsparing via
+                   fill-rule. Zo houdt het teken de washi-textuur van de pagina
+                   als lichte helft, in plaats van er een dichte witte vlek
+                   overheen te leggen. -->
+              <svg class="duality__taijitu" viewBox="0 0 100 100" aria-hidden="true">
+                <circle cx="50" cy="50" r="48.5" fill="none" stroke="currentColor" stroke-width="1.6"></circle>
+                <path fill="currentColor" fill-rule="evenodd"
+                      d="M50 1.5A48.5 48.5 0 0 1 50 98.5A24.25 24.25 0 0 1 50 50A24.25 24.25 0 0 0 50 1.5Z
+                         M50 65.5a8.75 8.75 0 1 0 0 17.5a8.75 8.75 0 1 0 0-17.5Z"></path>
+                <circle cx="50" cy="25.75" r="8.75" fill="currentColor"></circle>
+              </svg>
+            </div>
+            <p class="label">Yin en Yang</p>
+            <h3 class="quote quote--panel">Complementaire krachten</h3>
+
+            <button class="duality__toggle" type="button"
+                    aria-expanded="false" aria-controls="duality-meer-yinyang">
+              <span class="duality__toggle-tekst">Wat yin en yang betekenen</span>
+              <svg class="duality__chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5"/></svg>
+            </button>
+          </div>
+
+          <div class="duality__more" id="duality-meer-yinyang">
+            <div class="duality__more-inner">
+              <p>
+                Licht en donker, hard en zacht — complementaire krachten die altijd
+                naar balans zoeken. In een snelle, hectische wereld wil OostersLicht
+                een rustpunt zijn.
+              </p>
+              <p>
+                Die rust zit in de zachtheid van het licht door het Japanse papier, in
+                het ambacht en in de eenvoud waarmee de lampen gemaakt zijn.
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
+      </article>
     </div>
   </section>
 

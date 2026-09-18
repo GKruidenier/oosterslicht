@@ -144,6 +144,7 @@ assets/img/wandlamp_sola_decor.jpg
 assets/img/wandlamp_stijl_decor.jpg
 assets/img/werkplaats.jpg
 assets/img/yang.png
+assets/img/yang.webp
 assets/img/yang_detail.jpg
 assets/img/yang_detail_iepen.jpg
 assets/img/yang_japanse_stalamp1.jpg
@@ -158,6 +159,7 @@ assets/img/yang_unryu_kersenhout_detail.jpg
 assets/img/yang_unryu_stalamp_iep.jpg
 assets/img/yang_unryu_stalamp_iep.webp
 assets/img/yin.png
+assets/img/yin.webp
 assets/img/yin_detail.jpg
 assets/img/yin_detail_noten.jpg
 assets/img/yin_interieur.jpg
@@ -168,7 +170,6 @@ assets/img/yin_unryu_meditatie2.jpg
 assets/img/yin_woonkamer.jpg
 assets/img/ying_woonkamer.jpg
 assets/img/zen-cirkel.png
-assets/img/zen-cirkel.webp
 assets/img/zendo.jpg
 assets/img/zendo.webp
 yin_interieur.jpg
