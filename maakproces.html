@@ -11,7 +11,7 @@
 <link rel="preload" href="assets/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.classList.add('js')</script>
-<link rel="stylesheet" href="css/style.css?v=43">
+<link rel="stylesheet" href="css/style.css?v=44">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OostersLicht">
 <meta property="og:title" content="Het maakproces — OostersLicht">
@@ -133,10 +133,24 @@
   <section class="section" id="materialen">
     <div class="wrap">
       <div class="split split--reverse split--wide-media">
+        <!-- Hier stond een foto van drogende kozo-bast. De film laat hetzelfde
+             zien en meer: van bast tot vel, in beweging. youtube-nocookie zet
+             geen volgcookie voordat er gespeeld wordt, en loading="lazy" haalt
+             de speler pas op als hij in beeld komt. -->
         <div class="split__media" data-reveal>
-          <img class="split__photo" src="assets/img/impact_kozobark.webp"
-               alt="Bundels kozo-bast die onder een afdak te drogen hangen, de grondstof voor washi-papier"
-               width="1600" height="1509" loading="lazy">
+          <figure class="video">
+            <div class="video__kader">
+              <iframe src="https://www.youtube-nocookie.com/embed/p2WXBZQ3S18?start=3"
+                      title="Sekishu-Banshi: papierscheppen in de Iwami-streek — film van Unesco"
+                      loading="lazy" allowfullscreen
+                      referrerpolicy="strict-origin-when-cross-origin"
+                      allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+            </div>
+            <figcaption>
+              Van moerbeibast tot droogplank: het papierscheppen in de Iwami-streek, dat
+              op de Unesco-lijst van immaterieel erfgoed staat.
+            </figcaption>
+          </figure>
         </div>
         <div class="split__body" data-reveal data-reveal-delay="1">
           <p class="label">Het papier</p>
@@ -173,25 +187,6 @@
         </figure>
       </div>
 
-      <!-- De film staat na de monsters: eerst zie je het papier, dan hoe het
-           ontstaat. youtube-nocookie zet geen volgcookie voordat er gespeeld
-           wordt, en loading="lazy" laadt de speler pas als hij in beeld komt —
-           anders haalt elke bezoeker de hele YouTube-speler binnen voor een
-           film die hij misschien nooit start. -->
-      <figure class="video" data-reveal>
-        <div class="video__kader">
-          <iframe src="https://www.youtube-nocookie.com/embed/p2WXBZQ3S18?start=3"
-                  title="Sekishu-Banshi: papierscheppen in de Iwami-streek — film van Unesco"
-                  loading="lazy" allowfullscreen
-                  referrerpolicy="strict-origin-when-cross-origin"
-                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-        </div>
-        <figcaption>
-          Hoe zo&#39;n vel ontstaat, van moerbeibast tot droogplank, laat deze film van
-          Unesco zien: het papierscheppen in de Iwami-streek, dat op de lijst van
-          immaterieel erfgoed staat.
-        </figcaption>
-      </figure>
     </div>
   </section>
 

@@ -2374,11 +2374,11 @@ p:last-child {
 
 /* --- Ingesloten film ------------------------------------------------------ */
 
-/* Zelfde maat en plek als een plaatfoto, zodat een film geen ander soort
-   element wordt op de pagina. */
+/* De film staat in de fotokolom van een split, op de plek waar anders een
+   foto staat. Dus geen eigen maat of marge: hij vult zijn kolom, net als de
+   foto die er stond. */
 .video {
-  max-width: 58rem;
-  margin: clamp(2.5rem, 5vw, 4rem) auto 0;
+  margin: 0;
 }
 
 /* De verhouding staat op het kader en niet op de iframe: een iframe heeft
