@@ -2305,6 +2305,22 @@ p:last-child {
 
 /* --- Stappen (maakproces) ------------------------------------------------- */
 
+/* De foto staat tussen de sectiekop en de stappen, over de volle breedte van
+   de kolom. Hij hoorde bij een stuk tekst over duurzaam hout dat eruit is;
+   hier illustreert hij stap twee, de houtbewerking. De hoogte is begrensd,
+   anders duwt een liggende foto van 16:9 de stappen van het scherm. */
+.steps__photo {
+  margin: 0 0 clamp(2rem, 4vw, 3.5rem);
+}
+
+.steps__photo img {
+  width: 100%;
+  max-height: min(26rem, 45svh);
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--radius-img);
+}
+
 .steps {
   counter-reset: step;
   display: grid;
