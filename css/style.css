@@ -2344,36 +2344,36 @@ p:last-child {
 
 /* --- Stappen (maakproces) ------------------------------------------------- */
 
-/* Een liggende foto als plaat in de kolom, in haar eigen verhouding.
+/* De foto boven de vier stappen loopt van de eerste tot de vierde kolom, dus
+   over de volle breedte van de sectie. Daar hoort een liggender kader bij dan
+   de foto zelf heeft: op 1440 zou 16:9 over die breedte 720px hoog worden en
+   de stappen van het scherm duwen.
 
-   Hier stond eerst een vaste 16:9 met een hoogtegrens. Die twee bijten
-   elkaar: het kader werd door de grens lager dan de verhouding vraagt, en
-   object-fit: cover sneed het verschil eraf — op een breed scherm bleef er
-   nog geen helft van de foto over, precies door het midden. Bij een
-   sfeerfoto waar de lampen van het plafond tot de vloer staan, sneuvelt dan
-   het onderwerp.
-
-   Daarom geen bijsnijden maar een smallere kolom: de foto houdt haar eigen
-   verhouding en de breedtegrens houdt de hoogte in de hand. */
+   Vandaar wel bijsnijden, maar alleen boven en onder. Dat kan hier omdat het
+   onderwerp — twee handen aan een schaaf — in het midden van het beeld ligt;
+   er valt lucht af, geen handeling. Op een telefoon is de volle breedte maar
+   320px, dus daar houdt de foto haar eigen 16:9 en wordt er niets gesneden. */
 .band-photo {
-  max-width: 58rem;
-  margin-inline: auto;
+  margin: 0;
 }
 
 .band-photo img {
   display: block;
   width: 100%;
-  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
   border-radius: var(--radius-img);
+}
+
+@media (min-width: 900px) {
+  .band-photo img {
+    aspect-ratio: 5 / 2;
+  }
 }
 
 /* Boven de vier stappen hoort er lucht onder. */
 .band-photo--steps {
   margin-bottom: clamp(2rem, 4vw, 3.5rem);
-}
-
-.steps__link {
-  margin: clamp(2rem, 4vw, 3rem) 0 0;
 }
 
 .materialen-link {
