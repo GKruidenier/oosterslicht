@@ -21,3 +21,9 @@ _originelen/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Tijdelijke vergelijkingspagina voor de lettertypekeuze; mag weg na de keuze.
+_fontkeuze/
+
+# Schetsen voor de ontwerprichting; mag weg zodra er gekozen is.
+_schetsen/

@@ -750,63 +750,224 @@ p:last-child {
 
 /* --- Hero ----------------------------------------------------------------- */
 
+/* Dit is de opzet van schets 1, nagemeten en overgenomen: een liggende band van
+   rand tot rand, de lamp vrij in beeld, en het tekstblok klein en laag in de
+   linkerhoek in plaats van groot in het midden.
+
+   Het verschil met wat hier eerder stond zit vooral in de maat van de letter.
+   De kop stond op 64 tot 72px in de schreefletter; in de schets is hij 32px
+   Inter. Een kleine kop vraagt een smal blok, een smal blok vraagt een smalle
+   sluier, en pas dan houdt de lamp zijn houtkleur. Alle drie hangen samen. */
 .hero {
   position: relative;
-  padding-block: clamp(1.5rem, 4vw, 3.5rem) clamp(2.5rem, 6vw, 5rem);
   overflow: hidden;
 }
 
-.hero__inner {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(2.5rem, 5vw, 4rem);
-  align-items: center;
+@keyframes hero-tot-rust {
+  from { transform: scale(1.055); }
+  to   { transform: none; }
 }
 
-/* Naast elkaar kreeg de tekstkolom meer breedte dan haar regellengte gebruikt,
-   waardoor er een leeg dal tussen tekst en foto ontstond. De foto krijgt nu het
-   grotere deel: dat sluit het gat en geeft het beeld meer aanwezigheid. */
-@media (min-width: 900px) {
-  .hero {
-    display: flex;
-    align-items: center;
-    /* Niet de volle schermhoogte: dan sluit de hero exact af op de vouw en
-       lijkt de pagina daar te eindigen. Deze marge laat de volgende sectie
-       net zichtbaar en nodigt uit tot scrollen zonder pijltje of animatie. */
-    min-height: calc(100svh - var(--header-h) - 5rem);
-  }
-
-  .hero__inner {
-    grid-template-columns: 0.9fr 1.1fr;
-    gap: clamp(2.5rem, 4.5vw, 4.5rem);
-  }
+.hero__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* De foto is hoger dan de band, dus alleen verticaal wordt er gesneden.
+     45% is de enige waarde waarbij de lamp op elke maat heel blijft: op 40%
+     viel op een breed scherm de voet met de bank er net vanaf, lager dan dit
+     gaat de houten kap eraf. */
+  object-position: 50% 45%;
+  /* Het enige bedoelde moment op de pagina: het beeld komt tot stilstand in
+     plaats van in te faden. De foto is er meteen — alleen de beweging eindigt. */
+  animation: hero-tot-rust 1400ms var(--ease-out) both;
 }
 
-.hero__eyebrow {
-  display: flex;
-  align-items: center;
-  gap: var(--space-m);
-  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
-}
-
-/* Op smalle schermen duwde het zegel het bijschrift naar een tweede regel,
-   waardoor twee blokjes kapitalen naast elkaar gingen rommelen. */
-@media (max-width: 599px) {
-  .seal {
-    width: 5.25rem;
-  }
-
-  .hero__eyebrow {
-    gap: var(--space-s);
-  }
-
-  .hero__eyebrow .label {
-    letter-spacing: 0.14em;
+@media (prefers-reduced-motion: reduce) {
+  .hero__media img {
+    animation: none;
   }
 }
 
+/* --- Hero, smal scherm --- */
+
+/* Geen sluier maar een band met de tekst eronder. Een tekstblok over de volle
+   breedte van een foto vraagt een dekking die het beeld toch weer doodslaat. */
+.hero__media {
+  aspect-ratio: 5 / 4;
+  margin-bottom: clamp(1.75rem, 6vw, 2.5rem);
+}
+
+/* Op een tablet wordt een 5:4-band een muur van foto: dan staat de kop onder
+   de vouw en zie je bij het openen alleen een plaatje. Breder dan 2:1 kan niet,
+   want de lamp beslaat ruim tweederde van de hoogte van de foto en zou dan aan
+   de voet worden afgesneden. */
+/* Het middelste houtje van de lamp staat op 0,598 van de breedte van de foto.
+   Door het beeld 3,4% breder te maken dan de band en links vast te zetten
+   schuift dat houtje naar 0,618 — de gulden snede. Wat rechts buiten beeld
+   valt is gordijn. Meer dan dit kan niet: de lamp beslaat 69% van de hoogte
+   van de foto, dus bij een grotere uitvergroting valt de kap of de voet eraf. */
+@media (min-width: 600px) {
+  .hero__media img {
+    width: 103.4%;
+    /* Zonder dit knijpt de globale img { max-width: 100% } de breedte terug. */
+    max-width: none;
+  }
+
+  .hero__media {
+    aspect-ratio: 2 / 1;
+    /* Twee grenzen: hoog genoeg voor de lamp (46vw), laag genoeg om de kop bij
+       het openen in beeld te houden (58svh). De hoogste van de twee wint, want
+       een afgesneden lamp is erger dan een kop die net onder de vouw begint. */
+    max-height: max(58svh, 47.6vw);
+    margin-bottom: clamp(1.25rem, 2.5vw, 1.5rem);
+  }
+
+  /* Kleiner en dichter op de kop dan op de telefoon: op een breed maar laag
+     scherm duwde het zegel de kop anders helemaal onder de vouw. */
+  .hero .seal {
+    width: 4.5rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.hero__wrap {
+  padding-bottom: clamp(2.5rem, 8vw, 4rem);
+}
+
+.hero .seal {
+  width: clamp(5rem, 16vw, 6.5rem);
+  margin-bottom: clamp(1.25rem, 4vw, 2rem);
+}
+
+/* De maat staat op de regels en niet op het hele blok: op het blok zou hij ook
+   de twee knoppen knijpen, en die braken dan af naar twee regels onder elkaar. */
+/* fit-content zodat het blok precies om de tekst sluit: anders loopt de
+   onzichtbare rechterrand van het blok tot ver over de foto. 28rem is de maat
+   waarop "die rust uitstralen" op de grootste trap nog op een regel past, zodat
+   de kop twee regels blijft en niet in vieren breekt. */
 .hero__title {
-  font-size: var(--fs-display-xl);
+  width: fit-content;
+  max-width: 28rem;
+}
+
+.hero__text {
+  width: fit-content;
+  max-width: 34ch;
+}
+
+/* --- Hero, de band met tekst erin --- */
+
+@media (min-width: 1100px) {
+  /* Een band, geen scherm. De hoogte volgt de breedte, met de schermhoogte als
+     bovengrens. --band-h staat apart omdat de breedte van de foto eruit volgt.
+
+     Die bovengrens trekt er 2rem extra af in plaats van er 4rem bij op te
+     tellen. Dat optellen stamt uit de opzet waarin de foto de hele band in de
+     breedte vulde: de lamp had toen een minimumhoogte nodig, en die ging voor
+     op de vouw. Nu is de foto zo hoog als de band en hoeft dat niet meer — dus
+     valt er niets meer onder de onderrand weg, en laat deze marge juist een
+     strookje van de volgende sectie zien. */
+  .hero {
+    --band-h: min(calc(100svh - var(--header-h) - 2rem), 49vw);
+    height: var(--band-h);
+  }
+
+  /* De foto vult de band niet meer in de breedte. Hij staat rechts, is precies
+     zo hoog als de band en houdt zijn eigen verhouding — je ziet dus de hele
+     foto van boven tot onder in plaats van het middenstuk. Zijn breedte is
+     daarmee 1,5 maal de bandhoogte, en links van die strook is er gewoon
+     pagina.
+
+     Twee dingen die eerder niet samen konden, kunnen nu wel. Het middelste
+     houtje schuift mee naar rechts omdat de foto smaller is dan de band. En er
+     ligt geen crème sluier meer over het beeld: waar de foto staat is hij
+     onaangeraakt scherp. De overgang naar de tekst is een masker op de foto
+     zelf, dat hem links laat oplossen in de achtergrond van de pagina. */
+  .hero__media {
+    position: absolute;
+    inset: 0;
+    aspect-ratio: auto;
+    max-height: none;
+    margin-bottom: 0;
+    display: flex;
+    justify-content: flex-end;
+    /* Het masker laat de foto links oplossen in de pagina.
+
+       Het verloop loopt over de volle breedte van de fotostrook: van 1,5
+       bandhoogtes (precies haar linkerrand, dus daar valt niets weg) tot 0,87.
+       Dat eindpunt ligt net voor de linkerstijl van de lamp, die altijd op 0,84
+       staat — de hele lamp blijft dus onaangeraakt scherp.
+
+       De kromme bepaalt hoeveel je ziet. Hij blijft de eerste derde bijna niets
+       (2 op de 100 op een kwart), want daar staat de tekst en die moet op schone
+       achtergrond blijven. Zodra hij de tekst voorbij is komt hij snel op:
+       halverwege zit hij al op een kwart en op tweederde op ruim de helft, zodat
+       de plant echt in beeld komt in plaats van als schim. Nergens een rand,
+       want begin en eind lopen allebei vlak uit. */
+    -webkit-mask-image: linear-gradient(95deg,
+    rgba(0, 0, 0, 0)       calc(100% - 1.5 * var(--band-h)),
+    rgba(0, 0, 0, 0.004)   calc(100% - 1.406 * var(--band-h)),
+    rgba(0, 0, 0, 0.02)    calc(100% - 1.324 * var(--band-h)),
+    rgba(0, 0, 0, 0.05)    calc(100% - 1.273 * var(--band-h)),
+    rgba(0, 0, 0, 0.12)    calc(100% - 1.223 * var(--band-h)),
+    rgba(0, 0, 0, 0.24)    calc(100% - 1.172 * var(--band-h)),
+    rgba(0, 0, 0, 0.4)     calc(100% - 1.122 * var(--band-h)),
+    rgba(0, 0, 0, 0.56)    calc(100% - 1.072 * var(--band-h)),
+    rgba(0, 0, 0, 0.71)    calc(100% - 1.021 * var(--band-h)),
+    rgba(0, 0, 0, 0.83)    calc(100% - 0.971 * var(--band-h)),
+    rgba(0, 0, 0, 0.93)    calc(100% - 0.927 * var(--band-h)),
+    rgba(0, 0, 0, 1)       calc(100% - 0.87 * var(--band-h)));
+    mask-image: linear-gradient(95deg,
+    rgba(0, 0, 0, 0)       calc(100% - 1.5 * var(--band-h)),
+    rgba(0, 0, 0, 0.004)   calc(100% - 1.406 * var(--band-h)),
+    rgba(0, 0, 0, 0.02)    calc(100% - 1.324 * var(--band-h)),
+    rgba(0, 0, 0, 0.05)    calc(100% - 1.273 * var(--band-h)),
+    rgba(0, 0, 0, 0.12)    calc(100% - 1.223 * var(--band-h)),
+    rgba(0, 0, 0, 0.24)    calc(100% - 1.172 * var(--band-h)),
+    rgba(0, 0, 0, 0.4)     calc(100% - 1.122 * var(--band-h)),
+    rgba(0, 0, 0, 0.56)    calc(100% - 1.072 * var(--band-h)),
+    rgba(0, 0, 0, 0.71)    calc(100% - 1.021 * var(--band-h)),
+    rgba(0, 0, 0, 0.83)    calc(100% - 0.971 * var(--band-h)),
+    rgba(0, 0, 0, 0.93)    calc(100% - 0.927 * var(--band-h)),
+    rgba(0, 0, 0, 1)       calc(100% - 0.87 * var(--band-h)));
+  }
+
+  .hero__media img {
+    width: auto;
+    height: 100%;
+    max-width: none;
+  }
+
+  /* De wrap vult de hele band, zodat het zegel linksboven en de tekst
+     linksonder in dezelfde kolom staan. */
+  .hero__wrap {
+    position: absolute;
+    inset: 0;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-block: clamp(2rem, 3.5vw, 3rem) clamp(2.5rem, 5vw, 5rem);
+  }
+
+  .hero .seal {
+    position: absolute;
+    top: clamp(2rem, 3.5vw, 3rem);
+    left: var(--gutter);
+    width: clamp(5.5rem, 6vw, 7rem);
+    margin-bottom: 0;
+  }
+}
+
+
+
+/* --- Hero, de tekst --- */
+
+/* De schreefletter van de site, zoals overal elders. De opzet eromheen blijft
+   die van de schets — band, tekst linksonder — maar de letter niet. */
+.hero__title {
+  font-size: clamp(2.75rem, 5vw, 4.5rem);
   font-weight: 300;
   line-height: 0.98;
   letter-spacing: -0.025em;
@@ -814,16 +975,29 @@ p:last-child {
   color: var(--c-ink);
 }
 
+/* Cursief en houtkleur komen van .accent; hier alleen de eigen regel. */
 .hero__title .accent {
   display: block;
+}
+
+/* Zelfde reden: de rand van een knop valt onder WCAG 1.4.11 en heeft 3:1 nodig.
+   De gewone --c-wood-rand haalt hier 2,95. */
+.hero .btn--ghost {
+  border-color: var(--c-wood-deep);
+}
+
+/* De tekst in de ring is klein (circa 9px) en heeft dus 4,5:1 nodig; met
+   --c-muted bleef hij tegen de foto steken op 4,35. */
+.seal__ring text {
+  fill: var(--c-ink-soft);
 }
 
 .hero__text {
   font-size: var(--fs-lead);
   line-height: 1.75;
   color: var(--c-ink-soft);
-  max-width: 42ch;
-  margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
+  max-width: 38ch;
+  margin: 0 0 clamp(1.5rem, 2.5vw, 2rem);
 }
 
 .hero__actions {
@@ -833,17 +1007,11 @@ p:last-child {
   gap: var(--space-s);
 }
 
-.hero__media {
-  position: relative;
-}
-
-/* Een liggend beeld (3:2) vult de kolom in de breedte en blijft daarbij ruim
-   binnen de schermhoogte, dus hier is geen hoogtebegrenzing of uitsnede
-   nodig: de foto is heel en sluit netjes aan op de kolomranden. */
-.hero__media img {
-  width: 100%;
-  height: auto;
-  border-radius: var(--radius-img);
+/* Anders spant de rij over de volle breedte van de band en loopt haar
+   onzichtbare rechterrand tot over de foto. */
+.hero .hero__actions {
+  width: fit-content;
+  max-width: 100%;
 }
 
 /* --- Kenmerken-triplet ---------------------------------------------------- */

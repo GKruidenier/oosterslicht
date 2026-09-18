@@ -53,56 +53,66 @@
 <main id="main">
 
   <!-- Hero -->
+  <!-- De foto loopt van rand tot rand en de tekst staat erin, niet ernaast. Naast
+       elkaar bleef er altijd een leeg dal tussen kolom en beeld; zo is de lamp
+       zelf het eerste wat je ziet en draagt het beeld de hele breedte. -->
   <section class="hero">
-    <div class="wrap wrap--wide">
-      <div class="hero__inner">
-        <div class="hero__content">
+    <div class="hero__media">
+      <!-- Twee maten. De band is op een breed scherm ruim 1600px breed; het oude
+           bestand was zelf 1600px en werd dus opgerekt, wat de achtergrond
+           zachter maakte dan de jpg. Deze komen allebei rechtstreeks uit
+           take_decor.jpg van 2048px. -->
+      <img src="assets/img/take_decor-2048.webp"
+           srcset="assets/img/take_decor-1200.webp 1200w,
+                   assets/img/take_decor-2048.webp 2048w"
+           sizes="100vw"
+           alt="Vierkante tafellamp van notenhout met Japans papier waarin bamboebladeren zijn verwerkt, warm brandend op een houten bank naast een kamerplant"
+           width="2048" height="1365" fetchpriority="high">
+    </div>
 
-          <div class="hero__eyebrow">
-            <div class="seal" aria-hidden="true">
-              <svg class="seal__ring" viewBox="0 0 100 100">
-                <defs>
-                  <!-- Twee losse bogen in plaats van één doorlopende cirkel: op een
-                       gesloten cirkel staat de onderste helft van de tekst op zijn kop.
-                       De bovenboog heeft een kleinere straal omdat de letters daar naar
-                       buiten staan en op de onderboog naar binnen; zo vormen beide
-                       woorden samen één band op dezelfde afstand van het midden. -->
-                  <path id="sealArcTop" d="M18,50 A32,32 0 0 1 82,50"></path>
-                  <path id="sealArcBottom" d="M12,50 A38,38 0 0 0 88,50"></path>
-                </defs>
-                <text text-anchor="middle"><textPath href="#sealArcTop" startOffset="50%">Handgemaakt</textPath></text>
-                <text text-anchor="middle"><textPath href="#sealArcBottom" startOffset="50%">in Driebergen</textPath></text>
-              </svg>
-              <img class="seal__mark" src="assets/img/zen-cirkel.webp" alt="" width="200" height="202">
-            </div>
-            <p class="label label--plain">Hout, papier en handwerk</p>
-          </div>
+    <div class="wrap wrap--wide hero__wrap">
 
-          <h1 class="hero__title">
-            Handgemaakt licht
-            <span class="accent">dat tot rust komt</span>
-          </h1>
+      <!-- Het zegel staat los van het tekstblok, linksboven in het beeld, waar
+           de sluier het dichtst is. Het stond eerst boven de kop met
+           "Hout, papier en handwerk" ernaast, maar het zegel zegt zelf al
+           "Handgemaakt in Driebergen" — twee keer hetzelfde keelschrapen voor
+           de kop begint. Nu is het een merkteken op het beeld, geen opschrift. -->
+      <div class="seal" aria-hidden="true">
+            <svg class="seal__ring" viewBox="0 0 100 100">
+              <defs>
+                <!-- Twee losse bogen in plaats van een doorlopende cirkel: op een
+                     gesloten cirkel staat de onderste helft van de tekst op zijn kop.
+                     De bovenboog heeft een kleinere straal omdat de letters daar naar
+                     buiten staan en op de onderboog naar binnen; zo vormen beide
+                     woorden samen een band op dezelfde afstand van het midden. -->
+                <path id="sealArcTop" d="M18,50 A32,32 0 0 1 82,50"></path>
+                <path id="sealArcBottom" d="M12,50 A38,38 0 0 0 88,50"></path>
+              </defs>
+              <text text-anchor="middle"><textPath href="#sealArcTop" startOffset="50%">Ambachtelijk</textPath></text>
+              <text text-anchor="middle"><textPath href="#sealArcBottom" startOffset="50%">Onvolmaakt</textPath></text>
+            </svg>
+        <img class="seal__mark" src="assets/img/zen-cirkel.webp" alt="" width="200" height="202">
+      </div>
 
-          <p class="hero__text">
-            Lampen van massief hout en Japans papier. Het washi filtert de harde
-            lichtstralen tot een zachte gloed — licht dat een kamer laat ademen.
-          </p>
+      <div class="hero__content">
 
-          <div class="hero__actions">
-            <a class="btn btn--solid" href="lampencollectie.html">
-              Bekijk de collectie
-              <svg class="btn__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12 12 4M12 4H5.5M12 4v6.5"/></svg>
-            </a>
-            <a class="btn btn--ghost" href="maakproces.html">Het maakproces</a>
-          </div>
+        <h1 class="hero__title">
+          Houten lampen
+          <span class="accent">die rust uitstralen</span>
+        </h1>
 
+        <p class="hero__text">
+          Ambachtelijke lampen van massief hout en Japans papier.
+        </p>
+
+        <div class="hero__actions">
+          <a class="btn btn--solid" href="lampencollectie.html">
+            Bekijk de collectie
+            <svg class="btn__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12 12 4M12 4H5.5M12 4v6.5"/></svg>
+          </a>
+          <a class="btn btn--ghost" href="maakproces.html">Het maakproces</a>
         </div>
 
-        <div class="hero__media">
-          <img src="assets/img/take_decor.webp?v=2"
-               alt="Vierkante tafellamp van notenhout met Japans papier waarin bamboebladeren zijn verwerkt, warm brandend op een houten bank naast een kamerplant"
-               width="1600" height="1066" fetchpriority="high">
-        </div>
       </div>
     </div>
   </section>
