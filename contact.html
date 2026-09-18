@@ -17,7 +17,7 @@
 <meta property="og:title" content="Contact &amp; bestellen — OostersLicht">
 <meta property="og:description" content="Een lamp bestellen of een vraag stellen.">
 <meta property="og:image" content="assets/img/werkplaats.webp">
-<script src="js/site.js?v=40" defer></script>
+<script src="js/site.js?v=41" defer></script>
 </head>
 <body>
 
@@ -187,9 +187,8 @@
                   </div>
 
                   <div class="field" data-veld="tape">
-                    <label for="tape">Kleur van de tape — alleen De Stijl</label>
-                    <select id="tape" name="tape[1]">
-                      <option value="">Niet van toepassing</option>
+                    <label for="tape">Kleur van de tape <span class="req" aria-hidden="true">*</span></label>
+                    <select id="tape" name="tape[1]" data-required>
                       <option>Primaire kleuren (rood, geel, blauw)</option>
                       <option>Grijstinten</option>
                     </select>

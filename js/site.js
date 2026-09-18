@@ -480,7 +480,8 @@
       'Lamp Koyo (wandlamp)':            { hout: 1, papier: 1, blad: 1, afmeting: 1 },
       'Wandlamp Torii (wandlamp)':       { hout: ['Noten', 'In overleg'], papier: 1 },
       'Tafellamp Take (tafellamp)':      { hout: ['Noten', 'In overleg'], papier: 1,
-                                           blad: ['Geen blad', 'Bamboeblad'] },
+                                           blad: ['Geen blad', 'Bamboeblad'],
+                                           standaard: { blad: 'Bamboeblad' } },
       'Tafellamp De Stijl':                { tape: 1, vast: 'effen Japans papier zonder vezels' },
       'Wandlamp De Stijl':               { tape: 1, vast: 'effen Japans papier zonder vezels' },
 
@@ -496,7 +497,7 @@
     var ALTIJD = { lamp: 1, aantal: 1, detaillering: 1 };
     var ALTIJD_OPMAAT = { lamp: 1, aantal: 1 };
 
-    var syncVelden = function (block) {
+    var syncVelden = function (block, verseKeuze) {
       if (!block) return;
       var select = block.querySelector('[data-veld="lamp"] select');
       if (!select) return;
@@ -533,6 +534,19 @@
           }
         });
 
+        /* Een beginkeuze die afwijkt van de eerste optie: de Take krijgt zijn
+           bamboeblad. Alleen bij een verse lampkeuze, zodat een bezoeker die
+           daarna bewust "geen blad" kiest dat niet verderop kwijtraakt. */
+        if (toon && verseKeuze && regels && regels.standaard &&
+            regels.standaard[sleutel]) {
+          var wens = regels.standaard[sleutel];
+          veld.querySelectorAll('select').forEach(function (sel) {
+            [].slice.call(sel.options).forEach(function (opt) {
+              if (!opt.disabled && opt.text === wens) sel.selectedIndex = opt.index;
+            });
+          });
+        }
+
         veld.querySelectorAll('input, select, textarea').forEach(function (el) {
           if (!toon) {
             // Verplicht uitzetten, anders blokkeert een verborgen veld het
@@ -541,11 +555,19 @@
             // een lege string: menu's als Afmeting en Blad hebben geen lege
             // optie, en die zouden dan blanco opengaan zodra ze weer
             // verschijnen.
+            //
+            // Uitschakelen erbij, want verborgen is niet hetzelfde als
+            // afwezig: een veld in een verborgen blok wordt gewoon meegestuurd.
+            // Zonder dit stond er bij een Ronde Lamp Yin "Afmeting: Standaard"
+            // en "Blad: Geen blad" in de bestelmail, terwijl die lamp geen van
+            // beide kent.
             el.required = false;
+            el.disabled = true;
             if (el.tagName === 'SELECT') el.selectedIndex = 0;
             else if (el.type !== 'number') el.value = '';
-          } else if (el.hasAttribute('data-required')) {
-            el.required = bestelt;
+          } else {
+            el.disabled = false;
+            if (el.hasAttribute('data-required')) el.required = bestelt;
           }
         });
       });
@@ -562,14 +584,16 @@
       }
     };
 
-    var syncAlleBlokken = function () {
-      form.querySelectorAll('.lamp-block').forEach(syncVelden);
+    var syncAlleBlokken = function (verseKeuze) {
+      form.querySelectorAll('.lamp-block').forEach(function (block) {
+        syncVelden(block, verseKeuze);
+      });
     };
 
     // Gedelegeerd, zodat het ook werkt voor blokken die later worden bijgezet.
     form.addEventListener('change', function (e) {
       if (e.target.matches('[data-veld="lamp"] select')) {
-        syncVelden(e.target.closest('.lamp-block'));
+        syncVelden(e.target.closest('.lamp-block'), true);
       }
     });
 
@@ -625,7 +649,7 @@
 
       // De lampkeuze bepaalt welke velden er zijn; daarna pas de rest invullen,
       // anders zetten we een waarde in een veld dat voor deze lamp niet geldt.
-      syncAlleBlokken();
+      syncAlleBlokken(true);
 
       var zichtbaar = function (el) {
         var veld = el && el.closest('[data-veld]');
@@ -701,7 +725,7 @@
         if (remove) remove.hidden = false;
 
         list.appendChild(clone);
-        syncVelden(clone);
+        syncVelden(clone, true);
         var firstField = clone.querySelector('select, input');
         if (firstField) firstField.focus();
       });
