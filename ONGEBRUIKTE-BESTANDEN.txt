@@ -4,8 +4,6 @@ Er is niets verwijderd.
 
 assets/fonts/marcellus-latin-ext.woff2
 assets/fonts/marcellus-latin.woff2
-assets/img/IMG_0882.JPG
-assets/img/IMG_E0960.JPG
 assets/img/_MG_5568.jpg
 assets/img/_MG_5634.jpg
 assets/img/_MG_5646[1].jpg
@@ -46,6 +44,8 @@ assets/img/hanglamp.png
 assets/img/hanglamp_plant.jpg
 assets/img/hero-yang-opstelling.jpg
 assets/img/hero-yang-opstelling.webp
+assets/img/IMG_0882.JPG
+assets/img/IMG_E0960.JPG
 assets/img/impact_kozobark.jpg
 assets/img/impact_kozobark.webp
 assets/img/inzet_eikenhout.jpg
@@ -57,6 +57,7 @@ assets/img/inzet_notenhout.jpg
 assets/img/japans_lampen_collectie.jpg
 assets/img/jinwashi.jpg
 assets/img/kawa_detail.jpg
+assets/img/kawa_detail.webp
 assets/img/kawa_hanglamp.jpg
 assets/img/kawa_hanglamp.png
 assets/img/kinwashi_kozo_washi.jpg
@@ -105,6 +106,7 @@ assets/img/take_decor.jpg
 assets/img/take_decor2.jpg
 assets/img/take_detail.jpg
 assets/img/take_japanse_tafellamp_vensterbank.JPEG
+assets/img/take_japanse_tafellamp_vensterbank.webp
 assets/img/take_noten.jpg
 assets/img/take_opstelling.jpg
 assets/img/theehuis_zijzicht.JPEG
@@ -154,6 +156,7 @@ assets/img/yang_unryu_iepenhout.jpg
 assets/img/yang_unryu_kersenhout.jpg
 assets/img/yang_unryu_kersenhout_detail.jpg
 assets/img/yang_unryu_stalamp_iep.jpg
+assets/img/yang_unryu_stalamp_iep.webp
 assets/img/yin.png
 assets/img/yin_detail.jpg
 assets/img/yin_detail_noten.jpg
@@ -167,4 +170,5 @@ assets/img/ying_woonkamer.jpg
 assets/img/zen-cirkel.png
 assets/img/zen-cirkel.webp
 assets/img/zendo.jpg
+assets/img/zendo.webp
 yin_interieur.jpg
