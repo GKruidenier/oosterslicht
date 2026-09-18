@@ -207,6 +207,29 @@
     };
   })();
 
+  /* --- Papiermonsters: klikken opent een close-up -------------------------- */
+
+  /* Dezelfde close-up als het materiaalwiel bij de collectie, zodat dezelfde
+     handeling op beide plekken hetzelfde doet. Naam en omschrijving komen uit
+     het bijschrift dat er al staat; geen tweede plek om bij te houden. */
+  document.querySelectorAll('[data-monster]').forEach(function (knop) {
+    knop.addEventListener('click', function () {
+      var foto = knop.querySelector('img');
+      var caption = knop.closest('figure').querySelector('figcaption');
+      if (!foto || !caption) return;
+
+      var klein = caption.querySelector('small');
+      var naam = caption.firstChild ? caption.firstChild.textContent.trim() : '';
+
+      lightbox.openInfo({
+        src: foto.currentSrc || foto.src,
+        alt: 'Close-up van ' + naam,
+        titel: naam,
+        desc: klein ? klein.textContent.trim() : ''
+      });
+    });
+  });
+
   /* --- Lampgalerij met materiaalfilter ------------------------------------- */
 
   document.querySelectorAll('[data-lamp-gallery]').forEach(function (gallery) {

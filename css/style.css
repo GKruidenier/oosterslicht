@@ -1070,6 +1070,49 @@ p:last-child {
   .split--reverse .split__media {
     order: 2;
   }
+
+  /* Beeld rechts én in de brede kolom, met de tekst links in de smalle.
+     Met --reverse kon dat niet: die verplaatst het beeld naar de tweede
+     kolom nadat de sporen al verdeeld zijn, dus kreeg juist de tekst de
+     1,15fr. Bij een film is dat de verkeerde kant op — en de tekstregel
+     werd er 95 tot 110 tekens lang van, ver boven de 65 tot 75 waarop een
+     alinea nog prettig leest.
+
+     De tekst staat nu eerst in de bron. Dat is ook de goede volgorde voor
+     wie met een schermlezer of Tab door de sectie gaat: eerst de kop die
+     zegt waar je bent, dan de film. Op een telefoon vallen ze in diezelfde
+     volgorde onder elkaar. */
+  .split--media-right {
+    align-items: start;
+  }
+}
+
+/* De scheve verdeling pas als er ruimte voor is. Op 1024 zou 0,85fr een
+   tekstkolom van 363 pixels geven en dat is rond de 50 tekens per regel —
+   smaller dan waar een alinea van baat heeft. Tot 1200 dus gelijke kolommen
+   (circa 60 tekens), daarboven de scheve (circa 72). In beide gevallen is de
+   film groter dan de 514 pixels die hij hiervoor had. */
+@media (min-width: 1200px) {
+  .split--media-right {
+    grid-template-columns: 0.85fr 1.15fr;
+  }
+}
+
+/* Tussen 900 en 1000 pixels knipt de split in twee kolommen van elk 375
+   pixels: dan is de film kleiner dan wanneer alles onder elkaar staat. Daar
+   blijft deze variant dus één kolom, met de film op de volle breedte. */
+@media (min-width: 900px) and (max-width: 999px) {
+  .split--media-right {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Een regellengte-grens op de alinea zelf, niet op de kolom: zodra de sectie
+   één kolom is, is die kolom breder dan een alinea aankan. Zonder deze regel
+   loopt de tekst daar op tot 89 tekens per regel, tegen de 65 tot 75 waarop
+   het oog de volgende regel nog zonder zoeken terugvindt. */
+.split--media-right .lead {
+  max-width: 31rem;
 }
 
 .split + .split {
@@ -2198,21 +2241,105 @@ p:last-child {
 
 /* --- Materiaalstalen ------------------------------------------------------ */
 
+/* Drie monsters, dus drie kolommen. Hier stond auto-fill met een minimum
+   van 9rem: dat vulde de rij met zoveel sporen als er passen — zeven op een
+   breed scherm — en zette de drie monsters links in de eerste drie. Ruim 740
+   pixels van de rij bleef leeg, en de monsters zelf werden 159 pixels groot.
+   Papier waarvan de vezel het onderwerp is, is op die maat niet te zien: twee
+   van de drie soorten werden onderling ononderscheidbaar.
+
+   Nu drie gelijke kolommen, dus ruim 400 pixels per monster. Op een telefoon
+   zou een derde van 335 pixels weer te klein zijn, dus daar één per rij, in
+   een liggend kader zodat de drie samen niet een half scherm kosten. */
 .swatches {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 9rem), 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: clamp(1rem, 2vw, 1.75rem);
+  margin-top: clamp(2.5rem, 5vw, 4.5rem);
 }
 
 .swatch {
   margin: 0;
 }
 
+/* Het monster is een knop: klikken opent dezelfde close-up als het
+   materiaalwiel bij de collectie. De knop is verder onzichtbaar — de foto
+   is de knop, de loep verschijnt pas bij aanwijzen of toetsenbordfocus. */
+.swatch__knop {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  border-radius: var(--radius-img);
+  cursor: zoom-in;
+  overflow: hidden;
+}
+
 .swatch img {
+  display: block;
   width: 100%;
   aspect-ratio: 1;
   object-fit: cover;
   border-radius: var(--radius-img);
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+.swatch__knop:hover img,
+.swatch__knop:focus-visible img {
+  transform: scale(1.03);
+}
+
+.swatch__loep {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--c-line);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--c-bg) 88%, transparent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: var(--c-ink);
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+
+.swatch__loep svg {
+  width: 14px;
+  height: 14px;
+}
+
+.swatch__knop:hover .swatch__loep,
+.swatch__knop:focus-visible .swatch__loep {
+  opacity: 1;
+  transform: none;
+}
+
+/* Op een aanraakscherm is er geen aanwijzen, dus staat de loep er gewoon. */
+@media (hover: none) {
+  .swatch__loep {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 699px) {
+  .swatches {
+    grid-template-columns: 1fr;
+  }
+
+  /* Eén monster per rij zou op de volle breedte een vierkant van 335 pixels
+     worden, drie keer achter elkaar: een half scherm scrollen aan papier. In
+     een liggend kader zie je de vezel even goed voor een derde van de hoogte. */
+  .swatch img {
+    aspect-ratio: 3 / 2;
+  }
 }
 
 .swatch figcaption {
@@ -2397,6 +2524,23 @@ p:last-child {
   border-radius: var(--radius-img);
   overflow: hidden;
   background: var(--c-bg-deep);
+}
+
+/* Ligt onder de iframe. Speelt de film, dan dekt de speler dit af; wordt
+   YouTube geblokkeerd, dan leest de bezoeker waarom en waar de film wel
+   staat, in plaats van naar een donker vlak te kijken. */
+.video__terugval {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: center;
+  gap: 0.35rem;
+  margin: 0;
+  padding: clamp(1rem, 4vw, 2rem);
+  text-align: center;
+  font-size: var(--fs-small);
+  line-height: 1.7;
+  color: var(--c-ink-soft);
 }
 
 .video__kader iframe {

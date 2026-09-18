@@ -11,13 +11,13 @@
 <link rel="preload" href="assets/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.classList.add('js')</script>
-<link rel="stylesheet" href="css/style.css?v=46">
+<link rel="stylesheet" href="css/style.css?v=48">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OostersLicht">
 <meta property="og:title" content="Het maakproces — OostersLicht">
 <meta property="og:description" content="Over de maker, het ambacht en de materialen.">
 <meta property="og:image" content="assets/img/werkplaats.webp">
-<script src="js/site.js?v=35" defer></script>
+<script src="js/site.js?v=36" defer></script>
 </head>
 <body>
 
@@ -85,10 +85,7 @@
           <p class="label">Het proces</p>
           <h2 class="section__title">In vier stappen</h2>
         </div>
-        <p class="lead">
-          Van eerste schets tot brandende lamp doorloopt elk exemplaar dezelfde vier
-          fasen — allemaal in dezelfde werkplaats, door dezelfde handen.
-        </p>
+
       </div>
 
       <figure class="band-photo band-photo--steps" data-reveal>
@@ -134,29 +131,10 @@
   <!-- Papier -->
   <section class="section" id="materialen">
     <div class="wrap">
-      <div class="split split--reverse split--wide-media">
-        <!-- Hier stond een foto van drogende kozo-bast. De film laat hetzelfde
-             zien en meer: van bast tot vel, in beweging. youtube-nocookie zet
-             geen volgcookie voordat er gespeeld wordt, en loading="lazy" haalt
-             de speler pas op als hij in beeld komt. -->
-        <div class="split__media" data-reveal>
-          <figure class="video">
-            <div class="video__kader">
-              <iframe src="https://www.youtube-nocookie.com/embed/p2WXBZQ3S18?start=3"
-                      title="Sekishu-Banshi: papierscheppen in de Iwami-streek — film van Unesco"
-                      loading="lazy" allowfullscreen
-                      referrerpolicy="strict-origin-when-cross-origin"
-                      allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-            </div>
-            <figcaption>
-              Van moerbeibast tot droogplank: het papierscheppen in de Iwami-streek, dat
-              op de Unesco-lijst van immaterieel erfgoed staat.
-            </figcaption>
-          </figure>
-        </div>
-        <div class="split__body" data-reveal data-reveal-delay="1">
+      <div class="split split--media-right">
+        <div class="split__body" data-reveal>
           <p class="label">Het papier</p>
-          <h2>Traditioneel papier<br>uit Japan</h2>
+          <h2>Traditioneel papier uit Japan</h2>
           <p class="lead">
             OostersLicht gebruikt authentiek Japans papier (washi), dat rechtstreeks in
             Japan wordt besteld en gemaakt. De basis is kozo-papier (kozogami), van de
@@ -172,19 +150,54 @@
             &ldquo;goudpapier&rdquo; genoemd.
           </p>
         </div>
+        <!-- Hier stond een foto van drogende kozo-bast. De film laat hetzelfde
+             zien en meer: van bast tot vel, in beweging. youtube-nocookie zet
+             geen volgcookie voordat er gespeeld wordt, en loading="lazy" haalt
+             de speler pas op als hij in beeld komt. -->
+        <div class="split__media" data-reveal data-reveal-delay="1">
+          <figure class="video">
+            <div class="video__kader">
+              <p class="video__terugval">
+                Speelt de film niet? Dan houdt je browser of een uitbreiding YouTube
+                tegen.
+                <a href="https://www.youtube.com/watch?v=p2WXBZQ3S18" rel="noopener">Bekijk
+                hem rechtstreeks op YouTube</a>.
+              </p>
+              <iframe src="https://www.youtube-nocookie.com/embed/p2WXBZQ3S18?start=3"
+                      title="Sekishu-Banshi: papierscheppen in de Iwami-streek — film van Unesco"
+                      loading="lazy" allowfullscreen
+                      referrerpolicy="strict-origin-when-cross-origin"
+                      allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+            </div>
+            <figcaption>
+              Traditioneel productieproces van Japans papier in de Iwami-streek.
+              Film van Unesco.
+            </figcaption>
+          </figure>
+        </div>
       </div>
 
-      <div class="swatches" style="margin-top:var(--space-xl)" data-reveal>
+      <h3 class="visueel-verborgen">De drie papiersoorten</h3>
+      <div class="swatches" data-reveal>
         <figure class="swatch">
-          <img src="assets/img/traditioneel_wit_moerbei_kozo_2.webp" alt="Kozogami: wit, egaal kozo-papier" width="1588" height="1588" loading="lazy">
+          <button class="swatch__knop" type="button" data-monster>
+            <img src="assets/img/traditioneel_wit_moerbei_kozo_2.webp" alt="Kozogami: wit, egaal kozo-papier" width="1588" height="1588" loading="lazy">
+            <span class="swatch__loep" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="4.5"></circle><path d="M10.5 10.5 14.5 14.5M7 5v4M5 7h4"></path></svg></span>
+          </button>
           <figcaption>Kozogami<small>Wit en egaal, van moerbeibast.</small></figcaption>
         </figure>
         <figure class="swatch">
-          <img src="assets/img/unryu_moerbei_kozo_papier.webp" alt="Unryu kozo: papier met lange zichtbare vezels" width="1588" height="1588" loading="lazy">
+          <button class="swatch__knop" type="button" data-monster>
+            <img src="assets/img/unryu_moerbei_kozo_papier.webp" alt="Unryu kozo: papier met lange zichtbare vezels" width="1588" height="1588" loading="lazy">
+            <span class="swatch__loep" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="4.5"></circle><path d="M10.5 10.5 14.5 14.5M7 5v4M5 7h4"></path></svg></span>
+          </button>
           <figcaption>Unryu kozo<small>Lange vezels als wolken door het vel.</small></figcaption>
         </figure>
         <figure class="swatch">
-          <img src="assets/img/kinwashi_kozo_washi.webp" alt="Kinwashi: kozo-papier met manillahennep-vezels" width="1588" height="1588" loading="lazy">
+          <button class="swatch__knop" type="button" data-monster>
+            <img src="assets/img/kinwashi_kozo_washi.webp" alt="Kinwashi: kozo-papier met manillahennep-vezels" width="1588" height="1588" loading="lazy">
+            <span class="swatch__loep" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="4.5"></circle><path d="M10.5 10.5 14.5 14.5M7 5v4M5 7h4"></path></svg></span>
+          </button>
           <figcaption>Kinwashi<small>Met manillahennep, iets geliger van kleur.</small></figcaption>
         </figure>
       </div>
