@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stijlenlab — OostersLicht</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<script>document.documentElement.classList.add('js')</script>
+<script src="js/theme.js?v=1"></script>
+<link rel="stylesheet" href="css/style.css?v=90">
+<link rel="stylesheet" href="css/themes.css?v=1">
+<style>
+/* ==========================================================================
+   Stijlenlab — het gereedschap om twee richtingen naast elkaar te zetten
+   ==========================================================================
+
+   De omlijsting van deze pagina is met opzet middengrijs. Dat is de kleur van
+   een museumwand: hij trekt een licht palet niet naar wit en een donker palet
+   niet naar zwart, en geen van de zes paletten valt erin weg. De enige kleur
+   op het scherm hoort van de proeven zelf te komen.
+
+   De proeven gebruiken de echte componenten uit css/style.css. Ze zijn dus
+   geen nabootsing: verandert er iets aan de site, dan verandert het hier mee.
+   ========================================================================== */
+
+:root {
+  --lab-wand: #5f6367;
+  --lab-wand-diep: #4e5255;
+  --lab-lijn: #7d8286;
+  --lab-tekst: #ffffff;
+  /* 4,70:1 tegen de wand. #d3d7da oogde rustiger maar haalde 4,18. */
+  --lab-tekst-zacht: #e0e3e5;
+}
+
+/* De site tekent een papiertextuur over de hele pagina en zet de
+   achtergrondkleur op <html>. Hier hoort de wand te staan; de textuur komt
+   per proef terug, in de sterkte van dat palet. */
+html { background-color: var(--lab-wand); }
+body::before { content: none; }
+
+body {
+  background: var(--lab-wand);
+  color: var(--lab-tekst);
+  /* Niet de letter van de site: de omlijsting hoort geen partij te kiezen
+     tussen de vijf lettersets die ze laat zien. */
+  font-family: 'Public Sans', -apple-system, 'Segoe UI', Arial, sans-serif;
+  min-height: 100vh;
+}
+
+.lab {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+}
+
+/* --- Kop ---------------------------------------------------------------- */
+
+.lab__kop {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--lab-lijn);
+}
+
+.lab__titel {
+  margin: 0;
+  font-family: inherit;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--lab-tekst);
+}
+
+.lab__uitleg {
+  margin: 0.3rem 0 0;
+  max-width: 62ch;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--lab-tekst-zacht);
+}
+
+.lab__acties { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+.knop {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 0.95rem;
+  border: 1px solid var(--lab-lijn);
+  border-radius: 2rem;
+  background: transparent;
+  color: var(--lab-tekst);
+  font: inherit;
+  font-size: 0.8125rem;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.16s ease, border-color 0.16s ease;
+}
+.knop:hover { background: var(--lab-wand-diep); border-color: var(--lab-tekst-zacht); }
+.knop--vol { background: var(--lab-tekst); border-color: var(--lab-tekst); color: #23262a; font-weight: 600; }
+.knop--vol:hover { background: var(--lab-tekst-zacht); border-color: var(--lab-tekst-zacht); }
+.knop:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+/* --- De twee kolommen ---------------------------------------------------- */
+
+.lab__paar {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+  margin-top: clamp(1.25rem, 3vw, 2rem);
+}
+/* De twee proeven zijn bijna nooit even hoog — een mincho zet losser dan een
+   Garamond. Met een subraster delen beide kolommen dezelfde rijen, zodat de
+   ladders naast elkaar beginnen en je waarden op dezelfde regel vergelijkt. */
+.kolom {
+  display: grid;
+  grid-template-rows: auto 1fr auto auto auto;
+  align-content: start;
+}
+
+@media (min-width: 1000px) {
+  .lab__paar {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr auto auto auto;
+  }
+  .kolom {
+    grid-row: span 5;
+    grid-template-rows: subgrid;
+  }
+}
+
+.kolom__balk {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.kolom__merk {
+  width: 1.75rem;
+  height: 1.75rem;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--lab-lijn);
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.kies {
+  appearance: none;
+  padding: 0.45rem 2rem 0.45rem 0.7rem;
+  border: 1px solid var(--lab-lijn);
+  border-radius: 0.35rem;
+  background: var(--lab-wand-diep);
+  color: var(--lab-tekst);
+  font: inherit;
+  font-size: 0.8125rem;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23ffffff' stroke-width='1.5'%3E%3Cpath d='M4 6.5 8 10.5 12 6.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 0.9rem;
+}
+.kies:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+.kolom__omschrijving {
+  flex-basis: 100%;
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--lab-tekst-zacht);
+}
+
+/* --- De proef ------------------------------------------------------------
+   Een vel papier tegen de wand. De achtergrond en de textuur komen uit het
+   palet dat op dit blok staat, dus het vel is echt van dat materiaal. */
+
+.proef {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--c-bg);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.28), 0 14px 34px -12px rgba(0, 0, 0, 0.45);
+}
+
+.proef::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url('assets/img/nieuw_kozo.webp');
+  background-size: 1100px auto;
+  background-position: center;
+  opacity: var(--texture-opacity);
+  pointer-events: none;
+}
+
+.proef > * { position: relative; z-index: 1; }
+
+.proef__blok { padding: clamp(1.5rem, 3.2vw, 2.5rem); }
+.proef__blok--alt { background: color-mix(in srgb, var(--c-bg-alt) 86%, transparent); }
+
+/* De naam van het palet, gezet in de displayletter van deze combinatie en in
+   de accentkleur: het opschrift is zelf de proef. */
+.proef__naam {
+  font-family: var(--font-display);
+  font-weight: var(--fw-display);
+  font-size: clamp(2.5rem, 5.5vw, 3.75rem);
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-display-tight);
+  color: var(--c-wood-deep);
+  margin: 0 0 0.15em;
+}
+
+.proef__letters {
+  margin: 0 0 1.5rem;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+
+.proef h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); margin-bottom: 0.6rem; }
+.proef .lead { margin-bottom: 1.5rem; }
+
+.proef__knoppen { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+
+.proef__onder {
+  display: grid;
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+@media (min-width: 560px) {
+  .proef__onder { grid-template-columns: minmax(0, 8.5rem) minmax(0, 1fr); }
+}
+
+.proef .card__media { margin: 0; }
+.proef .card__media img { display: block; width: 100%; height: auto; }
+
+.proef__band { padding: clamp(1.25rem, 2.5vw, 1.75rem) clamp(1.5rem, 3.2vw, 2.5rem); }
+.proef__band .quote { font-size: clamp(1.25rem, 2.4vw, 1.75rem); max-width: none; }
+
+/* --- De ladder -----------------------------------------------------------
+   Alle waarden van dit palet onder elkaar, in de volgorde waarin ze op de
+   pagina boven elkaar liggen. Klik een vlak om het te veranderen. */
+
+.ladder { margin-top: 1rem; }
+
+.ladder__groep {
+  margin: 0 0 0.5rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--lab-tekst-zacht);
+}
+.ladder__groep:not(:first-child) { margin-top: 1.1rem; }
+
+.sport {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.2rem 0;
+}
+
+.sport__kleur {
+  inline-size: 2.5rem;
+  block-size: 1.6rem;
+  flex: none;
+  padding: 0;
+  border: 1px solid var(--lab-lijn);
+  border-radius: 3px;
+  background: none;
+  cursor: pointer;
+}
+.sport__kleur::-webkit-color-swatch-wrapper { padding: 2px; }
+.sport__kleur::-webkit-color-swatch { border: none; border-radius: 2px; }
+.sport__kleur::-moz-color-swatch { border: none; border-radius: 2px; }
+.sport__kleur:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+.sport__naam {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 0.75rem;
+  color: var(--lab-tekst-zacht);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sport__hex {
+  inline-size: 7.5rem;
+  flex: none;
+  padding: 0.3rem 0.5rem;
+  border: 1px solid var(--lab-lijn);
+  border-radius: 3px;
+  background: var(--lab-wand-diep);
+  color: var(--lab-tekst);
+  font-family: ui-monospace, 'Cascadia Mono', 'SF Mono', Menlo, monospace;
+  font-size: 0.75rem;
+}
+.sport__hex:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+.ladder__voet { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+
+.lab__uitvoer {
+  width: 100%;
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  border: 1px solid var(--lab-lijn);
+  border-radius: 4px;
+  background: var(--lab-wand-diep);
+  color: var(--lab-tekst);
+  font-family: ui-monospace, 'Cascadia Mono', 'SF Mono', Menlo, monospace;
+  font-size: 0.75rem;
+  line-height: 1.55;
+  resize: vertical;
+}
+
+.lab__voet {
+  margin-top: clamp(2rem, 5vw, 3.5rem);
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--lab-lijn);
+  font-size: 0.8125rem;
+  line-height: 1.65;
+  color: var(--lab-tekst-zacht);
+  max-width: 78ch;
+}
+.lab__voet code {
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+  background: var(--lab-wand-diep);
+  font-family: ui-monospace, 'Cascadia Mono', 'SF Mono', Menlo, monospace;
+  font-size: 0.9em;
+}
+.lab__voet a { color: var(--lab-tekst); }
+
+.melding {
+  position: fixed;
+  left: 50%;
+  bottom: 1.5rem;
+  transform: translate(-50%, 1rem);
+  padding: 0.6rem 1.1rem;
+  border-radius: 2rem;
+  background: #23262a;
+  color: #fff;
+  font-size: 0.8125rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.melding.is-zichtbaar { opacity: 1; transform: translate(-50%, 0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .melding { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="lab">
+
+  <header class="lab__kop">
+    <div>
+      <h1 class="lab__titel">Stijlenlab</h1>
+      <p class="lab__uitleg">
+        Zes paletten en vijf lettersets, vrij te combineren. Beide kolommen tonen
+        dezelfde onderdelen uit de echte stylesheet, dus wat je hier ziet is wat
+        de site wordt. Klik een kleurvlak om hem te veranderen.
+      </p>
+    </div>
+    <div class="lab__acties">
+      <button class="knop" type="button" data-wissel>A en B omdraaien</button>
+      <a class="knop knop--vol" href="index.html" data-bekijk>Bekijk A op de site</a>
+      <a class="knop" href="index.html?standaard">Site op standaard</a>
+    </div>
+  </header>
+
+  <div class="lab__paar" data-paar></div>
+
+  <footer class="lab__voet">
+    <p>
+      De paletten staan in <code>css/themes.css</code>, elk als één blok met
+      negentien waarden. De keuze voor de site zelf staat bovenin
+      <code>js/theme.js</code>: twee regels, <code>PALET</code> en
+      <code>LETTERS</code>. Een nieuw palet maak je door een blok te kopiëren,
+      te hernoemen en de naam in de lijst <code>PALETTEN</code> te zetten — dan
+      verschijnt hij hier vanzelf in de keuzelijst.
+    </p>
+    <p>
+      &ldquo;Bekijk A op de site&rdquo; zet de combinatie tijdelijk op alle pagina&rsquo;s,
+      zolang dit browservenster openstaat. Het verandert niets aan de bestanden;
+      met &ldquo;Site op standaard&rdquo; is het weer weg.
+    </p>
+    <p>
+      Let op bij het bijstellen: de zes paletten halen nu allemaal 4,5:1 voor
+      lopende tekst op alle vier de vlakken en 3:1 voor de rand van een
+      invoerveld. Verschuif je een waarde, controleer die dan opnieuw.
+    </p>
+  </footer>
+
+</div>
+
+<p class="melding" role="status" aria-live="polite" data-melding></p>
+
+<template data-sjabloon>
+  <section class="kolom">
+    <div class="kolom__balk">
+      <span class="kolom__merk" data-merk></span>
+      <label class="visueel-verborgen" data-label-palet>Palet</label>
+      <select class="kies" data-kies-palet></select>
+      <label class="visueel-verborgen" data-label-letters>Letterset</label>
+      <select class="kies" data-kies-letters></select>
+      <p class="kolom__omschrijving" data-omschrijving></p>
+    </div>
+
+    <div class="proef" data-proef>
+      <div class="proef__blok">
+        <p class="proef__naam" data-naam>Washi</p>
+        <p class="proef__letters" data-letternamen></p>
+
+        <p class="label">Zes modellen</p>
+        <h2>Japanse <span class="accent">collectie</span></h2>
+        <p class="lead">
+          Elke lamp wordt met de hand gemaakt van massief hout en Japans papier.
+          Dat papier spreidt de harde stralen tot een egale gloed.
+        </p>
+        <div class="proef__knoppen">
+          <a class="btn btn--solid" href="#">Bekijk de collectie</a>
+          <a class="btn btn--ghost" href="#">Het maakproces</a>
+        </div>
+      </div>
+
+      <div class="proef__blok proef__blok--alt">
+        <div class="proef__onder">
+          <div class="card">
+            <div class="card__media card__media--cutout">
+              <img src="assets/img/tafellamp_take.webp"
+                   alt="Tafellamp Take van notenhout, uitsnede"
+                   width="695" height="1149" loading="lazy">
+            </div>
+            <div class="card__foot">
+              <div>
+                <h3 class="card__name">Tafellamp Take</h3>
+                <span class="card__meta">Tafellamp &middot; 45 × 20 cm</span>
+                <span class="card__price">&euro; 165</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="field">
+              <label data-veldlabel>Houtsoort</label>
+              <select data-veldkies>
+                <option>Esdoorn</option>
+                <option>Noten</option>
+              </select>
+              <span class="field__hint">Alleen de soorten waarin deze lamp gemaakt wordt.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="proef__blok proef__band band-dark">
+        <p class="label label--plain">Maatwerk</p>
+        <blockquote class="quote">Rechte lijnen, en het licht doet de rest.</blockquote>
+      </div>
+    </div>
+
+    <div class="ladder" data-ladder></div>
+
+    <div class="ladder__voet">
+      <button class="knop" type="button" data-kopieer>Kopieer CSS van dit palet</button>
+      <button class="knop" type="button" data-herstel>Bijstellingen ongedaan maken</button>
+    </div>
+    <textarea class="lab__uitvoer" rows="6" spellcheck="false" hidden data-uitvoer aria-label="CSS van dit palet"></textarea>
+  </section>
+</template>
+
+<script>
+(function () {
+  'use strict';
+
+  /* De tokens die een palet vult, in de groepen waarin ze samenhangen. */
+  var GROEPEN = [
+    ['Oppervlakken', [
+      ['--c-bg', 'pagina'],
+      ['--c-bg-alt', 'tweede band'],
+      ['--c-bg-deep', 'derde band'],
+      ['--c-card', 'kaart en invoerveld']
+    ]],
+    ['Inkt', [
+      ['--c-ink', 'koppen'],
+      ['--c-ink-soft', 'lopende tekst'],
+      ['--c-muted', 'bijschrift'],
+      ['--c-on-dark', 'tekst op de band'],
+      ['--c-on-dark-muted', 'bijschrift op de band']
+    ]],
+    ['Lijnen', [
+      ['--c-line', 'scheidingslijn'],
+      ['--c-line-soft', 'lichte lijn'],
+      ['--c-line-control', 'rand invoerveld'],
+      ['--c-line-dark', 'lijn op de band']
+    ]],
+    ['Accent', [
+      ['--c-wood', 'streepje en accent'],
+      ['--c-wood-deep', 'accentwoord in koppen'],
+      ['--c-glow', 'het licht uit de lamp']
+    ]]
+  ];
+
+  var paar = document.querySelector('[data-paar]');
+  var sjabloon = document.querySelector('[data-sjabloon]');
+  var melding = document.querySelector('[data-melding]');
+  var meldingKlok;
+
+  function zeg(tekst) {
+    melding.textContent = tekst;
+    melding.classList.add('is-zichtbaar');
+    clearTimeout(meldingKlok);
+    meldingKlok = setTimeout(function () {
+      melding.classList.remove('is-zichtbaar');
+    }, 2400);
+  }
+
+  /* De eerste familienaam uit een font-stack, zonder aanhalingstekens. */
+  function eersteFamilie(stack) {
+    return (stack || '').split(',')[0].replace(/['"]/g, '').trim();
+  }
+
+  function vulLijst(select, rijen) {
+    rijen.forEach(function (rij) {
+      var optie = document.createElement('option');
+      optie.value = rij[0];
+      optie.textContent = rij[1];
+      select.appendChild(optie);
+    });
+  }
+
+  function omschrijving(rijen, waarde) {
+    for (var i = 0; i < rijen.length; i++) {
+      if (rijen[i][0] === waarde) return rijen[i][2];
+    }
+    return '';
+  }
+
+  function naamVan(rijen, waarde) {
+    for (var i = 0; i < rijen.length; i++) {
+      if (rijen[i][0] === waarde) return rijen[i][1];
+    }
+    return waarde;
+  }
+
+  function maakKolom(merk, palet, letters) {
+    var knip = sjabloon.content.cloneNode(true);
+    var kolom = knip.querySelector('.kolom');
+    var proef = kolom.querySelector('[data-proef]');
+    var kiesPalet = kolom.querySelector('[data-kies-palet]');
+    var kiesLetters = kolom.querySelector('[data-kies-letters]');
+    var ladder = kolom.querySelector('[data-ladder]');
+    var uitvoer = kolom.querySelector('[data-uitvoer]');
+
+    kolom.querySelector('[data-merk]').textContent = merk;
+
+    /* Labels en veld-id's uniek per kolom, anders wijzen twee labels naar
+       hetzelfde veld en leest een schermlezer de tweede kolom verkeerd. */
+    var idP = 'palet-' + merk, idL = 'letters-' + merk, idV = 'veld-' + merk;
+    kiesPalet.id = idP;
+    kiesLetters.id = idL;
+    kolom.querySelector('[data-label-palet]').setAttribute('for', idP);
+    kolom.querySelector('[data-label-palet]').textContent = 'Palet voor kolom ' + merk;
+    kolom.querySelector('[data-label-letters]').setAttribute('for', idL);
+    kolom.querySelector('[data-label-letters]').textContent = 'Letterset voor kolom ' + merk;
+    kolom.querySelector('[data-veldkies]').id = idV;
+    kolom.querySelector('[data-veldlabel]').setAttribute('for', idV);
+
+    vulLijst(kiesPalet, PALETTEN);
+    vulLijst(kiesLetters, LETTERSETS);
+    kiesPalet.value = palet;
+    kiesLetters.value = letters;
+
+    var bijgesteld = {};
+
+    function bouwLadder() {
+      ladder.textContent = '';
+      var stijl = getComputedStyle(proef);
+      GROEPEN.forEach(function (groep) {
+        var kop = document.createElement('p');
+        kop.className = 'ladder__groep';
+        kop.textContent = groep[0];
+        ladder.appendChild(kop);
+
+        groep[1].forEach(function (rij) {
+          var token = rij[0];
+          var waarde = (stijl.getPropertyValue(token) || '').trim();
+
+          var sport = document.createElement('div');
+          sport.className = 'sport';
+
+          var kleur = document.createElement('input');
+          kleur.type = 'color';
+          kleur.className = 'sport__kleur';
+          kleur.value = /^#[0-9a-f]{6}$/i.test(waarde) ? waarde : '#000000';
+          kleur.setAttribute('aria-label', token + ' — ' + rij[1]);
+
+          var naam = document.createElement('span');
+          naam.className = 'sport__naam';
+          naam.textContent = token.replace('--c-', '') + ' · ' + rij[1];
+
+          var hex = document.createElement('input');
+          hex.type = 'text';
+          hex.className = 'sport__hex';
+          hex.value = waarde;
+          hex.spellcheck = false;
+          hex.setAttribute('aria-label', token + ' als hexwaarde');
+
+          function zet(nieuw) {
+            proef.style.setProperty(token, nieuw);
+            bijgesteld[token] = nieuw;
+          }
+
+          kleur.addEventListener('input', function () {
+            hex.value = kleur.value;
+            zet(kleur.value);
+          });
+          hex.addEventListener('change', function () {
+            var v = hex.value.trim();
+            if (/^#[0-9a-f]{6}$/i.test(v)) {
+              kleur.value = v;
+              zet(v);
+            } else {
+              hex.value = kleur.value;
+            }
+          });
+
+          sport.appendChild(kleur);
+          sport.appendChild(naam);
+          sport.appendChild(hex);
+          ladder.appendChild(sport);
+        });
+      });
+    }
+
+    function ververs() {
+      proef.dataset.palet = kiesPalet.value;
+      proef.dataset.letters = kiesLetters.value;
+      kolom.querySelector('[data-naam]').textContent = naamVan(PALETTEN, kiesPalet.value);
+      kolom.querySelector('[data-omschrijving]').textContent =
+        omschrijving(PALETTEN, kiesPalet.value) + ' · ' + omschrijving(LETTERSETS, kiesLetters.value);
+
+      var stijl = getComputedStyle(proef);
+      kolom.querySelector('[data-letternamen]').textContent =
+        eersteFamilie(stijl.getPropertyValue('--font-display')) + ' + ' +
+        eersteFamilie(stijl.getPropertyValue('--font-body'));
+
+      bouwLadder();
+    }
+
+    kiesPalet.addEventListener('change', function () {
+      /* Een ander palet begint schoon: bijstellingen horen bij het palet
+         waarop je ze maakte, niet bij de kolom. */
+      Object.keys(bijgesteld).forEach(function (t) { proef.style.removeProperty(t); });
+      bijgesteld = {};
+      ververs();
+    });
+    kiesLetters.addEventListener('change', ververs);
+
+    kolom.querySelector('[data-herstel]').addEventListener('click', function () {
+      Object.keys(bijgesteld).forEach(function (t) { proef.style.removeProperty(t); });
+      bijgesteld = {};
+      bouwLadder();
+      zeg('Bijstellingen zijn weg; het palet staat weer zoals in themes.css.');
+    });
+
+    kolom.querySelector('[data-kopieer]').addEventListener('click', function () {
+      var stijl = getComputedStyle(proef);
+      var regels = ["[data-palet='" + kiesPalet.value + "'] {"];
+      GROEPEN.forEach(function (groep, i) {
+        if (i) regels.push('');
+        groep[1].forEach(function (rij) {
+          regels.push('  ' + rij[0] + ': ' + (stijl.getPropertyValue(rij[0]) || '').trim() + ';');
+        });
+      });
+      regels.push('');
+      regels.push('  --texture-opacity: ' + (stijl.getPropertyValue('--texture-opacity') || '').trim() + ';');
+      regels.push('}');
+      var css = regels.join('\n');
+
+      uitvoer.hidden = false;
+      uitvoer.value = css;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(css).then(function () {
+          zeg('CSS gekopieerd. Plak hem over het blok in css/themes.css.');
+        }, function () {
+          uitvoer.select();
+          zeg('Kopiëren mocht niet; de CSS staat hieronder klaar.');
+        });
+      } else {
+        uitvoer.select();
+        zeg('De CSS staat hieronder klaar om te kopiëren.');
+      }
+    });
+
+    /* Eerst in de pagina hangen, dan pas verversen: getComputedStyle geeft op
+       een element dat nog in het sjabloonfragment zit lege waarden terug, en
+       de ladder en de letternamen worden daaruit opgebouwd. */
+    paar.appendChild(kolom);
+    ververs();
+    return { kiesPalet: kiesPalet, kiesLetters: kiesLetters, ververs: ververs };
+  }
+
+  var a = maakKolom('A', document.documentElement.dataset.palet || 'washi',
+                         document.documentElement.dataset.letters || 'garamond');
+  var b = maakKolom('B', 'sumi', 'mincho');
+
+  document.querySelector('[data-wissel]').addEventListener('click', function () {
+    var p = a.kiesPalet.value, l = a.kiesLetters.value;
+    a.kiesPalet.value = b.kiesPalet.value;
+    a.kiesLetters.value = b.kiesLetters.value;
+    b.kiesPalet.value = p;
+    b.kiesLetters.value = l;
+    a.ververs();
+    b.ververs();
+  });
+
+  var bekijk = document.querySelector('[data-bekijk]');
+  function werkLinkBij() {
+    bekijk.href = 'index.html?palet=' + a.kiesPalet.value + '&letters=' + a.kiesLetters.value;
+  }
+  a.kiesPalet.addEventListener('change', werkLinkBij);
+  a.kiesLetters.addEventListener('change', werkLinkBij);
+  document.querySelector('[data-wissel]').addEventListener('click', werkLinkBij);
+  werkLinkBij();
+})();
+</script>
+
+</body>
+</html>

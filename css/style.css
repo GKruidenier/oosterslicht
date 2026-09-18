@@ -115,6 +115,44 @@
   --font-display: 'Cormorant Garamond', 'Times New Roman', Georgia, serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
 
+  /* Zetwaarden van de displayletter. Elke letter vraagt om een eigen gewicht,
+     spatiering en regelafstand: wat bij Cormorant rustig oogt, valt bij een
+     mincho of een geometrische sans uit elkaar. Een letterset in
+     css/themes.css overschrijft deze acht regels en verder niets. */
+  --fw-display: 300;        /* koppen en citaten */
+  --fw-display-mid: 400;    /* kleinere koppen: kaartnaam, rijtitel */
+  --ls-display: -0.015em;
+  --ls-display-tight: -0.025em;   /* de grootste koppen */
+  --lh-display: 1.06;
+  --ls-label: 0.2em;        /* de kapitaaltjes boven een kop */
+  --accent-style: italic;   /* het accentwoord in een kop */
+  --accent-weight: inherit;
+
+  /* De kop in de hero staat in elke letterset op precies twee regels. Wat
+     dat bepaalt is de verhouding tussen de breedte van het tekstblok en de
+     korpsgrootte, en die verschilt per letter: Cormorant zet "die rust
+     uitstralen" ruim een kwart smaller dan een mincho.
+
+     Daarom liggen alle drie hier open. Een brede letter krijgt een breder
+     blok (--hero-breedte) zodat hij niet hoeft te krimpen, en een eigen
+     bovengrens (--fs-hero-max) voor wat er dan nog niet in past. De
+     ondergrens geldt op de telefoon, waar niet het blok maar het scherm de
+     grens is; daar helpt verbreden niet en moet de letter wél kleiner. */
+  --hero-breedte: 28rem;
+  --fs-hero-min: 2.75rem;
+  --fs-hero-max: 4.5rem;
+
+  /* Het woordmerk is donkere inkt op transparant. Op een lichte pagina kan
+     het zo staan; op de donkere band moet het omgekeerd. Bij een donker palet
+     draait die verhouding om, en dan wisselen deze twee waarden van plek. */
+  --logo-filter: none;
+  --logo-filter-band: invert(1) brightness(1.6);
+
+  /* De washi-textuur over de pagina. Een donker palet heeft een lichtere
+     hand nodig, anders leest het vezelpatroon als ruis. */
+  --texture-opacity: 0.12;
+  --texture-blend: normal;
+
   --fs-display-xl: clamp(2.75rem, 5vw, 5rem);
   --fs-display-l: clamp(2.5rem, 5.5vw, 5rem);
   --fs-h2: clamp(2rem, 4vw, 3.5rem);
@@ -190,7 +228,8 @@ body::before {
      het beeld zelf sluit namelijk niet naadloos op zichzelf aan. */
   background-size: 2200px auto;
   background-repeat: repeat;
-  opacity: 0.12;
+  opacity: var(--texture-opacity);
+  mix-blend-mode: var(--texture-blend);
   pointer-events: none;
 }
 
@@ -269,11 +308,11 @@ h2,
 h3,
 h4 {
   font-family: var(--font-display);
-  font-weight: 300;
+  font-weight: var(--fw-display);
   color: var(--c-ink);
   margin: 0;
-  letter-spacing: -0.015em;
-  line-height: 1.06;
+  letter-spacing: var(--ls-display);
+  line-height: var(--lh-display);
   text-wrap: balance;
 }
 
@@ -314,7 +353,7 @@ p:last-child {
   font-family: var(--font-body);
   font-size: var(--fs-label);
   font-weight: 500;
-  letter-spacing: 0.2em;
+  letter-spacing: var(--ls-label);
   text-transform: uppercase;
   color: var(--c-muted);
   margin: 0 0 var(--space-s);
@@ -332,9 +371,12 @@ p:last-child {
   display: none;
 }
 
-/* Accent-woord in koppen: cursief, iets warmer */
+/* Accent-woord in koppen: cursief, iets warmer. Niet elke displayletter heeft
+   een echte cursief — een letterset zonder cursief zet --accent-style op
+   normal en onderscheidt het woord met gewicht in plaats van helling. */
 .accent {
-  font-style: italic;
+  font-style: var(--accent-style);
+  font-weight: var(--accent-weight);
   color: var(--c-wood-deep);
 }
 
@@ -461,6 +503,7 @@ p:last-child {
 .site-header__logo img {
   width: auto;
   height: clamp(1.5rem, 2.4vw, 1.9rem);
+  filter: var(--logo-filter);
 }
 
 /* Navigatie — pill-vorm met omlijnde actieve staat, zoals de referentie */
@@ -776,6 +819,7 @@ p:last-child {
   width: auto;
   height: clamp(1.75rem, 4.5vw, 2.5rem);
   margin-bottom: clamp(1.25rem, 4vw, 2rem);
+  filter: var(--logo-filter);
 }
 
 /* --- Hero ----------------------------------------------------------------- */
@@ -868,12 +912,13 @@ p:last-child {
 /* De maat staat op de regels en niet op het hele blok: op het blok zou hij ook
    de twee knoppen knijpen, en die braken dan af naar twee regels onder elkaar. */
 /* fit-content zodat het blok precies om de tekst sluit: anders loopt de
-   onzichtbare rechterrand van het blok tot ver over de foto. 28rem is de maat
-   waarop "die rust uitstralen" op de grootste trap nog op een regel past, zodat
-   de kop twee regels blijft en niet in vieren breekt. */
+   onzichtbare rechterrand van het blok tot ver over de foto. De maat is die
+   waarop "die rust uitstralen" op de grootste trap nog op een regel past,
+   zodat de kop twee regels blijft en niet in vieren breekt. 28rem is die maat
+   voor Cormorant; een bredere letter krijgt in css/themes.css meer. */
 .hero__title {
   width: fit-content;
-  max-width: 28rem;
+  max-width: var(--hero-breedte);
 }
 
 .hero__text {
@@ -989,10 +1034,10 @@ p:last-child {
 /* De schreefletter van de site, zoals overal elders. De opzet eromheen blijft
    die van de schets — band, tekst linksonder — maar de letter niet. */
 .hero__title {
-  font-size: clamp(2.75rem, 5vw, 4.5rem);
-  font-weight: 300;
+  font-size: clamp(var(--fs-hero-min), 5vw, var(--fs-hero-max));
+  font-weight: var(--fw-display);
   line-height: 0.98;
-  letter-spacing: -0.025em;
+  letter-spacing: var(--ls-display-tight);
   margin: 0 0 clamp(1.25rem, 2.5vw, 2rem);
   color: var(--c-ink);
 }
@@ -1052,7 +1097,7 @@ p:last-child {
 .feature__title {
   font-family: var(--font-display);
   font-size: 1.4rem;
-  font-weight: 400;
+  font-weight: var(--fw-display-mid);
   color: var(--c-ink);
   margin: 0 0 0.6rem;
   line-height: 1.2;
@@ -1318,7 +1363,7 @@ p:last-child {
 .card__name {
   font-family: var(--font-display);
   font-size: 1.35rem;
-  font-weight: 400;
+  font-weight: var(--fw-display-mid);
   color: var(--c-ink);
   margin: 0 0 0.25rem;
   line-height: 1.2;
@@ -1391,9 +1436,9 @@ p:last-child {
    de foto en niet meer alleen op een lege regel. */
 .product__title {
   font-size: clamp(2.25rem, 4vw, 3.25rem);
-  font-weight: 300;
+  font-weight: var(--fw-display);
   line-height: 1.04;
-  letter-spacing: -0.025em;
+  letter-spacing: var(--ls-display-tight);
   margin: 0;
 }
 
@@ -1683,7 +1728,7 @@ p:last-child {
 .lightbox__title {
   font-family: var(--font-display);
   font-size: clamp(1.75rem, 4vw, 2.5rem);
-  font-weight: 300;
+  font-weight: var(--fw-display);
   color: var(--c-on-dark);
   margin: 0 0 0.6rem;
 }
@@ -1788,7 +1833,7 @@ p:last-child {
 .row__title {
   font-family: var(--font-display);
   font-size: clamp(1.35rem, 2.2vw, 1.9rem);
-  font-weight: 400;
+  font-weight: var(--fw-display-mid);
   color: var(--c-ink);
   margin: 0;
   line-height: 1.2;
@@ -1874,9 +1919,9 @@ p:last-child {
   max-width: 24ch;
   font-family: var(--font-display);
   font-size: var(--fs-display-l);
-  font-weight: 300;
+  font-weight: var(--fw-display);
   line-height: 1.1;
-  letter-spacing: -0.02em;
+  letter-spacing: var(--ls-display);
   color: var(--c-ink);
   margin: 0;
 }
@@ -2296,7 +2341,7 @@ p:last-child {
   width: auto;
   height: 1.75rem;
   margin-bottom: var(--space-s);
-  filter: invert(1) brightness(1.6);
+  filter: var(--logo-filter-band);
 }
 
 .site-footer__tagline {

@@ -1,0 +1,543 @@
+/* ==========================================================================
+   OostersLicht — paletten en lettersets
+   ==========================================================================
+
+   Dit bestand verandert niets aan de opbouw van de site, alleen aan de
+   waarden. css/style.css zet alle kleur en alle zetwerk in tokens; hier staan
+   de alternatieve invullingen daarvan.
+
+   Twee assen, los van elkaar te kiezen:
+
+     data-palet    = de kleuren        (washi, sumi, indigo, kersen, mos, destijl)
+     data-letters  = de letters        (garamond, mincho, bauhaus, redactie, werkplaats)
+
+   Wisselen doe je in js/theme.js — daar staan twee regels bovenaan. Of open
+   stijlenlab.html en zet twee combinaties naast elkaar.
+
+   Zelf een palet toevoegen:
+     1. Kopieer een heel blok hieronder en geef het een eigen naam.
+     2. Pas de waarden aan.
+     3. Zet de naam in de lijst PALETTEN in js/theme.js, dan staat hij ook
+        in het stijlenlab.
+
+   De selectors zijn losse attribuutselectors, geen html[data-palet]. Daardoor
+   werkt een palet ook op een enkele <div> — dat is wat het stijlenlab gebruikt
+   om twee versies naast elkaar te tonen.
+
+   Contrast: alle paletten hieronder halen 4,5:1 voor lopende tekst op elk van
+   de vier oppervlakken, 3:1 voor het accentwoord in koppen en 3:1 voor de rand
+   van een invoerveld. Pas je een waarde aan, controleer die dan opnieuw.
+   ========================================================================== */
+
+
+/* --- Letters: de bestanden ------------------------------------------------
+   Alleen de latin-subsets, net als bij de twee letters die de site al had.
+   Een browser haalt een bestand pas op als de letter ook echt gebruikt wordt,
+   dus deze lijst kost niets zolang je één letterset aan hebt staan. */
+
+/* Shippori Mincho — een Japanse mincho met een volwaardige latijnse snede.
+   Geen cursief; de letterset vangt dat op met gewicht. */
+@font-face {
+  font-family: 'Shippori Mincho';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('../assets/fonts/shippori-mincho-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Shippori Mincho';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('../assets/fonts/shippori-mincho-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* Zen Kaku Gothic New — de gothic die bij die mincho hoort. */
+@font-face {
+  font-family: 'Zen Kaku Gothic New';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('../assets/fonts/zen-kaku-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Zen Kaku Gothic New';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('../assets/fonts/zen-kaku-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* Jost — geometrische sans in de lijn van de Futura uit de jaren twintig,
+   de letter van het tijdperk waarin De Stijl werkte. */
+@font-face {
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 300 600;
+  font-display: swap;
+  src: url('../assets/fonts/jost-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 300 600;
+  font-display: swap;
+  src: url('../assets/fonts/jost-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Jost';
+  font-style: italic;
+  font-weight: 300 600;
+  font-display: swap;
+  src: url('../assets/fonts/jost-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Newsreader — een krantenletter met een echte cursief en een optische as. */
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 300 600;
+  font-display: swap;
+  src: url('../assets/fonts/newsreader-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Newsreader';
+  font-style: italic;
+  font-weight: 300 600;
+  font-display: swap;
+  src: url('../assets/fonts/newsreader-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Public Sans — nuchtere sans, ontworpen voor de Amerikaanse overheid. */
+@font-face {
+  font-family: 'Public Sans';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('../assets/fonts/public-sans-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Public Sans';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('../assets/fonts/public-sans-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* Literata — laag contrast, stevig, gemaakt om lang in te lezen. */
+@font-face {
+  font-family: 'Literata';
+  font-style: normal;
+  font-weight: 300 600;
+  font-display: swap;
+  src: url('../assets/fonts/literata-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Literata';
+  font-style: italic;
+  font-weight: 300 600;
+  font-display: swap;
+  src: url('../assets/fonts/literata-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Karla — grotesk met een eigen kop, minder neutraal dan Inter. */
+@font-face {
+  font-family: 'Karla';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('../assets/fonts/karla-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Karla';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('../assets/fonts/karla-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+
+/* ==========================================================================
+   PALETTEN
+   ==========================================================================
+
+   Elk palet vult dezelfde negentien tokens. De namen zeggen waar ze voor
+   staan, niet welke kleur ze hebben — daarom werkt een donker palet ook:
+   --c-ink is "de kleur van de letter", niet "donker".
+
+     --c-bg / --c-bg-alt / --c-bg-deep   de drie bandkleuren onder elkaar
+     --c-card                            vulling van kaart en invoerveld
+     --c-ink / --c-ink-soft / --c-muted  kop, lopende tekst, bijschrift
+     --c-on-dark(-muted)                 tekst op de donkere band
+     --c-line / --c-line-soft            scheidingslijnen
+     --c-line-control                    rand van invoervelden (WCAG 1.4.11)
+     --c-line-dark                       lijn op de donkere band
+     --c-wood / --c-wood-deep            accentkleur, streepje en accentwoord
+     --c-glow                            het licht dat uit de lamp komt
+   ========================================================================== */
+
+
+/* --- washi ---------------------------------------------------------------
+   Het huidige palet: warm papierwit, notenhout als accent. Dit is wat de
+   site nu is; het staat hier zodat je het net zo makkelijk kunt bijstellen
+   als de rest. */
+[data-palet='washi'] {
+  --c-bg: #f7f4ee;
+  --c-bg-alt: #efeae1;
+  --c-bg-deep: #e7e0d4;
+  --c-card: #fffdf9;
+
+  --c-ink: #1c1a17;
+  --c-ink-soft: #3a3630;
+  --c-muted: #666057;
+  --c-on-dark: #f2ede4;
+  --c-on-dark-muted: #a49c90;
+
+  --c-line: #ddd6c9;
+  --c-line-control: #928c83;
+  --c-line-soft: #e9e3d8;
+  --c-line-dark: #3b352c;
+
+  --c-wood: #8b7355;
+  --c-wood-deep: #6d5842;
+  --c-glow: #e0bd8a;
+
+  --texture-opacity: 0.12;
+}
+
+
+/* --- sumi ----------------------------------------------------------------
+   Inkt. De omkering: de kamer is donker en de lamp is het enige wat licht
+   geeft — precies de situatie waarvoor deze lampen gemaakt zijn. Let op dat
+   --c-ink hier licht is: het is de kleur van de letter, en de donkere band
+   wordt daardoor vanzelf de lichte band. De textuur gaat flink omlaag, want
+   een lichte vezel op zwart leest snel als ruis. */
+[data-palet='sumi'] {
+  --c-bg: #141210;
+  --c-bg-alt: #1b1916;
+  --c-bg-deep: #232019;
+  --c-card: #1f1c18;
+
+  --c-ink: #f4efe4;
+  --c-ink-soft: #ded7c9;
+  --c-muted: #a59b8a;
+  --c-on-dark: #17150f;
+  --c-on-dark-muted: #5b544a;
+
+  --c-line: #332f28;
+  --c-line-control: #807869;
+  --c-line-soft: #272420;
+  --c-line-dark: #e8e1d3;
+
+  --c-wood: #c89b63;
+  --c-wood-deep: #e0bd8a;
+  --c-glow: #ffcf8e;
+
+  /* Donkere pagina, lichte band: het woordmerk draait precies om. */
+  --logo-filter: invert(1) brightness(1.6);
+  --logo-filter-band: none;
+
+  /* De primaire kleuren van De Stijl zijn op zwart te donker om te lezen. */
+  --c-ds-red: #e2555f;
+  --c-ds-yellow: #f5c542;
+  --c-ds-blue: #5b83e0;
+  --c-ds-black: #0e0d0b;
+
+  --texture-opacity: 0.05;
+}
+
+
+/* --- indigo --------------------------------------------------------------
+   Aizome, het Japanse indigoverven. Koele grijsblauwe vlakken, en het licht
+   blijft met opzet warm: --c-glow is het enige warme in dit palet, zodat de
+   brandende lamp op elke foto meteen opvalt. */
+[data-palet='indigo'] {
+  --c-bg: #eef0f2;
+  --c-bg-alt: #e3e7ec;
+  --c-bg-deep: #d6dce4;
+  --c-card: #f8f9fb;
+
+  --c-ink: #13202e;
+  --c-ink-soft: #2c3b4b;
+  --c-muted: #55626f;
+  --c-on-dark: #eaeef3;
+  --c-on-dark-muted: #94a3b3;
+
+  --c-line: #c6cfd9;
+  --c-line-control: #7d8b9b;
+  --c-line-soft: #dde3ea;
+  --c-line-dark: #2b3a4a;
+
+  --c-wood: #2f4f7a;
+  --c-wood-deep: #21395c;
+  --c-glow: #cfa76a;
+
+  --texture-opacity: 0.1;
+}
+
+
+/* --- kersen --------------------------------------------------------------
+   Kersenhout, dat volgens de collectiepagina "met de tijd verdiept en rijker
+   wordt". Het warmste palet van de zes, met een gebrand rood als accent. */
+[data-palet='kersen'] {
+  --c-bg: #f6f1ea;
+  --c-bg-alt: #efe6da;
+  --c-bg-deep: #e5d8c7;
+  --c-card: #fffaf3;
+
+  --c-ink: #2a1a14;
+  --c-ink-soft: #453028;
+  --c-muted: #6b5144;
+  --c-on-dark: #f4e9dd;
+  --c-on-dark-muted: #ab9484;
+
+  --c-line: #ddcdb9;
+  --c-line-control: #907a67;
+  --c-line-soft: #e9dccb;
+  --c-line-dark: #4a3228;
+
+  --c-wood: #9e4a33;
+  --c-wood-deep: #7d3624;
+  --c-glow: #e8b06f;
+
+  --texture-opacity: 0.14;
+}
+
+
+/* --- mos -----------------------------------------------------------------
+   Het blad in het papier: esdoorn, ginkgo, bamboe, moeraseik. Een gedempt
+   groen dat de bladeren op de Koyo oppakt zonder ze na te apen. */
+[data-palet='mos'] {
+  --c-bg: #f3f4ee;
+  --c-bg-alt: #e9ebe0;
+  --c-bg-deep: #dce0d0;
+  --c-card: #fbfcf7;
+
+  --c-ink: #1e2418;
+  --c-ink-soft: #384030;
+  --c-muted: #59614d;
+  --c-on-dark: #eef0e7;
+  --c-on-dark-muted: #9aa390;
+
+  --c-line: #ccd2bf;
+  --c-line-control: #808970;
+  --c-line-soft: #e0e4d6;
+  --c-line-dark: #333b2b;
+
+  --c-wood: #5c6b3f;
+  --c-wood-deep: #465330;
+  --c-glow: #d8bb78;
+
+  --texture-opacity: 0.11;
+}
+
+
+/* --- destijl -------------------------------------------------------------
+   De tweede collectie, doorgetrokken naar de hele site: bijna wit, zwarte
+   lijnen, en de drie primaire kleuren als enige kleur. Het accent is blauw,
+   de gloed geel. De textuur gaat bijna uit — De Stijl wil een vlak vlak. */
+[data-palet='destijl'] {
+  --c-bg: #f5f4f1;
+  --c-bg-alt: #ebeae6;
+  --c-bg-deep: #e0dfda;
+  --c-card: #ffffff;
+
+  --c-ink: #121212;
+  --c-ink-soft: #2e2e2e;
+  --c-muted: #5c5c5c;
+  --c-on-dark: #f5f4f1;
+  --c-on-dark-muted: #9a9a9a;
+
+  --c-line: #d2d1cc;
+  --c-line-control: #828282;
+  --c-line-soft: #e4e3df;
+  --c-line-dark: #121212;
+
+  --c-wood: #1b3f8b;
+  --c-wood-deep: #16326e;
+  --c-glow: #f0b323;
+
+  --texture-opacity: 0.04;
+}
+
+
+/* ==========================================================================
+   LETTERSETS
+   ==========================================================================
+
+   Een letterset is twee letters plus de zetwaarden die daarbij horen. Die
+   waarden zijn niet optioneel: dezelfde -0.025em die Cormorant strak zet,
+   drukt een mincho dicht. Wie een letter wisselt zonder gewicht, spatiering
+   en regelafstand mee te nemen, krijgt de letter wel maar de zetting niet.
+   ========================================================================== */
+
+
+/* --- garamond ------------------------------------------------------------
+   De huidige zetting. Cormorant Garamond is een hoog-contrast renaissance-
+   letter: heel licht gezet, groot afgedrukt, met een kalligrafische cursief
+   voor het accentwoord. Inter eronder als neutrale werkletter. */
+[data-letters='garamond'] {
+  /* Cormorant is de smalste van de vijf; dit is de ijkmaat. */
+  --hero-breedte: 28rem;
+  --fs-hero-min: 2.75rem;
+  --fs-hero-max: 4.5rem;
+
+  --font-display: 'Cormorant Garamond', 'Times New Roman', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+
+  --fw-display: 300;
+  --fw-display-mid: 400;
+  --ls-display: -0.015em;
+  --ls-display-tight: -0.025em;
+  --lh-display: 1.06;
+  --ls-label: 0.2em;
+  --accent-style: italic;
+  --accent-weight: inherit;
+}
+
+
+/* --- mincho --------------------------------------------------------------
+   Dezelfde typografische traditie als het papier zelf. Shippori Mincho heeft
+   verticale schaduw en harde serifs; op 300 valt hij uit elkaar, dus het
+   gewicht gaat naar 400 en de spatiering naar nul. Er is geen cursief, dus
+   het accentwoord onderscheidt zich met gewicht in plaats van helling. */
+[data-letters='mincho'] {
+  /* Een mincho zet fors breder: zonder deze krimp breekt de kop in vieren. */
+  --hero-breedte: 36rem;
+  --fs-hero-min: 2.05rem;
+  --fs-hero-max: 4.2rem;
+
+  --font-display: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+  --font-body: 'Zen Kaku Gothic New', 'Hiragino Sans', 'Segoe UI', sans-serif;
+
+  --fw-display: 400;
+  --fw-display-mid: 400;
+  --ls-display: 0.005em;
+  --ls-display-tight: -0.005em;
+  --lh-display: 1.18;
+  --ls-label: 0.18em;
+  --accent-style: normal;
+  --accent-weight: 600;
+}
+
+
+/* --- bauhaus -------------------------------------------------------------
+   Eén letter voor alles, zoals de ontwerpers van rond 1920 het wilden: geen
+   schreef, alleen cirkel en rechte lijn. Jost zet heel strak en heeft een
+   grote x-hoogte, dus de regelafstand kan dicht. Het accentwoord staat niet
+   cursief maar zwaarder — een geometrische cursief is een helling, geen
+   eigen letter, en dat ziet er hier goedkoop uit. */
+[data-letters='bauhaus'] {
+  /* Jost oogt smal, maar het accentwoord staat hier op gewicht 500 en dat
+     maakt de tweede regel een stuk breder dan de kop zelf. Daar is deze
+     krimp op gemeten, niet op de romp van de letter. */
+  --hero-breedte: 32rem;
+  --fs-hero-min: 2.3rem;
+  --fs-hero-max: 4.3rem;
+
+  --font-display: 'Jost', 'Futura', 'Century Gothic', sans-serif;
+  --font-body: 'Jost', 'Futura', 'Century Gothic', sans-serif;
+
+  --fw-display: 300;
+  --fw-display-mid: 500;
+  --ls-display: -0.01em;
+  --ls-display-tight: -0.02em;
+  --lh-display: 1.02;
+  --ls-label: 0.24em;
+  --accent-style: normal;
+  --accent-weight: 500;
+}
+
+
+/* --- redactie ------------------------------------------------------------
+   De toon van een tijdschriftartikel in plaats van een winkel. Newsreader is
+   gemaakt voor schermtekst en heeft een echte cursief; Public Sans eronder
+   is zakelijk zonder koud te worden. Iets strakker gezet dan Cormorant,
+   omdat Newsreader minder contrast heeft en dus meer kleur op de regel. */
+[data-letters='redactie'] {
+  /* Newsreader heeft meer kleur op de regel en dus meer breedte. */
+  --hero-breedte: 32rem;
+  --fs-hero-min: 2.45rem;
+  --fs-hero-max: 4.5rem;
+
+  --font-display: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-body: 'Public Sans', -apple-system, 'Segoe UI', Arial, sans-serif;
+
+  --fw-display: 300;
+  --fw-display-mid: 400;
+  --ls-display: -0.02em;
+  --ls-display-tight: -0.03em;
+  --lh-display: 1.05;
+  --ls-label: 0.19em;
+  --accent-style: italic;
+  --accent-weight: inherit;
+}
+
+
+/* --- werkplaats ----------------------------------------------------------
+   De tegenhanger van garamond: laag contrast, stevige stokken, niets
+   fragiels. Literata is gebouwd om lang te lezen en Karla heeft een eigen
+   kop — samen leest het als gemaakt werk in plaats van als etalage. */
+[data-letters='werkplaats'] {
+  /* Literata heeft stevige stokken en een brede romp. */
+  --hero-breedte: 32rem;
+  --fs-hero-min: 2.3rem;
+  --fs-hero-max: 4.3rem;
+
+  --font-display: 'Literata', Georgia, serif;
+  --font-body: 'Karla', -apple-system, 'Segoe UI', Arial, sans-serif;
+
+  --fw-display: 300;
+  --fw-display-mid: 500;
+  --ls-display: -0.02em;
+  --ls-display-tight: -0.03em;
+  --lh-display: 1.1;
+  --ls-label: 0.2em;
+  --accent-style: italic;
+  --accent-weight: inherit;
+}
