@@ -897,11 +897,15 @@ p:last-child {
     margin-bottom: clamp(1.25rem, 2.5vw, 1.5rem);
   }
 
-  /* Kleiner en dichter op de kop dan op de telefoon: op een breed maar laag
-     scherm duwde het merkteken de kop anders helemaal onder de vouw. */
+  /* Deze maat kwam uit de opzet waarin het merk klein en dicht op de kop
+     stond. Op 1,8rem stond het hier vlak onder de koptekst op bijna dezelfde
+     hoogte (29 tegen 24 pixels) en las het als een herhaling. 2,3rem houdt
+     dezelfde verhouding aan als op een breed scherm, ruim anderhalf maal de
+     koptekst, en blijft klein genoeg om de kop op een breed maar laag scherm
+     niet onder de vouw te duwen. */
   .hero__logo {
-    height: 1.8rem;
-    margin-bottom: 1rem;
+    height: 2.3rem;
+    margin-bottom: 1.1rem;
   }
 }
 
@@ -1021,9 +1025,12 @@ p:last-child {
     padding-block: clamp(2rem, 3.5vw, 3rem) clamp(2.5rem, 5vw, 5rem);
   }
 
+  /* De koptekst zet het merk op 2,4vw. Op die maat stond het hier vlak
+     onder hetzelfde beeldmerk en las het als een herhaling; groter leest het
+     als de aanhef van dit blok. */
   .hero__logo {
-    height: clamp(2.1rem, 2.6vw, 3rem);
-    margin-bottom: clamp(1rem, 1.6vw, 1.5rem);
+    height: clamp(2.5rem, 3.3vw, 4rem);
+    margin-bottom: clamp(1.1rem, 1.8vw, 1.6rem);
   }
 }
 
@@ -1036,15 +1043,27 @@ p:last-child {
 .hero__title {
   font-size: clamp(var(--fs-hero-min), 5vw, var(--fs-hero-max));
   font-weight: var(--fw-display);
-  line-height: 0.98;
+  line-height: 1;
   letter-spacing: var(--ls-display-tight);
-  margin: 0 0 clamp(1.25rem, 2.5vw, 2rem);
+  /* De alinea eronder hoort bij de kop en niet bij de knoppen: de kop laat
+     haar dichtbij, de alinea duwt de knoppen ver weg. Even grote gaten maken
+     van vier onderdelen één rij losse regels. */
+  margin: 0 0 clamp(0.6rem, 1.1vw, 0.9rem);
   color: var(--c-ink);
 }
 
-/* Cursief en houtkleur komen van .accent; hier alleen de eigen regel. */
+/* "Houten lampen die rust uitstralen" is één zin: een onderwerp met een
+   bijzin. Op dezelfde korpsgrootte leest dat als één blok, en omdat de bijzin
+   ook nog gekleurd is, schreeuwt juist het ondergeschikte deel het hardst.
+
+   De trap zet dat recht. Het onderwerp draagt de regel; de bijzin volgt
+   kleiner en houdt de houtkleur, die nu een accent is in plaats van een
+   tweede stem. In em, zodat de verhouding in elke letterset gelijk blijft. */
 .hero__title .accent {
   display: block;
+  font-size: 0.6em;
+  line-height: 1.12;
+  margin-top: 0.3em;
 }
 
 /* Zelfde reden: de rand van een knop valt onder WCAG 1.4.11 en heeft 3:1 nodig.
@@ -1055,10 +1074,14 @@ p:last-child {
 
 .hero__text {
   font-size: var(--fs-lead);
-  line-height: 1.75;
   color: var(--c-ink-soft);
-  max-width: 38ch;
-  margin: 0 0 clamp(1.5rem, 2.5vw, 2rem);
+  /* Op 1,75 stond deze regel te ijl onder een kop die net gewicht heeft
+     gekregen. De maat is ruim genoeg dat de zin op een breed scherm op één
+     regel staat; wordt het blok smaller, dan breekt hij in tweeën. */
+  line-height: 1.55;
+  max-width: 56ch;
+  text-wrap: balance;
+  margin: 0 0 clamp(1.75rem, 3.2vw, 2.75rem);
 }
 
 .hero__actions {

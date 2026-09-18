@@ -425,7 +425,7 @@
   /* Cormorant is de smalste van de vijf; dit is de ijkmaat. */
   --hero-breedte: 28rem;
   --fs-hero-min: 2.75rem;
-  --fs-hero-max: 4.5rem;
+  --fs-hero-max: 4.7rem;
 
   --font-display: 'Cormorant Garamond', 'Times New Roman', Georgia, serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
@@ -449,8 +449,8 @@
 [data-letters='mincho'] {
   /* Een mincho zet fors breder: zonder deze krimp breekt de kop in vieren. */
   --hero-breedte: 36rem;
-  --fs-hero-min: 2.05rem;
-  --fs-hero-max: 4.2rem;
+  --fs-hero-min: 2.2rem;
+  --fs-hero-max: 4.7rem;
 
   --font-display: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
   --font-body: 'Zen Kaku Gothic New', 'Hiragino Sans', 'Segoe UI', sans-serif;
@@ -476,9 +476,9 @@
   /* Jost oogt smal, maar het accentwoord staat hier op gewicht 500 en dat
      maakt de tweede regel een stuk breder dan de kop zelf. Daar is deze
      krimp op gemeten, niet op de romp van de letter. */
-  --hero-breedte: 32rem;
-  --fs-hero-min: 2.3rem;
-  --fs-hero-max: 4.3rem;
+  --hero-breedte: 29.5rem;
+  --fs-hero-min: 2.6rem;
+  --fs-hero-max: 4.7rem;
 
   --font-display: 'Jost', 'Futura', 'Century Gothic', sans-serif;
   --font-body: 'Jost', 'Futura', 'Century Gothic', sans-serif;
@@ -501,9 +501,9 @@
    omdat Newsreader minder contrast heeft en dus meer kleur op de regel. */
 [data-letters='redactie'] {
   /* Newsreader heeft meer kleur op de regel en dus meer breedte. */
-  --hero-breedte: 32rem;
-  --fs-hero-min: 2.45rem;
-  --fs-hero-max: 4.5rem;
+  --hero-breedte: 31rem;
+  --fs-hero-min: 2.5rem;
+  --fs-hero-max: 4.7rem;
 
   --font-display: 'Newsreader', Georgia, 'Times New Roman', serif;
   --font-body: 'Public Sans', -apple-system, 'Segoe UI', Arial, sans-serif;
@@ -526,8 +526,8 @@
 [data-letters='werkplaats'] {
   /* Literata heeft stevige stokken en een brede romp. */
   --hero-breedte: 32rem;
-  --fs-hero-min: 2.3rem;
-  --fs-hero-max: 4.3rem;
+  --fs-hero-min: 2.45rem;
+  --fs-hero-max: 4.7rem;
 
   --font-display: 'Literata', Georgia, serif;
   --font-body: 'Karla', -apple-system, 'Segoe UI', Arial, sans-serif;
