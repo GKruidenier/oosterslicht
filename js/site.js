@@ -352,8 +352,12 @@
 
   document.querySelectorAll('[data-wheel]').forEach(function (wheel) {
     var segments = [].slice.call(wheel.querySelectorAll('.wheel__segment'));
-    var nameEl = wheel.querySelector('[data-wheel-name]');
-    var descEl = wheel.querySelector('[data-wheel-desc]');
+    /* De uitleg staat niet meer onder elk wiel, maar één keer tussen de twee
+       wielen in; beide wielen schrijven dus naar hetzelfde vak. */
+    var readout = wheel.querySelector('[data-wheel-readout]') ||
+      (wheel.closest('.wheels') || document).querySelector('[data-wheel-readout]');
+    var nameEl = readout && readout.querySelector('[data-wheel-name]');
+    var descEl = readout && readout.querySelector('[data-wheel-desc]');
     if (!segments.length || !nameEl || !descEl) return;
 
     var startName = nameEl.textContent;

@@ -2704,28 +2704,21 @@ p:last-child {
   text-align: center;
 }
 
-/* Vanaf twee kolommen scheidt een haarlijn de twee wielen, in dezelfde dunne
-   lijnentaal als de rest van de site; een kader eromheen zou zwaarder wegen
-   dan de foto's in de wielen zelf. */
+/* Vanaf twee kolommen staan de wielen naast elkaar met de uitleg ertussen in
+   een smalle middenkolom. */
 @media (min-width: 860px) {
   .wheels {
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
+    grid-template-columns: 1fr minmax(13rem, 17rem) 1fr;
+    gap: clamp(1.5rem, 3vw, 3rem);
+    align-items: start;
+    max-width: 64rem;
   }
 
-  /* Kop, wiel en uitleg delen hun rijhoogte met de kolom ernaast, zodat de
-     twee wielen op dezelfde hoogte staan ook als de ene inleiding een regel
-     langer afbreekt dan de andere. */
-  @supports (grid-template-rows: subgrid) {
-    .wheels {
-      grid-template-rows: auto auto auto;
-    }
-
-    .wheel-block {
-      display: grid;
-      grid-template-rows: subgrid;
-      grid-row: span 3;
-    }
+  /* Het vak met de gekozen soort hangt tussen de twee wielen, op de hoogte
+     van de wielen zelf in plaats van eronder. */
+  .wheel-readout {
+    grid-column: 2;
+    align-self: center;
   }
 }
 
@@ -2736,18 +2729,14 @@ p:last-child {
   margin-inline: auto;
 }
 
-.wheel-block__title {
-  font-family: var(--font-display);
-  font-size: var(--fs-h3);
-  font-weight: 400;
-  margin: 0 0 0.4rem;
-}
-
+/* Zonder kop erboven draagt het wiel geen eigen marges meer: de afstand tot
+   de uitleg komt van de ruimte tussen de cellen, zodat het wiel en het vak
+   met de gekozen soort op dezelfde hoogte uitkomen. */
 .wheel {
   position: relative;
   display: grid;
   place-items: center;
-  margin-block: var(--space-m) var(--space-s);
+  margin-block: 0;
 }
 
 /* Het wiel blijft smaller dan de tekstmaat eromheen; op volle kolombreedte
@@ -2831,6 +2820,9 @@ p:last-child {
    verspringen terwijl je over de segmenten beweegt. */
 .wheel-readout {
   min-height: 6.5rem;
+  width: min(100%, 24rem);
+  margin-inline: auto;
+  text-align: center;
 }
 
 .wheel-readout__name:empty {
