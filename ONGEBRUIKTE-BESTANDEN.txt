@@ -69,6 +69,7 @@ assets/img/koyo_esdoorn_wandlamp.webp
 assets/img/koyo_ginko1.png
 assets/img/koyo_ginko1.webp
 assets/img/koyo_ginko_detail.jpg
+assets/img/koyo_ginko_detail.webp
 assets/img/koyo_ginko_interieur-2.jpg
 assets/img/koyo_ginko_interieur-2.png
 assets/img/koyo_ginko_interieur.jpg
