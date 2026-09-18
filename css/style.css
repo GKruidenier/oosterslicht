@@ -1073,10 +1073,6 @@ p:last-child {
     grid-template-columns: 1fr 1fr;
   }
 
-  .split--wide-media {
-    grid-template-columns: 1.15fr 0.85fr;
-  }
-
   .split--wide-body {
     grid-template-columns: 0.85fr 1.15fr;
   }
@@ -1140,13 +1136,42 @@ p:last-child {
   border-radius: var(--radius-img);
 }
 
-.split__photo--tall {
-  aspect-ratio: 3 / 4;
+/* De introfoto stond op 3:4 in de brede kolom en werd daarmee tweehonderd
+   pixels langer dan de alinea ernaast, die dus in het midden van een hoge
+   kolom bleef zweven. Met gelijke kolommen en deze verhouding schelen beeld
+   en tekst nog ongeveer honderd pixels, wat als bewust gekozen witruimte
+   leest in plaats van als een gat. Het is meteen dichter bij de uitsnede van
+   de foto zelf, die liggend is. */
+.split__photo--intro {
+  aspect-ratio: 5 / 4;
+}
+
+/* Twee kolommen pas vanaf 1200, net als bij .split--media-right hierboven.
+   Op 900 gaf de tweekolomsvorm kolommen van 382 pixels: eenenveertig tekens
+   per regel, met een foto die met 300 pixels korter werd dan de tekst
+   ernaast. Op 1024 is dat nog steeds zevenenveertig tekens en 342 om 412.
+   Vanaf 1200 lopen de twee kolommen wel gelijk op. */
+@media (min-width: 900px) and (max-width: 1199px) {
+  .split--intro {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Zodra alles onder elkaar staat is de kolom breder dan een alinea aankan;
+   zonder deze grens loopt de tekst daar op tot ruim negentig tekens. Vanaf
+   1200 is de kolom zelf al de grens, dus dan is de regel niet nodig. */
+@media (max-width: 1199px) {
+  .split--intro .split__body > * {
+    max-width: 34rem;
+  }
 }
 
 .split__body h2,
 .split__body h3 {
   margin-bottom: var(--space-s);
+  /* Vervangt de handmatige <br> die hier stond: die brak de kop ook af op een
+     smal scherm, waar hij al vanzelf over twee regels viel. */
+  text-wrap: balance;
 }
 
 /* --- Productraster -------------------------------------------------------- */
