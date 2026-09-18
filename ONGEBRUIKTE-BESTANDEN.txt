@@ -163,5 +163,6 @@ assets/img/yin_unryu_meditatie2.jpg
 assets/img/yin_woonkamer.jpg
 assets/img/ying_woonkamer.jpg
 assets/img/zen-cirkel.png
+assets/img/zen-cirkel.webp
 assets/img/zendo.jpg
 yin_interieur.jpg

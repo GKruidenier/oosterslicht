@@ -714,39 +714,23 @@ p:last-child {
   height: 13px;
 }
 
-/* --- Roterend zegel ------------------------------------------------------- */
+/* --- Woordmerk in de hero ------------------------------------------------- */
 
-.seal {
-  position: relative;
-  width: clamp(6.5rem, 9vw, 8.5rem);
-  aspect-ratio: 1;
-  flex: none;
-  display: grid;
-  place-items: center;
+/* Hier stond de component voor het zegel: een ring met tekst eromheen en de
+   losse ensō in het midden. Die is vervallen — het echte logo doet hetzelfde
+   werk in één beeld, en twee merktekens boven elkaar is er één te veel. */
+
+/* De maat staat op de hoogte en niet op de breedte: het woordmerk is ruim vijf
+   keer zo breed als hoog, dus een breedte in vw laat de letters op een groot
+   scherm uit hun verband groeien. Op deze hoogte staat hij een slag boven de
+   1,9rem van de koptekst — genoeg om niet als tweede kopregel te lezen, klein
+   genoeg om de kop zijn eigen aanloop te laten houden. */
+.hero__logo {
+  display: block;
+  width: auto;
+  height: clamp(1.75rem, 4.5vw, 2.5rem);
+  margin-bottom: clamp(1.25rem, 4vw, 2rem);
 }
-
-/* Het zegel stond permanent te draaien. Op een pagina die rust belooft is een
-   eindeloos bewegend element in de ooghoek het onrustigste wat er kan staan,
-   en het zette de onderste woorden steeds op hun kop. Nu staat het stil. */
-.seal__ring {
-  position: absolute;
-  inset: 0;
-}
-
-.seal__ring text {
-  font-family: var(--font-body);
-  font-size: 8.2px;
-  font-weight: 500;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  fill: var(--c-muted);
-}
-
-.seal__mark {
-  width: 34%;
-  opacity: 0.85;
-}
-
 
 /* --- Hero ----------------------------------------------------------------- */
 
@@ -824,20 +808,15 @@ p:last-child {
   }
 
   /* Kleiner en dichter op de kop dan op de telefoon: op een breed maar laag
-     scherm duwde het zegel de kop anders helemaal onder de vouw. */
-  .hero .seal {
-    width: 4.5rem;
+     scherm duwde het merkteken de kop anders helemaal onder de vouw. */
+  .hero__logo {
+    height: 1.8rem;
     margin-bottom: 1rem;
   }
 }
 
 .hero__wrap {
   padding-bottom: clamp(2.5rem, 8vw, 4rem);
-}
-
-.hero .seal {
-  width: clamp(5rem, 16vw, 6.5rem);
-  margin-bottom: clamp(1.25rem, 4vw, 2rem);
 }
 
 /* De maat staat op de regels en niet op het hele blok: op het blok zou hij ook
@@ -951,12 +930,9 @@ p:last-child {
     padding-block: clamp(2rem, 3.5vw, 3rem) clamp(2.5rem, 5vw, 5rem);
   }
 
-  .hero .seal {
-    position: absolute;
-    top: clamp(2rem, 3.5vw, 3rem);
-    left: var(--gutter);
-    width: clamp(5.5rem, 6vw, 7rem);
-    margin-bottom: 0;
+  .hero__logo {
+    height: clamp(2.1rem, 2.6vw, 3rem);
+    margin-bottom: clamp(1rem, 1.6vw, 1.5rem);
   }
 }
 
@@ -984,12 +960,6 @@ p:last-child {
    De gewone --c-wood-rand haalt hier 2,95. */
 .hero .btn--ghost {
   border-color: var(--c-wood-deep);
-}
-
-/* De tekst in de ring is klein (circa 9px) en heeft dus 4,5:1 nodig; met
-   --c-muted bleef hij tegen de foto steken op 4,35. */
-.seal__ring text {
-  fill: var(--c-ink-soft);
 }
 
 .hero__text {
@@ -1171,15 +1141,44 @@ p:last-child {
   background: var(--c-bg-alt);
 }
 
+/* Elke kaart heeft hetzelfde staande kader, en bijna elke foto heeft een
+   andere verhouding dan dat kader — er gaat dus altijd iets af. Welk deel je
+   wegsnijdt staat in --crop; het midden is het uitgangspunt. De kaders zelf
+   blijven overal even groot, alleen het venster op de foto verschuift.
+
+   transform-origin volgt --crop: bij het opzoomen op hover schaalt het beeld
+   anders vanuit het midden, en kruipt precies de rand die je wilde houden
+   alsnog uit beeld. */
 .card__media img {
   width: 100%;
   aspect-ratio: 3 / 4;
   object-fit: cover;
+  object-position: var(--crop, 50% 50%);
+  transform-origin: var(--crop, 50% 50%);
   transition: transform var(--dur-slow) var(--ease-out);
 }
 
 .card:hover .card__media img {
   transform: scale(1.035);
+}
+
+/* Een staande foto in een minder staand kader: er gaat verticaal iets af.
+   Hiermee blijft de bovenrand heel en valt alleen de onderkant weg — voor een
+   foto die haar onderwerp bovenin heeft, zoals hangende lampen. */
+.card__media--top {
+  --crop: 50% 0;
+}
+
+/* Een liggende foto in een staand kader: nu gaat er juist links en rechts wat
+   af, en dat treft een lamp die niet in het midden van de foto staat.
+
+   De 3,5% is nagerekend, niet geschat. Het kader is 3:4 en de foto 3:2, dus de
+   foto is na het schalen precies twee keer zo breed als het kader: je ziet er
+   de helft van, en het midden van dat venster ligt op 0,25 + 0,5 × --crop van
+   de foto. De lamp staat op 0,267 — vandaar 3,5% en niet 0. Helemaal links
+   uitlijnen zou hem een haartje links van het midden laten staan. */
+.card__media--left {
+  --crop: 3.5% 50%;
 }
 
 /* Uitsnede-foto's staan op transparant: die niet bijsnijden maar tonen */
@@ -2683,7 +2682,6 @@ p:last-child {
 @media print {
   .site-header,
   .nav-toggle,
-  .seal,
   .skip-link {
     display: none;
   }
