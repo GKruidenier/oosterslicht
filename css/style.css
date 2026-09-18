@@ -2743,13 +2743,6 @@ p:last-child {
   margin: 0 0 0.4rem;
 }
 
-.wheel-block__text {
-  font-size: var(--fs-small);
-  line-height: 1.65;
-  color: var(--c-muted);
-  margin: 0;
-}
-
 .wheel {
   position: relative;
   display: grid;
