@@ -476,16 +476,18 @@ p:last-child {
   color: var(--c-ink);
 }
 
-/* Hogere specificiteit dan .btn, dat verderop in dit bestand staat en
-   anders display:inline-flex zou terugzetten. */
-.site-header .site-header__cta {
-  display: none;
-}
+/* De knop stond hiernaast in de koptekst en heette "Bestellen", met daarnaast
+   een menu-item "Contact" dat naar dezelfde pagina ging. Twee ingangen naar
+   een adres. De knop heet nu Contact en het menu-item is vervallen.
 
-@media (min-width: 1100px) {
-  .site-header .site-header__cta {
-    display: inline-flex;
-  }
+   Daardoor staat de knop binnen <nav>: alleen daar komt hij op een telefoon
+   mee in het uitklapmenu. Stond hij ernaast, zoals eerst, dan was hij onder
+   1100px verborgen en was contact vanuit de koptekst niet meer te bereiken —
+   precies wat het samenvoegen niet mag kosten. */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 1.5vw, 1rem);
 }
 
 /* Mobiel menu */
@@ -564,6 +566,19 @@ p:last-child {
   .nav__link[aria-current='page'] {
     color: var(--c-wood-deep);
   }
+
+  /* In het uitklapmenu is de knop een regel als alle andere, alleen met een
+     rand eromheen: over de volle breedte en onder de scheidslijn van het
+     laatste menu-item. */
+  .nav {
+    display: block;
+  }
+
+  .site-header__cta {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-m);
+  }
 }
 
 @media (min-width: 980px) {
@@ -571,8 +586,19 @@ p:last-child {
     display: none;
   }
 
+  /* De menu-items stonden midden in de balk toen de knop nog een los element
+     naast <nav> was: de koptekst verdeelde de ruimte over logo, menu en knop.
+     Nu de knop binnen <nav> hangt, zou het menu met de knop mee naar rechts
+     schuiven. Daarom rekt <nav> over de vrije ruimte en duwen de automatische
+     marges de lijst terug naar het midden tussen het logo en de knop —
+     dezelfde plek als eerst. */
   .nav {
-    display: block !important;
+    display: flex !important;
+    flex: 1;
+  }
+
+  .nav__list {
+    margin-inline: auto;
   }
 }
 
