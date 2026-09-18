@@ -11,13 +11,13 @@
 <link rel="preload" href="assets/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.classList.add('js')</script>
-<link rel="stylesheet" href="css/style.css?v=48">
+<link rel="stylesheet" href="css/style.css?v=53">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OostersLicht">
 <meta property="og:title" content="Het maakproces — OostersLicht">
 <meta property="og:description" content="Over de maker, het ambacht en de materialen.">
 <meta property="og:image" content="assets/img/werkplaats.webp">
-<script src="js/site.js?v=36" defer></script>
+<script src="js/site.js?v=37" defer></script>
 </head>
 <body>
 
@@ -63,7 +63,7 @@
             OostersLicht is de combinatie van vier interesses: de oosterse cultuur,
             licht, meditatie en ambacht. Jelle Kruidenier is afgestudeerd in de Chinese
             taal en cultuur, rondde de meubelmakersvakschool af en is altijd geboeid
-            geweest door licht; in OostersLicht komen die lijnen samen.
+            geweest door licht.
           </p>
           <p class="page-head__text">
             Elke lamp wordt in nauw overleg gemaakt, zodat hij precies aansluit bij jouw
@@ -137,7 +137,7 @@
           <h2>Traditioneel papier uit Japan</h2>
           <p class="lead">
             OostersLicht gebruikt authentiek Japans papier (washi), dat rechtstreeks in
-            Japan wordt besteld en gemaakt. De basis is kozo-papier (kozogami), van de
+            Japan wordt besteld en gemaakt. De basis is kozo washi, van de
             bast van de moerbeiboom. Dit stevige papier werd in Japan van oudsher
             gebruikt voor scheidingswanden en vensters (shoji) — en dat gebeurt vandaag
             nog steeds.
@@ -149,7 +149,19 @@
             manillahennep-vezels, iets geliger van kleur en daarom kinwashi ofwel
             &ldquo;goudpapier&rdquo; genoemd.
           </p>
-        </div>
+
+        <!-- Met het houtblok is destijds ook de enige verwijzing naar de
+             materialen verdwenen. De zes houtsoorten staan er nog gewoon, in
+             het wiel bij de collectie; deze regel wijst er weer heen. De
+             slotknop hieronder gaat naar de collectie als geheel. -->
+        <p class="materialen-link">
+          <a class="link-line" href="lampencollectie.html#materialen">
+            Alle hout- en papiersoorten
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12 12 4M12 4H5.5M12 4v6.5"/></svg>
+          </a>
+        </p>
+      </div>
+
         <!-- Hier stond een foto van drogende kozo-bast. De film laat hetzelfde
              zien en meer: van bast tot vel, in beweging. youtube-nocookie zet
              geen volgcookie voordat er gespeeld wordt, en loading="lazy" haalt
@@ -174,44 +186,35 @@
               Film van Unesco.
             </figcaption>
           </figure>
+
+          <h3 class="visueel-verborgen">De drie papiersoorten</h3>
+          <div class="swatches" data-reveal>
+            <figure class="swatch" data-omschrijving="Wit en egaal, van moerbeibast.">
+              <button class="swatch__knop" type="button" data-monster>
+                <img src="assets/img/traditioneel_wit_moerbei_kozo_2.webp" alt="Kozo washi: wit, egaal papier van moerbeibast" width="1588" height="1588" loading="lazy">
+                <span class="swatch__loep" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="4.5"></circle><path d="M10.5 10.5 14.5 14.5M7 5v4M5 7h4"></path></svg></span>
+              </button>
+              <figcaption>Kozo washi</figcaption>
+            </figure>
+            <figure class="swatch" data-omschrijving="Lange vezels als wolken door het vel.">
+              <button class="swatch__knop" type="button" data-monster>
+                <img src="assets/img/unryu_moerbei_kozo_papier.webp" alt="Unryu kozo: papier met lange zichtbare vezels" width="1588" height="1588" loading="lazy">
+                <span class="swatch__loep" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="4.5"></circle><path d="M10.5 10.5 14.5 14.5M7 5v4M5 7h4"></path></svg></span>
+              </button>
+              <figcaption>Unryu kozo</figcaption>
+            </figure>
+            <figure class="swatch" data-omschrijving="Met manillahennep, iets geliger van kleur.">
+              <button class="swatch__knop" type="button" data-monster>
+                <img src="assets/img/kinwashi_kozo_washi.webp" alt="Kinwashi: kozo-papier met manillahennep-vezels" width="1588" height="1588" loading="lazy">
+                <span class="swatch__loep" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="4.5"></circle><path d="M10.5 10.5 14.5 14.5M7 5v4M5 7h4"></path></svg></span>
+              </button>
+              <figcaption>Kinwashi</figcaption>
+            </figure>
+          </div>
+
         </div>
       </div>
 
-      <h3 class="visueel-verborgen">De drie papiersoorten</h3>
-      <div class="swatches" data-reveal>
-        <figure class="swatch">
-          <button class="swatch__knop" type="button" data-monster>
-            <img src="assets/img/traditioneel_wit_moerbei_kozo_2.webp" alt="Kozogami: wit, egaal kozo-papier" width="1588" height="1588" loading="lazy">
-            <span class="swatch__loep" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="4.5"></circle><path d="M10.5 10.5 14.5 14.5M7 5v4M5 7h4"></path></svg></span>
-          </button>
-          <figcaption>Kozogami<small>Wit en egaal, van moerbeibast.</small></figcaption>
-        </figure>
-        <figure class="swatch">
-          <button class="swatch__knop" type="button" data-monster>
-            <img src="assets/img/unryu_moerbei_kozo_papier.webp" alt="Unryu kozo: papier met lange zichtbare vezels" width="1588" height="1588" loading="lazy">
-            <span class="swatch__loep" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="4.5"></circle><path d="M10.5 10.5 14.5 14.5M7 5v4M5 7h4"></path></svg></span>
-          </button>
-          <figcaption>Unryu kozo<small>Lange vezels als wolken door het vel.</small></figcaption>
-        </figure>
-        <figure class="swatch">
-          <button class="swatch__knop" type="button" data-monster>
-            <img src="assets/img/kinwashi_kozo_washi.webp" alt="Kinwashi: kozo-papier met manillahennep-vezels" width="1588" height="1588" loading="lazy">
-            <span class="swatch__loep" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="4.5"></circle><path d="M10.5 10.5 14.5 14.5M7 5v4M5 7h4"></path></svg></span>
-          </button>
-          <figcaption>Kinwashi<small>Met manillahennep, iets geliger van kleur.</small></figcaption>
-        </figure>
-      </div>
-
-      <!-- Met het houtblok is destijds ook de enige verwijzing naar de
-           materialen verdwenen. De zes houtsoorten staan er nog gewoon, in
-           het wiel bij de collectie; deze regel wijst er weer heen. De
-           slotknop hieronder gaat naar de collectie als geheel. -->
-      <p class="materialen-link">
-        <a class="link-line" href="lampencollectie.html#materialen">
-          Alle hout- en papiersoorten
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12 12 4M12 4H5.5M12 4v6.5"/></svg>
-        </a>
-      </p>
     </div>
   </section>
 

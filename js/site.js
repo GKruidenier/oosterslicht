@@ -218,14 +218,14 @@
       var caption = knop.closest('figure').querySelector('figcaption');
       if (!foto || !caption) return;
 
-      var klein = caption.querySelector('small');
-      var naam = caption.firstChild ? caption.firstChild.textContent.trim() : '';
+      var figuur = knop.closest('figure');
+      var naam = caption.textContent.trim();
 
       lightbox.openInfo({
         src: foto.currentSrc || foto.src,
         alt: 'Close-up van ' + naam,
         titel: naam,
-        desc: klein ? klein.textContent.trim() : ''
+        desc: figuur.dataset.omschrijving || ''
       });
     });
   });
