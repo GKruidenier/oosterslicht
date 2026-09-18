@@ -60,8 +60,9 @@
           <h1 class="page-head__title">Neem contact op<br><span class="accent">met Jelle</span></h1>
         </div>
         <p class="page-head__text">
-          Enthousiast over een lamp, een eigen idee, of een andere vraag? Vul het
-          formulier in. Bellen tijdens kantooruren kan ook.
+          Wil je een lamp bestellen, heb je een eigen idee of een andere vraag? Vul
+          het formulier in — Jelle leest en beantwoordt het zelf. Bellen kan ook,
+          tijdens kantooruren.
         </p>
       </div>
     </div>
@@ -80,7 +81,7 @@
             <!-- contact.php stuurt hierheen terug als het versturen mislukt.
                  Standaard verborgen; js/site.js toont hem bij ?fout=1. -->
             <p class="form-notice" id="form-fout" role="alert" hidden>
-              Het versturen is helaas niet gelukt. Probeer het zo nog eens, of mail
+              Het versturen is niet gelukt. Probeer het opnieuw, of mail
               je bericht rechtstreeks naar
               <a href="mailto:info@oosterslicht.nl">info@oosterslicht.nl</a>.
             </p>
@@ -90,7 +91,7 @@
               <div class="choices">
                 <label class="choice">
                   <input type="radio" name="onderwerp-type" value="bestellen" checked>
-                  <span class="choice__text">Ik wil een of meer lampen bestellen — uit de collectie en/of op maat</span>
+                  <span class="choice__text">Ik wil een of meer lampen bestellen — uit de collectie of op maat</span>
                 </label>
                 <label class="choice">
                   <input type="radio" name="onderwerp-type" value="vraag">
@@ -160,7 +161,7 @@
                       <option>Eiken</option>
                       <option>In overleg</option>
                     </select>
-                    <span class="field__hint">Alleen de soorten waarin deze lamp gemaakt wordt. Wil je een andere, kies dan &ldquo;in overleg&rdquo;.</span>
+                    <span class="field__hint">Hier staan alleen de houtsoorten waarin deze lamp gemaakt wordt. Wil je een andere, kies dan &ldquo;In overleg&rdquo;.</span>
                   </div>
 
                   <div class="field" data-veld="papier">
@@ -187,24 +188,25 @@
                   </div>
 
                   <div class="field" data-veld="tape">
-                    <label for="tape">Kleur van de tape <span class="req" aria-hidden="true">*</span></label>
+                    <label for="tape">Kleurstelling <span class="req" aria-hidden="true">*</span></label>
                     <select id="tape" name="tape[1]" data-required>
                       <option>Primaire kleuren (rood, geel, blauw)</option>
                       <option>Grijstinten</option>
                     </select>
+                    <span class="field__hint">De kleur van de banen op het papier.</span>
                   </div>
 
                   <div class="field" data-veld="detaillering">
-                    <label for="detaillering">Eventuele custom detaillering</label>
+                    <label for="detaillering">Wensen voor de detaillering <span class="field__optioneel">optioneel</span></label>
                     <textarea id="detaillering" name="detaillering[1]" rows="3" placeholder="Bijvoorbeeld een afwijkende maat of een specifiek motief"></textarea>
-                    <span class="field__hint">Houtsoort, papier en detaillering stemmen we af in overleg met de maker.</span>
+                    <span class="field__hint">Houtsoort, papier en detaillering neemt Jelle daarna met je door.</span>
                   </div>
 
                   <div class="field" data-veld="beschrijving" hidden>
                     <label for="beschrijving">Beschrijf je idee <span class="req" aria-hidden="true">*</span></label>
                     <textarea id="beschrijving" name="beschrijving[1]" rows="5" data-required
                               placeholder="Bijvoorbeeld: een hanglamp boven een eettafel van twee meter, in donker hout, met een warm en gedempt licht"></textarea>
-                    <span class="field__hint">Een paar zinnen is genoeg. We nemen contact op om vorm, hout, papier en detaillering samen door te nemen.</span>
+                    <span class="field__hint">Een paar zinnen is genoeg. Jelle neemt daarna contact op om vorm, hout, papier en detaillering door te nemen.</span>
                   </div>
 
                   <div class="field" data-veld="bestanden" hidden>
@@ -244,7 +246,7 @@
                    dan is een onderwerpregel dubbelop. js/site.js verbergt hem daar.
                    Zonder JavaScript blijft hij gewoon staan, en hij is optioneel. -->
               <div class="field" data-alleen-vraag style="margin-top:var(--space-s)">
-                <label for="onderwerp">Onderwerp <span class="req" aria-hidden="true">*</span></label>
+                <label for="onderwerp">Onderwerp van je vraag <span class="req" aria-hidden="true">*</span></label>
                 <input id="onderwerp" name="onderwerp" type="text" required>
               </div>
 
@@ -263,7 +265,7 @@
             </fieldset>
 
             <button class="btn btn--solid" type="submit">
-              Verzenden
+              Verstuur je bericht
               <svg class="btn__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12 12 4M12 4H5.5M12 4v6.5"/></svg>
             </button>
 
@@ -277,7 +279,7 @@
           <h2 class="site-footer__title" style="color:var(--c-ink)">Direct contact</h2>
           <dl>
             <dt>Telefoon</dt>
-            <dd><a href="tel:+31612345678">+31 (0) 6 12345678</a></dd>
+            <dd><a href="tel:+31636058978">06 36 05 89 78</a></dd>
             <dt>E-mail</dt>
             <dd><a href="mailto:info@oosterslicht.nl">info@oosterslicht.nl</a></dd>
             <dt>Werkplaats</dt>
@@ -331,7 +333,7 @@
       <div>
         <h2 class="site-footer__title">Contact</h2>
         <div class="site-footer__contact">
-          <p><a href="tel:+31612345678">+31 (0) 6 12345678</a></p>
+          <p><a href="tel:+31636058978">06 36 05 89 78</a></p>
           <p><a href="mailto:info@oosterslicht.nl">info@oosterslicht.nl</a></p>
           <p>Driebergen-Rijsenburg</p>
         </div>

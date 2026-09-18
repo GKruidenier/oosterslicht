@@ -98,7 +98,7 @@ $labels = [
     'houtsoort'    => 'Houtsoort',
     'papier'       => 'Japans papier',
     'blad'         => 'Blad in het papier',
-    'tape'         => 'Kleur van de tape',
+    'tape'         => 'Kleurstelling',
     'detaillering' => 'Detaillering',
     'beschrijving' => 'Het idee',
 ];
@@ -359,6 +359,7 @@ if ($BEVESTIGING && $verzonden) {
     $bregels[] = $samenvatting;
     $bregels[] = '';
     $bregels[] = 'Hartelijke groet,';
+    $bregels[] = 'Jelle Kruidenier';
     $bregels[] = 'OostersLicht';
 
     $btitel = $bestelling
