@@ -11,11 +11,11 @@
 
 // Waar de aanvragen heen gaan. Hier mag elk adres staan, ook een persoonlijk
 // adres bij Gmail of Outlook; de mail wordt gewoon daarheen bezorgd.
-$ONTVANGER  = 'info@oosterslicht.nl';
+$ONTVANGER  = 'giadakruidenier@gmail.com';
 
 // Namens wie de server mailt. Dit MOET een adres op het eigen domein zijn.
 // Hetzelfde adres als hierboven gebruiken mag en is de eenvoudigste keuze.
-$AFZENDER   = 'info@oosterslicht.nl';
+$AFZENDER   = 'noreply@oosterslicht.nl';
 
 /*
  * Waarom de afzender geen privéadres mag zijn: de server van KeurigOnline mag
@@ -199,7 +199,11 @@ if ($onderwerp !== '') {
 }
 $regels[] = '';
 
-$lampen = $_POST['lamp'] ?? [];
+// Alleen bij een bestelling. Bij een vraag staat het lampblok in de pagina
+// verborgen, maar de velden zitten nog wel in het formulier en worden dus
+// meegestuurd — inclusief de standaard "1" bij Aantal. Zonder deze controle
+// komt er bij elke vraag een zinloos "Lamp 1" in de mail te staan.
+$lampen = $bestelling ? ($_POST['lamp'] ?? []) : [];
 if (is_array($lampen) && $lampen) {
     $n = 0;
     foreach (array_keys($lampen) as $i) {
