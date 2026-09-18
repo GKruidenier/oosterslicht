@@ -3069,6 +3069,17 @@ p:last-child {
   color: var(--c-ds-red);
 }
 
+/* Tegenhanger van de rode ster: bij een veld dat wél mag leegblijven staat
+   dat er gewoon, in plaats van de bezoeker te laten raden. */
+.field__optioneel {
+  margin-inline-start: 0.4em;
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+
 .field input,
 .field textarea,
 .field select {
@@ -3109,6 +3120,34 @@ p:last-child {
    over de hele kolom uit en suggereert het een lang antwoord. */
 .field input[type='number'] {
   max-width: 7rem;
+}
+
+/* Een bestandsveld heeft geen tekst om te vullen, dus hoort het niet de hoogte
+   van een invoerveld te hebben. De knop die de browser zelf tekent laten we
+   staan — die is bekend en werkt met het toetsenbord — maar hij krijgt wel de
+   kleuren en de maat van de rest van het formulier. */
+.field input[type='file'] {
+  padding: 0.55rem 0.75rem;
+  font-size: var(--fs-small);
+  cursor: pointer;
+}
+
+.field input[type='file']::file-selector-button {
+  margin-inline-end: 0.75rem;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--c-line-control);
+  border-radius: var(--radius-pill);
+  background: var(--c-bg);
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: var(--c-ink);
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease);
+}
+
+.field input[type='file']::file-selector-button:hover {
+  background: var(--c-bg-alt);
 }
 
 .field input:focus,

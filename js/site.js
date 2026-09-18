@@ -474,11 +474,18 @@
                                            blad: ['Geen blad', 'Bamboeblad'] },
       'Tafellamp De Stijl':                { tape: 1, vast: 'effen Japans papier zonder vezels' },
       'Wandlamp De Stijl':               { tape: 1, vast: 'effen Japans papier zonder vezels' },
-      'Lamp op maat':                    { hout: 1, papier: 1, blad: 1, afmeting: 1 }
+
+      /* Bij een volledig nieuw ontwerp valt er nog niets te kiezen: hout,
+         papier, blad en afmeting komen pas ter sprake in het gesprek dat
+         hierna volgt. Daarom alleen een beschrijving en, als iemand die
+         heeft, een schets of foto. Met opmaat gelden ook de ALTIJD-velden
+         niet, op de lampkeuze zelf na. */
+      'Volledig op maat':                { opmaat: true, beschrijving: 1, bestanden: 1 }
     };
 
     // Deze velden gelden altijd, ongeacht de lamp.
     var ALTIJD = { lamp: 1, aantal: 1, detaillering: 1 };
+    var ALTIJD_OPMAAT = { lamp: 1 };
 
     var syncVelden = function (block) {
       if (!block) return;
@@ -489,13 +496,14 @@
         ? select.options[select.selectedIndex].text : '');
       var regels = LAMPVELDEN[gekozen] || null;
       var bestelt = orderBlock ? !orderBlock.hidden : true;
+      var altijd = (regels && regels.opmaat) ? ALTIJD_OPMAAT : ALTIJD;
 
       block.querySelectorAll('[data-veld]').forEach(function (veld) {
         var sleutel = veld.getAttribute('data-veld');
         var regel = regels ? regels[sleutel] : null;
         // Zonder gekozen lamp alleen de vaste velden tonen; dat is rustiger
         // dan alles tonen en daarna de helft weghalen.
-        var toon = !!ALTIJD[sleutel] || !!regel;
+        var toon = !!altijd[sleutel] || !!regel;
         veld.hidden = !toon;
 
         // Opties binnen het veld beperken wanneer de regel een lijst is.
@@ -666,7 +674,13 @@
             el.id = newId;
             if (label) label.setAttribute('for', newId);
           }
-          if (el.name) el.name = el.name.replace(/(\[\d*\])?$/, '[' + count + ']');
+          if (el.name) {
+            // bestanden[1][] moet bestanden[2][] worden en niet bestanden[1][2]:
+            // de haakjes aan het eind horen bij het meervoud, niet bij de teller.
+            el.name = /\[\]$/.test(el.name)
+              ? el.name.replace(/\[\d*\]\[\]$/, '[' + count + '][]')
+              : el.name.replace(/(\[\d*\])?$/, '[' + count + ']');
+          }
         });
 
         var remove = clone.querySelector('[data-remove-lamp]');

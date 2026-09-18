@@ -11,13 +11,13 @@
 <link rel="preload" href="assets/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.classList.add('js')</script>
-<link rel="stylesheet" href="css/style.css?v=83">
+<link rel="stylesheet" href="css/style.css?v=85">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OostersLicht">
 <meta property="og:title" content="Contact &amp; bestellen — OostersLicht">
 <meta property="og:description" content="Een lamp bestellen of een vraag stellen.">
 <meta property="og:image" content="assets/img/werkplaats.webp">
-<script src="js/site.js?v=38" defer></script>
+<script src="js/site.js?v=39" defer></script>
 </head>
 <body>
 
@@ -75,7 +75,7 @@
           <!-- contact.php staat op je eigen hosting en mailt de inzending door.
                Er komt geen externe dienst aan te pas. Let op: dit werkt alleen op
                een server die PHP draait, niet bij het lokaal openen van de site. -->
-          <form class="form" action="contact.php" method="post" data-form>
+          <form class="form" action="contact.php" method="post" enctype="multipart/form-data" data-form>
 
             <!-- contact.php stuurt hierheen terug als het versturen mislukt.
                  Standaard verborgen; js/site.js toont hem bij ?fout=1. -->
@@ -126,7 +126,7 @@
                         <option>Wandlamp De Stijl</option>
                       </optgroup>
                       <optgroup label="Anders">
-                        <option>Lamp op maat</option>
+                        <option>Volledig op maat</option>
                       </optgroup>
                     </select>
                   </div>
@@ -198,7 +198,21 @@
                   <div class="field" data-veld="detaillering">
                     <label for="detaillering">Eventuele custom detaillering</label>
                     <textarea id="detaillering" name="detaillering[1]" rows="3" placeholder="Bijvoorbeeld een afwijkende maat of een specifiek motief"></textarea>
-                    <span class="field__hint">Bij een lamp op maat worden vorm en detaillering met je afgestemd in overleg met de maker.</span>
+                    <span class="field__hint">Houtsoort, papier en detaillering stemmen we af in overleg met de maker.</span>
+                  </div>
+
+                  <div class="field" data-veld="beschrijving" hidden>
+                    <label for="beschrijving">Beschrijf je idee <span class="req" aria-hidden="true">*</span></label>
+                    <textarea id="beschrijving" name="beschrijving[1]" rows="5" data-required
+                              placeholder="Bijvoorbeeld: een hanglamp boven een eettafel van twee meter, in donker hout, met een warm en gedempt licht"></textarea>
+                    <span class="field__hint">Een paar zinnen is genoeg. We nemen contact op om vorm, hout, papier en detaillering samen door te nemen.</span>
+                  </div>
+
+                  <div class="field" data-veld="bestanden" hidden>
+                    <label for="bestanden">Schets of foto <span class="field__optioneel">optioneel</span></label>
+                    <input id="bestanden" name="bestanden[1][]" type="file" multiple
+                           accept="image/jpeg,image/png,image/webp,image/heic,application/pdf">
+                    <span class="field__hint">Bijvoorbeeld een schets van je idee of een foto van de ruimte. JPG, PNG, WEBP, HEIC of PDF, maximaal 5 MB per bestand en vijf bestanden in totaal.</span>
                   </div>
                 </div>
               </div>
