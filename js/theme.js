@@ -9,7 +9,11 @@
    vaststaat voordat de eerste regel tekst getekend wordt.
    ========================================================================== */
 
-var PALET   = 'washi';       /* washi · sumi · indigo · kersen · mos · destijl */
+/* 'auto' volgt de voorkeur van het apparaat: washi overdag, sumi zodra het
+   besturingssysteem op donker staat. Dat is geen toevallige koppeling — sumi
+   is de kamer waarvoor deze lampen gemaakt zijn. Een vaste naam invullen
+   (washi, sumi, …) zet de site onvoorwaardelijk op dat palet. */
+var PALET   = 'auto';        /* auto · washi · sumi · indigo · kersen · mos · destijl */
 var LETTERS = 'mincho';    /* garamond · mincho */
 
 
@@ -40,9 +44,20 @@ var LETTERSETS = [
    verdwijnt zodra je de browser sluit, of via de knop in het lab.
    De twee regels bovenaan blijven wat de site standaard is. */
 
+/* Welke paletten donker zijn. Dit bepaalt ook wat de browser zelf tekent:
+   schuifbalken, de cursor in een invoerveld, de standaard formulierknoppen.
+   Zonder color-scheme blijven die lichtgrijs op een zwarte pagina staan. */
+var DONKERE_PALETTEN = ['sumi'];
+
 (function () {
   var palet = PALET;
   var letters = LETTERS;
+  var gekozen = false;               /* heeft de bezoeker zelf iets gekozen? */
+
+  var wilDonker = function () {
+    return window.matchMedia &&
+           window.matchMedia('(prefers-color-scheme: dark)').matches;
+  };
 
   try {
     var vraag = new URLSearchParams(window.location.search);
@@ -52,12 +67,29 @@ var LETTERSETS = [
       sessionStorage.removeItem('ol-palet');
       sessionStorage.removeItem('ol-letters');
     }
-    palet = sessionStorage.getItem('ol-palet') || palet;
+    var bewaard = sessionStorage.getItem('ol-palet');
+    if (bewaard) { palet = bewaard; gekozen = true; }
     letters = sessionStorage.getItem('ol-letters') || letters;
   } catch (e) {
     /* Privémodus zonder opslag: dan gewoon de waarden uit dit bestand. */
   }
 
-  document.documentElement.dataset.palet = palet;
+  var zet = function (naam) {
+    var echt = naam === 'auto' ? (wilDonker() ? 'sumi' : 'washi') : naam;
+    document.documentElement.dataset.palet = echt;
+    document.documentElement.style.colorScheme =
+      DONKERE_PALETTEN.indexOf(echt) === -1 ? 'light' : 'dark';
+  };
+
+  zet(palet);
   document.documentElement.dataset.letters = letters;
+
+  /* Iemand die 's avonds zijn telefoon op donker zet, hoeft de pagina niet te
+     verversen. Wie zelf een palet koos houdt die keuze. */
+  if (!gekozen && palet === 'auto' && window.matchMedia) {
+    var donkerVraag = window.matchMedia('(prefers-color-scheme: dark)');
+    var luister = function () { zet('auto'); };
+    if (donkerVraag.addEventListener) donkerVraag.addEventListener('change', luister);
+    else if (donkerVraag.addListener) donkerVraag.addListener(luister);
+  }
 })();
