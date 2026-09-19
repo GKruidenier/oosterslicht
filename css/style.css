@@ -2879,6 +2879,130 @@ p:last-child {
   flex: 1;
 }
 
+/* --- Een soort aanwijzen: het staaltje bij de muis ------------------------ */
+
+/* In de specificaties staan de hout- en papiersoorten als woorden. Een naam
+   als "kinwashi" of "iep" zegt niets als je de soort niet kent, en de
+   close-ups staan drie pagina's verderop: op het maakproces en in de
+   materiaalwielen bij de collectie. Wie hier staat is aan het kiezen, en die
+   moet de soort kunnen zien zonder de pagina te verlaten.
+
+   Dus een knop die op een woord lijkt. Een dunne lijn eronder in de houtkleur
+   zegt dat er iets te halen valt zonder de zin op te breken; bij aanwijzen
+   wordt de lijn vol en donker. Het is met opzet geen knop-in-een-doosje: dit
+   staat middenin een lopende regel. */
+.staal {
+  font: inherit;
+  color: inherit;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  /* Een echte onderstreping en niet het verloop dat .link-line gebruikt. Daar
+     staat de link op zichzelf; hier staat het woord middenin een zin, en dan
+     hoort de lijn om de staartletters heen te lopen — dat doet skip-ink
+     vanzelf en een achtergrondverloop niet.
+
+     Het scheelt ook een vals alarm: een verloop over de volle breedte leest
+     voor elke contrastmeter als een gevulde achtergrond, en dan lijkt donkere
+     inkt op houtkleur te staan terwijl het gewoon een lijn van één pixel is. */
+  text-decoration: underline;
+  text-decoration-color: var(--c-wood);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  transition: text-decoration-color var(--dur-fast) var(--ease),
+    text-decoration-thickness var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease);
+}
+
+.staal:hover,
+.staal:focus-visible {
+  color: var(--c-wood-deep);
+  text-decoration-color: var(--c-wood-deep);
+  text-decoration-thickness: 2px;
+}
+
+/* Het kaartje zelf. Er is er één op de pagina; hij verhuist naar de soort die
+   je aanwijst in plaats van dat elke naam zijn eigen kaartje krijgt.
+
+   position: fixed omdat hij de muis volgt en niet de pagina; pointer-events
+   uit omdat hij anders onder de cursor schuift en zijn eigen mouseleave
+   veroorzaakt — dan flikkert hij. */
+.staalkaart {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-menu);
+  width: 10.5rem;
+  pointer-events: none;
+  background: var(--c-card);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius);
+  /* Verschoven en zacht: een kaartje dat boven de pagina hangt heeft een
+     richting nodig, anders leest de schaduw als een gloed. */
+  box-shadow: 0 8px 24px -8px rgba(28, 26, 23, 0.28),
+    0 2px 6px -2px rgba(28, 26, 23, 0.18);
+  overflow: hidden;
+  opacity: 0;
+  translate: 0 4px;
+  transition: opacity 160ms var(--ease-out), translate 160ms var(--ease-out);
+}
+
+.staalkaart[data-open] {
+  opacity: 1;
+  translate: none;
+}
+
+.staalkaart__foto {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  /* De foto is er pas na het ophalen. Zonder deze vulling springt het kaartje
+     open op een wit vlak en daarna pas op hout. */
+  background: var(--c-bg-deep);
+}
+
+/* display: block is hier geen opsmuk maar de reden dat de opvulling werkt. Als
+   inline-span begrenst deze laag haar blokkende kinderen niet, en dan zetten
+   de naam en de omschrijving zich op de breedte van het kaartje zelf: de tekst
+   liep tot twee pixels van de rand. */
+.staalkaart__tekst {
+  display: block;
+  padding: 0.5rem 0.7rem 0.65rem;
+}
+
+.staalkaart__naam {
+  display: block;
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: var(--c-ink);
+  line-height: 1.25;
+}
+
+.staalkaart__desc {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: var(--fs-label);
+  line-height: 1.4;
+  color: var(--c-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .staalkaart {
+    translate: none;
+    transition: opacity 120ms linear;
+  }
+}
+
+/* Zonder muis is er niets om te volgen: daar opent een tik de close-up die
+   het maakproces ook gebruikt, en het kaartje blijft weg. */
+@media (hover: none) {
+  .staalkaart {
+    display: none;
+  }
+}
+
 .product__actions {
   margin-top: var(--space-m);
   display: flex;

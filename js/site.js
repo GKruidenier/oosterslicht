@@ -230,6 +230,168 @@
     });
   });
 
+  /* --- Hout- en papiersoort aanwijzen -------------------------------------- */
+
+  /* In de specificaties op een productpagina staan de soorten als woorden.
+     "Kinwashi" of "iep" zegt niets als je ze niet kent, en de close-ups staan
+     elders: op het maakproces en in de materiaalwielen bij de collectie. Wie
+     op een productpagina staat is aan het kiezen, en die moet de soort kunnen
+     zien zonder weg te klikken.
+
+     Eén tabel voor alle negen soorten. De namen en omschrijvingen zijn
+     dezelfde als in de wielen en bij de monsters, zodat er niet op drie
+     plekken een eigen waarheid ontstaat. */
+  var SOORTEN = {
+    esdoorn:  { naam: 'Esdoorn',    desc: 'Licht met een subtiele nerf. Rustig en minimalistisch.',   bron: 'inzet_esdoornhout.webp' },
+    es:       { naam: 'Es',         desc: 'Licht van kleur met een duidelijke, levendige nerf.',      bron: 'inzet_essenhout.webp' },
+    iep:      { naam: 'Iep',        desc: 'Warm lichtbruin met een krachtige, karakteristieke nerf.', bron: 'inzet_iepenhout.webp' },
+    kers:     { naam: 'Kers',       desc: 'Warm roodbruin dat met de tijd verdiept en rijker wordt.', bron: 'inzet_kersenhout.webp' },
+    noten:    { naam: 'Noten',      desc: 'Diep donkerbruin met een golvende tekening.',              bron: 'inzet_notenhout.webp' },
+    eiken:    { naam: 'Eiken',      desc: 'Stevig, met een open en herkenbare nerf.',                 bron: 'inzet_eikenhout.webp' },
+    kozo:     { naam: 'Kozo washi', desc: 'Wit en egaal, van de bast van de moerbeiboom.',            bron: 'traditioneel_wit_moerbei_kozo_2.webp' },
+    unryu:    { naam: 'Unryu kozo', desc: 'Lange vezels die als wolken door het vel lopen.',          bron: 'unryu_moerbei_kozo_papier.webp' },
+    kinwashi: { naam: 'Kinwashi',   desc: 'Met manillahennep, iets geliger van kleur.',               bron: 'kinwashi_kozo_washi.webp' }
+  };
+
+  (function () {
+    var knoppen = [].slice.call(document.querySelectorAll('[data-staal]'));
+    if (!knoppen.length) return;
+
+    /* De originelen lopen tot 269 kB — te zwaar om bij het aanwijzen op te
+       halen, want dan is het kaartje een halve seconde leeg. Er staat dus een
+       uitsnede van 320px klaar per soort; de originelen blijven voor de
+       close-up, waar je ze wél op ware grootte wilt. */
+    function klein(sleutel) { return 'assets/img/staal/' + sleutel + '.webp'; }
+    function groot(sleutel) { return 'assets/img/' + SOORTEN[sleutel].bron; }
+
+    var kaart, foto, naamEl, descEl;
+    var actief = null;
+    var wacht = 0;
+
+    function bouw() {
+      kaart = document.createElement('div');
+      kaart.className = 'staalkaart';
+      /* Het kaartje herhaalt wat de knop al aan een schermlezer vertelt, dus
+         het hoort niet nog een keer in de voorleesvolgorde. */
+      kaart.setAttribute('aria-hidden', 'true');
+      kaart.innerHTML =
+        '<img class="staalkaart__foto" alt="" width="320" height="320" decoding="async">' +
+        '<span class="staalkaart__tekst">' +
+        '<span class="staalkaart__naam"></span>' +
+        '<span class="staalkaart__desc"></span>' +
+        '</span>';
+      document.body.appendChild(kaart);
+      foto = kaart.querySelector('.staalkaart__foto');
+      naamEl = kaart.querySelector('.staalkaart__naam');
+      descEl = kaart.querySelector('.staalkaart__desc');
+    }
+
+    /* Het kaartje mag niet half buiten beeld vallen, dus het klapt om zodra
+       het rechts of onder niet meer past. De 18px is de afstand tot de punt
+       van de muis: dichterbij en de cursor staat er bovenop. */
+    function plaats(x, y) {
+      var m = kaart.getBoundingClientRect();
+      var r = 18;
+      var l = x + r;
+      var t = y + r;
+      if (l + m.width > window.innerWidth - 8) l = x - r - m.width;
+      if (t + m.height > window.innerHeight - 8) t = y - r - m.height;
+      if (l < 8) l = 8;
+      if (t < 8) t = 8;
+      kaart.style.transform = 'translate3d(' + Math.round(l) + 'px,' + Math.round(t) + 'px,0)';
+    }
+
+    /* Onder de knop in plaats van bij de muis: bij toetsenbordbediening is er
+       geen cursor om naast te gaan staan. */
+    function plaatsBijKnop(knop) {
+      var k = knop.getBoundingClientRect();
+      plaats(k.left - 18, k.bottom - 12);
+    }
+
+    function toon(knop, x, y) {
+      var sleutel = knop.dataset.staal;
+      var soort = SOORTEN[sleutel];
+      if (!soort) return;
+      if (!kaart) bouw();
+
+      if (actief !== sleutel) {
+        actief = sleutel;
+        foto.src = klein(sleutel);
+        naamEl.textContent = soort.naam;
+        descEl.textContent = soort.desc;
+      }
+      if (x === null) plaatsBijKnop(knop); else plaats(x, y);
+      kaart.setAttribute('data-open', '');
+    }
+
+    function verberg() {
+      if (kaart) kaart.removeAttribute('data-open');
+    }
+
+    knoppen.forEach(function (knop) {
+      var soort = SOORTEN[knop.dataset.staal];
+      if (!soort) return;
+
+      /* Het kaartje is beeld; de omschrijving moet ook zonder beeld mee. */
+      knop.setAttribute('aria-label', soort.naam + ': ' + soort.desc + ' Bekijk close-up.');
+
+      knop.addEventListener('pointerenter', function (e) {
+        if (e.pointerType !== 'mouse') return;
+        toon(knop, e.clientX, e.clientY);
+      });
+
+      knop.addEventListener('pointermove', function (e) {
+        if (e.pointerType !== 'mouse' || actief !== knop.dataset.staal) return;
+        /* Eén verplaatsing per beeld: pointermove vuurt vaker dan er getekend
+           wordt, en dan staat het kaartje te trillen. */
+        if (wacht) return;
+        var x = e.clientX;
+        var y = e.clientY;
+        wacht = requestAnimationFrame(function () {
+          wacht = 0;
+          plaats(x, y);
+        });
+      });
+
+      knop.addEventListener('pointerleave', verberg);
+      knop.addEventListener('focus', function () { toon(knop, null, null); });
+      knop.addEventListener('blur', verberg);
+
+      /* Aanklikken of aantikken opent dezelfde close-up als de monsters op de
+         maakproces-pagina. Daar is de grote versie op zijn plek, en op een
+         telefoon — waar niets aan te wijzen valt — is dit de enige manier. */
+      knop.addEventListener('click', function () {
+        verberg();
+        lightbox.openInfo({
+          src: groot(knop.dataset.staal),
+          alt: 'Close-up van ' + soort.naam,
+          titel: soort.naam,
+          desc: soort.desc
+        });
+      });
+    });
+
+    window.addEventListener('scroll', verberg, { passive: true });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') verberg();
+    });
+
+    /* De uitsnedes van deze pagina alvast ophalen zodra de browser niets beters
+       te doen heeft. Het zijn er hooguit zeven van rond de 10 kB, en daarmee
+       staat het kaartje bij de eerste aanwijzing meteen goed. */
+    function vooruit() {
+      var gehad = {};
+      knoppen.forEach(function (knop) {
+        var sleutel = knop.dataset.staal;
+        if (gehad[sleutel] || !SOORTEN[sleutel]) return;
+        gehad[sleutel] = 1;
+        new Image().src = klein(sleutel);
+      });
+    }
+    if (window.requestIdleCallback) requestIdleCallback(vooruit, { timeout: 3000 });
+    else setTimeout(vooruit, 1200);
+  })();
+
   /* --- Lampgalerij met materiaalfilter ------------------------------------- */
 
   document.querySelectorAll('[data-lamp-gallery]').forEach(function (gallery) {
