@@ -539,7 +539,10 @@
       var m = /url\(\s*["']?#([^"')\s]+)["']?\s*\)/.exec(segment.style.fill || '');
       if (!m) return null;
       var pattern = wheel.querySelector('#' + CSS.escape(m[1]) + ' image');
-      return pattern ? pattern.getAttribute('href') : null;
+      if (!pattern) return null;
+      return pattern.getAttribute('data-groot') ||
+             pattern.getAttribute('data-href') ||
+             pattern.getAttribute('href');
     };
 
     segments.forEach(function (segment) {
@@ -638,25 +641,26 @@
          staat overal bij, want elke pagina zegt "andere soorten op aanvraag".
 
          Het papier is bij elke Japanse lamp vrij te kiezen uit alle drie. */
-      'Ronde Lamp Yin (vloerlamp)':      { hout: ['Noten', 'In overleg'], papier: 1,
-                                           vast: 'een detaillering van esdoornhout' },
-      'Vierkante Lamp Yang (vloerlamp)': { hout: ['Kers', 'Iep', 'In overleg'], papier: 1,
-                                           vast: 'een detaillering van esdoornhout' },
-      'Hanglamp Kawa (hanglamp)':        { hout: ['Esdoorn', 'In overleg'], papier: 1 },
-      'Lamp Koyo (wandlamp)':            { hout: 1, papier: 1, blad: 1, afmeting: 1 },
-      'Wandlamp Torii (wandlamp)':       { hout: ['Noten', 'In overleg'], papier: 1 },
-      'Tafellamp Take (tafellamp)':      { hout: ['Noten', 'In overleg'], papier: 1,
-                                           blad: ['Geen blad', 'Bamboeblad'],
-                                           standaard: { blad: 'Bamboeblad' } },
-      'Tafellamp De Stijl':                { tape: 1, vast: 'effen Japans papier zonder vezels' },
-      'Wandlamp De Stijl':               { tape: 1, vast: 'effen Japans papier zonder vezels' },
+      'Vloerlamp Yin':      { hout: ['Noten', 'In overleg'], papier: 1,
+                              vast: 'een detaillering van esdoornhout' },
+      'Vloerlamp Yang':     { hout: ['Kers', 'Iep', 'In overleg'], papier: 1,
+                              vast: 'een detaillering van esdoornhout' },
+      'Hanglamp Kawa':      { hout: ['Esdoorn', 'In overleg'], papier: 1 },
+      'Wandlamp Koyo':      { hout: 1, papier: 1, blad: 1, afmeting: 1 },
+      'Wandlamp Torii':     { hout: ['Noten', 'In overleg'], papier: 1 },
+      'Tafellamp Take':     { hout: ['Noten', 'In overleg'], papier: 1,
+                              blad: ['Geen blad', 'Bamboeblad'],
+                              standaard: { blad: 'Bamboeblad' } },
+
+      'Tafellamp De Stijl': { tape: 1, vast: 'effen Japans papier zonder vezels' },
+      'Wandlamp De Stijl':  { tape: 1, vast: 'effen Japans papier zonder vezels' },
 
       /* Bij een volledig nieuw ontwerp valt er nog niets te kiezen: hout,
          papier, blad en afmeting komen pas ter sprake in het gesprek dat
          hierna volgt. Daarom alleen een beschrijving en, als iemand die
          heeft, een schets of foto. Met opmaat gelden ook de ALTIJD-velden
          niet, op de lampkeuze zelf na. */
-      'Volledig op maat':                { opmaat: true, beschrijving: 1, bestanden: 1 }
+      'Volledig op maat':   { opmaat: true, beschrijving: 1, bestanden: 1 }
     };
 
     // Deze velden gelden altijd, ongeacht de lamp.
@@ -724,7 +728,7 @@
             //
             // Uitschakelen erbij, want verborgen is niet hetzelfde als
             // afwezig: een veld in een verborgen blok wordt gewoon meegestuurd.
-            // Zonder dit stond er bij een Ronde Lamp Yin "Afmeting: Standaard"
+            // Zonder dit stond er bij een Vloerlamp Yin "Afmeting: Standaard"
             // en "Blad: Geen blad" in de bestelmail, terwijl die lamp geen van
             // beide kent.
             el.required = false;
@@ -867,8 +871,8 @@
       notice.className = 'notice';
       notice.setAttribute('role', 'status');
       notice.textContent =
-        'Je keuze uit de collectie is alvast ingevuld (' + filled.join(', ') +
-        '). Je kunt alles hieronder nog aanpassen.';
+        'Uw keuze uit de collectie is alvast ingevuld (' + filled.join(', ') +
+        '). U kunt alles hieronder nog aanpassen.';
       form.prepend(notice);
     })();
 
