@@ -1,0 +1,7 @@
+# Serverbestanden moeten LF houden. Windows-regeleindes laten een \r achter
+# aan het eind van elke regel, en Apache leest dat mee als onderdeel van de
+# laatste vlag: [R=301,L,NE] wordt dan [R=301,L,NE\r] en de regel faalt.
+.htaccess   text eol=lf
+.user.ini   text eol=lf
+robots.txt  text eol=lf
+*.sh        text eol=lf

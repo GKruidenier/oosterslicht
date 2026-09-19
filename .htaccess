@@ -1,0 +1,165 @@
+# ==========================================================================
+# OostersLicht — serverinstellingen en de verhuizing van de oude site
+# ==========================================================================
+#
+# Dit bestand doet vier dingen, in deze volgorde:
+#
+#   1. het domein vastzetten op één adres (https + www)
+#   2. elke URL van de oude site uit 2016 doorsturen naar de nieuwe pagina
+#   3. wat definitief weg is netjes als weg melden
+#   4. comprimeren en cachen
+#
+# De volgorde is niet vrijblijvend. De canonicalisatie moet vóór de
+# doorstuurtabel staan, anders krijgt iemand die op een oude non-www-URL
+# binnenkomt twee sprongen achter elkaar. Google volgt die wel, maar elke
+# extra sprong kost waarde en tijd.
+#
+# Let op: de hosting draait LiteSpeed. Die leest dit bestand wel, maar
+# negeert php_value-regels. PHP-instellingen staan daarom in .user.ini.
+# ==========================================================================
+
+Options -Indexes
+DirectoryIndex index.html index.php
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+
+
+# --- 1. Eén adres voor de hele site --------------------------------------
+#
+# Nu serveren www en non-www allebei een 200, en bestaat elke pagina zowel
+# met als zonder https. Dat zijn vier adressen voor één pagina. Hieronder
+# wordt alles in één sprong naar https://www.oosterslicht.nl gebracht.
+#
+# De eerste twee regels bepalen of de verbinding al beveiligd is. Achter een
+# proxy of loadbalancer staat %{HTTPS} soms niet, maar komt het antwoord via
+# de header X-Forwarded-Proto binnen; zonder die tweede controle zou de site
+# zichzelf eindeloos naar https blijven sturen.
+
+RewriteCond %{HTTPS} =on [OR]
+RewriteCond %{HTTP:X-Forwarded-Proto} =https
+RewriteRule ^ - [E=OL_BEVEILIGD:1]
+
+# De testomgeving draait op test.oosterslicht.nl, zonder certificaat. Zonder
+# deze uitzondering zou de regel hieronder elk verzoek op de testsite naar de
+# live site sturen, en is er op de test dus niets meer te zien of te meten.
+# De doorstuurtabel eronder blijft daar wel gewoon werken.
+RewriteCond %{HTTP_HOST} ^test\.oosterslicht\.nl$ [NC]
+RewriteRule ^ - [E=OL_TEST:1]
+
+# Lees de drie regels hieronder als: "niet de testsite, EN (nog geen https, OF
+# nog niet www)". Apache bindt het [OR] aan het aangrenzende paar; de losse
+# regel ervoor geldt daar bovenop.
+RewriteCond %{ENV:OL_TEST} !=1
+RewriteCond %{ENV:OL_BEVEILIGD} !=1 [OR]
+RewriteCond %{HTTP_HOST} !^www\.oosterslicht\.nl$ [NC]
+RewriteRule ^(.*)$ https://www.oosterslicht.nl/$1 [R=301,L,NE]
+
+
+# --- 2. De oude site doorsturen ------------------------------------------
+#
+# De oude site had tien pagina's, elk bereikbaar als map én als
+# .../index.php. Beide vormen zitten in de patronen hieronder verwerkt met
+# (index\.php)?, zodat er ook vanaf een index.php-adres maar één sprong
+# nodig is. De afsluitende slash is optioneel gemaakt met /?.
+#
+# Waarschuwing voor wie dit later aanpast: de slugs van de oude site liggen
+# NIET op de inhoud. De pagina die "hanglampen-van-esdoorn-of-beukenhout"
+# heet bevat de vloerlampen Yin en Yang; de pagina die "Yin-Yang-houten-
+# vloerlamp" heet bevat juist de hanglamp. De koppeling hieronder volgt de
+# inhoud, niet de naam, en is gecontroleerd aan de hand van de prijzen
+# (585, 485 en 220 euro) die in beide sites terugkomen.
+#
+# De vlag NE is nodig omdat sommige bestemmingen een anker (#materialen)
+# hebben: zonder NE maakt Apache daar %23 van en springt de pagina niet.
+# De vlag NC vangt afwijkend gebruik van hoofdletters op, wat vooral voor
+# de Yin-Yang-URL hieronder van belang is.
+
+# Homepage: /index.php bestaat niet meer, de nieuwe site draait op index.html
+RewriteRule ^index\.php$ https://www.oosterslicht.nl/ [R=301,L,NE]
+
+# Collectie-overzicht
+RewriteRule ^meditatielampen/?(index\.php)?$ https://www.oosterslicht.nl/lampencollectie.html [R=301,L,NE,NC]
+
+# Bevatte de vloerlampen Yin (585) en Yang (485). Twee producten op één
+# pagina, en op de nieuwe site zijn dat twee aparte pagina's. Daarom naar
+# het overzicht dat ze allebei toont, en niet naar een van de twee.
+RewriteRule ^meditatielampen/handgemaakte-houten-hanglampen-van-esdoorn-of-beukenhout/?(index\.php)?$ https://www.oosterslicht.nl/lampencollectie.html [R=301,L,NE,NC]
+
+# Bevatte de wandlamp (95) die met een herfstblad geleverd kon worden. Dat
+# is op de nieuwe site de Koyo, met het geperste blad in het papier.
+RewriteRule ^meditatielampen/wandlamp-gemaakt-van-notenhout-kersenhout-of-esdoorn-hout/?(index\.php)?$ https://www.oosterslicht.nl/lamp-koyo.html [R=301,L,NE,NC]
+
+# Bevatte ondanks de naam de hanglamp (220, esdoorn of beuken). Dat is de Kawa.
+RewriteRule ^meditatielampen/Yin-Yang-houten-vloerlamp-met-lichtdoorlatend-japans-papier/?(index\.php)?$ https://www.oosterslicht.nl/lamp-kawa.html [R=301,L,NE,NC]
+
+# Materialen-overzicht en de houtsoorten: beide naar het materialenblok van
+# de collectiepagina, waar per houtsoort een anker staat.
+RewriteRule ^lampmateriaal/?(index\.php)?$ https://www.oosterslicht.nl/lampencollectie.html#materialen [R=301,L,NE,NC]
+RewriteRule ^lampmateriaal/kersenboom-of-notenboom-met-esdoorn-beuken/?(index\.php)?$ https://www.oosterslicht.nl/lampencollectie.html#materialen [R=301,L,NE,NC]
+
+# Het papier heeft op de nieuwe site een eigen verhaal op de maakprocespagina.
+RewriteRule ^lampmateriaal/washi-papier-van-moerbeiboom-jinwashi-van-hennep/?(index\.php)?$ https://www.oosterslicht.nl/maakproces.html#materialen [R=301,L,NE,NC]
+
+# De maker, en het contactformulier dat eronder hing.
+RewriteRule ^sinoloog-en-meubelmaker-van-meubelmakers-vakschool/contact/?(index\.php)?$ https://www.oosterslicht.nl/contact.html [R=301,L,NE,NC]
+RewriteRule ^sinoloog-en-meubelmaker-van-meubelmakers-vakschool/?(index\.php)?$ https://www.oosterslicht.nl/maakproces.html [R=301,L,NE,NC]
+
+
+# --- 3. Wat definitief weg is --------------------------------------------
+#
+# De oude RSS-feed en de mappen van het oude CMS. Een 410 zegt tegen Google
+# "dit komt niet terug" en gaat sneller uit de index dan een 404. Ze naar de
+# homepage sturen zou misleidend zijn: een feedlezer verwacht daar XML.
+
+RewriteRule ^cms-data/ - [G,L]
+RewriteRule ^resources/ - [G,L]
+
+</IfModule>
+
+
+# --- Eigen foutpagina -----------------------------------------------------
+# 404.html gebruikt bewust paden vanaf de root (/css/…, /assets/…), want de
+# pagina wordt ook getoond bij een verzonnen adres diep in een oude map.
+# Bij relatieve paden zou daar de opmaak wegvallen.
+ErrorDocument 404 /404.html
+
+
+# --- 4. Comprimeren -------------------------------------------------------
+# De stylesheet is ongeveer 117 kB en het script 45 kB. Gecomprimeerd blijft
+# daar ruwweg een vijfde van over.
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml
+  AddOutputFilterByType DEFLATE application/javascript application/x-javascript
+  AddOutputFilterByType DEFLATE application/json application/xml application/rss+xml
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+
+# --- 5. Cachen ------------------------------------------------------------
+# Afbeeldingen, lettertypen en het icoon veranderen niet; die mogen een jaar
+# blijven staan. De stylesheet en het script hebben een ?v=-nummer in de
+# verwijzing, dus een lange cache is daar ook veilig: bij een wijziging gaat
+# dat nummer omhoog en vraagt de browser een nieuw adres op. Alleen de
+# HTML-pagina's zelf moeten kort blijven, anders ziet een terugkerende
+# bezoeker een oude tekst.
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault                          "access plus 1 month"
+  ExpiresByType text/html                 "access plus 10 minutes"
+  ExpiresByType text/css                  "access plus 1 year"
+  ExpiresByType application/javascript    "access plus 1 year"
+  ExpiresByType image/webp                "access plus 1 year"
+  ExpiresByType image/png                 "access plus 1 year"
+  ExpiresByType image/jpeg                "access plus 1 year"
+  ExpiresByType image/svg+xml             "access plus 1 year"
+  ExpiresByType image/x-icon              "access plus 1 year"
+  ExpiresByType font/woff2                "access plus 1 year"
+</IfModule>
+
+
+# --- Tekstbestanden als UTF-8 --------------------------------------------
+# Zonder dit serveert Apache de foutpagina's als iso-8859-1, waardoor een
+# accent in "één" verkeerd op het scherm komt.
+AddDefaultCharset UTF-8

@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
+# Het stijlenlab is een werkpagina voor het vergelijken van paletten en
+# letters. Hij staat al op noindex; dit houdt ook het crawlen tegen.
+Disallow: /stijlenlab.html
+
 Sitemap: https://www.oosterslicht.nl/sitemap.xml
