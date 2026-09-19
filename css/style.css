@@ -1209,6 +1209,17 @@ p:last-child {
   gap: var(--space-s);
 }
 
+/* Dezelfde rij, maar als afsluiting onder een sectie. Dit stond op zeven
+   pagina's als .hero__actions met een inline margin, terwijl geen van die
+   pagina's een hero heeft. */
+.section__actions {
+  margin-top: var(--space-l);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-s);
+}
+
 /* Anders spant de rij over de volle breedte van de band en loopt haar
    onzichtbare rechterrand tot over de foto. */
 .hero .hero__actions {
@@ -1942,6 +1953,12 @@ p:last-child {
   color: var(--c-muted);
 }
 
+/* Onder de specificatielijst staat de regel los van de tabel erboven, niet
+   vastgeplakt zoals onder een keuzerij. */
+.product__body .chooser__note {
+  margin-top: var(--space-s);
+}
+
 /* --- Lichtbak ------------------------------------------------------------- */
 
 /* Alleen tonen als het dialoogvenster daadwerkelijk open is. Zonder de
@@ -2050,8 +2067,7 @@ p:last-child {
   color: var(--c-ink);
 }
 
-.slider.is-ready .slider__zoom,
-.slider .slider__zoom {
+.slider.is-ready .slider__zoom {
   display: grid;
 }
 
@@ -2197,6 +2213,23 @@ p:last-child {
   max-width: 20ch;
   margin-inline: auto;
   text-align: center;
+}
+
+/* De afsluitende band: label, vraag, een alinea en een knop, allemaal
+   gecentreerd. Dit patroon stond op twee pagina's met drie inline
+   overrides per stuk. */
+.closer {
+  text-align: center;
+}
+
+.closer .label {
+  justify-content: center;
+}
+
+/* Meer lucht onder de alinea dan erboven, zodat de knop losstaat van de
+   tekst in plaats van eraan vast te plakken. */
+.closer .lead {
+  margin: var(--space-m) auto var(--space-l);
 }
 
 .quote__cite {
@@ -2624,7 +2657,8 @@ p:last-child {
   margin: 0;
 }
 
-.site-footer__title {
+.site-footer__title,
+.contact-aside__title {
   font-family: var(--font-body);
   font-size: var(--fs-label);
   font-weight: 500;
@@ -2632,6 +2666,11 @@ p:last-child {
   text-transform: uppercase;
   color: var(--c-on-dark);
   margin: 0 0 var(--space-s);
+}
+
+/* Dezelfde kop, maar op papierwit in plaats van in de donkere footer. */
+.contact-aside__title {
+  color: var(--c-ink);
 }
 
 .site-footer__list {
@@ -3647,6 +3686,12 @@ p:last-child {
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-wood) 22%, transparent);
 }
 
+/* Een veld dat niet bij het blok erboven hoort en dus lucht nodig heeft. */
+.field--spaced,
+.field__hint--spaced {
+  margin-top: var(--space-s);
+}
+
 .field__hint {
   font-size: 0.8125rem;
   color: var(--c-muted);
@@ -3845,6 +3890,12 @@ p:last-child {
   margin: 0;
 }
 
+.contact-aside__rule {
+  border: 0;
+  border-top: 1px solid var(--c-line);
+  margin: var(--space-m) 0;
+}
+
 .contact-aside dt {
   font-size: var(--fs-label);
   letter-spacing: 0.18em;
@@ -4015,5 +4066,13 @@ p:last-child {
   body {
     background: #fff;
     color: #000;
+  }
+
+  /* De onthulling bij het scrollen zet alles onder de hero op opacity 0.
+     Wie een pagina print zonder hem eerst helemaal door te scrollen, krijgt
+     anders blanco papier. */
+  .js [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

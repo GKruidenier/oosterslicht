@@ -108,7 +108,7 @@
               <div data-lamp-list>
                 <div class="lamp-block">
                   <div class="lamp-block__head">
-                    <h3 class="lamp-block__title">Lamp 1</h3>
+                    <h2 class="lamp-block__title">Lamp 1</h2>
                     <button class="btn-text" type="button" data-remove-lamp hidden>Verwijder deze lamp</button>
                   </div>
 
@@ -239,7 +239,7 @@
                 </div>
               </div>
 
-              <div class="field" style="margin-top:var(--space-s)">
+              <div class="field field--spaced">
                 <label for="email">E-mailadres <span class="req" aria-hidden="true">*</span></label>
                 <input id="email" name="email" type="email" autocomplete="email" required>
               </div>
@@ -247,15 +247,15 @@
               <!-- Bij een bestelling zegt het blok hierboven al waar het over gaat;
                    dan is een onderwerpregel dubbelop. js/site.js verbergt hem daar.
                    Zonder JavaScript blijft hij gewoon staan, en hij is optioneel. -->
-              <div class="field" data-alleen-vraag style="margin-top:var(--space-s)">
-                <label for="onderwerp">Onderwerp van je vraag <span class="req" aria-hidden="true">*</span></label>
+              <div class="field field--spaced" data-alleen-vraag>
+                <label for="onderwerp">Onderwerp van uw vraag <span class="req" aria-hidden="true">*</span></label>
                 <input id="onderwerp" name="onderwerp" type="text" required>
               </div>
 
               <!-- Verplicht in de opmaak, want zonder JavaScript kan dit het enige
                    zijn wat iemand kwijt wil. Bij een bestelling zet js/site.js het
                    terug naar optioneel: de lampgegevens vertellen het verhaal al. -->
-              <div class="field" style="margin-top:var(--space-s)">
+              <div class="field field--spaced">
                 <label for="bericht">Bericht <span class="req" data-req-bericht aria-hidden="true">*</span></label>
                 <textarea id="bericht" name="bericht" rows="6" required></textarea>
               </div>
@@ -271,14 +271,14 @@
               <svg class="btn__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12 12 4M12 4H5.5M12 4v6.5"/></svg>
             </button>
 
-            <p class="field__hint" style="margin-top:var(--space-s)">
+            <p class="field__hint field__hint--spaced">
               Velden met <span class="req" aria-hidden="true">*</span> zijn verplicht.
             </p>
           </form>
         </div>
 
         <aside class="contact-aside">
-          <h2 class="site-footer__title" style="color:var(--c-ink)">Direct contact</h2>
+          <h2 class="contact-aside__title">Direct contact</h2>
           <dl>
             <dt>Telefoon</dt>
             <dd><a href="tel:+31636058978">06 36 05 89 78</a></dd>
@@ -290,7 +290,7 @@
             <dd>Tijdens kantooruren</dd>
           </dl>
 
-          <hr style="border:0;border-top:1px solid var(--c-line);margin:var(--space-m) 0">
+          <hr class="contact-aside__rule">
 
           <p class="field__hint">
             Twijfelt u over houtsoort of papier? Bekijk eerst de
@@ -321,7 +321,6 @@
         <ul class="site-footer__list">
           <li><a href="lampencollectie.html">Japanse collectie</a></li>
           <li><a href="collectie-de-stijl.html">Collectie De Stijl</a></li>
-          <li><a href="maakproces.html">Het maakproces</a></li>
         </ul>
       </div>
       <div>
@@ -329,7 +328,7 @@
         <ul class="site-footer__list">
           <li><a href="contact.html">Contact &amp; bestellen</a></li>
           <li><a href="lampencollectie.html#materialen">Materialen</a></li>
-          <li><a href="maakproces.html">De maker</a></li>
+          <li><a href="maakproces.html">Het maakproces</a></li>
         </ul>
       </div>
       <div>
