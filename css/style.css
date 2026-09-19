@@ -511,6 +511,37 @@ p:last-child {
   filter: var(--logo-filter);
 }
 
+/* Op de homepagina staat het woordmerk twee keer in hetzelfde beeld: klein in
+   de header en groot in de hero, allebei tegen dezelfde linkermarge, een paar
+   honderd pixels uit elkaar. Dat leest niet als nadruk maar als een dubbel
+   afgedrukt logo.
+
+   Dus een overgave in plaats van een herhaling: zolang de pagina bovenaan
+   staat draagt de hero het merk alleen, en zodra je scrolt — precies wanneer
+   dat grote merk uit beeld loopt — neemt de header het over. Er is nooit meer
+   dan één woordmerk te zien.
+
+   Alleen met javascript, want .is-stuck komt daarvandaan: zonder script zou
+   het merk voorgoed weg blijven. En focus zet het terug, anders staat er een
+   onzichtbare link in de tabvolgorde. */
+.js .site-header__logo {
+  transition: opacity var(--dur) var(--ease);
+}
+
+.js body:has(.hero__logo) .site-header:not(.is-stuck) .site-header__logo {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.js body:has(.hero__logo) .site-header:not(.is-stuck) .site-header__logo:focus-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .site-header__logo { transition: none; }
+}
+
 /* Navigatie — pill-vorm met omlijnde actieve staat, zoals de referentie */
 .nav__list {
   display: flex;
@@ -832,7 +863,34 @@ p:last-child {
 .hero {
   position: relative;
   overflow: hidden;
+
+  /* De korpsgrootte van de kop staat op één plek, want drie regels rekenen
+     ermee: de kop zelf, de hoogte van het woordmerk erboven, en de
+     verschuiving naar de hoogte van het licht. */
+  --fs-hero: clamp(
+    var(--fs-hero-min),
+    5vw,
+    var(--fs-hero-max)
+  );
 }
+
+/* Boven ongeveer 1500px loopt 5vw tegen --fs-hero-max aan: de band groeit
+   door met het scherm, de kop niet. Op 1920 is het tekstblok daardoor nog
+   ruim een derde van de bandhoogte, op 2560 nog maar ruim een kwart, tegen
+   vijfenveertig procent op 1440.
+
+   Groter zetten kan niet, en dat is nagemeten en niet aangenomen. De schone
+   achtergrond onder de tekst komt van het masker, en dat masker hangt aan de
+   bandhoogte — die groeit dus mee met het scherm. De tekst zelf begint bij
+   de linkerrand van --wrap-wide, en die staat vast op 1680 en schuift op een
+   breder scherm juist naar rechts. Op 1440 eindigt de langste regel nog op
+   een kwart dekking, op 2560 al op een derde; elke vergroting duwt de kop
+   verder de foto in. Een tiende groei is op 1920 nog net goed en op 2560 al
+   niet meer.
+
+   Wat hier overblijft is dus geen regel maar een grens: de bovengrens van de
+   kop hoort bij de uitsnede van de foto en bij het masker. Wil de kop op een
+   breed scherm meegroeien, dan moet het masker mee — en dat is de foto. */
 
 @keyframes hero-tot-rust {
   from { transform: scale(1.055); }
@@ -854,8 +912,27 @@ p:last-child {
   animation: hero-tot-rust 1400ms var(--ease-out) both;
 }
 
+/* De tekst hoort bij dezelfde beweging. Ze staat vanaf de eerste tel op haar
+   plek en in volle dekking — er wordt niets ingefade, want dit is de kop en
+   die moet er meteen zijn. Alleen zakt ze de laatste zeven pixels mee naar
+   beneden terwijl het beeld tot stilstand komt, zodat de band en de tekst één
+   beweging zijn in plaats van een foto die beweegt naast een blok dat staat.
+
+   Dit is `translate` en niet `transform`, want op een breed scherm draagt de
+   transform van .hero__content al de hoogte van het licht. De twee stapelen
+   zonder elkaar te overschrijven. */
+@keyframes hero-tekst-tot-rust {
+  from { translate: 0 0.45rem; }
+  to   { translate: none; }
+}
+
+.hero__content {
+  animation: hero-tekst-tot-rust 1400ms var(--ease-out) both;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .hero__media img {
+  .hero__media img,
+  .hero__content {
     animation: none;
   }
 }
@@ -895,7 +972,13 @@ p:last-child {
   }
 }
 
+/* De afstand van de band naar de tekst was kleiner dan de afstand binnen het
+   blok tussen de kop en de knoppen. Daardoor plakte het tekstblok aan de foto
+   en dreven de knoppen juist weg. Groepen horen krap te staan en van elkaar
+   ruim; deze opvulling zet dat recht. Boven 1100px vervalt hij, want daar
+   staat de tekst in de band en niet eronder. */
 .hero__wrap {
+  padding-top: clamp(1.75rem, 5vw, 2.25rem);
   padding-bottom: clamp(2.5rem, 8vw, 4rem);
 }
 
@@ -1034,7 +1117,7 @@ p:last-child {
     transform: translateY(calc(
       (var(--licht-y) - 0.5) * var(--band-h)
       + (clamp(2.5rem, 5vw, 5rem) - clamp(2rem, 3.5vw, 3rem)) / 2
-      + 0.175 * clamp(var(--fs-hero-min), 5vw, var(--fs-hero-max))
+      + 0.175 * var(--fs-hero)
     ));
   }
 }
@@ -1046,13 +1129,13 @@ p:last-child {
 /* De schreefletter van de site, zoals overal elders. De opzet eromheen blijft
    die van de schets — band, tekst linksonder — maar de letter niet. */
 .hero__title {
-  font-size: clamp(var(--fs-hero-min), 5vw, var(--fs-hero-max));
+  font-size: var(--fs-hero);
   font-weight: var(--fw-display);
   line-height: 1;
   letter-spacing: var(--ls-display-tight);
   /* Deze afstand kwam eerst van de alinea eronder. Nu die weg is, staat hij
      hier: de knoppen zijn een volgende handeling en horen los van de kop. */
-  margin: 0 0 clamp(1.9rem, 3.4vw, 2.9rem);
+  margin: 0 0 clamp(1.75rem, 3.4vw, 2.9rem);
   color: var(--c-ink);
 }
 
@@ -1076,7 +1159,7 @@ p:last-child {
      De ondergrens is er voor de telefoon: bij een mincho blijft de kop daar
      op 35 pixels steken en zou het merk kleiner worden dan bij de andere
      lettersets. */
-  height: max(2rem, calc(clamp(var(--fs-hero-min), 5vw, var(--fs-hero-max)) * 0.84));
+  height: max(2rem, calc(var(--fs-hero) * 0.84));
   margin: 0 0 clamp(0.6rem, 1.1vw, 0.95rem);
   filter: var(--logo-filter);
 }
@@ -1118,6 +1201,33 @@ p:last-child {
 .hero .hero__actions {
   width: fit-content;
   max-width: 100%;
+}
+
+/* Naast elkaar passen ze niet meer op een telefoon, en gebroken stonden er
+   twee pillen van ongelijke breedte onder elkaar — links uitgelijnd, rechts
+   rafelig. Onder elkaar én even breed is het één blok in plaats van twee
+   losse vormen. De bovengrens houdt ze los van de schermrand, zodat ze een
+   knop blijven en geen balk worden. */
+@media (max-width: 559px) {
+  .hero .hero__actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    width: min(20rem, 100%);
+    gap: var(--space-xs);
+  }
+
+  /* Over de volle breedte hoort het opschrift links te beginnen, op dezelfde
+     lijn als het woordmerk en de kop erboven. Gecentreerd zou het een derde
+     as openen naast de twee die er al zijn. De pijl gaat mee naar de
+     rechterrand, zodat hij de knop afsluit in plaats van achter het woord
+     aan te hangen. */
+  .hero .btn {
+    justify-content: flex-start;
+  }
+
+  .hero .btn__icon {
+    margin-left: auto;
+  }
 }
 
 /* --- Slot van de homepagina ----------------------------------------------- */
