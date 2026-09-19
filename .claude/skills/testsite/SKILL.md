@@ -73,7 +73,8 @@ map en komen op dezelfde plek op de server terecht.
 Bronmateriaal en werkbestanden worden altijd overgeslagen: `_originelen/`,
 `_schetsen/`, `_fontkeuze/`, `fotos_claude_website/`, `.git/`, `.claude/` en
 systeemrommel. `--alles` stuurt de HTML-bestanden, `contact.php`,
-`favicon.ico`, `robots.txt`, `.user.ini` en de mappen `assets`, `css`, `js`.
+`favicon.ico`, `robots.txt`, `sitemap.xml`, `.htaccess`, `.user.ini` en de
+mappen `assets`, `css`, `js`.
 
 ## Achteraf controleren
 
@@ -104,8 +105,13 @@ bij CSS- of JS-wijzigingen of de bestanden zelf ook echt ververst zijn.
 - **Zip nooit met `Compress-Archive`.** PowerShell schrijft backslashes als
   mapscheiding; Linux maakt daar bestanden van die letterlijk `css\style.css`
   heten. Upload liever rechtstreeks met dit script.
-- **`robots.txt` verschilt.** Op de testsite staat `Disallow: /` zodat Google
-  hem niet indexeert. Die mag niet mee naar de live site.
+- **`robots.txt` is in beide omgevingen hetzelfde bestand**, en dat hoort zo.
+  De testsite wordt uit de zoekresultaten gehouden met een `X-Robots-Tag:
+  noindex`-header die `.htaccess` alleen zet als de hostnaam
+  `test.oosterslicht.nl` is. Zet er geen `Disallow: /` meer bij: een crawler
+  die de pagina niet mag ophalen, ziet die header nooit, en dan kan de URL
+  alsnog kaal in de resultaten belanden. Controleer na een upload van
+  `.htaccess` of de header er is.
 - **`.user.ini` werkt pas na maximaal vijf minuten.** Niet meteen concluderen
   dat het niet werkt.
 

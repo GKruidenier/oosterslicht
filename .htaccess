@@ -139,6 +139,27 @@ RewriteRule ^resources/ - [G,L]
 ErrorDocument 404 /404.html
 
 
+# --- De testomgeving uit de zoekresultaten houden ------------------------
+#
+# Dit hangt aan OL_TEST, dat hierboven alleen gezet wordt als de hostnaam
+# test.oosterslicht.nl is. De live site raakt deze regel dus nooit, en
+# robots.txt kan daardoor in beide omgevingen hetzelfde bestand zijn - wat
+# precies de bedoeling is, want een bestand dat per omgeving moet verschillen
+# gaat vroeg of laat mee met een volledige uitrol.
+#
+# Waarom een header en niet "Disallow: /" in robots.txt: Disallow houdt
+# crawlen tegen, niet indexeren. Staat er ergens een link naar de testsite,
+# dan kan Google die URL alsnog tonen - kaal, zonder omschrijving, want hij
+# mocht de pagina niet ophalen. X-Robots-Tag verbiedt het indexeren zelf.
+#
+# Daarvoor moet de crawler de pagina juist wel mogen ophalen, anders ziet hij
+# de header nooit. Daarom staat er in robots.txt geen Disallow meer voor deze
+# omgeving.
+<IfModule mod_headers.c>
+  Header always set X-Robots-Tag "noindex, nofollow" env=OL_TEST
+</IfModule>
+
+
 # --- 4. Comprimeren -------------------------------------------------------
 # De stylesheet is ongeveer 117 kB en het script 45 kB. Gecomprimeerd blijft
 # daar ruwweg een vijfde van over.
