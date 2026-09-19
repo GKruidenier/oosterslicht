@@ -79,6 +79,19 @@ RewriteRule ^(.*)$ https://www.oosterslicht.nl/$1 [R=301,L,NE]
 # Homepage: /index.php bestaat niet meer, de nieuwe site draait op index.html
 RewriteRule ^index\.php$ https://www.oosterslicht.nl/ [R=301,L,NE]
 
+# De homepage heeft één adres: /. Alle interne links wijzen daar al heen, maar
+# oude bladwijzers en links van buitenaf kunnen nog op /index.html staan.
+#
+# De controle op THE_REQUEST is hier geen franje maar noodzaak. DirectoryIndex
+# vertaalt een verzoek om / intern naar index.html, en die interne vertaling
+# loopt opnieuw langs deze regels. Zonder de controle zou / dus naar / worden
+# gestuurd, eindeloos. THE_REQUEST bevat de letterlijke eerste regel van het
+# verzoek zoals de browser hem stuurde, en die verandert bij een interne
+# vertaling niet mee - dus de regel vuurt alleen als er echt iemand
+# /index.html opvroeg.
+RewriteCond %{THE_REQUEST} \s/+index\.html[\s?] [NC]
+RewriteRule ^index\.html$ https://www.oosterslicht.nl/ [R=301,L,NE]
+
 # Collectie-overzicht
 RewriteRule ^meditatielampen/?(index\.php)?$ https://www.oosterslicht.nl/lampencollectie.html [R=301,L,NE,NC]
 
