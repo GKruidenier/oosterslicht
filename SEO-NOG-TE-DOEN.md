@@ -81,9 +81,15 @@ kans is reëel dat "handgemaakt" wegvalt. C is dezelfde titel zonder die kans.
 
 | | Titel | Tekens |
 |---|---|---|
-| **A** | Japanse lampen en meditatielampen \| OostersLicht | 48 |
+| **A** | Handgemaakte Japanse lampen van hout \| OostersLicht | 51 |
 | B | Japanse lampen: vloer-, hang- en wandlamp \| OostersLicht | 56 |
-| C | Handgemaakte Japanse lampen van hout \| OostersLicht | 51 |
+| C | Japanse lampen van hout en rijstpapier \| OostersLicht | 53 |
+
+Hier stond eerst "Japanse lampen en meditatielampen". Dat is aangepast om
+dezelfde reden als in hoofdstuk 2: "meditatielamp" levert geen enkele
+autocomplete-suggestie op, en wat er wel omheen gezocht wordt zijn
+waxinelichthouders. Variant C neemt in plaats daarvan "rijstpapier" mee, het
+woord waarmee mensen washi aanduiden.
 
 `collectie-de-stijl.html`
 
@@ -186,36 +192,95 @@ af en is de rest verspild.
 
 ---
 
-## 2. De woordenschat die de oude site heeft en de nieuwe niet
+## 2. De woorden waarop gezocht wordt
 
 De oude site heet `Japanse lampen | Oosterslicht Meditatielamp` en rankt
-daarop. Op de nieuwe site:
+daarop. De vraag is welke van die woorden het waard zijn om mee te nemen.
 
-| Term | Voorkomens op de nieuwe site |
+**Hoe dit gemeten is.** Via Googles eigen autocomplete, de suggesties die
+verschijnen terwijl je typt. Die komen uit wat mensen werkelijk intikken.
+Het is geen zoekvolume — daarvoor heb je een zoekwoordtool nodig — maar het
+laat wel zien welke termen leven en met welke bedoeling ze gebruikt worden.
+Geen suggesties betekent "onder Googles drempel", niet bewijsbaar nul.
+
+### Sterk en relevant
+
+| Term | Wat mensen erachteraan typen |
 |---|---|
-| "Japanse lampen" | 0 |
-| "meditatielamp" | 1, en dat is een regel commentaar in de code |
-| "meditatie" | 5, waarvan 2 in een alt-tekst en een commentaar |
+| japanse lampen | **kopen**, amsterdam, **rijstpapier**, buiten, groningen |
+| japanse vloerlamp | **rijstpapier**, **japandi stijl**, japanse papieren vloerlamp |
+| houten vloerlamp | met kap, landelijk, voet — maar ook kwantum, marktplaats |
+| handgemaakte lampen | den haag, arnhem, amsterdam, haarlem |
 
-Ter vergelijking: "Japanse collectie" 42 keer, "Japans papier" 14 keer. Mooie
-taal, maar niet wat mensen intikken.
+Twee dingen vallen op. "Kopen" en plaatsnamen duiken op bij zowel *japanse
+lampen* als *handgemaakte lampen*: dat is koopintentie en lokale intentie, en
+precies waar een maker met een werkplaats iets te halen heeft. En bij *houten
+vloerlamp* staan Kwantum en Marktplaats tussen de suggesties — dat is de
+massamarkt, waar je het als kleine maker niet van wint.
 
-**Waarom dit telt.** De 301's vertellen Google dat een pagina verhuisd is,
-maar Google beoordeelt daarna of de nieuwe pagina ergens nog over hetzelfde
-gaat. Wijst `/meditatielampen/` naar een pagina die het woord meditatie
-nergens noemt, dan zakt die positie alsnog weg. De redirects behouden de
-autoriteit, niet de relevantie.
+### Zwak of het verkeerde publiek
 
-**De keuze is van jou.** Het woord "meditatielamp" is niet onwaar voor deze
-lampen: je homepage noemt al "yoga- of meditatieruimte", en op de
-maakprocespagina staat dat meditatie een van de vier interesses is waaruit het
-werk is ontstaan. Maar of je merk daarmee vooropgaat, is jouw beslissing en
-niet die van een zoekmachine. Een tussenweg: de term in de description en op
-de collectiepagina, en de homepagetitel houden zoals hij is.
+| Term | Wat er gebeurt |
+|---|---|
+| meditatielamp | **geen enkele suggestie** |
+| meditatie lamp | alleen "meditatie lampje xenos" — waxinelichthouders |
+| zen lamp | overwoekerd door een Roblox-game en de serie Ozark |
+| rustgevende lamp | autisme, dementie, baby, kinderkamer — zorgmarkt |
+| washi lamp | vrijwel alles Engelstalig: lampshade, tokyo, diy, ikea |
+| zen verlichting, sfeerlamp hout, lamp japans papier | te zeldzaam |
 
-Minimaal nodig om de oude posities niet weg te gooien: de term ergens
-zichtbaar op `lampencollectie.html`, want dat is de bestemming van de
-redirect van `/meditatielampen/`.
+### Bijstelling van een eerder advies
+
+In een eerdere versie van dit document stond dat "meditatielamp"
+teruggeclaimd moest worden, omdat de oude site erop rankt. Dat klopt
+feitelijk, maar het is minder waard dan het leek. De term levert geen enkele
+suggestie op, en wat er wél omheen gezocht wordt is "meditatie lampje Xenos":
+mensen die een waxinelichthouder van een paar euro zoeken, geen vloerlamp van
+585 euro. Bovenaan staan bij een term die bijna niemand intikt, en dan nog bij
+het verkeerde publiek, levert weinig op.
+
+**De winnaar is "Japanse lampen", niet "meditatielamp".** Die staat al in het
+titelvoorstel voor de homepage en de collectiepagina.
+
+### Twee woorden die de site mist
+
+| Woord | Op de nieuwe site | Waarom het telt |
+|---|---|---|
+| `rijstpapier` | 0x | Staat wel op de oude site (2x op de materialenpagina) en komt in twee suggesties voor |
+| `japandi` | 0x | Levende interieurtrend; *vloerlamp japandi stijl* is een suggestie |
+
+Ter vergelijking: "washi" staat er 65 keer, "Japans papier" 58 keer. Juiste
+taal, maar niet de taal van de zoekbalk.
+
+#### Voorstel 1: rijstpapier op `maakproces.html`
+
+Vakinhoudelijk is "rijstpapier" onjuist — washi is van moerbeibast, niet van
+rijst. Maar het is wel het woord waarmee gezocht wordt. De bestaande zin gaat
+daar al overheen en kan de term opnemen zonder iets onwaars te beweren:
+
+> **Nu:** De basis is kozo-papier (kozo washi), gemaakt van de bast van de
+> moerbeiboom.
+>
+> **Voorstel:** De basis is kozo-papier (kozo washi), gemaakt van de bast van
+> de moerbeiboom — in de volksmond vaak rijstpapier genoemd, al zit er geen
+> rijst in.
+
+Dit doet twee dingen tegelijk: het vangt de zoekterm, en het corrigeert een
+misverstand. Dat laatste past bij een maker die zijn materiaal kent.
+
+#### Voorstel 2: japandi op `lampencollectie.html`
+
+De intro van de collectie beschrijft al de stijl. Daar past de term zonder
+kunstgrepen:
+
+> **Nu:** Met de minimalistische vorm en het gebruik van natuurlijke
+> materialen stralen ze warmte en rust uit.
+>
+> **Voorstel:** Met de minimalistische vorm en het gebruik van natuurlijke
+> materialen stralen ze warmte en rust uit. Die combinatie van Japanse
+> soberheid en warm, licht hout staat tegenwoordig bekend als japandi.
+
+Beide voorstellen zijn nog **niet doorgevoerd**; dit is jouw tekst.
 
 ---
 
