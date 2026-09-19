@@ -588,6 +588,14 @@ p:last-child {
   color: var(--c-ink);
 }
 
+/* De productpagina's dragen al aria-current="true" op de collectie waar ze bij
+   horen, maar alleen 'page' werd gestileerd. Daardoor viel de pil weg zodra je
+   op een lamp doorklikte en veranderde de kop zichtbaar van vorm. De sectie
+   krijgt de inkt zonder de rand: je bent hier in de buurt, niet hier. */
+.nav__link[aria-current='true'] {
+  color: var(--c-ink);
+}
+
 /* De knop stond hiernaast in de koptekst en heette "Bestellen", met daarnaast
    een menu-item "Contact" dat naar dezelfde pagina ging. Twee ingangen naar
    een adres. De knop heet nu Contact en het menu-item is vervallen.
@@ -675,7 +683,8 @@ p:last-child {
     font-size: 1.05rem;
   }
 
-  .nav__link[aria-current='page'] {
+  .nav__link[aria-current='page'],
+  .nav__link[aria-current='true'] {
     color: var(--c-wood-deep);
   }
 
@@ -3690,6 +3699,18 @@ p:last-child {
   outline: none;
   border-color: var(--c-wood);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-wood) 22%, transparent);
+}
+
+/* De richtprijs onder de lampkeuze. Iets steviger dan .field__hint: dit is het
+   enige bedrag in het hele formulier en het hoort niet weg te vallen. */
+.veld-prijs {
+  margin: 0.35rem 0 0;
+  font-size: var(--fs-small);
+  color: var(--c-ink-soft);
+}
+
+.veld-prijs strong {
+  font-weight: 500;
 }
 
 /* De geruststelling vlak boven de verzendknop: het moment waarop iemand

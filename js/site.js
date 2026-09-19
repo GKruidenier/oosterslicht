@@ -703,6 +703,21 @@
       'Volledig op maat':   { opmaat: true, beschrijving: 1, bestanden: 1 }
     };
 
+    /* De bezoeker kon een lamp bestellen zonder ooit een bedrag te zien: de
+       deeplink vanaf een productpagina draagt alleen ?lamp=, en het formulier
+       zweeg erover. Dit zijn dezelfde bedragen als in de specificatielijst op
+       de productpagina's; wijzigt daar een prijs, dan ook hier.
+
+       Twee bedragen betekent: de prijs hangt af van de afmeting. */
+    var PRIJZEN = {
+      'Vloerlamp Yin':      585,
+      'Vloerlamp Yang':     485,
+      'Hanglamp Kawa':      220,
+      'Wandlamp Koyo':      { Standaard: 95, Klein: 75 },
+      'Wandlamp Torii':     175,
+      'Tafellamp Take':     165
+    };
+
     // Deze velden gelden altijd, ongeacht de lamp.
     var ALTIJD = { lamp: 1, aantal: 1, detaillering: 1 };
     var ALTIJD_OPMAAT = { lamp: 1, aantal: 1 };
@@ -782,6 +797,26 @@
         });
       });
 
+      var prijsEl = block.querySelector('[data-prijs]');
+      if (prijsEl) {
+        var tarief = PRIJZEN[gekozen];
+        if (typeof tarief === 'object') {
+          var maat = block.querySelector('[data-veld="afmeting"] select');
+          tarief = tarief[maat && maat.value ? maat.value : 'Standaard'];
+        }
+        if (!bestelt || tarief === undefined) {
+          /* Geen bedrag bekend (De Stijl, volledig op maat) of geen bestelling:
+             dan liever niets dan een bedrag dat niet klopt. */
+          prijsEl.hidden = true;
+          prijsEl.textContent = '';
+        } else {
+          prijsEl.innerHTML = 'Richtprijs <strong>&euro; ' + tarief + '</strong> incl. btw. ' +
+            'Een andere houtsoort, maat of afwerking kan de prijs veranderen; ' +
+            'het bedrag in het voorstel is het bedrag dat geldt.';
+          prijsEl.hidden = false;
+        }
+      }
+
       var vast = block.querySelector('[data-vast]');
       if (vast) {
         if (regels && regels.vast) {
@@ -793,6 +828,15 @@
         }
       }
     };
+
+    /* Bij de Koyo verandert de prijs mee met de afmeting, dus die keuze moet
+       het blok opnieuw laten rekenen. */
+    form.addEventListener('change', function (e) {
+      var sel = e.target.closest('[data-veld="afmeting"] select');
+      if (!sel) return;
+      var blok = sel.closest('.lamp-block');
+      if (blok) syncVelden(blok);
+    });
 
     var syncAlleBlokken = function (verseKeuze) {
       form.querySelectorAll('.lamp-block').forEach(function (block) {
