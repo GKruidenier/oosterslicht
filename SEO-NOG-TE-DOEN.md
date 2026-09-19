@@ -58,9 +58,11 @@ tot zes weken, kijk in Search Console naar vertoningen, klikken en CTR van die
 ene pagina, en wissel dan naar een andere variant. De description is daarbij
 een tweede knop die los van de titel werkt.
 
-Daarom staan hieronder per pagina drie varianten, zodat er iets is om naar te
-wisselen. **A** is steeds het voorstel; B en C zijn alternatieven met een
-ander accent.
+Daarom staan hieronder meerdere varianten per pagina, zodat er iets is om naar
+te wisselen. **A** is steeds het voorstel; de rest zijn alternatieven met een
+ander accent. Voor de homepage en de collectiepagina's zijn dat er drie, voor
+de productpagina's twee — daar gaat de keuze niet over de formulering maar
+over welk woord je opoffert, en dat zijn er maar twee.
 
 ### Homepage en collectiepagina's
 
@@ -93,74 +95,46 @@ kans is reëel dat "handgemaakt" wegvalt. C is dezelfde titel zonder die kans.
 
 ### Productpagina's
 
-`lamp-kawa.html`
+De beschrijvende woorden gaan voorop, want dat is wat een bezoeker leest en
+waarop hij zoekt. De naam van de lamp staat achteraan: die zegt een vreemde
+niets, maar hij is wel nodig — zonder naam zouden Koyo en Torii allebei
+"houten wandlamp" heten, en Yin en Yang allebei "houten vloerlamp". Twee paar
+identieke titels, en dan weet Google niet welke van de twee hij moet tonen.
 
-| | Titel | Tekens |
+| Pagina | **A** (voorstel) | Tekens |
 |---|---|---|
-| **A** | Houten hanglamp Kawa met Japans papier \| OostersLicht | 53 |
-| B | Hanglamp Kawa van esdoorn en Japans papier \| OostersLicht | 57 |
-| C | Slanke houten hanglamp Kawa \| OostersLicht | 42 |
+| `lamp-kawa.html` | Handgemaakte houten hanglamp Kawa \| OostersLicht | 48 |
+| `lamp-koyo.html` | Handgemaakte houten wandlamp Koyo \| OostersLicht | 48 |
+| `lamp-take.html` | Handgemaakte houten tafellamp Take \| OostersLicht | 49 |
+| `lamp-torii.html` | Handgemaakte houten wandlamp Torii \| OostersLicht | 49 |
+| `lamp-yang.html` | Handgemaakte houten vloerlamp Yang \| OostersLicht | 49 |
+| `lamp-yin.html` | Handgemaakte houten vloerlamp Yin \| OostersLicht | 48 |
+| `destijl-tafellamp.html` | Handgemaakte tafellamp De Stijl \| OostersLicht | 46 |
+| `destijl-wandlamp.html` | Handgemaakte wandlamp De Stijl \| OostersLicht | 45 |
 
-`lamp-koyo.html`
+Wat hier niet meer in past is "Japans papier". De volledige zin —
+`Handgemaakte houten hanglamp met Japans papier \| OostersLicht` — is 61
+tekens en valt daarmee over de afkapgrens. Dat woord hoort thuis in de
+**description**, de grijze regel direct onder de titel in het zoekresultaat.
+Daar is ruimte voor ongeveer 155 tekens, en jouw descriptions noemen het
+papier al.
 
-| | Titel | Tekens |
+Als alternatief, met het papier er wel in maar "handgemaakte" eruit:
+
+| Pagina | B | Tekens |
 |---|---|---|
-| **A** | Houten wandlamp Koyo met geperst blad \| OostersLicht | 52 |
-| B | Wandlamp Koyo met een blad in Japans papier \| OostersLicht | 58 |
-| C | Houten wandlamp Koyo, elk exemplaar uniek \| OostersLicht | 56 |
+| `lamp-kawa.html` | Houten hanglamp Kawa met Japans papier \| OostersLicht | 53 |
+| `lamp-koyo.html` | Houten wandlamp Koyo met geperst blad \| OostersLicht | 52 |
+| `lamp-take.html` | Houten tafellamp Take met bamboemotief \| OostersLicht | 53 |
+| `lamp-torii.html` | Houten wandlamp Torii, Japanse poortvorm \| OostersLicht | 55 |
+| `lamp-yang.html` | Houten vloerlamp Yang, vierkante kap \| OostersLicht | 51 |
+| `lamp-yin.html` | Houten vloerlamp Yin, ronde kap van noten \| OostersLicht | 56 |
+| `destijl-tafellamp.html` | Tafellamp De Stijl met kleurvlakken \| OostersLicht | 50 |
+| `destijl-wandlamp.html` | Wandlamp De Stijl met kleurvlakken \| OostersLicht | 49 |
 
-`lamp-take.html`
-
-| | Titel | Tekens |
-|---|---|---|
-| **A** | Houten tafellamp Take met bamboemotief \| OostersLicht | 53 |
-| B | Tafellamp Take van notenhout en Japans papier \| OostersLicht | 60 |
-| C | Compacte houten tafellamp Take \| OostersLicht | 45 |
-
-`lamp-torii.html`
-
-| | Titel | Tekens |
-|---|---|---|
-| **A** | Houten wandlamp Torii, Japanse poortvorm \| OostersLicht | 55 |
-| B | Wandlamp Torii van notenhout en unryu kozo \| OostersLicht | 57 |
-| C | Houten wandlamp Torii met Japans papier \| OostersLicht | 54 |
-
-`lamp-yang.html`
-
-| | Titel | Tekens |
-|---|---|---|
-| **A** | Houten vloerlamp Yang, vierkante kap \| OostersLicht | 51 |
-| B | Vloerlamp Yang van kersen- of iepenhout \| OostersLicht | 54 |
-| C | Houten vloerlamp Yang met Japans papier \| OostersLicht | 54 |
-
-`lamp-yin.html`
-
-| | Titel | Tekens |
-|---|---|---|
-| **A** | Houten vloerlamp Yin, ronde kap van noten \| OostersLicht | 56 |
-| B | Vloerlamp Yin van notenhout en Japans papier \| OostersLicht | 59 |
-| C | Houten vloerlamp Yin met ronde kap \| OostersLicht | 49 |
-
-`destijl-tafellamp.html`
-
-| | Titel | Tekens |
-|---|---|---|
-| **A** | Tafellamp De Stijl met kleurvlakken \| OostersLicht | 50 |
-| B | De Stijl tafellamp op Japans papier \| OostersLicht | 50 |
-| C | Tafellamp De Stijl, rood geel blauw \| OostersLicht | 50 |
-
-`destijl-wandlamp.html`
-
-| | Titel | Tekens |
-|---|---|---|
-| **A** | Wandlamp De Stijl met kleurvlakken \| OostersLicht | 49 |
-| B | De Stijl wandlamp op Japans papier \| OostersLicht | 49 |
-| C | Wandlamp De Stijl, rood geel blauw \| OostersLicht | 49 |
-
-Het patroon achter de A-varianten: **soort lamp en materiaal vooraan**, want
-dat is het zoekwoord. Dan de naam, want wie op "Koyo" zoekt kent je al en moet
-je zeker vinden. En een staart die per lamp verschilt, zodat acht resultaten
-naast elkaar niet op elkaar lijken.
+Het verschil in één zin: **A** zet in op "handgemaakt" en leest als een
+winkel, **B** zet in op wat elke lamp bijzonder maakt en leest als een
+ambacht. A is consequenter, B is gevarieerder.
 
 Alle lengtes zijn nagerekend, niet geschat. Boven de zestig tekens kapt Google
 af en is de rest verspild.
