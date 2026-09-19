@@ -27,7 +27,12 @@ CURL_OPTS=(--netrc-file "$NETRC" --ssl-reqd --tls-max 1.2 --connect-timeout 15 -
 UITSLUITEN='^(\.git/|\.claude/|\.impeccable/|_originelen/|_schetsen/|_fontkeuze/|fotos_claude_website/|ONGEBRUIKTE-BESTANDEN\.txt$|\.gitignore$|.*/\.DS_Store$|\.DS_Store$|Thumbs\.db$|desktop\.ini$)'
 
 # De site zelf: wat er bij --alles meegaat.
-SITE_BESTANDEN=(*.html contact.php favicon.ico robots.txt .user.ini)
+# .htaccess en sitemap.xml horen hier beslist bij. Zonder .htaccess mist de
+# site elke 301 van de oude adressen, de canonicalisatie naar één domein, de
+# eigen foutpagina en de compressie - en dat valt niet op, want alle pagina's
+# laden gewoon. Zonder sitemap.xml kondigt robots.txt een sitemap aan die
+# 404 geeft.
+SITE_BESTANDEN=(*.html contact.php favicon.ico robots.txt sitemap.xml .htaccess .user.ini)
 SITE_MAPPEN=(assets css js)
 
 kleur() { printf '%s\n' "$*" >&2; }
