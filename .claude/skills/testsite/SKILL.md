@@ -15,7 +15,11 @@ geraakt: het FTP-account is opgesloten in de map van de testsite.
   openbare DNS (zie *Openstaand* onderaan). Voor controle vanaf hier moet je
   daarom `--resolve` gebruiken, en in de browser een regel in het
   hosts-bestand.
-- **HTTP, geen HTTPS.** Zonder DNS is er geen certificaat voor deze naam.
+- **HTTPS werkt wel.** Er staat sinds 19 september 2026 een Let's Encrypt
+  wildcardcertificaat op de server, voor `*.oosterslicht.nl` en het kale
+  `oosterslicht.nl`. De testnaam valt daaronder, dus `https://test.
+  oosterslicht.nl` geeft geen waarschuwing. Controleren kan met
+  `--resolve test.oosterslicht.nl:443:5.22.249.25`.
 - **Er draait PHP 7.4.33 op LiteSpeed.** `.htaccess` met `php_value` doet hier
   niets; PHP-instellingen gaan via `.user.ini`, die tot vijf minuten gecachet
   wordt.
