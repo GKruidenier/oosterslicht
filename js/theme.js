@@ -10,7 +10,7 @@
    ========================================================================== */
 
 var PALET   = 'washi';       /* washi · sumi · indigo · kersen · mos · destijl */
-var LETTERS = 'mincho';    /* garamond · mincho · bauhaus · redactie · werkplaats */
+var LETTERS = 'mincho';    /* garamond · mincho */
 
 
 /* --- De lijst voor het stijlenlab ----------------------------------------
@@ -29,10 +29,7 @@ var PALETTEN = [
 
 var LETTERSETS = [
   ['garamond',   'Garamond',   'Cormorant Garamond + Inter — de huidige zetting'],
-  ['mincho',     'Mincho',     'Shippori Mincho + Zen Kaku Gothic — de traditie van het papier'],
-  ['bauhaus',    'Bauhaus',    'Jost — één geometrische letter, het tijdperk van De Stijl'],
-  ['redactie',   'Redactie',   'Newsreader + Public Sans — artikel in plaats van etalage'],
-  ['werkplaats', 'Werkplaats', 'Literata + Karla — laag contrast, stevig, gemaakt werk']
+  ['mincho',     'Mincho',     'Shippori Mincho + Zen Kaku Gothic — de traditie van het papier']
 ];
 
 

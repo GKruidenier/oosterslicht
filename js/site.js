@@ -512,6 +512,43 @@
 
   /* --- Materiaalwielen ----------------------------------------------------- */
 
+  /* Een SVG-patroon kent geen loading="lazy": zodra de parser de <image> ziet,
+     haalt hij hem op. De wielen staan ver onder de vouw, dus dat kostte de
+     collectiepagina 213 kB voordat er iets van te zien was. De bron staat nu
+     in data-href en wordt pas gezet als het wiel in de buurt komt. Onder de
+     texturen ligt een vlak in de gemiddelde kleur van de foto, zodat er geen
+     leeg wiel staat tijdens het laden — en zodat het wiel zonder JavaScript
+     nog steeds negen te onderscheiden soorten toont. */
+  (function () {
+    var patronen = [].slice.call(document.querySelectorAll('image[data-href]'));
+    if (!patronen.length) return;
+
+    var laad = function (image) {
+      if (image.getAttribute('href')) return;
+      image.setAttribute('href', image.getAttribute('data-href'));
+    };
+
+    if (!('IntersectionObserver' in window)) {
+      patronen.forEach(laad);
+      return;
+    }
+
+    /* Een halve schermhoogte vooruit: ver genoeg om geladen te zijn voordat
+       het wiel in beeld komt, dichtbij genoeg om niets op te halen voor wie
+       nooit zo ver scrolt. */
+    var kijker = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.querySelectorAll('image[data-href]').forEach(laad);
+        kijker.unobserve(entry.target);
+      });
+    }, { rootMargin: '50% 0px' });
+
+    document.querySelectorAll('[data-wheel]').forEach(function (wheel) {
+      kijker.observe(wheel);
+    });
+  })();
+
   document.querySelectorAll('[data-wheel]').forEach(function (wheel) {
     var segments = [].slice.call(wheel.querySelectorAll('.wheel__segment'));
     /* De uitleg staat niet meer onder elk wiel, maar één keer tussen de twee
@@ -532,7 +569,10 @@
     };
 
     /* De materiaalfoto zit als <image> in het SVG-patroon waarmee het segment
-       gevuld is; die halen we eruit in plaats van hem te dupliceren. */
+       gevuld is; die halen we eruit in plaats van hem te dupliceren.
+       Het patroon zelf draagt een versie van 512px — genoeg voor een taartpunt
+       van 336px, veel te weinig voor een close-up. data-groot wijst naar het
+       origineel, dat alleen wordt opgehaald als iemand echt doorklikt. */
     var fotoVan = function (segment) {
       // Browsers geven de fill terug als url("#id") — de aanhalingstekens
       // moeten dus optioneel zijn, anders matcht er niets.
