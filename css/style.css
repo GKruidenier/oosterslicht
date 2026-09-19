@@ -452,9 +452,22 @@ p:last-child {
   text-align: center;
 }
 
+/* 48ch stond hier eerder. Dat is de maat van een smalle kolom naast iets
+   anders, en deze alinea staat alleen en gecentreerd boven twee wielen: twee
+   zinnen werden er vijf korte regels van, met een laatste regel van drie
+   woorden. Breder leest hier rustiger, en het blijft ruim binnen de 44rem van
+   het blok eromheen.
+
+   text-wrap: balance verdeelt de regels over gelijke lengte. Dat is hier
+   nodig en niet mooi-doen: zonder viel de alinea in drie volle regels plus
+   een vierde van één woord, en zo'n wees valt midden onder een gecentreerd
+   blok direct op. pretty bleek die laatste regel niet te redden, balance
+   wel — het blok telt vier regels en blijft daarmee onder de grens van zes
+   waarboven browsers het balanceren laten vallen. */
 .section__head--wheels .lead {
-  max-width: 48ch;
+  max-width: 62ch;
   margin: var(--space-s) auto 0;
+  text-wrap: balance;
 }
 
 .section__title {
