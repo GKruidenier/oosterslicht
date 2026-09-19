@@ -1090,7 +1090,7 @@ p:last-child {
    tweede stem. In em, zodat de verhouding in elke letterset gelijk blijft. */
 .hero__title .accent {
   display: block;
-  font-size: 0.6em;
+  font-size: 0.7em;
   line-height: 1.12;
   margin-top: 0.3em;
 }
@@ -1118,6 +1118,95 @@ p:last-child {
 .hero .hero__actions {
   width: fit-content;
   max-width: 100%;
+}
+
+/* --- Slot van de homepagina ----------------------------------------------- */
+
+/* De laatste sectie voor de voettekst. De lamp stond eerst met haar voet exact
+   op de rand van de donkere voettekst. Dat was als idee aardig, maar in het
+   echt leest het als een foto die tegen de zwarte balk aan geschoven is: er is
+   geen rand meer die zegt dat de sectie hier ophoudt. De sectie krijgt dus weer
+   ruimte onder de foto, en minder erboven — het blok schuift als geheel omhoog
+   in plaats van onderaan te blijven hangen.
+
+   Het raster is 1fr auto en niet 1fr 1fr. De foto staat staand en is maar een
+   derde zo breed als een halve kolom: bij een gelijke verdeling bleef er
+   tweehonderdvijftig pixels leeg naast haar staan, en werd de sectie ruim
+   achthonderd pixels hoog voor een afsluiter van vier regels. */
+.slot {
+  /* Krapper dan --section-y (tot 10rem): boven de kop stond honderdzestig
+     pixels leegte voor een afsluiter van vier regels, terwijl de foto beneden
+     al tegen de rand zat. Deze maat is dezelfde als .section--tight. */
+  padding-block: clamp(3rem, 6vw, 5.5rem);
+}
+
+.slot__raster {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: end;
+}
+
+@media (min-width: 900px) {
+  /* Niet 1fr auto: dat duwt de tekst tegen de linkerrand en de foto tegen de
+     rechter, met in een wrap van 1440 pixels ruim vijfhonderd pixels leegte
+     ertussen. De twee kolommen zijn nu allebei zo breed als hun inhoud en het
+     paar staat als geheel gecentreerd — zoals deze sectie ook was voordat er
+     een foto bij kwam. */
+  .slot__raster {
+    grid-template-columns: minmax(0, 32rem) auto;
+    justify-content: center;
+  }
+
+  /* Alleen de foto hangt aan de onderrand. De tekst staat op halve hoogte
+     tegenover de lamp; onderaan uitlijnen liet een gat van honderdzestig
+     pixels onder de knop staan, want de tekst is veel korter dan de foto. */
+  .slot__tekst {
+    align-self: center;
+  }
+}
+
+/* .quote is de maat van een paginacitaat: op een breed scherm tachtig pixels,
+   breder dan de foto ernaast hoog is smal. Een slotkop hoeft niet de grootste
+   letter van de pagina te zijn; op de maat van een sectiekop weegt hij tegen
+   het beeld op. En .quote heeft margin:0, waardoor de alinea eronder tegen de
+   kop aan plakte.
+
+   Twee klassen in de selector en niet één: .quote staat verderop in dit bestand
+   en wint bij gelijke specificiteit. */
+.quote.slot__kop {
+  font-size: var(--fs-h2);
+  margin-bottom: 0.45em;
+}
+
+.slot__foto {
+  margin: 0;
+}
+
+/* Rondom afgerond, zoals elk ander beeld op de site: de foto staat nu vrij in
+   de sectie en niet meer met haar onderrand op de sectierand. De Yin is een
+   hoge cilinder, dus de foto wordt niet naar 4:3 gesneden zoals .split__photo
+   maar op hoogte begrensd, met de breedte die volgt. */
+.slot__foto img {
+  display: block;
+  /* Een vaste hoogte en niet max-height: de foto laadt pas als je hem nadert,
+     en bij width:auto is de kolom tot dat moment nul breed. Met de hoogte
+     vastgezet rekent de browser de breedte alvast uit de verhouding in de
+     HTML-attributen, en staat de opmaak meteen goed. */
+  height: clamp(20rem, 32vw, 30rem);
+  width: auto;
+  max-width: 100%;
+  margin-inline: auto;
+  border-radius: var(--radius-img);
+}
+
+/* Nagemeten in de kolom van 512 pixels: op 36ch brak de zin in drie regels van
+   307, 249 en 230 en stond het blok als een smalle pilaar onder een kop van
+   512 breed. Op 44ch bleef er een staartje van 58 pixels over. Op 48ch zijn
+   het twee regels van 390 en 400 — vrijwel gelijk. */
+.slot__lead {
+  max-width: 48ch;
+  margin-bottom: var(--space-m);
 }
 
 /* --- Kenmerken-triplet ---------------------------------------------------- */
