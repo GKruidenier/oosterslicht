@@ -2170,6 +2170,16 @@ p:last-child {
   margin: 0;
 }
 
+/* De kolom met de kleurbalk hoort bovenaan de band te beginnen, op de hoogte
+   van de eerste regel van de tekst ernaast. .split centreert zijn kolommen, en
+   dat viel niet op zolang er een citaat van drie regels onder de balk stond:
+   de kolom was toen bijna even hoog als de tekst. Met een kop van twee regels
+   is die kolom nog maar de helft, en zakt de balk naar het midden van de band
+   — terwijl juist die balk de bovenrand hoort te markeren. */
+.split--band > :first-child {
+  align-self: start;
+}
+
 .quote--center {
   max-width: 20ch;
   margin-inline: auto;
