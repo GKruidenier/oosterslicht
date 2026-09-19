@@ -248,7 +248,6 @@ body {
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
 }
 
 /* Het hidden-attribuut werkt via display:none uit de browserstylesheet, en
@@ -922,6 +921,7 @@ p:last-child {
 .hero__media img {
   display: block;
   width: 100%;
+  max-width: 100%;
   height: 100%;
   object-fit: cover;
   /* De foto is hoger dan de band, dus alleen verticaal wordt er gesneden.
@@ -2827,6 +2827,15 @@ p:last-child {
   display: inline-flex;
   align-items: center;
   min-height: 32px;
+  position: relative;
+}
+
+/* De kruimel is 32px hoog, want hoger maakt de rij log. Het raakvlak groeit
+   er buiten om naar 44px; er staat niets onder of boven waar het mee botst. */
+.crumbs a::after {
+  content: '';
+  position: absolute;
+  inset: -6px -4px;
 }
 
 .crumbs a:hover {
@@ -2980,6 +2989,21 @@ p:last-child {
   transition: text-decoration-color var(--dur-fast) var(--ease),
     text-decoration-thickness var(--dur-fast) var(--ease),
     color var(--dur-fast) var(--ease);
+}
+
+/* Het woord blijft even groot, het aanraakvlak niet. Een staalknop is 24px
+   hoog omdat hij tussen de woorden van een zin staat; dat haalt wel de
+   24x24 van WCAG 2.2 maar is op een telefoon niet prettig. Dit pseudo-element
+   maakt het raakvlak 44px hoog zonder dat de regel verspringt. */
+.staal {
+  position: relative;
+}
+
+.staal::after {
+  content: '';
+  position: absolute;
+  inset: -10px -4px;
+  /* Niet zichtbaar, alleen aanraakbaar. */
 }
 
 .staal:hover,
@@ -3277,8 +3301,16 @@ p:last-child {
   outline: none;
 }
 
+/* Hier stond outline: none met alleen een SVG-stroke als vervanging: vier
+   pixels accentkleur bovenop een foto van houtnerf, de ene achtergrond waarop
+   die kleur juist verdwijnt. De stroke blijft - hij tekent de taartpunt na en
+   dat werkt goed - maar de ring eromheen komt terug, in dezelfde maat en met
+   dezelfde offset als de basisregel. Wel in inkt in plaats van hout: deze ring
+   grenst aan de andere taartpunten, dus aan houtnerf, en daar is houtkleur
+   precies de kleur die wegvalt. */
 .wheel__segment:focus-visible {
-  outline: none;
+  outline: 2px solid var(--c-ink);
+  outline-offset: 3px;
   stroke: var(--c-wood-deep);
   stroke-width: 4;
 }
@@ -3699,6 +3731,25 @@ p:last-child {
   outline: none;
   border-color: var(--c-wood);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-wood) 22%, transparent);
+}
+
+/* Windows-modus voor hoog contrast tekent geen box-shadow en dwingt de
+   randkleur af. Zonder deze regel verliest elk veld op het formulier daar
+   zijn focusaanduiding - en dat is precies de modus waarin iemand hem het
+   hardst nodig heeft. */
+@media (forced-colors: active) {
+  .field input:focus,
+  .field textarea:focus,
+  .field select:focus {
+    outline: 2px solid Highlight;
+    outline-offset: 1px;
+  }
+
+  /* Dezelfde reden: de ring op de taartpunten is een SVG-stroke plus outline,
+     en alleen de outline overleeft hier. */
+  .wheel__segment:focus-visible {
+    outline: 2px solid Highlight;
+  }
 }
 
 /* De richtprijs onder de lampkeuze. Iets steviger dan .field__hint: dit is het

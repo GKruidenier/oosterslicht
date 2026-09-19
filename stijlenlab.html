@@ -8,7 +8,7 @@
 <link rel="icon" href="favicon.ico" sizes="32x32">
 <script>document.documentElement.classList.add('js')</script>
 <script src="js/theme.js?v=3"></script>
-<link rel="stylesheet" href="css/style.css?v=134">
+<link rel="stylesheet" href="css/style.css?v=136">
 <link rel="stylesheet" href="css/themes.css?v=3">
 <style>
 /* ==========================================================================
@@ -122,6 +122,18 @@ body {
   display: grid;
   grid-template-rows: auto 1fr auto auto auto;
   align-content: start;
+  /* Twee keer hetzelfde probleem, op twee niveaus. De kolom is zelf een
+     grid-item in .lab__paar, en daar krijgt een 1fr-spoor min-width: auto;
+     zonder de regel hieronder rekt het spoor mee met de breedste inhoud.
+
+     En de kolom is op zijn beurt zelf een grid zonder opgegeven kolommen.
+     Het impliciete auto-spoor werd dan op max-content gezet: 379px, terwijl
+     de doos eromheen 335px is. De laddersrij (40 + 200 + 120 plus tussen-
+     ruimte) liep daardoor buiten beeld, wat alleen werd verborgen door
+     overflow-x: hidden op de body. minmax(0, 1fr) knoopt het spoor vast aan
+     de breedte van de kolom, waarna de naam in de ladder netjes krimpt. */
+  min-width: 0;
+  grid-template-columns: minmax(0, 1fr);
 }
 
 @media (min-width: 1000px) {
@@ -272,6 +284,9 @@ body {
   align-items: center;
   gap: 0.6rem;
   padding: 0.2rem 0;
+  /* 40 + 200 + 120 plus tussenruimte past niet op een telefoon. De naam mag
+     krimpen, de twee invoervelden houden hun maat. */
+  min-width: 0;
 }
 
 .sport__kleur {
