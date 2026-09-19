@@ -25,6 +25,7 @@ assets/img/_MG_5866.jpg
 assets/img/_MG_5888.jpg
 assets/img/bamboe_sola.JPG
 assets/img/berlijn.jpg
+assets/img/collectie-japans-interieur.webp
 assets/img/collectie_japans.webp
 assets/img/collectie_oosterlicht.jpg
 assets/img/collectie_oosters.jpg
