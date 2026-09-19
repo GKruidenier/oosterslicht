@@ -10,7 +10,11 @@ _originelen/
 
 # Gedownloade skill (impeccable). Externe code van
 # https://github.com/pbakaus/impeccable, opnieuw op te halen wanneer nodig.
-.claude/skills/
+# Alleen deze map, en niet .claude/skills/ als geheel: de testsite-skill is
+# eigen werk en hoort wel in de repository. Die stond eerder ook buiten
+# versiebeheer, waardoor een fix aan upload.sh bij een verse checkout
+# verdween.
+.claude/skills/impeccable/
 
 # Werkbestanden van diezelfde skill: critique-rapporten en momentopnamen.
 # Nuttig tijdens het werken, geen onderdeel van de site.
