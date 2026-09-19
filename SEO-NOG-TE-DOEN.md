@@ -37,38 +37,133 @@ voorop: `Wandlamp Koyo — OostersLicht`. Niemand zoekt op "Koyo". De
 beschrijvende woorden waar mensen wél op zoeken — houten wandlamp, vloerlamp,
 Japanse lampen — staan er niet in.
 
-Voorstel hieronder. Alles blijft onder de zestig tekens, want daarboven kapt
-Google af. Het aantal tekens staat erbij.
+Voorstel hieronder, met het aantal tekens erbij. Google kapt af rond de zestig
+tekens — niet op een vast aantal, maar op pixelbreedte, dus een titel die daar
+precies op zit kan net wel of net niet passen. Alles boven de 57 is daarom
+gemarkeerd als krap.
 
-### Productpagina's
+**Nog niet doorgevoerd.** Dit is een voorstel; de `<title>` in de HTML is
+onveranderd.
 
-| Pagina | Voorstel | Tekens |
-|---|---|---|
-| `lamp-kawa.html` | Houten hanglamp Kawa met Japans papier \| OostersLicht | 53 |
-| `lamp-koyo.html` | Houten wandlamp Koyo met geperst blad \| OostersLicht | 52 |
-| `lamp-take.html` | Houten tafellamp Take met bamboemotief \| OostersLicht | 53 |
-| `lamp-torii.html` | Houten wandlamp Torii, Japanse poortvorm \| OostersLicht | 55 |
-| `lamp-yang.html` | Houten vloerlamp Yang, vierkante kap \| OostersLicht | 51 |
-| `lamp-yin.html` | Houten vloerlamp Yin, ronde kap van noten \| OostersLicht | 56 |
-| `destijl-tafellamp.html` | Tafellamp De Stijl met kleurvlakken \| OostersLicht | 50 |
-| `destijl-wandlamp.html` | Wandlamp De Stijl met kleurvlakken \| OostersLicht | 49 |
+### Kun je meerdere titels tegelijk hebben?
 
-Het patroon: **soort lamp + materiaal + naam + wat deze lamp onderscheidt**.
-Het soort vooraan, omdat dat het zoekwoord is. De naam blijft erin, want wie
-op "Koyo" zoekt kent je al en moet je zeker vinden. De staart verschilt per
-lamp, zodat acht titels in een zoekresultaat niet op elkaar lijken.
+Nee. Een pagina heeft precies één `<title>`, en er is geen HTML-mechanisme
+voor varianten of een ingebouwde A/B-test.
+
+Twee dingen die daar wel bij horen. Google herschrijft titels regelmatig zelf
+in het zoekresultaat, op basis van de `h1`, de tekst op de pagina en de
+ankerteksten van links die ernaartoe wijzen — volledige controle heb je dus
+sowieso niet. En wat je wel kunt: na elkaar testen. Zet een titel, wacht vier
+tot zes weken, kijk in Search Console naar vertoningen, klikken en CTR van die
+ene pagina, en wissel dan naar een andere variant. De description is daarbij
+een tweede knop die los van de titel werkt.
+
+Daarom staan hieronder per pagina drie varianten, zodat er iets is om naar te
+wisselen. **A** is steeds het voorstel; B en C zijn alternatieven met een
+ander accent.
 
 ### Homepage en collectiepagina's
 
-| Pagina | Voorstel | Tekens |
-|---|---|---|
-| `index.html` | Japanse lampen van hout en washi, handgemaakt \| OostersLicht | 60 |
-| `index.html` *(variant)* | Japanse lampen en meditatielampen van hout \| OostersLicht | 57 |
-| `lampencollectie.html` | Japanse lampen en meditatielampen \| OostersLicht | 48 |
-| `collectie-de-stijl.html` | Lampen naar De Stijl, op Japans papier \| OostersLicht | 53 |
+`index.html` — **gekozen: A**
 
-Voor de homepage staan twee varianten, omdat daar een keuze in zit die van jou
-is. Zie het volgende punt.
+| | Titel | Tekens |
+|---|---|---|
+| **A** | Japanse lampen van hout en washi, handgemaakt \| OostersLicht | 60 |
+| B | Handgemaakte Japanse lampen van hout en washi \| OostersLicht | 60 |
+| C | Japanse lampen van hout en washi \| OostersLicht | 47 |
+
+A is precies 60 tekens en Google kapt af op pixelbreedte rond dat punt; de
+kans is reëel dat "handgemaakt" wegvalt. C is dezelfde titel zonder die kans.
+
+`lampencollectie.html` — bestemming van de redirect van `/meditatielampen/`
+
+| | Titel | Tekens |
+|---|---|---|
+| **A** | Japanse lampen en meditatielampen \| OostersLicht | 48 |
+| B | Japanse lampen: vloer-, hang- en wandlamp \| OostersLicht | 56 |
+| C | Handgemaakte Japanse lampen van hout \| OostersLicht | 51 |
+
+`collectie-de-stijl.html`
+
+| | Titel | Tekens |
+|---|---|---|
+| **A** | De Stijl lampen van hout en Japans papier \| OostersLicht | 56 |
+| B | De Stijl lampen met kleurvlakken op washi \| OostersLicht | 56 |
+| C | De Stijl lampen, handgemaakt op Japans papier \| OostersLicht | 60 |
+
+### Productpagina's
+
+`lamp-kawa.html`
+
+| | Titel | Tekens |
+|---|---|---|
+| **A** | Houten hanglamp Kawa met Japans papier \| OostersLicht | 53 |
+| B | Hanglamp Kawa van esdoorn en Japans papier \| OostersLicht | 57 |
+| C | Slanke houten hanglamp Kawa \| OostersLicht | 42 |
+
+`lamp-koyo.html`
+
+| | Titel | Tekens |
+|---|---|---|
+| **A** | Houten wandlamp Koyo met geperst blad \| OostersLicht | 52 |
+| B | Wandlamp Koyo met een blad in Japans papier \| OostersLicht | 58 |
+| C | Houten wandlamp Koyo, elk exemplaar uniek \| OostersLicht | 56 |
+
+`lamp-take.html`
+
+| | Titel | Tekens |
+|---|---|---|
+| **A** | Houten tafellamp Take met bamboemotief \| OostersLicht | 53 |
+| B | Tafellamp Take van notenhout en Japans papier \| OostersLicht | 60 |
+| C | Compacte houten tafellamp Take \| OostersLicht | 45 |
+
+`lamp-torii.html`
+
+| | Titel | Tekens |
+|---|---|---|
+| **A** | Houten wandlamp Torii, Japanse poortvorm \| OostersLicht | 55 |
+| B | Wandlamp Torii van notenhout en unryu kozo \| OostersLicht | 57 |
+| C | Houten wandlamp Torii met Japans papier \| OostersLicht | 54 |
+
+`lamp-yang.html`
+
+| | Titel | Tekens |
+|---|---|---|
+| **A** | Houten vloerlamp Yang, vierkante kap \| OostersLicht | 51 |
+| B | Vloerlamp Yang van kersen- of iepenhout \| OostersLicht | 54 |
+| C | Houten vloerlamp Yang met Japans papier \| OostersLicht | 54 |
+
+`lamp-yin.html`
+
+| | Titel | Tekens |
+|---|---|---|
+| **A** | Houten vloerlamp Yin, ronde kap van noten \| OostersLicht | 56 |
+| B | Vloerlamp Yin van notenhout en Japans papier \| OostersLicht | 59 |
+| C | Houten vloerlamp Yin met ronde kap \| OostersLicht | 49 |
+
+`destijl-tafellamp.html`
+
+| | Titel | Tekens |
+|---|---|---|
+| **A** | Tafellamp De Stijl met kleurvlakken \| OostersLicht | 50 |
+| B | De Stijl tafellamp op Japans papier \| OostersLicht | 50 |
+| C | Tafellamp De Stijl, rood geel blauw \| OostersLicht | 50 |
+
+`destijl-wandlamp.html`
+
+| | Titel | Tekens |
+|---|---|---|
+| **A** | Wandlamp De Stijl met kleurvlakken \| OostersLicht | 49 |
+| B | De Stijl wandlamp op Japans papier \| OostersLicht | 49 |
+| C | Wandlamp De Stijl, rood geel blauw \| OostersLicht | 49 |
+
+Het patroon achter de A-varianten: **soort lamp en materiaal vooraan**, want
+dat is het zoekwoord. Dan de naam, want wie op "Koyo" zoekt kent je al en moet
+je zeker vinden. En een staart die per lamp verschilt, zodat acht resultaten
+naast elkaar niet op elkaar lijken.
+
+Alle lengtes zijn nagerekend, niet geschat. Boven de zestig tekens kapt Google
+af en is de rest verspild.
 
 ---
 
