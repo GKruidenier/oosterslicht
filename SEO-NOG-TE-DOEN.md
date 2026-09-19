@@ -60,9 +60,9 @@ een tweede knop die los van de titel werkt.
 
 Daarom staan hieronder meerdere varianten per pagina, zodat er iets is om naar
 te wisselen. **A** is steeds het voorstel; de rest zijn alternatieven met een
-ander accent. Voor de homepage en de collectiepagina's zijn dat er drie, voor
-de productpagina's twee — daar gaat de keuze niet over de formulering maar
-over welk woord je opoffert, en dat zijn er maar twee.
+ander accent. Bij de productpagina's gaat de keuze niet zozeer over de
+formulering als over welk woord je opoffert: er passen nooit alle elementen
+tegelijk in.
 
 ### Homepage en collectiepagina's
 
@@ -103,21 +103,42 @@ identieke titels, en dan weet Google niet welke van de twee hij moet tonen.
 
 | Pagina | **A** (voorstel) | Tekens |
 |---|---|---|
-| `lamp-kawa.html` | Handgemaakte houten hanglamp Kawa \| OostersLicht | 48 |
-| `lamp-koyo.html` | Handgemaakte houten wandlamp Koyo \| OostersLicht | 48 |
-| `lamp-take.html` | Handgemaakte houten tafellamp Take \| OostersLicht | 49 |
-| `lamp-torii.html` | Handgemaakte houten wandlamp Torii \| OostersLicht | 49 |
-| `lamp-yang.html` | Handgemaakte houten vloerlamp Yang \| OostersLicht | 49 |
-| `lamp-yin.html` | Handgemaakte houten vloerlamp Yin \| OostersLicht | 48 |
+| `lamp-kawa.html` | Handgemaakte Japanse houten hanglamp Kawa \| OostersLicht | 56 |
+| `lamp-koyo.html` | Handgemaakte Japanse houten wandlamp Koyo \| OostersLicht | 56 |
+| `lamp-take.html` | Handgemaakte Japanse houten tafellamp Take \| OostersLicht | 57 |
+| `lamp-torii.html` | Handgemaakte Japanse houten wandlamp Torii \| OostersLicht | 57 |
+| `lamp-yang.html` | Handgemaakte Japanse houten vloerlamp Yang \| OostersLicht | 57 |
+| `lamp-yin.html` | Handgemaakte Japanse houten vloerlamp Yin \| OostersLicht | 56 |
 | `destijl-tafellamp.html` | Handgemaakte tafellamp De Stijl \| OostersLicht | 46 |
 | `destijl-wandlamp.html` | Handgemaakte wandlamp De Stijl \| OostersLicht | 45 |
 
+"Japanse" staat erin omdat dat het woord is waarop de oude site gevonden
+wordt, en het is hier de stijlaanduiding: gemaakt in Doorn, in Japanse traditie
+en met Japans papier.
+
+**De twee De Stijl-lampen krijgen het bewust niet.** Die collectie is
+Nederlands modernisme — dat is het hele idee ervan — en "Japanse tafellamp De
+Stijl" zou zichzelf tegenspreken. Ze zijn wel op Japans papier gemaakt, maar
+dat erbij zetten komt op 61 tekens uit en valt af.
+
+Deze zes zitten op 56 of 57 tekens: dat past, maar de marge is drie tekens.
+Wil je meer lucht, dan kan "houten" eruit — de houtsoort staat toch in de
+description en op de pagina zelf:
+
+| Pagina | A-kort | Tekens |
+|---|---|---|
+| `lamp-kawa.html` | Handgemaakte Japanse hanglamp Kawa \| OostersLicht | 49 |
+| `lamp-koyo.html` | Handgemaakte Japanse wandlamp Koyo \| OostersLicht | 49 |
+| `lamp-take.html` | Handgemaakte Japanse tafellamp Take \| OostersLicht | 50 |
+| `lamp-torii.html` | Handgemaakte Japanse wandlamp Torii \| OostersLicht | 50 |
+| `lamp-yang.html` | Handgemaakte Japanse vloerlamp Yang \| OostersLicht | 50 |
+| `lamp-yin.html` | Handgemaakte Japanse vloerlamp Yin \| OostersLicht | 49 |
+
 Wat hier niet meer in past is "Japans papier". De volledige zin —
-`Handgemaakte houten hanglamp met Japans papier \| OostersLicht` — is 61
-tekens en valt daarmee over de afkapgrens. Dat woord hoort thuis in de
-**description**, de grijze regel direct onder de titel in het zoekresultaat.
-Daar is ruimte voor ongeveer 155 tekens, en jouw descriptions noemen het
-papier al.
+`Handgemaakte Japanse houten hanglamp met Japans papier \| OostersLicht` — is
+ver over de afkapgrens. Dat woord hoort thuis in de **description**, de grijze
+regel direct onder de titel in het zoekresultaat. Daar is ruimte voor ongeveer
+155 tekens, en jouw descriptions noemen het papier al.
 
 Als alternatief, met het papier er wel in maar "handgemaakte" eruit:
 
