@@ -12,6 +12,10 @@ _originelen/
 # https://github.com/pbakaus/impeccable, opnieuw op te halen wanneer nodig.
 .claude/skills/
 
+# Werkbestanden van diezelfde skill: critique-rapporten en momentopnamen.
+# Nuttig tijdens het werken, geen onderdeel van de site.
+.impeccable/
+
 # Tijdelijke werkbestanden
 *.tmp
 .lampdata.json
