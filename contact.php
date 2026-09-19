@@ -11,7 +11,7 @@
 
 // Waar de aanvragen heen gaan. Hier mag elk adres staan, ook een persoonlijk
 // adres bij Gmail of Outlook; de mail wordt gewoon daarheen bezorgd.
-$ONTVANGER  = 'giadakruidenier@gmail.com';
+$ONTVANGER  = 'info@oosterslicht.nl';
 
 // Namens wie de server mailt. Dit MOET een adres op het eigen domein zijn.
 // Hetzelfde adres als hierboven gebruiken mag en is de eenvoudigste keuze.

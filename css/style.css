@@ -1947,6 +1947,12 @@ p:last-child {
   border-color: var(--c-line);
 }
 
+/* "incl. btw" hoort bij het bedrag maar mag het niet overstemmen. */
+.spec__btw {
+  font-size: 0.8125rem;
+  color: var(--c-muted);
+}
+
 .chooser__note {
   margin: 0.35rem 0 0;
   font-size: 0.8125rem;
@@ -3684,6 +3690,21 @@ p:last-child {
   outline: none;
   border-color: var(--c-wood);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-wood) 22%, transparent);
+}
+
+/* De geruststelling vlak boven de verzendknop: het moment waarop iemand
+   aarzelt. Rustiger dan de rest van het formulier, maar niet weggestopt. */
+.form-privacy {
+  margin: var(--space-m) 0 var(--space-s);
+  max-width: 54ch;
+  font-size: var(--fs-small);
+  color: var(--c-ink-soft);
+}
+
+/* Een verzendknop die op slot staat moet er ook zo uitzien. */
+.btn[disabled] {
+  opacity: 0.55;
+  cursor: progress;
 }
 
 /* Een veld dat niet bij het blok erboven hoort en dus lucht nodig heeft. */

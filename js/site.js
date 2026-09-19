@@ -850,6 +850,23 @@
     });
     syncReason();
 
+    /* Het formulier kan vijf bijlagen van 5 MB meesturen; dat duurt lang genoeg
+       om een tweede klik uit te lokken, en dan komt de bestelling twee keer
+       binnen. De knop gaat op slot zodra de browser echt gaat versturen — na de
+       native validatie dus, anders zit hij vast terwijl er nog een veld
+       ontbreekt. Bij terugnavigeren uit de cache moet hij weer open. */
+    var verzendknop = form.querySelector('button[type="submit"]');
+    if (verzendknop) {
+      form.addEventListener('submit', function () {
+        verzendknop.disabled = true;
+        verzendknop.dataset.bezig = 'ja';
+      });
+      window.addEventListener('pageshow', function () {
+        verzendknop.disabled = false;
+        delete verzendknop.dataset.bezig;
+      });
+    }
+
     /* Voorinvullen vanuit de collectiepagina (?lamp=…&hout=…&papier=…).
        De waarden komen uit onze eigen links, maar we zoeken ze alsnog op in de
        bestaande opties en zetten niets wat er niet in staat. */
@@ -963,12 +980,25 @@
         if (firstField) firstField.focus();
       });
 
+      /* Na het weghalen van een blok uit het midden bleef er "Lamp 1" naast
+         "Lamp 3" staan: count telde alleen op. contact.php nummert in de mail
+         zelf door, dus de bestelling klopte wel — het scherm loog. */
+      var hernummer = function () {
+        var blokken = [].slice.call(list.querySelectorAll('.lamp-block'));
+        blokken.forEach(function (blok, i) {
+          var titel = blok.querySelector('.lamp-block__title');
+          if (titel) titel.textContent = 'Lamp ' + (i + 1);
+        });
+        count = blokken.length;
+      };
+
       list.addEventListener('click', function (e) {
         var btn = e.target.closest('[data-remove-lamp]');
         if (!btn) return;
         var block = btn.closest('.lamp-block');
         if (block && list.querySelectorAll('.lamp-block').length > 1) {
           block.remove();
+          hernummer();
           addBtn.focus();
         }
       });
