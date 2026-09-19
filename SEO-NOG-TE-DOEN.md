@@ -27,6 +27,8 @@ Alle SEO-aanpassingen zitten **lokaal in git**. De testsite loopt achter.
   schemablokken en 33 plekken zichtbare tekst
 - Eigen 404-pagina, compressie, cache-headers
 - Testomgeving op `noindex` via een header op de hostnaam
+- "Rijstpapier" op `maakproces.html` en "japandi" op `index.html`, handmatig
+  toegevoegd (zie hoofdstuk 2)
 
 ---
 
@@ -244,45 +246,54 @@ titelvoorstel voor de homepage en de collectiepagina.
 
 ### Twee woorden die de site mist
 
-| Woord | Op de nieuwe site | Waarom het telt |
-|---|---|---|
-| `rijstpapier` | 0x | Staat wel op de oude site (2x op de materialenpagina) en komt in twee suggesties voor |
-| `japandi` | 0x | Levende interieurtrend; *vloerlamp japandi stijl* is een suggestie |
+| Woord | Was | Nu | Waarom het telt |
+|---|---|---|---|
+| `rijstpapier` | 0x | **1x** | Stond wel op de oude site en komt in twee suggesties voor |
+| `japandi` | 0x | **3x** | Levende interieurtrend; *vloerlamp japandi stijl* is een suggestie |
 
 Ter vergelijking: "washi" staat er 65 keer, "Japans papier" 58 keer. Juiste
 taal, maar niet de taal van de zoekbalk.
 
-#### Voorstel 1: rijstpapier op `maakproces.html`
+#### Doorgevoerd: rijstpapier op `maakproces.html`
 
 Vakinhoudelijk is "rijstpapier" onjuist — washi is van moerbeibast, niet van
-rijst. Maar het is wel het woord waarmee gezocht wordt. De bestaande zin gaat
-daar al overheen en kan de term opnemen zonder iets onwaars te beweren:
+rijst. De zin vangt de zoekterm en zet het misverstand meteen recht:
 
-> **Nu:** De basis is kozo-papier (kozo washi), gemaakt van de bast van de
-> moerbeiboom.
->
-> **Voorstel:** De basis is kozo-papier (kozo washi), gemaakt van de bast van
-> de moerbeiboom — in de volksmond vaak rijstpapier genoemd, al zit er geen
-> rijst in.
+> OostersLicht werkt met authentiek Japans papier: washi, geïmporteerd uit
+> Japan. De basis is kozo-papier (in de volksmond vaak rijstpapier genoemd),
+> gemaakt van de bast van de moerbeiboom.
 
-Dit doet twee dingen tegelijk: het vangt de zoekterm, en het corrigeert een
-misverstand. Dat laatste past bij een maker die zijn materiaal kent.
+Let op: hiermee is "(kozo washi)" uit die zin verdwenen. De term staat nog wel
+in de specificaties van elke lamp, maar wordt nu nergens meer geïntroduceerd.
 
-#### Voorstel 2: japandi op `lampencollectie.html`
+#### Doorgevoerd: japandi op `index.html`
 
-De intro van de collectie beschrijft al de stijl. Daar past de term zonder
-kunstgrepen:
+Op drie plekken, in de intro, in een tweede blok en in een bijschrift van de
+galerij:
 
-> **Nu:** Met de minimalistische vorm en het gebruik van natuurlijke
-> materialen stralen ze warmte en rust uit.
->
-> **Voorstel:** Met de minimalistische vorm en het gebruik van natuurlijke
-> materialen stralen ze warmte en rust uit. Die combinatie van Japanse
-> soberheid en warm, licht hout staat tegenwoordig bekend als japandi.
+> Een lamp van OostersLicht past goed bij een yoga- of meditatieruimte, of een
+> minimalistisch interieur zoals japandi.
 
-Beide voorstellen zijn nog **niet doorgevoerd**; dit is jouw tekst.
+Vier tikfouten in deze nieuwe tekst zijn hersteld: "yoga-of" zonder spatie,
+"eenminimalistisch" aan elkaar, "minimalistische interieur" in plaats van
+"minimalistisch interieur", en "japans paviljoen" met kleine letter terwijl de
+site verder overal "Japans" schrijft.
 
----
+#### Wat er bij die wijziging is verdwenen
+
+De vervangen zin luidde: *"Een lamp van OostersLicht brengt rust en sfeer in
+uw huis, retraite, horeca of andere ruimtes waar een serene ambiance gewenst
+is."* Daarmee zijn deze woorden van de site verdwenen:
+
+| Woord | Nog op de site |
+|---|---|
+| retraite | 0x |
+| serene, ambiance, "rust en sfeer" | 0x |
+| horeca | 1x (nog in het tweede blok) |
+
+Geen ramp — het waren geen sterke zoektermen — maar "retraite" was wel een
+concrete afnemer die nu nergens meer genoemd wordt. Overweeg of die ergens
+terug moet, bijvoorbeeld in de description van de homepage.
 
 ## 3. Google Bedrijfsprofiel
 
