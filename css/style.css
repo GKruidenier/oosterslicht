@@ -2842,6 +2842,17 @@ p:last-child {
   margin-bottom: 0.55em;
 }
 
+/* De drie koppen die boven een lopende tekst staan - Jelle Kruidenier
+   meubelmaker, en de twee collecties - stonden op de volle --fs-display-l en
+   drukten de alinea eronder weg. Twaalf procent eraf: genoeg om de verhouding
+   te herstellen, te weinig om de kop zijn plaats in de hierarchie te kosten.
+
+   Als factor en niet als eigen clamp, zodat het meebeweegt als --fs-display-l
+   ooit verandert. De marge hierboven staat in em en krimpt dus vanzelf mee. */
+.page-head__tekst .page-head__title {
+  font-size: calc(var(--fs-display-l) * 0.88);
+}
+
 .page-head__text {
   font-size: var(--fs-lead);
   line-height: 1.75;
