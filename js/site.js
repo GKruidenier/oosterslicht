@@ -683,7 +683,7 @@
          Het papier is bij elke Japanse lamp vrij te kiezen uit alle drie. */
       'Vloerlamp Yin':      { hout: ['Noten', 'In overleg'], papier: 1,
                               vast: 'een detaillering van esdoornhout' },
-      'Vloerlamp Yang':     { hout: ['Kers', 'Iep', 'In overleg'], papier: 1,
+      'Vloerlamp Yang':     { hout: ['Kers', 'Iep', 'Noten', 'In overleg'], papier: 1,
                               vast: 'een detaillering van esdoornhout' },
       'Hanglamp Kawa':      { hout: ['Esdoorn', 'In overleg'], papier: 1 },
       'Wandlamp Koyo':      { hout: 1, papier: 1, blad: 1, afmeting: 1 },
@@ -712,8 +712,8 @@
     var PRIJZEN = {
       'Vloerlamp Yin':      585,
       'Vloerlamp Yang':     485,
-      'Hanglamp Kawa':      220,
-      'Wandlamp Koyo':      { Standaard: 95, Klein: 75 },
+      'Hanglamp Kawa':      365,
+      'Wandlamp Koyo':      121,
       'Wandlamp Torii':     175,
       'Tafellamp Take':     165
     };
