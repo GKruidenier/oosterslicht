@@ -2830,6 +2830,17 @@ p:last-child {
   margin: 0;
 }
 
+/* Op de bedankpagina staat het hele verhaal onder de kop in plaats van in
+   losse blokjes eronder. Meer dan een alinea in die kolom dus. */
+.page-head__prose {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+  /* Drie alinea's onder elkaar vragen om een leesbare regel; in de tweede
+     kolom boven 900px is deze grens vanzelf al niet in beeld. */
+  max-width: 62ch;
+}
+
 /* Kruimelpad */
 .crumbs {
   display: flex;
