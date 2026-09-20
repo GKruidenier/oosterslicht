@@ -761,7 +761,10 @@ p:last-child {
 .btn--solid:hover {
   background: var(--c-wood-deep);
   border-color: var(--c-wood-deep);
-  color: #fff;
+  /* Niet #fff: in een donker palet is --c-wood-deep juist de lichtste van de
+     twee houttinten, en dan zakt wit naar 1,78:1. --c-bg draait met het palet
+     mee, net als bij .btn--solid zelf en bij de andere gevulde knoppen. */
+  color: var(--c-bg);
 }
 
 /* De rand is bij een omlijnde knop het enige wat hem als knop herkenbaar
@@ -3701,6 +3704,16 @@ p:last-child {
   resize: vertical;
 }
 
+/* Zonder deze regel kiest de browser zelf een grijs (#757575 in Chrome). Op
+   de lichte kaart is dat net 4,54:1, op de donkere kaart 3,68:1 — te weinig.
+   --c-muted is de bijschriftkleur en draait met het palet mee. De opacity
+   erbij omdat Firefox de placeholder anders nog eens halftransparant zet. */
+.field input::placeholder,
+.field textarea::placeholder {
+  color: var(--c-muted);
+  opacity: 1;
+}
+
 /* De prijsregel in het specificatielijstje krijgt iets meer gewicht dan de
    technische regels erboven, zonder eruit te springen. Laatste kind, want de
    prijs staat in elk product als onderste rij. */
@@ -3782,9 +3795,9 @@ p:last-child {
   font-weight: 500;
 }
 
-/* De geruststelling vlak boven de verzendknop: het moment waarop iemand
-   aarzelt. Rustiger dan de rest van het formulier, maar niet weggestopt. */
-.form-privacy {
+/* Het formulier heet "aanvragen", maar vlak boven de knop telt alleen nog
+   wat er gebeurt als je erop drukt. Daar staat het er nog een keer. */
+.form-aanvraag {
   margin: var(--space-m) 0 var(--space-s);
   max-width: 54ch;
   font-size: var(--fs-small);

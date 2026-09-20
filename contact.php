@@ -200,7 +200,7 @@ foreach (verzamelUploads($_FILES['bestanden'] ?? null) as $bestand) {
 $regels = [];
 $regels[] = 'Naam        : ' . $voornaam . ' ' . $achternaam;
 $regels[] = 'E-mail      : ' . $email;
-$regels[] = 'Soort       : ' . ($bestelling ? 'bestelling' : 'vraag');
+$regels[] = 'Soort       : ' . ($bestelling ? 'aanvraag' : 'vraag');
 // Het onderwerpveld werd hiervoor helemaal niet gelezen: wat iemand daar
 // intikte verdween. Bij een bestelling staat het veld er niet meer.
 if ($onderwerp !== '') {
@@ -275,7 +275,7 @@ $body = implode("\n", $regels);
 // de bevestiging aan de bezoeker.
 $samenvatting = $body;
 
-$titel = ($bestelling ? 'Bestelling' : 'Vraag')
+$titel = ($bestelling ? 'Aanvraag' : 'Vraag')
        . ' via de website - ' . $voornaam . ' ' . $achternaam;
 
 // Codering expliciet, anders komen accenten en het euroteken verminkt aan.
@@ -344,7 +344,7 @@ if ($BEVESTIGING && $verzonden) {
     $bregels[] = 'Dag ' . $voornaam . ',';
     $bregels[] = '';
     $bregels[] = $bestelling
-        ? 'Dank voor uw bestelling. Hij is goed aangekomen en ik neem zo snel'
+        ? 'Dank voor uw aanvraag. Hij is goed aangekomen en ik neem zo snel'
         : 'Dank voor uw bericht. Het is goed aangekomen en ik laat zo snel';
     $bregels[] = $bestelling
         ? 'mogelijk contact met u op.'
@@ -363,7 +363,7 @@ if ($BEVESTIGING && $verzonden) {
     $bregels[] = 'OostersLicht';
 
     $btitel = $bestelling
-        ? 'Uw bestelling bij OostersLicht'
+        ? 'Uw aanvraag bij OostersLicht'
         : 'Uw bericht aan OostersLicht';
 
     $bheaders = [
