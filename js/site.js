@@ -715,7 +715,7 @@
       'Hanglamp Kawa':      365,
       'Wandlamp Koyo':      121,
       'Wandlamp Torii':     395,
-      'Tafellamp Take':     165
+      'Tafellamp Take':     395
     };
 
     // Deze velden gelden altijd, ongeacht de lamp.
