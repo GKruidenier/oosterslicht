@@ -714,7 +714,7 @@
       'Vloerlamp Yang':     485,
       'Hanglamp Kawa':      365,
       'Wandlamp Koyo':      121,
-      'Wandlamp Torii':     175,
+      'Wandlamp Torii':     395,
       'Tafellamp Take':     165
     };
 
