@@ -2489,7 +2489,11 @@ p:last-child {
 .quote--panel {
   font-size: clamp(1.3rem, 1.85vw, 1.7rem);
   min-height: 2.2em;
-  margin: 0;
+  /* De 24ch van .quote is op een telefoon smaller dan de paneelkolom. Zonder
+     auto bleef dat smallere blok links plakken, terwijl de tekst erbinnen wel
+     centreerde: de kop stond een halve restbreedte links van het midden, en
+     dat liep op van 10px bij 320 tot 140px bij 600. */
+  margin: 0 auto;
 }
 
 /* Flex in plaats van inline-flex: anders gaan de knop en de link eronder op
@@ -2821,6 +2825,21 @@ p:last-child {
   line-height: 1.02;
   letter-spacing: -0.025em;
   margin: 0;
+}
+
+/* Staat de lopende tekst direct onder de kop, dan plakte die ertegenaan: de
+   marge uit .page-head__tekst > * + * staat eerder in dit bestand en heeft
+   dezelfde soortelijkheid, dus de margin: 0 hierboven won.
+
+   In em, niet in rem: bij een regelafstand van 1,02 valt de staart van een
+   "p" of "J" ruim onder het regelblok, en die overschrijding groeit mee met de
+   kop. Een vaste marge die op een telefoon klopt, is bij 5rem opgegeten -
+   precies wat er gebeurde.
+
+   Alleen bij een buur: op contact, bedankt en 404 staat de tekst in de tweede
+   kolom en zorgt de kolomafstand daar al voor lucht. */
+.page-head__title:has(+ .page-head__text) {
+  margin-bottom: 0.55em;
 }
 
 .page-head__text {
