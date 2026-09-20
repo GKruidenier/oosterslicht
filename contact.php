@@ -344,14 +344,14 @@ if ($BEVESTIGING && $verzonden) {
     $bregels[] = 'Dag ' . $voornaam . ',';
     $bregels[] = '';
     $bregels[] = $bestelling
-        ? 'Dank voor je bestelling. Hij is goed aangekomen en ik neem zo snel'
-        : 'Dank voor je bericht. Het is goed aangekomen en ik laat zo snel';
+        ? 'Dank voor uw bestelling. Hij is goed aangekomen en ik neem zo snel'
+        : 'Dank voor uw bericht. Het is goed aangekomen en ik laat zo snel';
     $bregels[] = $bestelling
-        ? 'mogelijk contact met je op.'
+        ? 'mogelijk contact met u op.'
         : 'mogelijk van me horen.';
     $bregels[] = '';
-    $bregels[] = 'Hieronder staat wat je hebt ingestuurd, zodat je het kunt nalezen.';
-    $bregels[] = 'Klopt er iets niet, of wil je iets aanvullen? Antwoord dan op deze';
+    $bregels[] = 'Hieronder staat wat u hebt ingestuurd, zodat u het kunt nalezen.';
+    $bregels[] = 'Klopt er iets niet, of wilt u iets aanvullen? Antwoord dan op deze';
     $bregels[] = 'mail, of schrijf naar ' . $ANTWOORDADRES . '.';
     $bregels[] = '';
     $bregels[] = str_repeat('-', 62);
@@ -363,8 +363,8 @@ if ($BEVESTIGING && $verzonden) {
     $bregels[] = 'OostersLicht';
 
     $btitel = $bestelling
-        ? 'Je bestelling bij OostersLicht'
-        : 'Je bericht aan OostersLicht';
+        ? 'Uw bestelling bij OostersLicht'
+        : 'Uw bericht aan OostersLicht';
 
     $bheaders = [
         'From: OostersLicht <' . $AFZENDER . '>',

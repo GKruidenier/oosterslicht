@@ -860,6 +860,20 @@ p:last-child {
   height: 13px;
 }
 
+/* Contactgegevens in lopende paginatekst, niet in de footer. Stond eerder
+   op .site-footer__contact, maar die klasse kleurt voor een donkere
+   ondergrond: op een lichte sectie haalde dat 2,07:1. */
+.contact-regels {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  margin: var(--space-m) 0;
+}
+
+.contact-regels p {
+  margin: 0;
+}
+
 /* --- Woordmerk in de hero ------------------------------------------------- */
 
 /* Hier stond de component voor het zegel: een ring met tekst eromheen en de
@@ -2991,10 +3005,14 @@ p:last-child {
     color var(--dur-fast) var(--ease);
 }
 
-/* Het woord blijft even groot, het aanraakvlak niet. Een staalknop is 24px
-   hoog omdat hij tussen de woorden van een zin staat; dat haalt wel de
-   24x24 van WCAG 2.2 maar is op een telefoon niet prettig. Dit pseudo-element
-   maakt het raakvlak 44px hoog zonder dat de regel verspringt. */
+/* Een staalknop staat tussen de woorden van een zin en is 23,8px hoog. Dat
+   valt onder de inline-uitzondering van WCAG 2.2 SC 2.5.8 en is dus goed.
+
+   Hier stond eerder inset: -10px -4px om het raakvlak op 44px te brengen.
+   Dat ging mis: gestapelde tekstregels raken elkaar, dus die 10px liep over
+   de regel eronder heen en de onderste helft van "kozo washi" opende
+   "kinwashi". Een tikdoel dat het verkeerde ding raakt is erger dan een
+   klein tikdoel. Alleen zijwaarts nog wat lucht; verticaal niets. */
 .staal {
   position: relative;
 }
@@ -3002,7 +3020,7 @@ p:last-child {
 .staal::after {
   content: '';
   position: absolute;
-  inset: -10px -4px;
+  inset: 0 -3px;
   /* Niet zichtbaar, alleen aanraakbaar. */
 }
 
