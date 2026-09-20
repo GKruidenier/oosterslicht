@@ -716,7 +716,8 @@
       'Wandlamp Koyo':      121,
       'Wandlamp Torii':     395,
       'Tafellamp Take':     395,
-      'Tafellamp De Stijl': 199
+      'Tafellamp De Stijl': 199,
+      'Wandlamp De Stijl':  179
     };
 
     // Deze velden gelden altijd, ongeacht de lamp.
