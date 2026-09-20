@@ -676,13 +676,12 @@
     var LAMPVELDEN = {
       /* De houtsoorten komen uit de specificatie op de productpagina en zijn
          per lamp verschillend: alleen de Koyo wordt in alle zes gemaakt. Bij
-         de Yin en de Yang gaat de keuze over de kap; de detaillering is daar
-         altijd esdoorn, wat de regel onder het menu vermeldt. "In overleg"
+         de Yin en de Yang gaat de keuze over de kap. Bij de Yang staat onder
+         het menu dat de detaillering altijd esdoorn is. "In overleg"
          staat overal bij, want elke pagina zegt "andere soorten op aanvraag".
 
          Het papier is bij elke Japanse lamp vrij te kiezen uit alle drie. */
-      'Vloerlamp Yin':      { hout: ['Noten', 'In overleg'], papier: 1,
-                              vast: 'een detaillering van esdoornhout' },
+      'Vloerlamp Yin':      { hout: ['Noten', 'In overleg'], papier: 1 },
       'Vloerlamp Yang':     { hout: ['Kers', 'Iep', 'Noten', 'In overleg'], papier: 1,
                               vast: 'een detaillering van esdoornhout' },
       'Hanglamp Kawa':      { hout: ['Esdoorn', 'In overleg'], papier: 1 },
@@ -813,8 +812,7 @@
           prijsEl.textContent = '';
         } else {
           prijsEl.innerHTML = 'Richtprijs <strong>&euro; ' + tarief + '</strong> incl. btw. ' +
-            'Een andere houtsoort, maat of afwerking kan de prijs veranderen; ' +
-            'het bedrag in het voorstel is het bedrag dat geldt.';
+            'Een andere houtsoort, maat of afwerking kan de prijs veranderen.';
           prijsEl.hidden = false;
         }
       }
