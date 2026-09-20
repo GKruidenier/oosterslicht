@@ -3795,6 +3795,15 @@ p:last-child {
   font-weight: 500;
 }
 
+/* Onder de kop van het aanvraagblok: de keuzes eronder zijn een startpunt,
+   geen opdracht. Dat moet er staan voordat iemand aan de selects begint. */
+.fieldset__intro {
+  margin: 0 0 var(--space-m);
+  max-width: 60ch;
+  font-size: var(--fs-small);
+  color: var(--c-ink-soft);
+}
+
 /* Het formulier heet "aanvragen", maar vlak boven de knop telt alleen nog
    wat er gebeurt als je erop drukt. Daar staat het er nog een keer. */
 .form-aanvraag {
