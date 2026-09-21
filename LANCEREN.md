@@ -169,6 +169,18 @@ Stuur één echt bericht via `contact.html` en controleer of het aankomt en of
 `bedankt.html` verschijnt. Dit is het enige onderdeel dat niet met een
 commando te controleren is.
 
+Let op twee dingen die buiten de code liggen:
+
+1. `$ONTVANGER` in `contact.php` staat op `info@oosterslicht.nl`. Die mailbox
+   moet bestaan en gelezen worden. Wil je de aanvragen in een persoonlijke
+   mailbox, zet dan een **doorstuurregel** in het klantenpaneel van
+   KeurigOnline in plaats van hier een privéadres in te vullen: dan blijft er
+   ook een kopie in de domeinmailbox staan, en komen antwoorden op de
+   bevestigingsmail op dezelfde plek terecht.
+2. Controleer dat de bezoeker ook de **bevestigingsmail** krijgt, niet alleen
+   jij de aanvraag. Staat daar nog "je" in plaats van "u", of een gmailadres,
+   dan draait er een verouderde `contact.php` op de server.
+
 ---
 
 ## 4. In Google Search Console
@@ -186,10 +198,15 @@ commando te controleren is.
 
 ## 5. Buiten de website
 
-- **Google Bedrijfsprofiel.** Het adres daar moet exact overeenkomen met het
-  `LocalBusiness`-schema op de homepage: Boswijklaan 52a, 3941 ZN Doorn. De
-  oude site zei Doorn, de nieuwe site zei aanvankelijk Driebergen-Rijsenburg;
-  dat is rechtgezet, maar het profiel valt buiten deze repository.
+- **Google Bedrijfsprofiel.** De site noemt als vestigingsplaats
+  **Driebergen-Rijsenburg** en geeft geen straatadres meer: het schema op de
+  homepage is `Organization` met alleen `addressLocality`. De werkplaats is
+  geen bezoekadres, lampen worden gebracht of bezorgd. Wil je een profiel,
+  registreer je dan als servicegebied-bedrijf; Google wil dan wel een echt
+  adres ter verificatie, maar toont het niet. Naam, plaats en telefoonnummer
+  daar moeten gelijklopen met de site, anders werkt de inconsistentie tegen je.
+- **Telefoonnummer.** De site staat op 0343 415525. Loop je oude vermeldingen
+  na: bedrijfsprofiel, bedrijvengidsen, mailhandtekening, drukwerk.
 
 ---
 
