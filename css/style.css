@@ -4237,17 +4237,52 @@ p:last-child {
     scroll-behavior: auto;
   }
 
+  /* Minder beweging, niet minder betekenis.
+
+     Hier stond transition-duration: 0.01ms !important over alles heen. Dat
+     haalt niet alleen de beweging weg maar ook de terugkoppeling: de
+     focusring verschijnt zonder aanloop, een knop springt van kleur, en het
+     mobiele menu klapt open zonder enig verband tussen de knop en het paneel.
+
+     En het overschreef de vijf gerichte blokken hierboven, die al precies het
+     juiste doen. .staalkaart vraagt daar om een overgang van 120ms op opacity
+     terwijl het schuiven vervalt — zorgvuldig gekozen, en dat ene !important
+     maakte er 0,01ms van. Een vangnet dat de vangst weggooit.
+
+     Wat er nu gebeurt: alleen de ruimtelijke eigenschappen gaan uit de
+     overgang. transform, translate, grid-template-*, background-size en top
+     springen naar hun eindwaarde; kleur, dekking en zichtbaarheid houden hun
+     eigen tijd en curve. WCAG 2.3.3 vraagt om een alternatief, niet om
+     stilte. De animaties zelf — de hero die tot rust komt — blijven wel uit;
+     dat is een entree van 1400ms en die hoort hier niet te spelen. */
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+    transition-property: opacity, visibility, color, background-color,
+      border-color, outline-color, box-shadow, text-decoration-color,
+      fill, stroke !important;
   }
 
   .js [data-reveal] {
     opacity: 1;
+    transform: none;
+  }
+
+  /* Wat niet mag bewegen, hoort ook niet naar zijn eindstand te springen: een
+     vergroting die instant gebeurt is nog steeds een vergroting. Dit is
+     hetzelfde wat .wheel__segment en .duality__mark hierboven al doen.
+
+     Het hamburgermenu is met opzet de uitzondering. Dat kruis is geen
+     versiering maar de aanduiding dát het menu openstaat; zonder de rotatie
+     blijven het drie streepjes en klopt de staat niet meer. */
+  .nav,
+  .card:hover .card__media img,
+  .gallery__item:hover img,
+  .swatch__knop:hover img,
+  .swatch__knop:focus-visible img {
     transform: none;
   }
 }
