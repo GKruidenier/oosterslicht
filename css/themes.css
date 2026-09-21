@@ -99,7 +99,7 @@
      --c-band                            de omgekeerde band: footer en ensō
      --c-on-band(-muted)                 tekst op die band
      --c-line-band                       lijn op en rond die band
-     --c-on-dark(-muted)                 tekst op een omgekeerd bedieningsvlak
+     --c-on-dark                         tekst op een omgekeerd bedieningsvlak
                                          (knop, actief filter, skip-link) —
                                          die kantelt juist wél mee met het palet
      --c-line / --c-line-soft            scheidingslijnen
@@ -123,7 +123,6 @@
   --c-ink-soft: #3a3630;
   --c-muted: #666057;
   --c-on-dark: #f2ede4;
-  --c-on-dark-muted: #a49c90;
   --c-band: #1c1a17;
   --c-on-band: #f2ede4;
   --c-on-band-muted: #a49c90;
@@ -144,9 +143,10 @@
 /* --- sumi ----------------------------------------------------------------
    Inkt. De omkering: de kamer is donker en de lamp is het enige wat licht
    geeft — precies de situatie waarvoor deze lampen gemaakt zijn. Let op dat
-   --c-ink hier licht is: het is de kleur van de letter, en de donkere band
-   wordt daardoor vanzelf de lichte band. De textuur gaat flink omlaag, want
-   een lichte vezel op zwart leest snel als ruis. */
+   --c-ink hier licht is: het is de kleur van de letter, niet "donker". De
+   band volgt dat niet meer; die heeft met --c-band een eigen waarde en blijft
+   ook in dit palet donker. De textuur gaat flink omlaag, want een lichte
+   vezel op zwart leest snel als ruis. */
 [data-palet='sumi'] {
   --c-bg: #141210;
   --c-bg-alt: #1b1916;
@@ -157,7 +157,6 @@
   --c-ink-soft: #ded7c9;
   --c-muted: #a59b8a;
   --c-on-dark: #17150f;
-  --c-on-dark-muted: #5b544a;
 
   /* Het diepste vlak van het palet. In de vijf lichte paletten is de
      band de omkering van de pagina; hier kan dat niet, want de pagina is
@@ -207,7 +206,6 @@
   --c-ink-soft: #2c3b4b;
   --c-muted: #55626f;
   --c-on-dark: #eaeef3;
-  --c-on-dark-muted: #94a3b3;
   --c-band: #13202e;
   --c-on-band: #eaeef3;
   --c-on-band-muted: #94a3b3;
@@ -238,7 +236,6 @@
   --c-ink-soft: #453028;
   --c-muted: #6b5144;
   --c-on-dark: #f4e9dd;
-  --c-on-dark-muted: #ab9484;
   --c-band: #2a1a14;
   --c-on-band: #f4e9dd;
   --c-on-band-muted: #ab9484;
@@ -269,7 +266,6 @@
   --c-ink-soft: #384030;
   --c-muted: #59614d;
   --c-on-dark: #eef0e7;
-  --c-on-dark-muted: #9aa390;
   --c-band: #1e2418;
   --c-on-band: #eef0e7;
   --c-on-band-muted: #9aa390;
@@ -301,7 +297,6 @@
   --c-ink-soft: #2e2e2e;
   --c-muted: #5c5c5c;
   --c-on-dark: #f5f4f1;
-  --c-on-dark-muted: #9a9a9a;
 
   /* De haarlijn is gelijk aan de band zelf: De Stijl kent geen
      verhoging, alleen vlak en lijn. */

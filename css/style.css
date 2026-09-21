@@ -90,7 +90,6 @@
   /* #666057 haalt 4.5:1 op alle vier de oppervlakken, ook op --c-bg-deep. */
   --c-muted: #666057;
   --c-on-dark: #f2ede4;
-  --c-on-dark-muted: #a49c90;
 
   /* De omgekeerde band — een eigen oppervlak, geen hergebruikte inkt.
 
@@ -3984,9 +3983,18 @@ p:last-child {
 .form-notice {
   margin: 0 0 var(--space-m);
   padding: var(--space-s);
-  background: var(--c-card);
+  /* Hier stond een linkerrand van 3px. Die dikke gekleurde rand is een
+     categoriegewoonte en geen vormtaal van deze site: hier is elke lijn een
+     haarlijn van 1px en elke hoek 2px.
+
+     Maar die rand deed wél werk — hij was het enige dat deze melding van een
+     gewone kaart onderscheidde. Hem weghalen zonder vervanging maakt het pad
+     slechter, niet beter. Het werk verhuist daarom naar het vlak: een waas
+     van hout over het kaartwit, zoals .notice dat met --c-glow doet. Zo
+     onderscheidt de melding zich op dezelfde manier als de rest van de site,
+     over alle zes de paletten, zonder balk aan de zijkant. */
+  background: color-mix(in srgb, var(--c-wood) 8%, var(--c-card));
   border: 1px solid var(--c-wood);
-  border-left-width: 3px;
   border-radius: var(--radius);
   color: var(--c-ink);
 }
