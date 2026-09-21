@@ -5,15 +5,21 @@ De eenmalige controles rond het live zetten staan apart in `LANCEREN.md`.
 
 ## Waar staat wat
 
-Alle SEO-aanpassingen zitten **lokaal in git**. De testsite loopt achter.
+Alle SEO-aanpassingen zitten **lokaal in git en op GitHub**. De testsite loopt
+achter: die draait nog op de versie van 19 september.
 
 | | Lokaal | Testsite |
 |---|---|---|
 | Canonicals, kruimelpaden, interne links naar `/` | ja | nee |
-| Vestigingsplaats Driebergen-Rijsenburg, zonder straatadres | ja | nee |
+| Titels, H1's en descriptions (nieuw) | ja | nee |
+| `og:locale`, `og:image:alt` | ja | nee |
+| Vestigingsplaats Driebergen-Rijsenburg, telefoon 0343 | ja | nee |
+| "Rijstpapier" en "japandi" | ja | nee |
 | `.htaccess`: 301's, canonicalisatie, noindex op de testnaam | ja | ja |
 | `404.html`, compressie, cache-headers | ja | ja |
 | `sitemap.xml` | ja | nee (geeft daar 404) |
+
+Voor de uitrol naar de testsite: zie `LANCEREN.md`, hoofdstuk 2.
 
 ---
 
@@ -467,24 +473,38 @@ bij een plek waar klanten langskomen, en die is er niet.
 
 ---
 
-## 7. Kleingoed
+## 7. Doorgevoerd: het kleingoed
 
-- `og:locale` (`nl_NL`) en `og:image:alt` ontbreken overal
-- `sitemap.xml`: alle `lastmod` staan op dezelfde handmatige datum en
-  verouderen stilletjes; `priority` wordt door Google genegeerd en mag weg
-- Meer onderlinge links tussen de lamppagina's ("zie ook"), zodat de waarde
-  beter verdeeld wordt. Nu linkt de homepage naar drie van de zes Japanse
-  lampen, en zijn de twee De Stijl-lampen alleen vanaf hun collectiepagina
-  bereikbaar
-- Een blok met veelgestelde vragen op `contact.html` of `maakproces.html`,
-  met `FAQPage`, levert extra ruimte in het zoekresultaat
+- `og:locale` (nl_NL) en `og:image:alt` staan op alle vijftien pagina's met
+  OG-tags
+- `sitemap.xml` opnieuw opgebouwd: `lastmod` per pagina uit de git-historie,
+  `priority` eruit
+- Elke lamppagina linkt al naar drie andere lampen, dus de onderlinge
+  verwijzingen waren al in orde
+
+Wat hiervan open blijft: de `lastmod` in de sitemap komt uit de git-historie
+op het moment van genereren, maar het bestand werkt zichzelf niet bij. Na een
+volgende ronde wijzigingen loopt hij opnieuw achter. Een klein script zou dat
+oplossen.
+
+En nog niet gedaan: een blok met veelgestelde vragen op `contact.html` of
+`maakproces.html`, met `FAQPage`. Dat levert extra ruimte in het
+zoekresultaat.
 
 ---
 
 ## Volgorde
 
-Punt 1, 2 en 3 vóór de verhuizing. Die bepalen of je de posities van de oude
-site meeneemt of opnieuw begint.
+Wat nu nog echt iets oplevert, op volgorde:
 
-Punt 4, 6 en 7 kunnen net zo goed erna. Dat zijn verbeteringen, geen behoud.
-Punt 5 is gedaan.
+1. **Hoofdstuk 2b** — "handgemaakt" in de hoofdtekst van de acht
+   productpagina's. De titels beloven het, de pagina's zeggen het nergens.
+2. **Hoofdstuk 3** — Google Bedrijfsprofiel. Nul regels code, veel effect
+   lokaal.
+3. **Hoofdstuk 4** — structured data op de vier pagina's die alleen een
+   kruimelpad hebben.
+4. **Hoofdstuk 6** — `sameAs` naar sociale profielen, als die er zijn.
+5. Het restje uit hoofdstuk 7: de FAQ en het bijwerken van de sitemap.
+
+En los daarvan, vóór de lancering: **de testsite bijwerken**. Die loopt twee
+dagen achter en `LANCEREN.md` gaat ervan uit dat je daar eerst test.

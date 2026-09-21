@@ -35,10 +35,15 @@ Staan bewust **niet** in de repository, maar in een netrc-bestand daarbuiten:
 Met deze inhoud (rechten op 600):
 
 ```
-machine <ftp-host>
+machine <ftp-host van de hosting>
 login <ftp-gebruikersnaam>
-password HETWACHTWOORD
+password <het wachtwoord>
 ```
+
+De echte waarden staan bewust niet hier. Deze repository is openbaar, en een
+hostnaam met gebruikersnaam eronder is de halve sleutel: het wijst een
+aanvaller precies aan waar hij moet proberen. Vraag ze op bij de beheerder of
+lees ze uit het bestaande netrc-bestand.
 
 Ontbreekt dat bestand, dan stopt het script met een duidelijke melding. Een
 ander pad kan via de omgevingsvariabele `OOSTERSLICHT_NETRC`.
@@ -122,5 +127,4 @@ bij CSS- of JS-wijzigingen of de bestanden zelf ook echt ververst zijn.
   bestaat `test.oosterslicht.nl` buiten deze computer niet. Dit moet
   KeurigOnline rechttrekken.
 - PHP staat op 7.4.33 en krijgt geen beveiligingsupdates meer.
-- Het FTP-wachtwoord is ooit in een gesprek gedeeld en hoort vervangen te
-  worden.
+- Het FTP-wachtwoord hoort vervangen te worden.

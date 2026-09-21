@@ -8,7 +8,11 @@
 set -u
 
 NETRC="${OOSTERSLICHT_NETRC:-$HOME/.claude/oosterslicht-test.netrc}"
-HOST="<ftp-host>"
+# De hostnaam staat niet in dit bestand. Deze repository is openbaar, en een
+# hostnaam met de gebruikersnaam eronder wijst een aanvaller precies aan waar
+# hij moet proberen. Hij wordt gelezen uit de machine-regel van het
+# netrc-bestand, dat buiten de repository staat; OOSTERSLICHT_HOST overschrijft.
+HOST="${OOSTERSLICHT_HOST:-$(awk '/^[[:space:]]*machine[[:space:]]/ {print $2; exit}' "$NETRC" 2>/dev/null)}"
 REMOTE_ROOT="/public_html"
 # --tls-max 1.2 is hier geen overbodige luxe. Onder TLS 1.3 breekt deze
 # Pure-FTPd-server de overdracht af met "451 Error during read from data
@@ -39,6 +43,7 @@ kleur() { printf '%s\n' "$*" >&2; }
 fout()  { printf 'FOUT: %s\n' "$*" >&2; exit 1; }
 
 [ -r "$NETRC" ] || fout "geen inloggegevens gevonden op $NETRC (zie SKILL.md)"
+[ -n "$HOST" ]  || fout "geen hostnaam gevonden; zet een machine-regel in $NETRC of OOSTERSLICHT_HOST"
 
 DRYRUN=0
 ACTIE="upload"
