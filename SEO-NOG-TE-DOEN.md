@@ -36,6 +36,7 @@ Alle SEO-aanpassingen zitten **lokaal in git**. De testsite loopt achter.
   meer voor
 - Eigen 404-pagina, compressie, cache-headers
 - Testomgeving op `noindex` via een header op de hostnaam
+- Elf titels omgezet naar beschrijvend-eerst, met `og:title` gelijkgetrokken
 - "Rijstpapier" op `maakproces.html` en "japandi" op `index.html`, handmatig
   toegevoegd (zie hoofdstuk 2)
 
@@ -53,8 +54,10 @@ tekens — niet op een vast aantal, maar op pixelbreedte, dus een titel die daar
 precies op zit kan net wel of net niet passen. Alles boven de 57 is daarom
 gemarkeerd als krap.
 
-**Nog niet doorgevoerd.** Dit is een voorstel; de `<title>` in de HTML is
-onveranderd.
+**Doorgevoerd op 21 september 2026.** De A-varianten staan in de HTML, en
+`og:title` is overal gelijkgetrokken met de `<title>`. De tabellen hieronder
+blijven staan als alternatieven om later naar te wisselen, en als
+verantwoording van de keuze.
 
 ### Kun je meerdere titels tegelijk hebben?
 
