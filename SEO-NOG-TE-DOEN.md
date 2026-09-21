@@ -297,6 +297,33 @@ het verkeerde publiek, levert weinig op.
 **De winnaar is "Japanse lampen", niet "meditatielamp".** Die staat al in het
 titelvoorstel voor de homepage en de collectiepagina.
 
+### Kozogami: getoetst en verworpen
+
+Een extern advies stelde voor om "kozogami" toe te voegen. Getoetst met
+dezelfde methode als hierboven, en dat viel af:
+
+| Term | Op de site | Autocomplete |
+|---|---|---|
+| kozogami | 0x | 2 suggesties, waarvan een over ander papier (gampi) |
+| kozo washi | **26x in 11 bestanden** | 6 suggesties |
+| washi | 66x in 14 bestanden | — |
+| **"washi papier"** als woordpaar | **was 0x** | 6 suggesties, waaronder **"washi papier lamp"** |
+
+Kozo washi en washi staan er allang ruim in; daar viel niets toe te voegen.
+Het werkelijke gat zat in het woordpaar "washi papier", omdat de site
+consequent "Japans papier (washi)" schrijft — met de twee woorden uit elkaar.
+En juist *washi papier lamp* is een levende zoekopdracht.
+
+Opgelost via de titel van `maakproces.html`, de pagina die over het papier
+gaat en die als enige nog een merkgerichte titel had zonder enig zoekwoord:
+
+> **Was:** Het maakproces — OostersLicht
+> **Nu:** Washi papier en hout: het maakproces | OostersLicht
+
+Alternatieven van gelijke lengte, mocht de formulering wringen:
+`Het maakproces: hout en washi papier` (51) of `Washi papier, hout en
+handwerk` (45).
+
 ### Twee woorden die de site mist
 
 | Woord | Was | Nu | Waarom het telt |
