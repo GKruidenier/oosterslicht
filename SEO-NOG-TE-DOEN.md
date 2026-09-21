@@ -15,6 +15,7 @@ achter: die draait nog op de versie van 19 september.
 | `og:locale`, `og:image:alt` | ja | nee |
 | Vestigingsplaats Driebergen-Rijsenburg, telefoon 0343 | ja | nee |
 | "Rijstpapier" en "japandi" | ja | nee |
+| `@id` op de `Organization`, seller verwijst ernaar | ja | nee |
 | `.htaccess`: 301's, canonicalisatie, noindex op de testnaam | ja | ja |
 | `404.html`, compressie, cache-headers | ja | ja |
 | `sitemap.xml` | ja | nee (geeft daar 404) |
