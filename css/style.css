@@ -92,6 +92,25 @@
   --c-on-dark: #f2ede4;
   --c-on-dark-muted: #a49c90;
 
+  /* De omgekeerde band — een eigen oppervlak, geen hergebruikte inkt.
+
+     Hiervoor stond .band-dark en .site-footer op var(--c-ink), en dat werkt
+     in vijf van de zes paletten. In sumi niet: daar is de pagina donker en is
+     --c-ink juist crème, want dat is de kleur van de letter. De twee banden
+     die donker bedoeld zijn werden daardoor de lichtste vlakken van de site,
+     onderaan een pagina van 5700px — precies in het palet dat voor de avond
+     bestaat. Het waren niet de waarden die fout stonden maar de rol: --c-ink
+     betekent "waarmee we schrijven", en een achtergrond is niet iets
+     waarmee je schrijft.
+
+     Deze vier staan los, zodat de donkerte van de band niet meer gekoppeld is
+     aan de donkerte van de letter. In de vijf lichte paletten zijn ze exact
+     gelijk aan wat er stond; alleen sumi kiest nu eigen waarden. */
+  --c-band: #1c1a17;
+  --c-on-band: #f2ede4;
+  --c-on-band-muted: #a49c90;
+  --c-line-band: #3b352c;
+
   /* Lijnen en accenten */
   --c-line: #ddd6c9;
   /* Rand van invoervelden. --c-line haalt daar maar 1,42:1 tegen de vulling,
@@ -100,7 +119,6 @@
      grijs, zodat het rustig blijft over zestien velden. */
   --c-line-control: #928c83;
   --c-line-soft: #e9e3d8;
-  --c-line-dark: #3b352c;
   --c-wood: #8b7355;
   --c-wood-deep: #6d5842;
   --c-glow: #e0bd8a;
@@ -842,13 +860,13 @@ p:last-child {
 }
 
 .btn--light {
-  border-color: color-mix(in srgb, var(--c-on-dark) 40%, transparent);
-  color: var(--c-on-dark);
+  border-color: color-mix(in srgb, var(--c-on-band) 40%, transparent);
+  color: var(--c-on-band);
 }
 
 .btn--light:hover {
-  background: var(--c-on-dark);
-  border-color: var(--c-on-dark);
+  background: var(--c-on-band);
+  border-color: var(--c-on-band);
   color: var(--c-ink);
 }
 
@@ -2065,12 +2083,12 @@ p:last-child {
   display: grid;
   place-items: center;
   padding: var(--space-l);
-  background: color-mix(in srgb, var(--c-ink) 92%, transparent);
+  background: color-mix(in srgb, var(--c-band) 92%, transparent);
   border: 0;
 }
 
 .lightbox::backdrop {
-  background: color-mix(in srgb, var(--c-ink) 92%, transparent);
+  background: color-mix(in srgb, var(--c-band) 92%, transparent);
 }
 
 .lightbox__img {
@@ -2086,21 +2104,21 @@ p:last-child {
   max-width: 46ch;
   margin-top: var(--space-m);
   text-align: center;
-  color: var(--c-on-dark);
+  color: var(--c-on-band);
 }
 
 .lightbox__title {
   font-family: var(--font-display);
   font-size: clamp(1.75rem, 4vw, 2.5rem);
   font-weight: var(--fw-display);
-  color: var(--c-on-dark);
+  color: var(--c-on-band);
   margin: 0 0 var(--space-xs);
 }
 
 .lightbox__desc {
   font-size: var(--fs-lead);
   line-height: 1.7;
-  color: var(--c-on-dark-muted);
+  color: var(--c-on-band-muted);
   margin: 0;
 }
 
@@ -2116,7 +2134,7 @@ p:last-child {
   justify-content: center;
   gap: var(--space-s);
   margin-top: var(--space-s);
-  color: var(--c-on-dark);
+  color: var(--c-on-band);
   font-size: var(--fs-small);
 }
 
@@ -2125,15 +2143,15 @@ p:last-child {
   place-items: center;
   width: 44px;
   height: 44px;
-  border: 1px solid color-mix(in srgb, var(--c-on-dark) 40%, transparent);
+  border: 1px solid color-mix(in srgb, var(--c-on-band) 40%, transparent);
   border-radius: 50%;
   background: none;
-  color: var(--c-on-dark);
+  color: var(--c-on-band);
   transition: background-color var(--dur-fast) var(--ease);
 }
 
 .lightbox__btn:hover {
-  background: color-mix(in srgb, var(--c-on-dark) 18%, transparent);
+  background: color-mix(in srgb, var(--c-on-band) 18%, transparent);
 }
 
 .lightbox__btn svg {
@@ -2365,18 +2383,19 @@ p:last-child {
 /* --- Donkere band --------------------------------------------------------- */
 
 .band-dark {
-  background: var(--c-ink);
-  color: var(--c-on-dark);
+  background: var(--c-band);
+  border-top: 1px solid var(--c-line-band);
+  color: var(--c-on-band);
 }
 
 .band-dark h2,
 .band-dark h3,
 .band-dark .quote {
-  color: var(--c-on-dark);
+  color: var(--c-on-band);
 }
 
 .band-dark .label {
-  color: var(--c-on-dark-muted);
+  color: var(--c-on-band-muted);
 }
 
 .band-dark .label::before {
@@ -2385,11 +2404,11 @@ p:last-child {
 
 .band-dark .lead,
 .band-dark p {
-  color: var(--c-on-dark-muted);
+  color: var(--c-on-band-muted);
 }
 
 .band-dark .quote__cite {
-  color: var(--c-on-dark-muted);
+  color: var(--c-on-band-muted);
 }
 
 /* --- Diptiek: ensō en yin/yang ---------------------------------------- */
@@ -2579,7 +2598,7 @@ p:last-child {
 }
 
 .band-dark .duality__toggle {
-  color: var(--c-on-dark-muted);
+  color: var(--c-on-band-muted);
 }
 
 .duality__panel:hover .duality__toggle {
@@ -2587,7 +2606,7 @@ p:last-child {
 }
 
 .band-dark.duality__panel:hover .duality__toggle {
-  color: var(--c-on-dark);
+  color: var(--c-on-band);
 }
 
 /* De pijl wijst de kant op waar de uitleg vandaan komt: naar rechts wanneer
@@ -2653,7 +2672,7 @@ p:last-child {
 }
 
 .band-dark .duality__more p {
-  color: var(--c-on-dark-muted);
+  color: var(--c-on-band-muted);
 }
 
 /* Zweven, toetsenbordfocus en een klik openen hetzelfde paneel. Zweven alleen
@@ -2712,8 +2731,9 @@ p:last-child {
 /* --- Footer --------------------------------------------------------------- */
 
 .site-footer {
-  background: var(--c-ink);
-  color: var(--c-on-dark);
+  background: var(--c-band);
+  border-top: 1px solid var(--c-line-band);
+  color: var(--c-on-band);
   padding-block: var(--space-2xl) var(--space-l);
 }
 
@@ -2722,7 +2742,7 @@ p:last-child {
   grid-template-columns: 1fr;
   gap: var(--space-xl);
   padding-bottom: var(--space-xl);
-  border-bottom: 1px solid var(--c-line-dark);
+  border-bottom: 1px solid var(--c-line-band);
 }
 
 @media (min-width: 760px) {
@@ -2746,7 +2766,7 @@ p:last-child {
 
 .site-footer__tagline {
   font-size: var(--fs-small);
-  color: var(--c-on-dark-muted);
+  color: var(--c-on-band-muted);
   max-width: 34ch;
   margin: 0;
 }
@@ -2758,7 +2778,7 @@ p:last-child {
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--c-on-dark);
+  color: var(--c-on-band);
   margin: 0 0 var(--space-s);
 }
 
@@ -2782,13 +2802,13 @@ p:last-child {
   align-items: center;
   min-height: 44px;
   font-size: var(--fs-small);
-  color: var(--c-on-dark-muted);
+  color: var(--c-on-band-muted);
   transition: color var(--dur-fast) var(--ease);
 }
 
 .site-footer__list a:hover,
 .site-footer__contact a:hover {
-  color: var(--c-on-dark);
+  color: var(--c-on-band);
 }
 
 .site-footer__contact {
@@ -2796,7 +2816,7 @@ p:last-child {
   flex-direction: column;
   font-size: var(--fs-small);
   line-height: 44px;
-  color: var(--c-on-dark-muted);
+  color: var(--c-on-band-muted);
 }
 
 .site-footer__contact p {
@@ -2811,7 +2831,7 @@ p:last-child {
   gap: var(--space-s);
   padding-top: var(--space-m);
   font-size: 0.8125rem;
-  color: var(--c-on-dark-muted);
+  color: var(--c-on-band-muted);
 }
 
 .site-footer__bottom p {

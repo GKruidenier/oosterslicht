@@ -84,17 +84,26 @@
    PALETTEN
    ==========================================================================
 
-   Elk palet vult dezelfde negentien tokens. De namen zeggen waar ze voor
+   Elk palet vult dezelfde tweeëntwintig tokens. De namen zeggen waar ze voor
    staan, niet welke kleur ze hebben — daarom werkt een donker palet ook:
    --c-ink is "de kleur van de letter", niet "donker".
 
-     --c-bg / --c-bg-alt / --c-bg-deep   de drie bandkleuren onder elkaar
+   Dat onderscheid is precies waarom --c-band bestaat. Een token dat zegt
+   waarmee je schrijft, kan geen achtergrond dragen: in sumi is --c-ink crème
+   en werd de donkere band daardoor de lichtste plek van de site. Een
+   oppervlak heeft een eigen naam nodig.
+
+     --c-bg / --c-bg-alt / --c-bg-deep   de drie paginavlakken onder elkaar
      --c-card                            vulling van kaart en invoerveld
      --c-ink / --c-ink-soft / --c-muted  kop, lopende tekst, bijschrift
-     --c-on-dark(-muted)                 tekst op de donkere band
+     --c-band                            de omgekeerde band: footer en ensō
+     --c-on-band(-muted)                 tekst op die band
+     --c-line-band                       lijn op en rond die band
+     --c-on-dark(-muted)                 tekst op een omgekeerd bedieningsvlak
+                                         (knop, actief filter, skip-link) —
+                                         die kantelt juist wél mee met het palet
      --c-line / --c-line-soft            scheidingslijnen
      --c-line-control                    rand van invoervelden (WCAG 1.4.11)
-     --c-line-dark                       lijn op de donkere band
      --c-wood / --c-wood-deep            accentkleur, streepje en accentwoord
      --c-glow                            het licht dat uit de lamp komt
    ========================================================================== */
@@ -115,11 +124,14 @@
   --c-muted: #666057;
   --c-on-dark: #f2ede4;
   --c-on-dark-muted: #a49c90;
+  --c-band: #1c1a17;
+  --c-on-band: #f2ede4;
+  --c-on-band-muted: #a49c90;
+  --c-line-band: #3b352c;
 
   --c-line: #ddd6c9;
   --c-line-control: #928c83;
   --c-line-soft: #e9e3d8;
-  --c-line-dark: #3b352c;
 
   --c-wood: #8b7355;
   --c-wood-deep: #6d5842;
@@ -147,18 +159,29 @@
   --c-on-dark: #17150f;
   --c-on-dark-muted: #5b544a;
 
+  /* Het diepste vlak van het palet. In de vijf lichte paletten is de
+     band de omkering van de pagina; hier kan dat niet, want de pagina is
+     al donker. Dus gaat de band niet de andere kant op maar verder door:
+     de pagina die onderaan in inkt wegzakt. Het verschil met de pagina is
+     klein (1,05:1), daarom tekent --c-line-band de rand. */
+  --c-band: #0d0b09;
+  --c-on-band: #f4efe4;
+  --c-on-band-muted: #a59b8a;
+  --c-line-band: #35302a;
+
   --c-line: #332f28;
   --c-line-control: #807869;
   --c-line-soft: #272420;
-  --c-line-dark: #e8e1d3;
 
   --c-wood: #c89b63;
   --c-wood-deep: #e0bd8a;
   --c-glow: #ffcf8e;
 
-  /* Donkere pagina, lichte band: het woordmerk draait precies om. */
+  /* Donkere pagina en, sinds --c-band, ook een donkere band: op allebei moet
+     het woordmerk licht staan. Hiervoor stond --logo-filter-band op none,
+     omdat de band in dit palet crème werd. */
   --logo-filter: invert(1) brightness(1.6);
-  --logo-filter-band: none;
+  --logo-filter-band: invert(1) brightness(1.6);
 
   /* De primaire kleuren van De Stijl zijn op zwart te donker om te lezen. */
   --c-ds-red: #e2555f;
@@ -185,11 +208,14 @@
   --c-muted: #55626f;
   --c-on-dark: #eaeef3;
   --c-on-dark-muted: #94a3b3;
+  --c-band: #13202e;
+  --c-on-band: #eaeef3;
+  --c-on-band-muted: #94a3b3;
+  --c-line-band: #2b3a4a;
 
   --c-line: #c6cfd9;
   --c-line-control: #7d8b9b;
   --c-line-soft: #dde3ea;
-  --c-line-dark: #2b3a4a;
 
   --c-wood: #2f4f7a;
   --c-wood-deep: #21395c;
@@ -213,11 +239,14 @@
   --c-muted: #6b5144;
   --c-on-dark: #f4e9dd;
   --c-on-dark-muted: #ab9484;
+  --c-band: #2a1a14;
+  --c-on-band: #f4e9dd;
+  --c-on-band-muted: #ab9484;
+  --c-line-band: #4a3228;
 
   --c-line: #ddcdb9;
   --c-line-control: #907a67;
   --c-line-soft: #e9dccb;
-  --c-line-dark: #4a3228;
 
   --c-wood: #9e4a33;
   --c-wood-deep: #7d3624;
@@ -241,11 +270,14 @@
   --c-muted: #59614d;
   --c-on-dark: #eef0e7;
   --c-on-dark-muted: #9aa390;
+  --c-band: #1e2418;
+  --c-on-band: #eef0e7;
+  --c-on-band-muted: #9aa390;
+  --c-line-band: #333b2b;
 
   --c-line: #ccd2bf;
   --c-line-control: #808970;
   --c-line-soft: #e0e4d6;
-  --c-line-dark: #333b2b;
 
   --c-wood: #5c6b3f;
   --c-wood-deep: #465330;
@@ -271,10 +303,16 @@
   --c-on-dark: #f5f4f1;
   --c-on-dark-muted: #9a9a9a;
 
+  /* De haarlijn is gelijk aan de band zelf: De Stijl kent geen
+     verhoging, alleen vlak en lijn. */
+  --c-band: #121212;
+  --c-on-band: #f5f4f1;
+  --c-on-band-muted: #9a9a9a;
+  --c-line-band: #121212;
+
   --c-line: #d2d1cc;
   --c-line-control: #828282;
   --c-line-soft: #e4e3df;
-  --c-line-dark: #121212;
 
   --c-wood: #1b3f8b;
   --c-wood-deep: #16326e;
