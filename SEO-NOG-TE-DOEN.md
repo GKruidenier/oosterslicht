@@ -36,7 +36,18 @@ Alle SEO-aanpassingen zitten **lokaal in git**. De testsite loopt achter.
   meer voor
 - Eigen 404-pagina, compressie, cache-headers
 - Testomgeving op `noindex` via een header op de hostnaam
-- Elf titels omgezet naar beschrijvend-eerst, met `og:title` gelijkgetrokken
+- Twaalf titels omgezet naar beschrijvend-eerst, met `og:title` gelijkgetrokken
+- H1 van de zes Japanse lampen: "Japanse wandlamp Koyo" in plaats van
+  "Wandlamp Koyo". Bewust korter dan de titel: de H1 staat in een smalle kolom
+  en de volledige titel zou daar op mobiel vier regels worden
+- H1 van de collectiepagina van "Lampen Japans" naar "Japanse lampen" - dat is
+  ook gewoon beter Nederlands
+- `og:locale` (nl_NL) en `og:image:alt` op alle vijftien pagina's met
+  OG-tags; de vijf deelafbeeldingen die nergens als `<img>` voorkomen hebben
+  een eigen beschrijving gekregen
+- `sitemap.xml` opnieuw opgebouwd: `lastmod` per pagina uit de git-historie in
+  plaats van een handmatige datum, en `priority` verwijderd omdat Google die
+  negeert
 - "Rijstpapier" op `maakproces.html` en "japandi" op `index.html`, handmatig
   toegevoegd (zie hoofdstuk 2)
 
