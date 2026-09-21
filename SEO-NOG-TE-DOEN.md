@@ -499,6 +499,96 @@ zoekresultaat.
 
 ---
 
+## 8. Voorstel: de cultuur naar de etalage
+
+De site is cultureel diep, maar dat zit in de paginatekst en niet in de
+titels en descriptions. Kozo staat er 117 keer, unryu 97 keer, zen 23 keer —
+en nul keer in een titel. Elf van de zestien titels beginnen met
+"Handgemaakte", hetzelfde woord dat Turkse mozaieklampen en rotan-import
+gebruiken.
+
+Wie op cultuur zoekt, ziet daar niets van. Wie op een lamp zoekt, vindt je
+wel. Dat is de omkering die hieronder wordt voorgesteld.
+
+### Wat er gezocht wordt en wat de site heeft
+
+| Zoekterm | Suggesties | Op de site |
+|---|---|---|
+| **wabi sabi lamp** | ook *wabi sabi hanglamp*, *wabi sabi interieur* | **0x** |
+| **japandi lamp** | ook *japandi stijl*, *japandi eettafel* | 2x |
+| **shoji lamp** | ook *shoji papier*, *shoji schuifdeur* | 1x, in een bijzin |
+| **japans interieur** | *winkel*, *design*, *stijl* | 0x |
+
+"Washi" kaal werkt niet als zoekterm: dat levert *Washington* en *washi tape*
+op. Het heeft altijd een lamp of papier ernaast nodig.
+
+### Voorstel 1: wabi-sabi benoemen op `lampencollectie.html`
+
+De intro beschrijft de esthetiek al, maar noemt hem niet bij naam.
+
+> **Nu:** ...Met de minimalistische vorm en het gebruik van natuurlijke
+> materialen stralen ze warmte en rust uit.
+>
+> **Voorstel:** ...Met de minimalistische vorm en het gebruik van natuurlijke
+> materialen stralen ze warmte en rust uit. Die waardering voor het
+> onregelmatige en het natuurlijke — de nerf in het hout, het blad dat nooit
+> hetzelfde valt — heet in Japan wabi-sabi.
+
+Dit is geen trucje: het is de esthetiek waarin het werk staat, en de Koyo
+zegt het al in zijn eigen description ("geen blad is hetzelfde, dus geen lamp
+is gelijk").
+
+### Voorstel 2: shoji uit de bijzin halen, op `maakproces.html`
+
+> **Nu:** Dit stevige papier werd in Japan van oudsher gebruikt voor
+> scheidingswanden en vensters (shoji) in huizen.
+>
+> **Voorstel:** Dit stevige papier werd in Japan van oudsher gebruikt voor
+> shoji: de schuifwanden en vensters die een kamer in zacht licht zetten. Een
+> lamp van OostersLicht werkt op dezelfde manier — hetzelfde papier, dezelfde
+> techniek, alleen om het licht heen in plaats van voor het raam.
+
+### Voorstel 3: titel van de collectiepagina
+
+| | Titel | Tekens |
+|---|---|---|
+| Nu | Handgemaakte Japanse lampen van hout | 51 |
+| **A** | Japanse lampen van hout en washi | 47 |
+| B | Japanse lampen van hout en washi papier | 54 |
+| C | Wabi-sabi lampen van hout en washi | 49 |
+
+A zet het materiaal vooraan in plaats van het productiewoord. C is de
+scherpste keuze qua publiek, maar ook de smalste: wie "Japanse lampen" zoekt
+en niet weet wat wabi-sabi is, herkent hem niet.
+
+### Voorstel 4: het papier bij naam in de descriptions
+
+Alleen de Torii noemt nu de papiersoort. De andere vijf zeggen "Japans
+papier". Voorstel: vervangen door "washi", dat is zowel de juiste term als de
+gezochte.
+
+| Pagina | Voorstel | Tekens |
+|---|---|---|
+| kawa | ...met washi naar keuze: kozo, unryu of kinwashi... | 133 |
+| koyo | ...een geperst blad in het washi: esdoorn, ginkgo... | 143 |
+| take | ...met een bamboeblad in het washi... | 107 |
+| yang | ...esdoornhouten detaillering op washi... | 116 |
+| yin | ...esdoornhouten detaillering op washi... | 130 |
+
+**Let op de nauwkeurigheid.** Een eerdere versie van dit voorstel zette
+"unryu kozo" in elke description. Dat zou onwaar zijn: bij de meeste lampen
+is het papier een keuze tussen kozo washi, unryu kozo en kinwashi. Alleen bij
+de Torii en de Take is een specifieke soort de getoonde uitvoering.
+
+### Wat bewust niet verandert
+
+De productpagina's houden hun titel. Daar moet "wandlamp" of "vloerlamp"
+vooraan blijven staan, anders wordt de pagina niet gevonden door iemand die
+een wandlamp zoekt. De cultuur hoort in de collectie- en maakprocespagina,
+waar het verhaal zit.
+
+---
+
 ## Volgorde
 
 Wat nu nog echt iets oplevert, op volgorde:
