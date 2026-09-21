@@ -40,3 +40,6 @@ _schetsen/
 # "python seo.py export". De HTML is de bron, deze tabel alleen de
 # invoerhulp om alle titels naast elkaar te kunnen bewerken.
 seo.tsv
+
+# Python zet hier zijn bytecode neer zodra seo.py als module wordt geladen.
+__pycache__/
