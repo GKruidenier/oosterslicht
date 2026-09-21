@@ -160,29 +160,87 @@
 
   --fs-display-xl: clamp(2.75rem, 5vw, 5rem);
   --fs-display-l: clamp(2.5rem, 5.5vw, 5rem);
-  --fs-h2: clamp(2rem, 4vw, 3.5rem);
+  --fs-h2: var(--space-l);
   --fs-h3: clamp(1.5rem, 2.4vw, 2.125rem);
   --fs-lead: clamp(1.0625rem, 1.15vw, 1.1875rem);
   --fs-body: 1rem;
   --fs-small: 0.875rem;
   --fs-label: 0.6875rem;
 
-  /* Ruimte — ruimtelijk (density 3/10) */
-  --space-2xs: 0.5rem;
-  --space-xs: 0.75rem;
-  --space-s: 1.25rem;
-  --space-m: 2rem;
-  --space-l: 3rem;
-  --space-xl: 4.5rem;
-  --space-2xl: 7rem;
-  --space-3xl: 10rem;
+  /* Ruimte — ruimtelijk (density 3/10)
+
+     Elke stap is vloeiend en groeit binnen hetzelfde venster: op 375px staat
+     hij op zijn minimum, op 1440px op zijn maximum. Dat is het hele punt van
+     deze schaal. Daarvoor stonden hier acht vaste waarden, en daarnaast
+     drieënvijftig met de hand geschreven clamp()-regels met zesentwintig
+     verschillende vw-snelheden. Een marge groeide dan met 2vw terwijl de
+     afstand eronder met 7vw groeide: op 900px had de pagina andere
+     verhoudingen dan op 1440px, en op geen enkele breedte klopte alles
+     tegelijk. Nu reist alle ruimte op de pagina met elkaar mee.
+
+     De middelste waarde is afgeleid, niet geschat:
+       helling   = (max - min) / (90rem - 23.4375rem)
+       vw-deel   = helling * 100
+       rem-deel  = min - helling * 23.4375
+     Het rem-deel staat er niet voor de sier: een clamp() met alleen vw
+     negeert de lettergrootte die de bezoeker in de browser heeft ingesteld,
+     en dan groeit de tekst bij inzoomen wel en de ruimte eromheen niet.
+
+     Elk maximum is gelijk aan de vaste waarde die hier eerder stond, dus op
+     desktop verandert er niets. Wat verandert is de telefoon: daar stond
+     --space-m op 32px, wat op een scherm van 375px bijna een tiende van de
+     breedte is voor een afstand die bedoeld was voor een venster van 1440.
+
+     De onderste twee stappen zijn nieuw en de bovenste twee stonden leeg:
+     --space-2xl en --space-3xl hadden nul gebruikers, terwijl elke
+     sectieafstand met de hand werd uitgeschreven. */
+  --space-3xs: clamp(0.25rem, 0.206rem + 0.188vw, 0.375rem);
+  --space-2xs: clamp(0.375rem, 0.331rem + 0.188vw, 0.5rem);
+  --space-xs: clamp(0.625rem, 0.581rem + 0.188vw, 0.75rem);
+  --space-s: clamp(1rem, 0.912rem + 0.376vw, 1.25rem);
+  --space-m: clamp(1.25rem, 0.986rem + 1.127vw, 2rem);
+  --space-l: clamp(1.75rem, 1.31rem + 1.878vw, 3rem);
+  --space-xl: clamp(2.5rem, 1.796rem + 3.005vw, 4.5rem);
+  --space-2xl: clamp(3rem, 2.12rem + 3.756vw, 5.5rem);
+  --space-3xl: clamp(4rem, 2.944rem + 4.507vw, 7rem);
+  --space-4xl: clamp(4.5rem, 2.563rem + 8.263vw, 10rem);
+
+  /* Bediening — bewust NIET vloeiend.
+
+     De ruimteschaal hierboven groeit met het venster omdat afstand tussen
+     dingen met de compositie meeschaalt. De binnenruimte van een knop doet
+     dat niet: die wordt bepaald door de letter erin en door de vinger die
+     hem raakt, en een duim is op een telefoon niet kleiner dan op een laptop.
+     Een knop die meegroeit is een knop die op de telefoon te klein is.
+
+     Hier stonden vijfentwintig verschillende waarden voor drie taken. De
+     nav-link had 0,6/1,05, de chip 0,55/1,1 en het filter 0,6/1,1 — drie
+     pillen naast elkaar in dezelfde vormtaal, elk een halve pixel anders om
+     geen enkele reden. Nu zijn het drie maten, per as benoemd zodat een
+     knop die alleen verticale ruimte heeft (.btn-text, .duality__toggle)
+     dezelfde hoogte houdt als de knoppen ernaast. */
+  --ctl-y-s: 0.375rem;
+  --ctl-x-s: 0.8125rem;
+  --ctl-y-m: 0.625rem;
+  --ctl-x-m: 1.125rem;
+  --ctl-y-l: 0.9rem;
+  --ctl-x-l: 1.8rem;
 
   /* Maatvoering */
   --wrap: 1440px;
   --wrap-wide: 1680px;
   --wrap-text: 68ch;
+  /* De marge naast de pagina hoort niet bij de ruimteschaal hierboven. Die
+     schaal regelt afstand tússen dingen; dit is de afstand tot de vensterrand
+     en die volgt het venster zelf, niet de inhoud. Daarom een eigen snelheid. */
   --gutter: clamp(1.25rem, 5vw, 5rem);
-  --section-y: clamp(4.5rem, 11vw, 10rem);
+  /* De sectiecadans is geen aparte maat meer maar de bovenste stap van de
+     schaal, zodat de afstand tussen twee secties met dezelfde klok loopt als
+     de afstand binnen een sectie. --section-y-tight is de enige andere cadans
+     die de site echt gebruikte; die stond eerder als losse clamp()-regel op
+     drie verschillende plekken. */
+  --section-y: var(--space-4xl);
+  --section-y-tight: var(--space-2xl);
   --header-h: 5rem;
 
   --radius: 2px;
@@ -296,7 +354,7 @@ button {
   z-index: 999;
   background: var(--c-ink);
   color: var(--c-on-dark);
-  padding: 0.85rem 1.5rem;
+  padding: var(--ctl-y-l) var(--ctl-x-l);
   font-size: var(--fs-small);
   transition: top var(--dur-fast) var(--ease);
 }
@@ -415,11 +473,11 @@ p:last-child {
 }
 
 .section--tight {
-  padding-block: clamp(3rem, 6vw, 5.5rem);
+  padding-block: var(--section-y-tight);
 }
 
 .section__head {
-  margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+  margin-bottom: var(--space-xl);
 }
 
 /* Vanaf de bovenkant uitlijnen, zodat de eerste regel van de inleiding op
@@ -558,7 +616,7 @@ p:last-child {
 .nav__list {
   display: flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: var(--space-2xs);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -566,7 +624,7 @@ p:last-child {
 
 .nav__link {
   display: block;
-  padding: 0.6rem 1.05rem;
+  padding: var(--ctl-y-m) var(--ctl-x-m);
   font-size: var(--fs-small);
   color: var(--c-ink-soft);
   border: 1px solid transparent;
@@ -606,7 +664,7 @@ p:last-child {
 .nav {
   display: flex;
   align-items: center;
-  gap: clamp(0.5rem, 1.5vw, 1rem);
+  gap: var(--space-xs);
 }
 
 /* Mobiel menu */
@@ -675,7 +733,7 @@ p:last-child {
   }
 
   .nav__link {
-    padding: 1rem 0;
+    padding: var(--space-s) 0;
     border: 0;
     border-bottom: 1px solid var(--c-line-soft);
     border-radius: 0;
@@ -730,7 +788,7 @@ p:last-child {
   justify-content: center;
   gap: 0.75em;
   min-height: 48px;
-  padding: 0.9rem 1.8rem;
+  padding: var(--ctl-y-l) var(--ctl-x-l);
   font-family: var(--font-body);
   font-size: var(--fs-small);
   font-weight: 500;
@@ -846,7 +904,7 @@ p:last-child {
   color: var(--c-ink);
   /* Verticale ruimte zodat het tikdoel de 24px-ondergrens haalt,
      zonder de tekstregel te breken (inline links in lopende tekst). */
-  padding-block: 0.4rem;
+  padding-block: var(--space-2xs);
   background-image: linear-gradient(currentColor, currentColor);
   background-size: 100% 1px;
   background-position: 0 calc(100% - 0.35rem);
@@ -982,7 +1040,7 @@ p:last-child {
    breedte van een foto vraagt een dekking die het beeld toch weer doodslaat. */
 .hero__media {
   aspect-ratio: 5 / 4;
-  margin-bottom: clamp(1.75rem, 6vw, 2.5rem);
+  margin-bottom: var(--space-l);
 }
 
 /* Op een tablet wordt een 5:4-band een muur van foto: dan staat de kop onder
@@ -1007,7 +1065,7 @@ p:last-child {
        het openen in beeld te houden (58svh). De hoogste van de twee wint, want
        een afgesneden lamp is erger dan een kop die net onder de vouw begint. */
     max-height: max(58svh, 47.6vw);
-    margin-bottom: clamp(1.25rem, 2.5vw, 1.5rem);
+    margin-bottom: var(--space-s);
   }
 }
 
@@ -1017,8 +1075,8 @@ p:last-child {
    ruim; deze opvulling zet dat recht. Boven 1100px vervalt hij, want daar
    staat de tekst in de band en niet eronder. */
 .hero__wrap {
-  padding-top: clamp(1.75rem, 5vw, 2.25rem);
-  padding-bottom: clamp(2.5rem, 8vw, 4rem);
+  padding-top: var(--space-m);
+  padding-bottom: var(--space-xl);
 }
 
 /* De maat staat op de regels en niet op het hele blok: op het blok zou hij ook
@@ -1134,7 +1192,7 @@ p:last-child {
     inset: 0;
     margin-inline: auto;
     display: grid;
-    padding-block: clamp(2rem, 3.5vw, 3rem) clamp(2.5rem, 5vw, 5rem);
+    padding-block: var(--space-l) var(--space-xl);
   }
 
   /* De kop komt op de hoogte van het licht te staan. Drie termen:
@@ -1155,7 +1213,7 @@ p:last-child {
     align-self: center;
     transform: translateY(calc(
       (var(--licht-y) - 0.5) * var(--band-h)
-      + (clamp(2.5rem, 5vw, 5rem) - clamp(2rem, 3.5vw, 3rem)) / 2
+      + (var(--space-xl) - var(--space-l)) / 2
       + 0.175 * var(--fs-hero)
     ));
   }
@@ -1174,7 +1232,7 @@ p:last-child {
   letter-spacing: var(--ls-display-tight);
   /* Deze afstand kwam eerst van de alinea eronder. Nu die weg is, staat hij
      hier: de knoppen zijn een volgende handeling en horen los van de kop. */
-  margin: 0 0 clamp(1.75rem, 3.4vw, 2.9rem);
+  margin: 0 0 var(--space-l);
   color: var(--c-ink);
 }
 
@@ -1199,7 +1257,7 @@ p:last-child {
      op 35 pixels steken en zou het merk kleiner worden dan bij de andere
      lettersets. */
   height: max(2rem, calc(var(--fs-hero) * 0.84));
-  margin: 0 0 clamp(0.6rem, 1.1vw, 0.95rem);
+  margin: 0 0 var(--space-xs);
   filter: var(--logo-filter);
 }
 
@@ -1297,13 +1355,13 @@ p:last-child {
   /* Krapper dan --section-y (tot 10rem): boven de kop stond honderdzestig
      pixels leegte voor een afsluiter van vier regels, terwijl de foto beneden
      al tegen de rand zat. Deze maat is dezelfde als .section--tight. */
-  padding-block: clamp(3rem, 6vw, 5.5rem);
+  padding-block: var(--section-y-tight);
 }
 
 .slot__raster {
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(2rem, 5vw, 4rem);
+  gap: var(--space-xl);
   align-items: end;
 }
 
@@ -1374,7 +1432,7 @@ p:last-child {
 .features {
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(2rem, 4vw, 3.5rem);
+  gap: var(--space-l);
 }
 
 @media (min-width: 720px) {
@@ -1393,7 +1451,7 @@ p:last-child {
   font-size: 1.4rem;
   font-weight: var(--fw-display-mid);
   color: var(--c-ink);
-  margin: 0 0 0.6rem;
+  margin: 0 0 var(--space-xs);
   line-height: 1.2;
 }
 
@@ -1409,7 +1467,7 @@ p:last-child {
 .split {
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(2rem, 5vw, 4.5rem);
+  gap: var(--space-xl);
   align-items: center;
 }
 
@@ -1467,7 +1525,7 @@ p:last-child {
 }
 
 .split + .split {
-  margin-top: clamp(3.5rem, 8vw, 7rem);
+  margin-top: var(--space-3xl);
 }
 
 .split__photo {
@@ -1537,12 +1595,12 @@ p:last-child {
 .filters {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: clamp(2.25rem, 4.5vw, 3.25rem);
+  gap: var(--space-2xs);
+  margin-bottom: var(--space-l);
 }
 
 .filter {
-  padding: 0.6rem 1.1rem;
+  padding: var(--ctl-y-m) var(--ctl-x-m);
   font-size: var(--fs-small);
   color: var(--c-ink-soft);
   background: none;
@@ -1570,7 +1628,7 @@ p:last-child {
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
-  gap: clamp(1.75rem, 3vw, 3rem) clamp(1.25rem, 2vw, 2rem);
+  gap: var(--space-l) var(--space-m);
 }
 
 .grid--two {
@@ -1635,7 +1693,7 @@ p:last-child {
   background: linear-gradient(180deg, var(--c-bg-alt), var(--c-bg-deep));
   display: grid;
   place-items: center;
-  padding: clamp(1.25rem, 2.5vw, 2.25rem);
+  padding: var(--space-m);
 }
 
 .card__media--cutout img {
@@ -1659,7 +1717,7 @@ p:last-child {
   font-size: 1.35rem;
   font-weight: var(--fw-display-mid);
   color: var(--c-ink);
-  margin: 0 0 0.25rem;
+  margin: 0 0 var(--space-3xs);
   line-height: 1.2;
 }
 
@@ -1672,7 +1730,7 @@ p:last-child {
 /* Prijs op een overzichtskaartje: het getal waar de bezoeker op scant. */
 .card__price {
   display: block;
-  margin-top: 0.35rem;
+  margin-top: var(--space-3xs);
   font-size: var(--fs-small);
   font-weight: 500;
   color: var(--c-ink);
@@ -1688,7 +1746,7 @@ p:last-child {
 /* Boven het product staat alleen nog het kruimelpad, dus de sectie hoeft daar
    geen volle marge meer aan toe te voegen. Zo begint de lamp hoog in beeld. */
 .section--tight:has(.product--single) {
-  padding-block-start: clamp(1rem, 2vw, 1.75rem);
+  padding-block-start: var(--space-m);
 }
 
 /* Op een losse lamppagina stond de naam in de paginakop, met een halve
@@ -1709,7 +1767,7 @@ p:last-child {
     grid-template-areas:
       'kop foto'
       'gegevens foto';
-    column-gap: clamp(2rem, 4vw, 4rem);
+    column-gap: var(--space-xl);
     row-gap: 0;
   }
 
@@ -1746,7 +1804,7 @@ p:last-child {
 /* Zonder de naam houdt de paginakop alleen het kruimelpad over; de ruime
    marge eronder was er voor een kop die er niet meer staat. */
 .page-head:not(:has(.page-head__inner)) {
-  padding-block: clamp(1.5rem, 3vw, 2.25rem) 0;
+  padding-block: var(--space-m) 0;
 }
 
 /* --- Fotoslider ----------------------------------------------------------- */
@@ -1785,7 +1843,7 @@ p:last-child {
 
 /* Uitsnedes staan op transparant en krijgen wat lucht rondom. */
 .slider__slide--cutout {
-  padding: clamp(1rem, 3vw, 2.5rem);
+  padding: var(--space-m);
 }
 
 .slider__slide.is-active {
@@ -1838,7 +1896,7 @@ p:last-child {
   position: absolute;
   left: 0.85rem;
   bottom: 0.85rem;
-  padding: 0.35rem 0.8rem;
+  padding: var(--ctl-y-s) var(--ctl-x-s);
   border-radius: var(--radius-pill);
   background: color-mix(in srgb, var(--c-bg) 88%, transparent);
   backdrop-filter: blur(6px);
@@ -1854,7 +1912,7 @@ p:last-child {
   bottom: 0.85rem;
   /* Nooit over de teller linksonder heen lopen. */
   max-width: calc(100% - 7.5rem);
-  padding: 0.35rem 0.8rem;
+  padding: var(--ctl-y-s) var(--ctl-x-s);
   border-radius: var(--radius-pill);
   background: color-mix(in srgb, var(--c-bg) 88%, transparent);
   backdrop-filter: blur(6px);
@@ -1868,7 +1926,7 @@ p:last-child {
 .slider__empty {
   position: absolute;
   inset: auto 1rem 1rem;
-  padding: 0.75rem 1rem;
+  padding: var(--ctl-y-m) var(--ctl-x-m);
   border-radius: var(--radius);
   background: color-mix(in srgb, var(--c-bg) 94%, transparent);
   border: 1px solid var(--c-line);
@@ -1898,7 +1956,7 @@ p:last-child {
 
 .chooser__legend {
   padding: 0;
-  margin-bottom: 0.6rem;
+  margin-bottom: var(--space-xs);
   font-size: var(--fs-label);
   font-weight: 500;
   letter-spacing: 0.16em;
@@ -1909,7 +1967,7 @@ p:last-child {
 .chooser__options {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6rem;
+  gap: var(--space-xs);
 }
 
 /* Keuzeknop als chip; de radio zelf blijft bedienbaar voor toetsenbord. */
@@ -1917,9 +1975,9 @@ p:last-child {
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: var(--space-2xs);
   min-height: 44px;
-  padding: 0.55rem 1.1rem;
+  padding: var(--ctl-y-m) var(--ctl-x-m);
   border: 1px solid var(--c-line);
   border-radius: var(--radius-pill);
   background: var(--c-card);
@@ -1980,7 +2038,7 @@ p:last-child {
 }
 
 .chooser__note {
-  margin: 0.35rem 0 0;
+  margin: var(--space-3xs) 0 0;
   font-size: 0.8125rem;
   color: var(--c-muted);
 }
@@ -2006,7 +2064,7 @@ p:last-child {
   z-index: 1000;
   display: grid;
   place-items: center;
-  padding: clamp(1rem, 4vw, 3rem);
+  padding: var(--space-l);
   background: color-mix(in srgb, var(--c-ink) 92%, transparent);
   border: 0;
 }
@@ -2036,7 +2094,7 @@ p:last-child {
   font-size: clamp(1.75rem, 4vw, 2.5rem);
   font-weight: var(--fw-display);
   color: var(--c-on-dark);
-  margin: 0 0 0.6rem;
+  margin: 0 0 var(--space-xs);
 }
 
 .lightbox__desc {
@@ -2124,14 +2182,14 @@ p:last-child {
   align-items: center;
   justify-content: space-between;
   gap: var(--space-m);
-  padding: clamp(1.25rem, 2.5vw, 1.9rem) 0;
+  padding: var(--space-m) 0;
   border-bottom: 1px solid var(--c-line);
   transition: padding-inline var(--dur) var(--ease),
     background-color var(--dur) var(--ease);
 }
 
 .row:hover {
-  padding-inline: clamp(0.5rem, 1.5vw, 1.25rem);
+  padding-inline: var(--space-s);
   background: color-mix(in srgb, var(--c-wood) 7%, transparent);
 }
 
@@ -2148,7 +2206,7 @@ p:last-child {
   display: block;
   font-size: var(--fs-small);
   color: var(--c-muted);
-  margin-top: 0.2rem;
+  margin-top: var(--space-3xs);
 }
 
 .row__arrow {
@@ -2169,7 +2227,7 @@ p:last-child {
 .gallery {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: clamp(0.75rem, 1.5vw, 1.25rem);
+  gap: var(--space-s);
 }
 
 @media (min-width: 900px) {
@@ -2213,7 +2271,7 @@ p:last-child {
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   color: var(--c-ink);
-  padding: 0.4rem 0.85rem;
+  padding: var(--ctl-y-s) var(--ctl-x-s);
   font-size: 0.8125rem;
   border-radius: var(--radius);
 }
@@ -2382,7 +2440,7 @@ p:last-child {
   align-content: center;
   justify-items: center;
   text-align: center;
-  padding: clamp(2.75rem, 5vw, 4.5rem) var(--gutter);
+  padding: var(--space-xl) var(--gutter);
   overflow: hidden;
 }
 
@@ -2433,7 +2491,7 @@ p:last-child {
   .duality__panel:focus-within .duality__inner,
   .duality__panel[data-open] .duality__inner {
     grid-template-columns: minmax(0, 18rem) clamp(16rem, 24vw, 26rem);
-    column-gap: clamp(2rem, 3vw, 3rem);
+    column-gap: var(--space-l);
   }
 }
 
@@ -2505,7 +2563,7 @@ p:last-child {
   align-items: center;
   gap: 0.6em;
   margin-top: var(--space-m);
-  padding: 0.6rem 0;
+  padding: var(--ctl-y-m) 0;
   min-height: 2.75rem;
   background: none;
   border: 0;
@@ -2656,14 +2714,14 @@ p:last-child {
 .site-footer {
   background: var(--c-ink);
   color: var(--c-on-dark);
-  padding-block: clamp(3.5rem, 7vw, 6rem) var(--space-l);
+  padding-block: var(--space-2xl) var(--space-l);
 }
 
 .site-footer__grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(2.5rem, 5vw, 4rem);
-  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+  gap: var(--space-xl);
+  padding-bottom: var(--space-xl);
   border-bottom: 1px solid var(--c-line-dark);
 }
 
@@ -2763,7 +2821,7 @@ p:last-child {
 /* --- Pagina-kop (subpagina's) --------------------------------------------- */
 
 .page-head {
-  padding-block: clamp(3rem, 7vw, 6rem) clamp(2.5rem, 5vw, 4rem);
+  padding-block: var(--space-2xl) var(--space-xl);
 }
 
 .page-head__inner {
@@ -2812,11 +2870,11 @@ p:last-child {
    eronder scheelt dat ruim honderd pixels voor de eerste lamp in beeld komt.
    De marges zijn kleiner, niet weg — de pagina moet lucht houden. */
 .page-head:has(.page-head__inner--media) {
-  padding-block-end: clamp(1rem, 2vw, 1.5rem);
+  padding-block-end: var(--space-s);
 }
 
 .page-head:has(.page-head__inner--media) + .section {
-  padding-block-start: clamp(2rem, 3.5vw, 3rem);
+  padding-block-start: var(--space-l);
 }
 
 .page-head__title {
@@ -2875,7 +2933,7 @@ p:last-child {
 .crumbs {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--space-2xs);
   font-size: var(--fs-small);
   color: var(--c-muted);
   margin-bottom: var(--space-s);
@@ -2913,8 +2971,8 @@ p:last-child {
 .product {
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(2rem, 4vw, 4rem);
-  padding-block: clamp(3rem, 6vw, 5.5rem);
+  gap: var(--space-xl);
+  padding-block: var(--section-y-tight);
   border-top: 1px solid var(--c-line);
   scroll-margin-top: calc(var(--header-h) + 1rem);
 }
@@ -2935,7 +2993,7 @@ p:last-child {
   border-radius: var(--radius-img);
   display: grid;
   place-items: center;
-  padding: clamp(1.5rem, 3vw, 3rem);
+  padding: var(--space-l);
   overflow: hidden;
 }
 
@@ -2981,7 +3039,7 @@ p:last-child {
 }
 
 .product__title {
-  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-size: var(--space-l);
   margin: 0 0 var(--space-s);
 }
 
@@ -2996,7 +3054,7 @@ p:last-child {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem var(--space-s);
-  padding: 0.85rem 0;
+  padding: var(--space-xs) 0;
   border-bottom: 1px solid var(--c-line);
   font-size: var(--fs-small);
 }
@@ -3122,7 +3180,7 @@ p:last-child {
    liep tot twee pixels van de rand. */
 .staalkaart__tekst {
   display: block;
-  padding: 0.5rem 0.7rem 0.65rem;
+  padding: var(--ctl-y-s) var(--ctl-x-s) calc(var(--ctl-y-s) + 0.15rem);
 }
 
 .staalkaart__naam {
@@ -3135,7 +3193,7 @@ p:last-child {
 
 .staalkaart__desc {
   display: block;
-  margin-top: 0.15rem;
+  margin-top: var(--space-3xs);
   font-size: var(--fs-label);
   line-height: 1.4;
   color: var(--c-muted);
@@ -3178,8 +3236,8 @@ p:last-child {
 .swatches {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: clamp(0.75rem, 1.5vw, 1.25rem);
-  margin-top: clamp(1rem, 2vw, 1.5rem);
+  gap: var(--space-s);
+  margin-top: var(--space-s);
   max-width: 27rem;
 }
 
@@ -3268,7 +3326,7 @@ p:last-child {
 }
 
 .swatch figcaption {
-  margin-top: 0.5rem;
+  margin-top: var(--space-2xs);
   font-size: var(--fs-small);
   color: var(--c-ink);
 }
@@ -3284,7 +3342,7 @@ p:last-child {
 .wheels {
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(2.5rem, 6vw, 4.5rem);
+  gap: var(--space-xl);
   max-width: 56rem;
   margin-inline: auto;
   text-align: center;
@@ -3295,7 +3353,7 @@ p:last-child {
 @media (min-width: 860px) {
   .wheels {
     grid-template-columns: 1fr minmax(13rem, 17rem) 1fr;
-    gap: clamp(1.5rem, 3vw, 3rem);
+    gap: var(--space-l);
     align-items: start;
     max-width: 64rem;
   }
@@ -3390,7 +3448,7 @@ p:last-child {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.3rem;
+  gap: var(--space-3xs);
   padding: 0.9rem;
   text-align: center;
   overflow: hidden;
@@ -3428,7 +3486,7 @@ p:last-child {
   font-size: clamp(1.375rem, 1.7vw, 1.75rem);
   line-height: 1.2;
   color: var(--c-ink);
-  margin: 0 0 0.35rem;
+  margin: 0 0 var(--space-3xs);
 }
 
 .wheel-readout__desc {
@@ -3483,7 +3541,7 @@ p:last-child {
 
 /* Boven de vier stappen hoort er lucht onder. */
 .band-photo--steps {
-  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+  margin-bottom: var(--space-l);
 }
 
 /* De vier stappen lezen als een lijst naast de werkplaatsfoto: het oog gaat
@@ -3493,7 +3551,7 @@ p:last-child {
   .proces {
     display: grid;
     grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-    gap: clamp(2.5rem, 5vw, 4.5rem);
+    gap: var(--space-xl);
     align-items: start;
   }
 
@@ -3513,7 +3571,7 @@ p:last-child {
 
   .proces .steps {
     grid-template-columns: 1fr;
-    gap: clamp(1.75rem, 3vw, 2.5rem);
+    gap: var(--space-l);
   }
 
   /* In één kolom staat het nummer naast de stap in plaats van erboven: dat
@@ -3521,7 +3579,7 @@ p:last-child {
   .proces .step {
     display: grid;
     grid-template-columns: auto 1fr;
-    column-gap: clamp(1rem, 1.5vw, 1.5rem);
+    column-gap: var(--space-s);
   }
 
   .proces .step::before {
@@ -3539,7 +3597,7 @@ p:last-child {
 }
 
 .materialen-link {
-  margin: clamp(1.25rem, 2.5vw, 1.75rem) 0 0;
+  margin: var(--space-m) 0 0;
 }
 
 /* De papiersectie past in één scherm: kop, tekst, drie monsters, de film en
@@ -3547,7 +3605,7 @@ p:last-child {
    sectiemarge dan de rest van de pagina (158px boven en onder is op een
    laptop een derde van het scherm) en een compacte monsterrij. */
 #materialen {
-  padding-block: clamp(1.75rem, 3.2vw, 3rem);
+  padding-block: var(--space-l);
 }
 
 /* De film schaalt mee met de schermhoogte, niet alleen met de breedte. Op een
@@ -3575,15 +3633,15 @@ p:last-child {
    pixels, precies wat een scherm van 720 pixels tekortkomt, en het blijft
    ruim genoeg om de blokken los te lezen. */
 #materialen .split__body h2 {
-  margin-bottom: clamp(0.6rem, 1.2vw, 1rem);
+  margin-bottom: var(--space-xs);
 }
 
 #materialen .lead {
-  margin-bottom: clamp(0.6rem, 1.2vw, 1rem);
+  margin-bottom: var(--space-xs);
 }
 
 #materialen .materialen-link {
-  margin-top: clamp(0.9rem, 1.8vw, 1.4rem);
+  margin-top: var(--space-s);
 }
 
 /* --- Ingesloten film ------------------------------------------------------ */
@@ -3613,9 +3671,9 @@ p:last-child {
   inset: 0;
   display: grid;
   align-content: center;
-  gap: 0.35rem;
+  gap: var(--space-3xs);
   margin: 0;
-  padding: clamp(1rem, 4vw, 2rem);
+  padding: var(--space-m);
   text-align: center;
   font-size: var(--fs-small);
   line-height: 1.7;
@@ -3641,7 +3699,7 @@ p:last-child {
   counter-reset: step;
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(2rem, 4vw, 3.5rem);
+  gap: var(--space-l);
 }
 
 @media (min-width: 760px) {
@@ -3669,12 +3727,12 @@ p:last-child {
   font-size: 1.6rem;
   color: var(--c-wood);
   line-height: 1;
-  margin-bottom: 0.75rem;
+  margin-bottom: var(--space-xs);
 }
 
 .step h3 {
   font-size: 1.35rem;
-  margin: 0 0 0.5rem;
+  margin: 0 0 var(--space-2xs);
 }
 
 .step p {
@@ -3693,7 +3751,7 @@ p:last-child {
 .field {
   display: flex;
   flex-direction: column;
-  gap: 0.45rem;
+  gap: var(--space-2xs);
 }
 
 .field label {
@@ -3734,7 +3792,7 @@ p:last-child {
   background: var(--c-card);
   border: 1px solid var(--c-line-control);
   border-radius: var(--radius);
-  padding: 0.85rem 1rem;
+  padding: var(--ctl-y-l) var(--ctl-x-m);
   min-height: 48px;
   transition: border-color var(--dur-fast) var(--ease),
     box-shadow var(--dur-fast) var(--ease);
@@ -3774,14 +3832,14 @@ p:last-child {
    staan — die is bekend en werkt met het toetsenbord — maar hij krijgt wel de
    kleuren en de maat van de rest van het formulier. */
 .field input[type='file'] {
-  padding: 0.55rem 0.75rem;
+  padding: var(--ctl-y-m) var(--ctl-x-s);
   font-size: var(--fs-small);
   cursor: pointer;
 }
 
 .field input[type='file']::file-selector-button {
-  margin-inline-end: 0.75rem;
-  padding: 0.4rem 0.9rem;
+  margin-inline-end: var(--space-xs);
+  padding: var(--ctl-y-s) var(--ctl-x-s);
   border: 1px solid var(--c-line-control);
   border-radius: var(--radius-pill);
   background: var(--c-bg);
@@ -3827,7 +3885,7 @@ p:last-child {
 /* De richtprijs onder de lampkeuze. Iets steviger dan .field__hint: dit is het
    enige bedrag in het hele formulier en het hoort niet weg te vallen. */
 .veld-prijs {
-  margin: 0.35rem 0 0;
+  margin: var(--space-3xs) 0 0;
   font-size: var(--fs-small);
   color: var(--c-ink-soft);
 }
@@ -3914,8 +3972,8 @@ p:last-child {
 .choice {
   display: flex;
   align-items: flex-start;
-  gap: 0.85rem;
-  padding: 1.15rem 1.35rem;
+  gap: var(--space-xs);
+  padding: var(--space-s);
   background: var(--c-card);
   border: 1px solid var(--c-line);
   border-radius: var(--radius);
@@ -4002,7 +4060,7 @@ p:last-child {
 .btn-text {
   background: none;
   border: 0;
-  padding: 0.5rem 0;
+  padding: var(--ctl-y-m) 0;
   font-size: var(--fs-small);
   color: var(--c-muted);
   text-decoration: underline;
@@ -4025,7 +4083,7 @@ p:last-child {
 
 /* Melding */
 .notice {
-  padding: 1.15rem 1.35rem;
+  padding: var(--space-s);
   margin-bottom: var(--space-m);
   background: color-mix(in srgb, var(--c-glow) 22%, var(--c-card));
   border: 1px solid color-mix(in srgb, var(--c-wood) 35%, transparent);
@@ -4042,7 +4100,7 @@ p:last-child {
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(2.5rem, 5vw, 4.5rem);
+  gap: var(--space-xl);
   align-items: start;
 }
 
@@ -4079,7 +4137,7 @@ p:last-child {
 }
 
 .contact-aside dd {
-  margin: 0.3rem 0 0;
+  margin: var(--space-3xs) 0 0;
   font-size: var(--fs-body);
   color: var(--c-ink);
 }
