@@ -132,8 +132,7 @@ tonen.
 
 "Japanse" staat erin omdat dat het woord is waarop de oude site gevonden
 wordt, en het is hier de stijlaanduiding: gemaakt in Driebergen-Rijsenburg,
-in Japanse
-traditie en met Japans papier.
+in Japanse traditie en met Japans papier.
 
 **De twee De Stijl-lampen krijgen het bewust niet.** Die collectie is
 Nederlands modernisme — dat is het hele idee ervan — en "Japanse tafellamp De
@@ -240,6 +239,47 @@ massamarkt, waar je het als kleine maker niet van wint.
 | rustgevende lamp | autisme, dementie, baby, kinderkamer — zorgmarkt |
 | washi lamp | vrijwel alles Engelstalig: lampshade, tokyo, diy, ikea |
 | zen verlichting, sfeerlamp hout, lamp japans papier | te zeldzaam |
+
+### Wat de concurrentie in haar titels zet
+
+Gemeten via DuckDuckGo, dus niet één op één Google, en er zaten advertenties
+tussen. Richtinggevend, niet gezaghebbend.
+
+Bovenaan bij **"japanse lampen"**:
+
+```
+Japanse Lampen kopen? - Ruim aanbod Japanse Lampen
+Japandi-lampen - Japan ontmoet Scandi
+Ummei | Specialist in Japanse lampen | Webshop |
+Japanse Lampen | ORIENTIQUE | Nu Gratis Levering!
+Japanse Lampen & Lantaarns | Authentiek Washi, Kumiko & Bamboe
+Japanse Lampen - Totale Showroom Leegverkoop! Tot 80% Korting
+Japanse lampen | Zen en minimalistische stijl - SKLUM
+```
+
+Het hele veld concurreert op voorraad, prijs en levering. Geen enkele titel
+zegt dat er één iemand aan zit die het ding maakt. Dat is het gat, en het is
+breed. Bevestigd wordt ook dat "japandi" en "washi" commercieel gebruikt
+worden: je zit niet naast de markt.
+
+Bovenaan bij **"handgemaakte lampen"** — een heel ander en rommeliger veld:
+
+```
+Studio Limonada - Handgemaakte lampen, lampenkappen, kussens & poefjes
++200 handgemaakte lampenkappen - met liefde voor het Wauw effect
+Blij Design - handgemaakte design lampen uit Nederland
+Handgemaakte unieke lampen (lampen24.nl)
+```
+
+En de winkelresultaten eronder: Turkse mozaieklampen, rotan, bamboe, abaca —
+geimporteerde waar met het etiket "handgemaakt".
+
+**Gevolg voor het titelvoorstel.** "Handgemaakte lampen" op zichzelf levert
+lampenkappen en mozaieklampen op, niet deze markt. Het woord verdient zijn
+plaats alleen in combinatie met "Japanse": `Handgemaakte Japanse hanglamp
+Kawa` is specifiek genoeg, `Handgemaakte hanglamp` zou de site in dat
+gezelschap zetten. Dat is precies hoe het voorstel in hoofdstuk 1 is
+opgebouwd.
 
 ### Bijstelling van een eerder advies
 

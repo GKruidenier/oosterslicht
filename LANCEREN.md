@@ -196,7 +196,45 @@ Let op twee dingen die buiten de code liggen:
 
 ---
 
-## 5. Buiten de website
+## 5. Na vier weken: de startmeting
+
+Dit is het enige punt dat niet meteen na de lancering kan. Zet er een
+herinnering voor.
+
+Search Console is de enige bron die over **jouw** titels gaat in plaats van
+over zoekwoorden in het algemeen. Geen enkele zoekwoordtool vertelt je of een
+titel aangeklikt wordt; dat is CTR, en die zie je alleen hier.
+
+Ga naar **Prestaties** en zet alle vier de vinkjes aan: vertoningen, klikken,
+CTR en gemiddelde positie. Kies de periode "laatste 28 dagen". Noteer per
+pagina:
+
+| Pagina | Vertoningen | Klikken | CTR | Gem. positie |
+|---|---|---|---|---|
+| / | | | | |
+| /lampencollectie.html | | | | |
+| /lamp-kawa.html | | | | |
+| … | | | | |
+
+Kijk daarnaast onder het tabblad **Zoekopdrachten** welke termen je
+vertoningen opleveren. Dat is de eerste keer dat je ziet wat mensen werkelijk
+intikken om bij jou uit te komen — niet wat een tool schat.
+
+**Waarom dit telt.** Zonder startmeting kun je later niet zien of een nieuwe
+titel beter werkt. Wissel je een titel zonder eerst vier weken te meten, dan
+weet je achteraf niet waarmee je vergelijkt. Eén titel per keer, vier tot zes
+weken laten staan, dan vergelijken. Het titelvoorstel in
+`SEO-NOG-TE-DOEN.md` heeft per pagina alternatieven staan om naar te
+wisselen.
+
+Let bij het lezen op twee dingen. Een lage CTR bij een goede positie betekent
+dat je gevonden wordt maar niet aangeklikt: dan is de titel of de description
+het probleem. Veel vertoningen op termen die niet bij je passen betekent het
+omgekeerde — je trekt het verkeerde publiek.
+
+---
+
+## 6. Buiten de website
 
 - **Google Bedrijfsprofiel.** De site noemt als vestigingsplaats
   **Driebergen-Rijsenburg** en geeft geen straatadres meer: het schema op de
@@ -210,7 +248,7 @@ Let op twee dingen die buiten de code liggen:
 
 ---
 
-## 6. Nog open
+## 7. Nog open
 
 Dit staat los van de lancering, maar hoort wel een keer opgelost:
 
