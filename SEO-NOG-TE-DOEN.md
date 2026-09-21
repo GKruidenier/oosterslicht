@@ -499,22 +499,20 @@ zoekresultaat.
 
 ---
 
-## 8. Voorstel: de cultuur naar de etalage
+## 8. De cultuur naar de etalage — deels uitgevoerd, deels ingetrokken
 
 De site is cultureel diep, maar dat zit in de paginatekst en niet in de
-titels en descriptions. Kozo staat er 117 keer, unryu 97 keer, zen 23 keer —
-en nul keer in een titel. Elf van de zestien titels beginnen met
-"Handgemaakte", hetzelfde woord dat Turkse mozaieklampen en rotan-import
-gebruiken.
+titels: kozo staat er 117 keer, unryu 97 keer, zen 23 keer — en nul keer in
+een titel. Elf van de zestien titels beginnen met "Handgemaakte", hetzelfde
+woord dat Turkse mozaieklampen en rotan-import gebruiken.
 
-Wie op cultuur zoekt, ziet daar niets van. Wie op een lamp zoekt, vindt je
-wel. Dat is de omkering die hieronder wordt voorgesteld.
+Die constatering klopt. De vier voorstellen die eruit volgden niet allemaal.
 
 ### Wat er gezocht wordt en wat de site heeft
 
 | Zoekterm | Suggesties | Op de site |
 |---|---|---|
-| **wabi sabi lamp** | ook *wabi sabi hanglamp*, *wabi sabi interieur* | **0x** |
+| **wabi sabi lamp** | ook *wabi sabi hanglamp*, *wabi sabi interieur* | nu 1x, was 0x |
 | **japandi lamp** | ook *japandi stijl*, *japandi eettafel* | 2x |
 | **shoji lamp** | ook *shoji papier*, *shoji schuifdeur* | 1x, in een bijzin |
 | **japans interieur** | *winkel*, *design*, *stijl* | 0x |
@@ -522,23 +520,18 @@ wel. Dat is de omkering die hieronder wordt voorgesteld.
 "Washi" kaal werkt niet als zoekterm: dat levert *Washington* en *washi tape*
 op. Het heeft altijd een lamp of papier ernaast nodig.
 
-### Voorstel 1: wabi-sabi benoemen op `lampencollectie.html`
+### Doorgevoerd: wabi-sabi op de homepage
 
-De intro beschrijft de esthetiek al, maar noemt hem niet bij naam.
+> Een lamp van OostersLicht past goed bij een yoga- of meditatieruimte, of bij
+> een rustige interieurstijl zoals **japandi of wabi-sabi: de waardering voor
+> het onregelmatige, voor het blad dat nooit hetzelfde valt.**
 
-> **Nu:** ...Met de minimalistische vorm en het gebruik van natuurlijke
-> materialen stralen ze warmte en rust uit.
->
-> **Voorstel:** ...Met de minimalistische vorm en het gebruik van natuurlijke
-> materialen stralen ze warmte en rust uit. Die waardering voor het
-> onregelmatige en het natuurlijke — de nerf in het hout, het blad dat nooit
-> hetzelfde valt — heet in Japan wabi-sabi.
+De korte uitleg staat erbij omdat een losse term die niemand herkent niets
+doet, en omdat Google die context nodig heeft. Drie lengtes gemeten op
+mobiel: alleen de termen geeft 3 regels, deze variant 5, de volledige uitleg
+7. De oorspronkelijke zin was er 3.
 
-Dit is geen trucje: het is de esthetiek waarin het werk staat, en de Koyo
-zegt het al in zijn eigen description ("geen blad is hetzelfde, dus geen lamp
-is gelijk").
-
-### Voorstel 2: shoji uit de bijzin halen, op `maakproces.html`
+### Nog te doen: shoji uit de bijzin halen, op `maakproces.html`
 
 > **Nu:** Dit stevige papier werd in Japan van oudsher gebruikt voor
 > scheidingswanden en vensters (shoji) in huizen.
@@ -548,44 +541,52 @@ is gelijk").
 > lamp van OostersLicht werkt op dezelfde manier — hetzelfde papier, dezelfde
 > techniek, alleen om het licht heen in plaats van voor het raam.
 
-### Voorstel 3: titel van de collectiepagina
+Dit is de sterkste van de vier: het voegt een verhaal toe dat de
+geinteresseerde meteen herkent, in plaats van een woord te verplaatsen.
 
-| | Titel | Tekens |
-|---|---|---|
-| Nu | Handgemaakte Japanse lampen van hout | 51 |
-| **A** | Japanse lampen van hout en washi | 47 |
-| B | Japanse lampen van hout en washi papier | 54 |
-| C | Wabi-sabi lampen van hout en washi | 49 |
+### INGETROKKEN: de titel van de collectiepagina
 
-A zet het materiaal vooraan in plaats van het productiewoord. C is de
-scherpste keuze qua publiek, maar ook de smalste: wie "Japanse lampen" zoekt
-en niet weet wat wabi-sabi is, herkent hem niet.
+Het voorstel was `Handgemaakte Japanse lampen van hout` te vervangen door
+`Japanse lampen van hout en washi`. **Dat is een slecht idee.** Naast de
+homepagetitel ziet het er zo uit:
 
-### Voorstel 4: het papier bij naam in de descriptions
+```
+homepage:   Japanse lampen van hout en washi, handgemaakt | OostersLicht
+collectie:  Japanse lampen van hout en washi | OostersLicht
+```
 
-Alleen de Torii noemt nu de papiersoort. De andere vijf zeggen "Japans
-papier". Voorstel: vervangen door "washi", dat is zowel de juiste term als de
-gezochte.
+Acht van de negen woorden identiek. Twee pagina's zouden op vrijwel dezelfde
+titel concurreren en Google moet dan kiezen welke hij toont — precies het
+probleem dat in dit document bij de twee De Stijl-pagina's als zwakste plek
+staat aangewezen. De huidige titel onderscheidt zich juist van de homepage.
+**Laten staan.**
 
-| Pagina | Voorstel | Tekens |
-|---|---|---|
-| kawa | ...met washi naar keuze: kozo, unryu of kinwashi... | 133 |
-| koyo | ...een geperst blad in het washi: esdoorn, ginkgo... | 143 |
-| take | ...met een bamboeblad in het washi... | 107 |
-| yang | ...esdoornhouten detaillering op washi... | 116 |
-| yin | ...esdoornhouten detaillering op washi... | 130 |
+### INGETROKKEN: "washi" in plaats van "Japans papier" in de descriptions
 
-**Let op de nauwkeurigheid.** Een eerdere versie van dit voorstel zette
-"unryu kozo" in elke description. Dat zou onwaar zijn: bij de meeste lampen
-is het papier een keuze tussen kozo washi, unryu kozo en kinwashi. Alleen bij
-de Torii en de Take is een specifieke soort de getoonde uitvoering.
+Twee redenen.
 
-### Wat bewust niet verandert
+De **description is geen rankingfactor** — dat staat elders in dit document
+ook. Een woord daar wisselen "voor de SEO" doet niets voor de vindbaarheid.
 
-De productpagina's houden hun titel. Daar moet "wandlamp" of "vloerlamp"
-vooraan blijven staan, anders wordt de pagina niet gevonden door iemand die
-een wandlamp zoekt. De cultuur hoort in de collectie- en maakprocespagina,
-waar het verhaal zit.
+En "Japans papier" is **niet de mindere term**:
+
+| Term | Wat mensen erachteraan typen |
+|---|---|
+| japans papier | *kopen, restauratie, **japans papier washi*** |
+| washi papier | *kopen, hema, japan, lamp* |
+
+Allebei leven ze, en bij "japans papier" typen mensen er zelf "washi" achter.
+De site heeft beide woorden al, verspreid over de pagina's.
+
+### De les hieruit
+
+Twee van de vier voorstellen waren woorden verplaatsen, niet inhoud
+toevoegen. Bij het toetsen bleek er geen onderbouwing voor, en bij een ervan
+zelfs schade. Wat wel werkt is het omgekeerde: een begrip toevoegen dat er
+nog niet stond (wabi-sabi) of een verhaal uit een bijzin halen (shoji).
+
+Vuistregel voor de volgende ronde: verplaats geen woorden zonder meting,
+voeg liever inhoud toe.
 
 ---
 
