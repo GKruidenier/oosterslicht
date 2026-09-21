@@ -76,6 +76,34 @@ crawler die de pagina niet mag ophalen, ziet die header nooit, en dan kan de
 URL alsnog kaal in de zoekresultaten belanden. `robots.txt` is in beide
 omgevingen hetzelfde bestand.
 
+### 1.4 Let op: `/index.html` op de testsite brengt je naar de live site
+
+**Test de homepage altijd op `/`, nooit op `/index.html`.**
+
+De uitzondering voor de testsite in `.htaccess` geldt alleen voor de
+canonicalisatie naar `https://www.oosterslicht.nl`. De doorstuurtabel
+eronder blijft op de testsite gewoon werken — dat is met opzet, want juist
+die 301's wil je daar kunnen controleren. Maar die tabel heeft de live
+URL hardgecodeerd, ook in de regel die `/index.html` naar de homepage
+stuurt.
+
+Gevolg: wie op de testsite `/index.html` opvraagt, komt zonder waarschuwing
+op de **live** homepage terecht. De pagina ziet er vertrouwd uit, dus je
+merkt niet dat je naar de oude site zit te kijken en concludeert dat je
+wijziging niet is aangekomen.
+
+```powershell
+curl.exe -s -o NUL --resolve test.oosterslicht.nl:80:5.22.249.25 -w "status=%{http_code} naar=%{redirect_url}`n" http://test.oosterslicht.nl/index.html
+```
+
+Wil zien: `status=301 naar=https://www.oosterslicht.nl/`. Dat is correct
+gedrag, geen storing — deze controle staat hier zodat je weet waaróm het
+gebeurt als je erin loopt.
+
+Hetzelfde geldt voor elk oud adres uit hoofdstuk 1.2: die sturen je ook naar
+de live site. Dat is precies wat je daar wilt meten, maar besef dat je na zo'n
+sprong niet meer op de testsite bent.
+
 ---
 
 ## 2. De uitrol
