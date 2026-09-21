@@ -3897,6 +3897,39 @@ p:last-child {
   color: var(--c-muted);
 }
 
+/* Het staal onder de keuzelijst: laat zien wat er gekozen is.
+
+   Bewust rustig. Dit is een bevestiging halverwege een formulier van vijftien
+   velden, geen etalage — het beeld is klein genoeg om de kolom niet te
+   onderbreken en groot genoeg om nerf en vezel te zien, wat precies het
+   verschil is tussen kozo en unryu.
+
+   De uitsnede is 320px en staat hier op 3,5rem. Dat is ruim, maar de
+   bestanden zijn 2 tot 14 kB en het is dezelfde uitsnede die het
+   materiaalwiel gebruikt; een eigen maat aanmaken zou een tweede waarheid
+   introduceren voor een winst van een paar kilobyte. */
+.staal-keuze {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin: var(--space-2xs) 0 0;
+}
+
+.staal-keuze__foto {
+  width: 3.5rem;
+  height: 3.5rem;
+  flex: none;
+  object-fit: cover;
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-img);
+}
+
+.staal-keuze__desc {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--c-muted);
+}
+
 @media (min-width: 640px) {
   .form__row {
     display: grid;

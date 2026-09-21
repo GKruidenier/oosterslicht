@@ -13,7 +13,7 @@
 <link rel="preload" href="assets/fonts/zen-kaku-latin.woff2" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.classList.add('js')</script>
 <script src="js/theme.js?v=4"></script>
-<link rel="stylesheet" href="css/style.css?v=158">
+<link rel="stylesheet" href="css/style.css?v=160">
 <link rel="stylesheet" href="css/themes.css?v=5">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="nl_NL">
@@ -24,7 +24,7 @@
 <meta property="og:description" content="Een lamp aanvragen of een vraag stellen.">
 <meta property="og:image" content="https://www.oosterslicht.nl/assets/img/werkplaats.webp">
 <meta property="og:image:alt" content="Jelle Kruidenier aan het werk in zijn werkplaats, met een cilindrische vloerlamp op de vloer en houtvoorraad langs de wand">
-<script src="js/site.js?v=58" defer></script>
+<script src="js/site.js?v=60" defer></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -211,27 +211,29 @@
                     <label for="houtsoort">Houtsoort <span class="req" aria-hidden="true">*</span></label>
                     <select id="houtsoort" name="houtsoort[1]" data-required>
                       <option value="">Kies een houtsoort</option>
-                      <option>Esdoorn</option>
-                      <option>Es</option>
-                      <option>Iep</option>
-                      <option>Kers</option>
-                      <option>Noten</option>
-                      <option>Eiken</option>
+                      <option data-staal="esdoorn">Esdoorn</option>
+                      <option data-staal="es">Es</option>
+                      <option data-staal="iep">Iep</option>
+                      <option data-staal="kers">Kers</option>
+                      <option data-staal="noten">Noten</option>
+                      <option data-staal="eiken">Eiken</option>
                       <option>In overleg</option>
                     </select>
                     <span class="field__hint">Hier staan alleen de houtsoorten waarin deze lamp gemaakt wordt. Wilt u een andere, kies dan &ldquo;In overleg&rdquo;.</span>
+                    <p class="staal-keuze" data-staal-keuze hidden></p>
                   </div>
 
                   <div class="field" data-veld="papier">
                     <label for="papier">Japans papier <span class="req" aria-hidden="true">*</span></label>
                     <select id="papier" name="papier[1]" data-required>
                       <option value="">Kies een papiersoort</option>
-                      <option>Kozo washi — wit en egaal</option>
-                      <option>Unryu kozo — met lange vezels</option>
-                      <option>Kinwashi — geliger, &ldquo;goudpapier&rdquo;</option>
+                      <option data-staal="kozo">Kozo washi — wit en egaal</option>
+                      <option data-staal="unryu">Unryu kozo — met lange vezels</option>
+                      <option data-staal="kinwashi">Kinwashi — geliger, &ldquo;goudpapier&rdquo;</option>
                       <option>In overleg</option>
                     </select>
                     <span class="field__hint">Elke lamp uit de Japanse collectie kan met elk van deze papiersoorten worden gemaakt.</span>
+                    <p class="staal-keuze" data-staal-keuze hidden></p>
                   </div>
 
                   <div class="field" data-veld="blad">

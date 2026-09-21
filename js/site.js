@@ -838,10 +838,70 @@
       if (blok) syncVelden(blok);
     });
 
+    /* --- Staal bij de keuzelijst -----------------------------------------
+
+       "Kinwashi" en "iep" zeggen niets als je ze niet kent, en dit is het
+       duurste moment van de site om ze niet te kennen: het bestelformulier.
+       De negen soorten staan al in SOORTEN hierboven, met dezelfde namen en
+       omschrijvingen als in de materiaalwielen, en de uitsneden van 320px
+       staan al klaar in assets/img/staal. Er hoeft dus niets bij; het moet
+       alleen op de plek komen waar gekozen wordt.
+
+       Niet het zwevende kaartje van de wielen. Dat hangt aan de muis en aan
+       hover, en hier heeft de bezoeker al gekozen: die wil zien wát hij koos
+       en dat het blijft staan, ook op een telefoon waar geen muis is. */
+    var ververseStaal = function (veld) {
+      var kaart = veld.querySelector('[data-staal-keuze]');
+      var sel = veld.querySelector('select');
+      if (!kaart || !sel) return;
+      var opt = sel.options[sel.selectedIndex];
+      var soort = opt && opt.dataset.staal ? SOORTEN[opt.dataset.staal] : null;
+      /* "In overleg" en de lege beginoptie dragen geen sleutel: dan is er
+         niets te tonen en verdwijnt het staal weer. */
+      if (!soort) { kaart.hidden = true; return; }
+
+      /* Het beeld wordt hier gemaakt en niet in contact.html neergezet. Een
+         <img> zonder src in de uitgeleverde pagina is een afbeelding die
+         nergens naar wijst; de bron staat pas vast als er gekozen is. */
+      var foto = kaart.querySelector('.staal-keuze__foto');
+      var tekst = kaart.querySelector('.staal-keuze__desc');
+      if (!foto) {
+        foto = document.createElement('img');
+        foto.className = 'staal-keuze__foto';
+        foto.alt = '';
+        foto.width = 320;
+        foto.height = 320;
+        foto.decoding = 'async';
+        foto.src = 'assets/img/staal/' + opt.dataset.staal + '.webp';
+        tekst = document.createElement('span');
+        tekst.className = 'staal-keuze__desc';
+        kaart.append(foto, tekst);
+      } else {
+        foto.src = 'assets/img/staal/' + opt.dataset.staal + '.webp';
+      }
+      tekst.textContent = soort.desc;
+      kaart.hidden = false;
+    };
+
+    var ververseAlleStalen = function () {
+      form.querySelectorAll('[data-veld="hout"], [data-veld="papier"]')
+        .forEach(ververseStaal);
+    };
+
+    /* Gedelegeerd, net als de andere twee hieronder: een lampblok dat later
+       wordt bijgezet is een kloon en heeft dus zijn eigen keuzelijsten. */
+    form.addEventListener('change', function (e) {
+      var veld = e.target.closest('[data-veld="hout"], [data-veld="papier"]');
+      if (veld) ververseStaal(veld);
+    });
+
     var syncAlleBlokken = function (verseKeuze) {
       form.querySelectorAll('.lamp-block').forEach(function (block) {
         syncVelden(block, verseKeuze);
       });
+      /* Een andere lamp kan de houtkeuze verschuiven of het veld verbergen,
+         dus het staal moet daarna opnieuw kijken wat er nu geselecteerd is. */
+      ververseAlleStalen();
     };
 
     // Gedelegeerd, zodat het ook werkt voor blokken die later worden bijgezet.
