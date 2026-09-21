@@ -10,7 +10,7 @@ Alle SEO-aanpassingen zitten **lokaal in git**. De testsite loopt achter.
 | | Lokaal | Testsite |
 |---|---|---|
 | Canonicals, kruimelpaden, interne links naar `/` | ja | nee |
-| Adres Boswijklaan 52a, Doorn | ja | ja |
+| Vestigingsplaats Driebergen-Rijsenburg, zonder straatadres | ja | nee |
 | `.htaccess`: 301's, canonicalisatie, noindex op de testnaam | ja | ja |
 | `404.html`, compressie, cache-headers | ja | ja |
 | `sitemap.xml` | ja | nee (geeft daar 404) |
@@ -23,8 +23,17 @@ Alle SEO-aanpassingen zitten **lokaal in git**. De testsite loopt achter.
 - Domein vastgezet op `https://www.oosterslicht.nl`
 - Canonical op alle dertien vindbare pagina's, gelijk aan `og:url` en sitemap
 - `BreadcrumbList` op twaalf pagina's, gelijk aan het zichtbare kruimelpad
-- Adres rechtgezet en aangevuld met straat en postcode, in vijftien
-  schemablokken en 33 plekken zichtbare tekst
+- Vestigingsplaats op Driebergen-Rijsenburg gezet, op 51 plekken. Straat en
+  postcode zijn juist uit alle schemablokken gehaald: ze stonden nergens
+  zichtbaar op de pagina, en dat gaat in tegen de richtlijn dat je geen
+  gegevens markeert die de bezoeker niet ziet. Voor de ranking maakt een
+  straatadres niets uit; alleen de plaatsnaam draagt bij
+- `LocalBusiness` vervangen door `Organization` op de homepage. De werkplaats
+  is geen bezoekadres: lampen worden gebracht of bezorgd. Daarmee is het type
+  ook gelijk aan de `manufacturer`- en `seller`-blokken op de productpagina's
+- Telefoonnummer naar 0343 415525, op 53 plekken
+- Alle acht lampen hebben een prijs in `offers`; "op aanvraag" komt nergens
+  meer voor
 - Eigen 404-pagina, compressie, cache-headers
 - Testomgeving op `noindex` via een header op de hostnaam
 - "Rijstpapier" op `maakproces.html` en "japandi" op `index.html`, handmatig
@@ -122,7 +131,8 @@ tonen.
 | `destijl-wandlamp.html` | Handgemaakte wandlamp De Stijl \| OostersLicht | 45 |
 
 "Japanse" staat erin omdat dat het woord is waarop de oude site gevonden
-wordt, en het is hier de stijlaanduiding: gemaakt in Doorn, in Japanse
+wordt, en het is hier de stijlaanduiding: gemaakt in Driebergen-Rijsenburg,
+in Japanse
 traditie en met Japans papier.
 
 **De twee De Stijl-lampen krijgen het bewust niet.** Die collectie is
@@ -297,9 +307,19 @@ terug moet, bijvoorbeeld in de description van de homepage.
 
 ## 3. Google Bedrijfsprofiel
 
-Nul regels code, grote invloed op zoekopdrachten als "lampen Doorn" of
-"lampenmaker Utrechtse Heuvelrug". Het adres daar moet exact overeenkomen met
-het `LocalBusiness`-schema op de homepage: **Boswijklaan 52a, 3941 ZN Doorn**.
+Nul regels code. Verwacht er geen verkeer van: wie een handgemaakte Japanse
+lamp zoekt, zoekt landelijk en niet "bij mij in de buurt", dus het kaartblok
+komt nauwelijks in beeld. De winst zit elders.
+
+**Recensies** zijn het echte argument. Die kunnen alleen bestaan met een
+profiel, ze verschijnen bij je naam in de zoekresultaten, en voor iemand die
+twijfelt over een lamp van een paar honderd euro wegen ze zwaarder dan welke
+SEO-ingreep ook. Daarnaast krijg je een net panel bij merkzoekopdrachten.
+
+Naam, plaats en telefoonnummer daar moeten gelijklopen met de site:
+**Driebergen-Rijsenburg** en **0343 415525**. Er is geen straatadres meer om
+te vergelijken; registreer je als servicegebied-bedrijf, dan wil Google wel
+een echt adres ter verificatie maar toont het niet.
 
 ---
 
@@ -310,24 +330,28 @@ Deze hebben nu geen enkel schemablok:
 - `lampencollectie.html` en `collectie-de-stijl.html`: `CollectionPage` met
   een `ItemList` die naar de losse lampen wijst
 - `maakproces.html`: `AboutPage`, eventueel met `Person` voor Jelle
-- `contact.html`: `ContactPage`, plus een herhaling van `LocalBusiness`
+- `contact.html`: `ContactPage`, plus een herhaling van `Organization`
 
 ---
 
-## 5. De Stijl-lampen hebben geen prijs in het schema
+## 5. Doorgevoerd: de De Stijl-lampen hebben nu een prijs in het schema
 
-Beide hebben `Product` zonder `offers`, omdat de prijs op aanvraag is.
-Daarmee vallen ze buiten de rich-result-validatie en krijgen ze geen
-uitgebreid zoekresultaat. Keuze: een prijsindicatie toevoegen, of accepteren
-dat deze twee een kaal resultaat houden.
+Beide hadden `Product` zonder `offers`, omdat de prijs op aanvraag was.
+Daarmee vielen ze buiten de rich-result-validatie. De tafellamp staat nu op
+EUR 199 en de wandlamp op EUR 179, allebei met een `Offer` in dezelfde vorm
+als de Japanse lampen. Alle acht productpagina's hebben er nu een.
 
 ---
 
-## 6. `LocalBusiness` aanvullen
+## 6. `Organization` aanvullen
 
-Staat nu op naam, adres, telefoon, e-mail en KvK. Kan bij: `openingHours`,
-`geo` met coördinaten, `priceRange`, en `sameAs` naar Instagram of andere
-profielen, als die er zijn.
+Staat nu op naam, beschrijving, url, image, logo, telefoon, e-mail, KvK,
+`addressLocality`, `areaServed` (NL en BE) en `knowsLanguage`. Kan bij:
+`sameAs` naar Instagram of andere profielen, als die er zijn, en
+`priceRange`.
+
+`openingHours` en `geo` met coördinaten passen hier niet meer bij: die horen
+bij een plek waar klanten langskomen, en die is er niet.
 
 ---
 
@@ -350,5 +374,5 @@ profielen, als die er zijn.
 Punt 1, 2 en 3 vóór de verhuizing. Die bepalen of je de posities van de oude
 site meeneemt of opnieuw begint.
 
-Punt 4 tot en met 7 kan net zo goed erna. Dat zijn verbeteringen, geen
-behoud.
+Punt 4, 6 en 7 kunnen net zo goed erna. Dat zijn verbeteringen, geen behoud.
+Punt 5 is gedaan.
