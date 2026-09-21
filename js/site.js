@@ -937,6 +937,12 @@
         });
       });
 
+      // Regels die alleen bij een bestelling kloppen (er valt niets te
+      // bestellen bij een vraag) gaan mee met de keuze.
+      form.querySelectorAll('[data-alleen-bestelling]').forEach(function (el) {
+        el.hidden = !isOrder;
+      });
+
       if (berichtVeld) berichtVeld.required = !isOrder;
       if (berichtSter) berichtSter.hidden = isOrder;
       // Verplichte velden uitschakelen als het blok verborgen is,
