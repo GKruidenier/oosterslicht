@@ -48,6 +48,9 @@ Alle SEO-aanpassingen zitten **lokaal in git**. De testsite loopt achter.
 - `sitemap.xml` opnieuw opgebouwd: `lastmod` per pagina uit de git-historie in
   plaats van een handmatige datum, en `priority` verwijderd omdat Google die
   negeert
+- "Handgemaakte" in de description en `og:description` van alle acht
+  productpagina's. Let op: dat helpt bij de klik, niet bij de ranking — de
+  description is geen rankingfactor. Zie hieronder
 - "Rijstpapier" op `maakproces.html` en "japandi" op `index.html`, handmatig
   toegevoegd (zie hoofdstuk 2)
 
@@ -385,6 +388,34 @@ is."* Daarmee zijn deze woorden van de site verdwenen:
 Geen ramp — het waren geen sterke zoektermen — maar "retraite" was wel een
 concrete afnemer die nu nergens meer genoemd wordt. Overweeg of die ergens
 terug moet, bijvoorbeeld in de description van de homepage.
+
+## 2b. "Handgemaakt" staat nog niet in de paginatekst
+
+De titels beloven "Handgemaakte Japanse hanglamp Kawa", en sinds kort zegt de
+description het ook. Maar in de **hoofdtekst** van alle acht productpagina's
+komt het woord nul keer voor; het staat alleen in de footer, buiten `<main>`.
+
+Dat is geen detail. De description is geen rankingfactor — Google gebruikt hem
+hooguit als de grijze regel onder je titel. Of een pagina zijn titel waarmaakt,
+wordt beoordeeld op de tekst in `<main>`. Een titel die iets belooft wat de
+pagina zelf nergens zegt, is precies het soort mismatch waar Google een eigen
+titel voor in de plaats zet.
+
+Eén zin in de introductie van elke lamp lost het op. Bijvoorbeeld bij de Kawa,
+waar nu staat:
+
+> De Kawa is een hanglamp, standaard uitgevoerd in esdoornhout, en het
+> minimalistische kozo washi.
+
+Daar zou "met de hand gemaakt" of "handgemaakt" natuurlijk in passen. Dit is
+bewust niet automatisch doorgevoerd: het is zichtbare tekst, en acht keer
+hetzelfde zinnetje inplakken leest als opvulling. Beter één keer per lamp, in
+je eigen woorden.
+
+Dezelfde overweging geldt voor de twee dunste pagina's: `destijl-wandlamp`
+(143 woorden) en `destijl-tafellamp` (169 woorden) hebben sowieso ruimte.
+
+---
 
 ## 3. Google Bedrijfsprofiel
 
