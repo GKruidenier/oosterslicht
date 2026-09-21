@@ -23,6 +23,78 @@ Voor de uitrol naar de testsite: zie `LANCEREN.md`, hoofdstuk 2.
 
 ---
 
+## Het gereedschap: `seo.py`
+
+Per pagina staat dezelfde tekst op meerdere plekken: de titel ook in
+`og:title`, de description ook in `og:description`, de canonical ook in
+`og:url` en in de sitemap. Zestien pagina’s maal zeven velden, met de hand
+bijgehouden, loopt vroeg of laat uit elkaar. Daarvoor is `seo.py`. Het draait
+op de standaardbibliotheek van Python, dus er valt niets te installeren.
+
+### Titels en descriptions aanpassen
+
+```
+python seo.py bewerken
+```
+
+Schrijft `seo.tsv` en opent die meteen in Excel: één regel per pagina, met de
+titel, de description, de `og:description` en de tekenaantallen.
+
+1. `python seo.py bewerken` — Excel opent met zestien regels, één per pagina
+2. Wijzig de kolommen `titel`, `description` of `og:description`
+3. Ctrl+S — Excel vraagt of je de tab-indeling wilt behouden; zeg ja
+4. `python seo.py toepassen`
+5. `python seo.py controleer`
+
+De kolommen `bestand` en `indexeerbaar` blijven ongemoeid: daarmee weet het
+script waar een regel heen moet. De tekenaantallen hoef je niet bij te werken,
+die worden bij de volgende export opnieuw geteld.
+
+`toepassen` zet de titel in `<title>` én in `og:title`, zodat die twee niet
+meer uit elkaar kunnen lopen. De `og:description` heeft een eigen kolom, want
+op deze site staat daar bewust een kortere zin dan in de `description` — die
+mag er niet door overschreven worden. Regels die je niet hebt aangeraakt laat
+het script letterlijk staan, dus `&mdash;` blijft `&mdash;` en de diff toont
+alleen wat je werkelijk hebt veranderd.
+
+### Nakijken
+
+```
+python seo.py controleer
+```
+
+Verandert niets, klaagt alleen. Titels boven de 60 tekens, descriptions buiten
+de 70–155, twee pagina’s met dezelfde titel, een canonical die niet klopt met
+`og:url` of met de bestandsnaam, meer of minder dan één `h1`, afbeeldingen
+zonder `alt`, ongeldige JSON-LD, een `@id` dat nergens gedefinieerd wordt, en
+de sitemap: ontbrekende pagina’s, noindex-pagina’s die er tóch in staan, en
+`lastmod`-datums die achterlopen op de git-historie.
+
+Een afsluitcode van 1 betekent fouten, 0 betekent schoon. Handig als je het
+ooit aan een controle bij het uitrollen wilt hangen.
+
+### Sitemap bijwerken
+
+```
+python seo.py sitemap
+```
+
+Zet elke `lastmod` op de datum van de laatste commit van dat bestand. Dit was
+het openstaande punt uit hoofdstuk 7: de sitemap werkte zichzelf niet bij.
+
+### Wat het niet doet
+
+Het schema, de OG-afbeeldingen en de paginatekst blijven handwerk. Dat is een
+keuze: die dingen vragen om een oordeel, en een script dat ze genereert zou de
+HTML tot output maken. De bestanden zelf zijn hier de bron, met het commentaar
+erin waarom iets is zoals het is.
+
+`seo.tsv` staat in `.gitignore`. Hij is altijd opnieuw af te leiden uit de
+HTML, en twee waarheden naast elkaar is precies het probleem dat dit script
+moet oplossen.
+
+---
+
 ## Al gedaan
 
 - 301 van elke oude URL naar de nieuwe pagina, in één sprong
@@ -59,6 +131,10 @@ Voor de uitrol naar de testsite: zie `LANCEREN.md`, hoofdstuk 2.
   description is geen rankingfactor. Zie hieronder
 - "Rijstpapier" op `maakproces.html` en "japandi" op `index.html`, handmatig
   toegevoegd (zie hoofdstuk 2)
+- De `Organization` had op elke pagina een eigen kopie zonder `@id`, en op de
+  productpagina’s zelfs twee (`manufacturer` en `offers.seller`). Nu één
+  definitie per pagina met `@id` `https://www.oosterslicht.nl/#organization`,
+  waar de rest naar verwijst: één knoop in plaats van negentien losse
 
 ---
 
@@ -470,8 +546,11 @@ als de Japanse lampen. Alle acht productpagina's hebben er nu een.
 ## 6. `Organization` aanvullen
 
 Staat nu op naam, beschrijving, url, image, logo, telefoon, e-mail, KvK,
-`addressLocality`, `areaServed` (NL en BE) en `knowsLanguage`. Kan bij:
-`sameAs` naar Instagram of andere profielen, als die er zijn, en
+`addressLocality`, `areaServed` (NL en BE) en `knowsLanguage`.
+
+`sameAs` is van de lijst af: er zijn geen sociale profielen, en verwijzen
+naar iets dat niet bestaat is schadelijker dan het weglaten. Het
+KvK-nummer doet hier het werk dat `sameAs` zou doen. Wat nog wel kan is
 `priceRange`.
 
 `openingHours` en `geo` met coördinaten passen hier niet meer bij: die horen
@@ -488,10 +567,10 @@ bij een plek waar klanten langskomen, en die is er niet.
 - Elke lamppagina linkt al naar drie andere lampen, dus de onderlinge
   verwijzingen waren al in orde
 
-Wat hiervan open blijft: de `lastmod` in de sitemap komt uit de git-historie
-op het moment van genereren, maar het bestand werkt zichzelf niet bij. Na een
-volgende ronde wijzigingen loopt hij opnieuw achter. Een klein script zou dat
-oplossen.
+De `lastmod` in de sitemap kwam uit de git-historie op het moment van
+genereren en werkte zichzelf niet bij. Dat is opgelost: `python seo.py
+sitemap` zet de datums opnieuw, en `python seo.py controleer` waarschuwt
+zodra ze achterlopen. Zie het hoofdstuk over `seo.py` hierboven.
 
 En nog niet gedaan: een blok met veelgestelde vragen op `contact.html` of
 `maakproces.html`, met `FAQPage`. Dat levert extra ruimte in het
@@ -600,8 +679,15 @@ Wat nu nog echt iets oplevert, op volgorde:
    lokaal.
 3. **Hoofdstuk 4** — structured data op de vier pagina's die alleen een
    kruimelpad hebben.
-4. **Hoofdstuk 6** — `sameAs` naar sociale profielen, als die er zijn.
-5. Het restje uit hoofdstuk 7: de FAQ en het bijwerken van de sitemap.
+4. Het restje uit hoofdstuk 7: een blok met veelgestelde vragen en `FAQPage`.
+
+Afgevallen: `sameAs` uit hoofdstuk 6. Er zijn geen sociale profielen, en een
+`sameAs` naar een profiel dat niet bestaat is erger dan geen `sameAs`. Het
+KvK-nummer staat al als `identifier` in het schema, en dat is voor een
+Nederlands bedrijf een steviger bevestiging van de identiteit.
+
+Het bijwerken van de sitemap stond hier ook: dat doet `python seo.py sitemap`
+nu.
 
 En los daarvan, vóór de lancering: **de testsite bijwerken**. Die loopt twee
 dagen achter en `LANCEREN.md` gaat ervan uit dat je daar eerst test.

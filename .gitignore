@@ -35,3 +35,8 @@ _fontkeuze/
 
 # Schetsen voor de ontwerprichting; mag weg zodra er gekozen is.
 _schetsen/
+
+# Werktabel van seo.py: telkens opnieuw af te leiden uit de HTML met
+# "python seo.py export". De HTML is de bron, deze tabel alleen de
+# invoerhulp om alle titels naast elkaar te kunnen bewerken.
+seo.tsv
