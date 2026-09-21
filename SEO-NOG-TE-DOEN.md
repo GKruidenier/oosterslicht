@@ -441,14 +441,20 @@ een echt adres ter verificatie maar toont het niet.
 
 ---
 
-## 4. Structured data op vier pagina's
+## 4. Doorgevoerd: structured data op de vier resterende pagina's
 
-Deze hebben nu geen enkel schemablok:
+Deze hadden alleen een `BreadcrumbList`. Nu ook:
 
-- `lampencollectie.html` en `collectie-de-stijl.html`: `CollectionPage` met
-  een `ItemList` die naar de losse lampen wijst
-- `maakproces.html`: `AboutPage`, eventueel met `Person` voor Jelle
-- `contact.html`: `ContactPage`, plus een herhaling van `Organization`
+| Pagina | Schema |
+|---|---|
+| `lampencollectie.html` | `CollectionPage` met een `ItemList` van de zes Japanse lampen |
+| `collectie-de-stijl.html` | `CollectionPage` met een `ItemList` van de twee De Stijl-lampen |
+| `maakproces.html` | `AboutPage` met `Person` voor Jelle Kruidenier, lampenmaker |
+| `contact.html` | `ContactPage` met de `Organization`-gegevens |
+
+De `ItemList` volgt de volgorde waarin de lampen op de pagina staan, niet een
+eigen rangschikking, en elke verwijzing is gecontroleerd op een bestaand
+bestand. Vijfentwintig schemablokken op de site, alle geldig.
 
 ---
 
