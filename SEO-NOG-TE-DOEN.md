@@ -141,20 +141,19 @@ moet oplossen.
 
 ## 1. De titels
 
-**Het zwaarste dat nog open staat.** De huidige titels zetten de merknaam
-voorop: `Wandlamp Koyo — OostersLicht`. Niemand zoekt op "Koyo". De
-beschrijvende woorden waar mensen wél op zoeken — houten wandlamp, vloerlamp,
-Japanse lampen — staan er niet in.
+**Uitgevoerd op 21 september 2026.** De A-varianten staan in de HTML, en
+`og:title` is overal gelijkgetrokken met de `<title>`. Dit hoofdstuk beschrijft
+de situatie van dáárvoor en blijft staan als verantwoording van de keuze, en
+als voorraad alternatieven om later naar te wisselen.
+
+De oude titels zetten de merknaam voorop: `Wandlamp Koyo — OostersLicht`.
+Niemand zoekt op "Koyo". De beschrijvende woorden waar mensen wél op zoeken —
+houten wandlamp, vloerlamp, Japanse lampen — stonden er niet in.
 
 Voorstel hieronder, met het aantal tekens erbij. Google kapt af rond de zestig
 tekens — niet op een vast aantal, maar op pixelbreedte, dus een titel die daar
 precies op zit kan net wel of net niet passen. Alles boven de 57 is daarom
 gemarkeerd als krap.
-
-**Doorgevoerd op 21 september 2026.** De A-varianten staan in de HTML, en
-`og:title` is overal gelijkgetrokken met de `<title>`. De tabellen hieronder
-blijven staan als alternatieven om later naar te wisselen, en als
-verantwoording van de keuze.
 
 ### Kun je meerdere titels tegelijk hebben?
 
@@ -426,9 +425,9 @@ handwerk` (45).
 | Woord | Was | Nu | Waarom het telt |
 |---|---|---|---|
 | `rijstpapier` | 0x | **1x** | Stond wel op de oude site en komt in twee suggesties voor |
-| `japandi` | 0x | **3x** | Levende interieurtrend; *vloerlamp japandi stijl* is een suggestie |
+| `japandi` | 0x | **2x** | Levende interieurtrend; *vloerlamp japandi stijl* is een suggestie |
 
-Ter vergelijking: "washi" staat er 65 keer, "Japans papier" 58 keer. Juiste
+Ter vergelijking: "washi" staat er 83 keer, "Japans papier" 61 keer. Juiste
 taal, maar niet de taal van de zoekbalk.
 
 #### Doorgevoerd: rijstpapier op `maakproces.html`
@@ -445,8 +444,7 @@ in de specificaties van elke lamp, maar wordt nu nergens meer geïntroduceerd.
 
 #### Doorgevoerd: japandi op `index.html`
 
-Op drie plekken, in de intro, in een tweede blok en in een bijschrift van de
-galerij:
+In de intro en in een bijschrift van de galerij:
 
 > Een lamp van OostersLicht past goed bij een yoga- of meditatieruimte, of een
 > minimalistisch interieur zoals japandi.
@@ -582,8 +580,8 @@ zoekresultaat.
 ## 8. De cultuur naar de etalage — deels uitgevoerd, deels ingetrokken
 
 De site is cultureel diep, maar dat zit in de paginatekst en niet in de
-titels: kozo staat er 117 keer, unryu 97 keer, zen 23 keer — en nul keer in
-een titel. Elf van de zestien titels beginnen met "Handgemaakte", hetzelfde
+titels: kozo staat er 133 keer, unryu 125 keer — en nul keer in
+een titel. Negen van de zestien titels beginnen met "Handgemaakte", hetzelfde
 woord dat Turkse mozaieklampen en rotan-import gebruiken.
 
 Die constatering klopt. De vier voorstellen die eruit volgden niet allemaal.
@@ -603,13 +601,14 @@ op. Het heeft altijd een lamp of papier ernaast nodig.
 ### Doorgevoerd: wabi-sabi op de homepage
 
 > Een lamp van OostersLicht past goed bij een yoga- of meditatieruimte, of bij
-> een rustige interieurstijl zoals **japandi of wabi-sabi: de waardering voor
-> het onregelmatige, voor het blad dat nooit hetzelfde valt.**
+> een rustige interieurstijl zoals **japandi of wabi-sabi**.
 
-De korte uitleg staat erbij omdat een losse term die niemand herkent niets
-doet, en omdat Google die context nodig heeft. Drie lengtes gemeten op
-mobiel: alleen de termen geeft 3 regels, deze variant 5, de volledige uitleg
-7. De oorspronkelijke zin was er 3.
+Er stond eerst een uitleg achter ("de waardering voor het onregelmatige, voor
+het blad dat nooit hetzelfde valt"); die is er later weer afgehaald. Daarmee
+staat de term er nu kaal, zonder de context die Google en een onbekende
+lezer eraan zouden hebben. Of dat erg is hangt ervan af hoeveel regels de
+zin op mobiel mag kosten: alleen de termen is 3 regels, met de korte uitleg
+5, met de volledige 7.
 
 ### Nog te doen: shoji uit de bijzin halen, op `maakproces.html`
 
@@ -678,9 +677,12 @@ Wat nu nog echt iets oplevert, op volgorde:
    productpagina's. De titels beloven het, de pagina's zeggen het nergens.
 2. **Hoofdstuk 3** — Google Bedrijfsprofiel. Nul regels code, veel effect
    lokaal.
-3. **Hoofdstuk 4** — structured data op de vier pagina's die alleen een
-   kruimelpad hebben.
-4. Het restje uit hoofdstuk 7: een blok met veelgestelde vragen en `FAQPage`.
+3. Het restje uit hoofdstuk 7: een blok met veelgestelde vragen en `FAQPage`.
+4. **Hoofdstuk 8** — shoji uit de bijzin halen op `maakproces.html`.
+
+Hoofdstuk 4 stond hier ook: structured data op de vier pagina's met alleen
+een kruimelpad. Dat is gedaan; die pagina's hebben nu een `CollectionPage`,
+een `AboutPage` en een `ContactPage`.
 
 Afgevallen: `sameAs` uit hoofdstuk 6. Er zijn geen sociale profielen, en een
 `sameAs` naar een profiel dat niet bestaat is erger dan geen `sameAs`. Het
