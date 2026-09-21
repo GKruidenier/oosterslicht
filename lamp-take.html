@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-letters="mincho">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,8 +12,8 @@
 <link rel="preload" href="assets/fonts/shippori-mincho-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/zen-kaku-latin.woff2" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.classList.add('js')</script>
-<script src="js/theme.js?v=3"></script>
-<link rel="stylesheet" href="css/style.css?v=154">
+<script src="js/theme.js?v=4"></script>
+<link rel="stylesheet" href="css/style.css?v=155">
 <link rel="stylesheet" href="css/themes.css?v=4">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="nl_NL">
@@ -106,7 +106,7 @@
 <header class="site-header">
   <div class="wrap wrap--wide site-header__inner">
     <a class="site-header__logo" href="/" aria-label="OostersLicht, naar de homepagina">
-      <img src="assets/img/logo.webp" alt="OostersLicht" width="1600" height="298">
+      <img src="assets/img/logo.webp" alt="OostersLicht" width="720" height="134" decoding="async">
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu openen">
       <span class="nav-toggle__bar"></span>
@@ -153,20 +153,41 @@
         <figure class="slider" data-slider>
           <div class="slider__track">
             <img class="slider__slide slider__slide--cutout" data-caption="Notenhout · unryu kozo"
-                 src="assets/img/tafellamp_take.webp" alt="Tafellamp Take van notenhout met unryu kozo"
-                 width="695" height="1149" loading="lazy">
+                 src="assets/img/tafellamp_take.webp"
+                 srcset="assets/img/tafellamp_take-400.webp 400w,
+                         assets/img/tafellamp_take.webp 695w"
+                 sizes="(min-width: 900px) 30vw, 92vw" alt="Tafellamp Take van notenhout met unryu kozo"
+                 width="695" height="1149" loading="lazy" decoding="async">
             <img class="slider__slide" data-caption="Notenhout · unryu kozo"
-                 src="assets/img/take_bankje.webp" alt="Tafellamp Take op een houten bankje"
-                 width="1066" height="1600" loading="lazy">
+                 src="assets/img/take_bankje.webp"
+                 srcset="assets/img/take_bankje-400.webp 400w,
+                         assets/img/take_bankje-800.webp 800w,
+                         assets/img/take_bankje.webp 1066w"
+                 sizes="(min-width: 900px) 30vw, 92vw" alt="Tafellamp Take op een houten bankje"
+                 width="1066" height="1600" loading="lazy" decoding="async">
             <img class="slider__slide" data-caption="Notenhout · unryu kozo"
-                 src="assets/img/take_decor.webp" alt="Tafellamp Take in een interieur"
-                 width="1600" height="1066" loading="lazy">
+                 src="assets/img/take_decor.webp"
+                 srcset="assets/img/take_decor-400.webp 400w,
+                         assets/img/take_decor-800.webp 800w,
+                         assets/img/take_decor-1200.webp 1200w,
+                         assets/img/take_decor.webp 1600w"
+                 sizes="(min-width: 900px) 50vw, 92vw" alt="Tafellamp Take in een interieur"
+                 width="1600" height="1066" loading="lazy" decoding="async">
             <img class="slider__slide" data-caption="Notenhout · unryu kozo"
-                 src="assets/img/take_decor2.webp" alt="Tafellamp Take naast decoratie"
-                 width="1066" height="1600" loading="lazy">
+                 src="assets/img/take_decor2.webp"
+                 srcset="assets/img/take_decor2-400.webp 400w,
+                         assets/img/take_decor2-800.webp 800w,
+                         assets/img/take_decor2.webp 1066w"
+                 sizes="(min-width: 900px) 50vw, 92vw" alt="Tafellamp Take naast decoratie"
+                 width="1066" height="1600" loading="lazy" decoding="async">
             <img class="slider__slide" data-caption="Notenhout · unryu kozo"
-                 src="assets/img/take_detail.webp" alt="Detail van het bamboemotief in het papier"
-                 width="1600" height="1066" loading="lazy">
+                 src="assets/img/take_detail.webp"
+                 srcset="assets/img/take_detail-400.webp 400w,
+                         assets/img/take_detail-800.webp 800w,
+                         assets/img/take_detail-1200.webp 1200w,
+                         assets/img/take_detail.webp 1600w"
+                 sizes="(min-width: 900px) 50vw, 92vw" alt="Detail van het bamboemotief in het papier"
+                 width="1600" height="1066" loading="lazy" decoding="async">
           </div>
           <button class="slider__zoom" type="button" aria-label="Foto vergroten">
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14.5 14.5M7 5v4M5 7h4"/></svg>
@@ -231,7 +252,10 @@
 
         <a class="card" href="lamp-yang.html" data-reveal data-reveal-delay="1">
           <div class="card__media card__media--cutout">
-            <img src="assets/img/yang_stalamp_unryu_iep_uitsnede.webp" alt="Vloerlamp Yang van iepenhout met unryu kozo" width="557" height="1429" loading="lazy">
+            <img src="assets/img/yang_stalamp_unryu_iep_uitsnede.webp"
+     srcset="assets/img/yang_stalamp_unryu_iep_uitsnede-400.webp 400w,
+             assets/img/yang_stalamp_unryu_iep_uitsnede.webp 557w"
+     sizes="(min-width: 900px) 30vw, 92vw" alt="Vloerlamp Yang van iepenhout met unryu kozo" width="557" height="1429" loading="lazy" decoding="async">
           </div>
           <div class="card__foot">
             <div>
@@ -274,7 +298,7 @@
   <div class="wrap wrap--wide">
     <div class="site-footer__grid">
       <div>
-        <img class="site-footer__logo" src="assets/img/logo.webp" alt="OostersLicht" width="1600" height="298" loading="lazy">
+        <img class="site-footer__logo" src="assets/img/logo.webp" alt="OostersLicht" width="720" height="134" loading="lazy" decoding="async">
         <p class="site-footer__tagline">
           Handgemaakte lampen van massief hout en Japans papier, uit de werkplaats
           in Driebergen-Rijsenburg.

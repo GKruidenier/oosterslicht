@@ -15,6 +15,11 @@
    (washi, sumi, …) zet de site onvoorwaardelijk op dat palet. */
 var PALET   = 'auto';        /* auto · washi · sumi · indigo · kersen · mos · destijl */
 var LETTERS = 'mincho';    /* garamond · mincho */
+/* Deze waarde staat ook als data-letters op de <html> van elke pagina, zodat
+   de standaardletter niet aan dit bestand hangt: laadt het script niet, dan
+   staat de zetting er alsnog. Wijzig je LETTERS hierboven, wijzig dan ook dat
+   attribuut — anders zetten de twee elkaar tegen. Het palet kan dat niet,
+   want 'auto' hangt af van prefers-color-scheme en is pas hier bekend. */
 
 
 /* --- De lijst voor het stijlenlab ----------------------------------------

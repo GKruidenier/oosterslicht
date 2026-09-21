@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-letters="mincho">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,8 +7,8 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" href="favicon.ico" sizes="32x32">
 <script>document.documentElement.classList.add('js')</script>
-<script src="js/theme.js?v=3"></script>
-<link rel="stylesheet" href="css/style.css?v=154">
+<script src="js/theme.js?v=4"></script>
+<link rel="stylesheet" href="css/style.css?v=155">
 <link rel="stylesheet" href="css/themes.css?v=4">
 <style>
 /* ==========================================================================
@@ -462,8 +462,11 @@ body {
           <div class="card">
             <div class="card__media card__media--cutout">
               <img src="assets/img/tafellamp_take.webp"
+     srcset="assets/img/tafellamp_take-400.webp 400w,
+             assets/img/tafellamp_take.webp 695w"
+     sizes="(min-width: 900px) 30vw, 92vw"
                    alt="Tafellamp Take van notenhout, uitsnede"
-                   width="695" height="1149" loading="lazy">
+                   width="695" height="1149" loading="lazy" decoding="async">
             </div>
             <div class="card__foot">
               <div>

@@ -2189,57 +2189,6 @@ p:last-child {
   height: 16px;
 }
 
-/* --- Lijstrijen met pijl -------------------------------------------------- */
-
-.rows {
-  border-top: 1px solid var(--c-line);
-}
-
-.row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-m);
-  padding: var(--space-m) 0;
-  border-bottom: 1px solid var(--c-line);
-  transition: padding-inline var(--dur) var(--ease),
-    background-color var(--dur) var(--ease);
-}
-
-.row:hover {
-  padding-inline: var(--space-s);
-  background: color-mix(in srgb, var(--c-wood) 7%, transparent);
-}
-
-.row__title {
-  font-family: var(--font-display);
-  font-size: clamp(1.35rem, 2.2vw, 1.9rem);
-  font-weight: var(--fw-display-mid);
-  color: var(--c-ink);
-  margin: 0;
-  line-height: 1.2;
-}
-
-.row__meta {
-  display: block;
-  font-size: var(--fs-small);
-  color: var(--c-muted);
-  margin-top: var(--space-3xs);
-}
-
-.row__arrow {
-  width: 20px;
-  height: 20px;
-  flex: none;
-  color: var(--c-muted);
-  transition: transform var(--dur) var(--ease), color var(--dur) var(--ease);
-}
-
-.row:hover .row__arrow {
-  transform: translate(3px, -3px);
-  color: var(--c-ink);
-}
-
 /* --- Galerij (mozaïek) ---------------------------------------------------- */
 
 .gallery {

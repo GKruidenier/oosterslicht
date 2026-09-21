@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-letters="mincho">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,8 +12,8 @@
 <link rel="preload" href="assets/fonts/shippori-mincho-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/zen-kaku-latin.woff2" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.classList.add('js')</script>
-<script src="js/theme.js?v=3"></script>
-<link rel="stylesheet" href="css/style.css?v=154">
+<script src="js/theme.js?v=4"></script>
+<link rel="stylesheet" href="css/style.css?v=155">
 <link rel="stylesheet" href="css/themes.css?v=4">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="nl_NL">
@@ -58,7 +58,7 @@
 <header class="site-header">
   <div class="wrap wrap--wide site-header__inner">
     <a class="site-header__logo" href="/" aria-label="OostersLicht, naar de homepagina">
-      <img src="assets/img/logo.webp" alt="OostersLicht" width="1600" height="298">
+      <img src="assets/img/logo.webp" alt="OostersLicht" width="720" height="134" decoding="async">
     </a>
 
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu openen">
@@ -109,7 +109,7 @@
              die zit nu ver weg: het tekstblok is naar de hoogte van het licht
              verhuisd, ongeveer halverwege de band. -->
         <img class="hero__logo" src="assets/img/logo.webp" alt=""
-             width="1600" height="298">
+             width="720" height="134" decoding="async">
 
         <h1 class="hero__title">
           Houten lampen
@@ -134,8 +134,13 @@
       <div class="split split--intro">
         <div class="split__media" data-reveal>
           <img class="split__photo split__photo--intro" src="assets/img/detail-hout-papier.webp"
+                                              srcset="assets/img/detail-hout-papier-400.webp 400w,
+                                                      assets/img/detail-hout-papier-800.webp 800w,
+                                                      assets/img/detail-hout-papier-1200.webp 1200w,
+                                                      assets/img/detail-hout-papier.webp 1600w"
+                                              sizes="(min-width: 900px) 50vw, 92vw"
                alt="Detail van een lamp: esdoornhouten latten voor oplichtend Japans papier"
-               width="1600" height="1067" loading="lazy">
+               width="1600" height="1067" loading="lazy" decoding="async">
         </div>
         <div class="split__body" data-reveal data-reveal-delay="1">
           <p class="label">Hout en papier</p>
@@ -170,8 +175,12 @@
                  kleiner lijken dan ze is. De cluster Kawa-hanglampen laat een
                  tweede lampsoort zien en meteen dat ze in groep hangen. -->
             <img src="assets/img/kawa-hanglampen-cluster.webp"
+     srcset="assets/img/kawa-hanglampen-cluster-400.webp 400w,
+             assets/img/kawa-hanglampen-cluster-800.webp 800w,
+             assets/img/kawa-hanglampen-cluster.webp 1066w"
+     sizes="(min-width: 900px) 30vw, 92vw"
                  alt="Een groep cilindrische hanglampen Kawa van esdoornhout en Japans papier, warm brandend onder een houten balkenplafond"
-                 width="1066" height="1599" loading="lazy">
+                 width="1066" height="1599" loading="lazy" decoding="async">
           </div>
           <div class="card__foot">
             <div>
@@ -189,8 +198,13 @@
                foto, dus in een staand kader viel ze links van het midden. -->
           <div class="card__media card__media--left">
             <img src="assets/img/destijl-tafellamp-haven.webp"
+     srcset="assets/img/destijl-tafellamp-haven-400.webp 400w,
+             assets/img/destijl-tafellamp-haven-800.webp 800w,
+             assets/img/destijl-tafellamp-haven-1200.webp 1200w,
+             assets/img/destijl-tafellamp-haven.webp 1600w"
+     sizes="(min-width: 900px) 30vw, 92vw"
                  alt="Tafellamp De Stijl met rode, gele en blauwe banen, buiten opgesteld voor een oude havenkraan"
-                 width="1600" height="1066" loading="lazy">
+                 width="1600" height="1066" loading="lazy" decoding="async">
           </div>
           <div class="card__foot">
             <div>
@@ -208,8 +222,12 @@
                de standaarduitsnede van het kader laat haar heel. -->
           <div class="card__media">
             <img src="assets/img/torii_2.webp"
+     srcset="assets/img/torii_2-400.webp 400w,
+             assets/img/torii_2-800.webp 800w,
+             assets/img/torii_2.webp 1066w"
+     sizes="(min-width: 900px) 30vw, 92vw"
                  alt="Wandlamp Torii van notenhout met Japans papier, brandend tegen een witte muur naast een plant"
-                 width="1066" height="1600" loading="lazy">
+                 width="1066" height="1600" loading="lazy" decoding="async">
           </div>
           <div class="card__foot">
             <div>
@@ -235,23 +253,46 @@
 
       <div class="gallery">
         <a class="gallery__item" href="lamp-yang.html" data-reveal>
-          <img src="assets/img/yang_vloerlamp_raam.webp" alt="Vloerlamp Yang brandend bij een tuindeur, naast een grote kamerplant" width="1066" height="1600" loading="lazy">
+          <img src="assets/img/yang_vloerlamp_raam.webp"
+     srcset="assets/img/yang_vloerlamp_raam-400.webp 400w,
+             assets/img/yang_vloerlamp_raam-800.webp 800w,
+             assets/img/yang_vloerlamp_raam.webp 1066w"
+     sizes="(min-width: 900px) 50vw, 92vw" alt="Vloerlamp Yang brandend bij een tuindeur, naast een grote kamerplant" width="1066" height="1600" loading="lazy" decoding="async">
           <span class="gallery__caption">Vloerlamp Yang - japandi woonkamer</span>
         </a>
         <a class="gallery__item gallery__item--wide" href="lamp-kawa.html" data-reveal data-reveal-delay="1">
-          <img src="assets/img/kawa-hanglampen-ruimte.webp" alt="Hanglampen Kawa aan het houten balkenplafond van een ruime eetzaal" width="1600" height="1200" loading="lazy">
+          <img src="assets/img/kawa-hanglampen-ruimte.webp"
+     srcset="assets/img/kawa-hanglampen-ruimte-400.webp 400w,
+             assets/img/kawa-hanglampen-ruimte-800.webp 800w,
+             assets/img/kawa-hanglampen-ruimte-1200.webp 1200w,
+             assets/img/kawa-hanglampen-ruimte.webp 1600w"
+     sizes="(min-width: 900px) 50vw, 92vw" alt="Hanglampen Kawa aan het houten balkenplafond van een ruime eetzaal" width="1600" height="1200" loading="lazy" decoding="async">
           <span class="gallery__caption">Hanglamp Kawa - Japans paviljoen</span>
         </a>
         <a class="gallery__item" href="lamp-koyo.html" data-reveal data-reveal-delay="2">
-          <img src="assets/img/koyo_esdoorn_wandlamp_interieur.webp" alt="Wandlamp Koyo met een esdoornblad in het papier, brandend tegen een witte muur onder een dakraam" width="1066" height="1600" loading="lazy">
+          <img src="assets/img/koyo_esdoorn_wandlamp_interieur.webp"
+     srcset="assets/img/koyo_esdoorn_wandlamp_interieur-400.webp 400w,
+             assets/img/koyo_esdoorn_wandlamp_interieur-800.webp 800w,
+             assets/img/koyo_esdoorn_wandlamp_interieur.webp 1066w"
+     sizes="(min-width: 900px) 50vw, 92vw" alt="Wandlamp Koyo met een esdoornblad in het papier, brandend tegen een witte muur onder een dakraam" width="1066" height="1600" loading="lazy" decoding="async">
           <span class="gallery__caption">Wandlamp Koyo - minimalistisch interieur</span>
         </a>
         <a class="gallery__item gallery__item--wide" href="collectie-de-stijl.html" data-reveal data-reveal-delay="3">
-          <img src="assets/img/destijl-tafellamp-haven.webp" alt="Tafellamp De Stijl buiten opgesteld voor een oude havenkraan" width="1600" height="1066" loading="lazy">
+          <img src="assets/img/destijl-tafellamp-haven.webp"
+     srcset="assets/img/destijl-tafellamp-haven-400.webp 400w,
+             assets/img/destijl-tafellamp-haven-800.webp 800w,
+             assets/img/destijl-tafellamp-haven-1200.webp 1200w,
+             assets/img/destijl-tafellamp-haven.webp 1600w"
+     sizes="(min-width: 900px) 50vw, 92vw" alt="Tafellamp De Stijl buiten opgesteld voor een oude havenkraan" width="1600" height="1066" loading="lazy" decoding="async">
           <span class="gallery__caption">Tafellamp De Stijl</span>
         </a>
         <a class="gallery__item gallery__item--wide" href="lamp-kawa.html" data-reveal data-reveal-delay="4">
-          <img src="assets/img/expo-berlijn.webp" alt="Hanglampen Kawa boven de zitplekken van een overdekte stand op een vakbeurs" width="1557" height="836" loading="lazy">
+          <img src="assets/img/expo-berlijn.webp"
+     srcset="assets/img/expo-berlijn-400.webp 400w,
+             assets/img/expo-berlijn-800.webp 800w,
+             assets/img/expo-berlijn-1200.webp 1200w,
+             assets/img/expo-berlijn.webp 1557w"
+     sizes="(min-width: 900px) 50vw, 92vw" alt="Hanglampen Kawa boven de zitplekken van een overdekte stand op een vakbeurs" width="1557" height="836" loading="lazy" decoding="async">
           <span class="gallery__caption">Hanglamp Kawa - vakbeurs</span>
         </a>
       </div>
@@ -357,8 +398,12 @@
 
         <figure class="slot__foto" data-reveal data-reveal-delay="1">
           <img src="assets/img/vloerlamp-yin-tuindeur.webp"
+     srcset="assets/img/vloerlamp-yin-tuindeur-400.webp 400w,
+             assets/img/vloerlamp-yin-tuindeur-800.webp 800w,
+             assets/img/vloerlamp-yin-tuindeur.webp 900w"
+     sizes="(min-width: 900px) 30vw, 92vw"
                alt="Vloerlamp Yin, een hoge cilindrische vloerlamp van notenhout met esdoornhouten banden, brandend bij een tuindeur naast een kamerplant"
-               width="900" height="1350" loading="lazy">
+               width="900" height="1350" loading="lazy" decoding="async">
         </figure>
       </div>
     </div>
@@ -370,7 +415,7 @@
   <div class="wrap wrap--wide">
     <div class="site-footer__grid">
       <div>
-        <img class="site-footer__logo" src="assets/img/logo.webp" alt="OostersLicht" width="1600" height="298" loading="lazy">
+        <img class="site-footer__logo" src="assets/img/logo.webp" alt="OostersLicht" width="720" height="134" loading="lazy" decoding="async">
         <p class="site-footer__tagline">
           Handgemaakte lampen van massief hout en Japans papier, uit de werkplaats
           in Driebergen-Rijsenburg.

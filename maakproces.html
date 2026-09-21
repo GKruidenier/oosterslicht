@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-letters="mincho">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,8 +12,8 @@
 <link rel="preload" href="assets/fonts/shippori-mincho-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/zen-kaku-latin.woff2" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.classList.add('js')</script>
-<script src="js/theme.js?v=3"></script>
-<link rel="stylesheet" href="css/style.css?v=154">
+<script src="js/theme.js?v=4"></script>
+<link rel="stylesheet" href="css/style.css?v=155">
 <link rel="stylesheet" href="css/themes.css?v=4">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="nl_NL">
@@ -78,7 +78,7 @@
 <header class="site-header">
   <div class="wrap wrap--wide site-header__inner">
     <a class="site-header__logo" href="/" aria-label="OostersLicht, naar de homepagina">
-      <img src="assets/img/logo.webp" alt="OostersLicht" width="1600" height="298">
+      <img src="assets/img/logo.webp" alt="OostersLicht" width="720" height="134" decoding="async">
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu openen">
       <span class="nav-toggle__bar"></span>
@@ -116,8 +116,13 @@
           </p>
         </div>
         <img class="page-head__foto" src="assets/img/werkplaats.webp"
+                             srcset="assets/img/werkplaats-400.webp 400w,
+                                     assets/img/werkplaats-800.webp 800w,
+                                     assets/img/werkplaats-1200.webp 1200w,
+                                     assets/img/werkplaats.webp 1600w"
+                             sizes="(min-width: 900px) 50vw, 92vw"
              alt="Jelle Kruidenier in zijn werkplaats, bezig aan een houten lamp, met gereedschap en stapels hout om zich heen"
-             width="1600" height="1066" fetchpriority="high">
+             width="1600" height="1066" fetchpriority="high" decoding="async">
       </div>
     </div>
   </section>
@@ -136,8 +141,13 @@
       <div class="proces">
       <figure class="band-photo band-photo--steps" data-reveal>
         <img src="assets/img/schaaf.webp"
+     srcset="assets/img/schaaf-400.webp 400w,
+             assets/img/schaaf-800.webp 800w,
+             assets/img/schaaf-1200.webp 1200w,
+             assets/img/schaaf.webp 1600w"
+     sizes="100vw"
              alt="Twee handen die met een blokschaaf een lat hout schaven, met houtkrullen op de werkbank"
-             width="1600" height="900" loading="lazy">
+             width="1600" height="900" loading="lazy" decoding="async">
       </figure>
 
       <div class="steps">
@@ -216,21 +226,36 @@
           <div class="swatches" data-reveal>
             <figure class="swatch" data-omschrijving="Wit en egaal, van moerbeibast.">
               <button class="swatch__knop" type="button" data-monster>
-                <img src="assets/img/traditioneel_wit_moerbei_kozo_2.webp" alt="Kozo washi: wit, egaal papier van moerbeibast" width="1588" height="1588" loading="lazy">
+                <img src="assets/img/traditioneel_wit_moerbei_kozo_2.webp"
+     srcset="assets/img/traditioneel_wit_moerbei_kozo_2-400.webp 400w,
+             assets/img/traditioneel_wit_moerbei_kozo_2-800.webp 800w,
+             assets/img/traditioneel_wit_moerbei_kozo_2-1200.webp 1200w,
+             assets/img/traditioneel_wit_moerbei_kozo_2.webp 1588w"
+     sizes="(min-width: 900px) 50vw, 92vw" alt="Kozo washi: wit, egaal papier van moerbeibast" width="1588" height="1588" loading="lazy" decoding="async">
                 <span class="swatch__loep" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="4.5"></circle><path d="M10.5 10.5 14.5 14.5M7 5v4M5 7h4"></path></svg></span>
               </button>
               <figcaption>Kozo washi</figcaption>
             </figure>
             <figure class="swatch" data-omschrijving="Lange vezels als wolken door het vel.">
               <button class="swatch__knop" type="button" data-monster>
-                <img src="assets/img/unryu_moerbei_kozo_papier.webp" alt="Unryu kozo: papier met lange zichtbare vezels" width="1588" height="1588" loading="lazy">
+                <img src="assets/img/unryu_moerbei_kozo_papier.webp"
+     srcset="assets/img/unryu_moerbei_kozo_papier-400.webp 400w,
+             assets/img/unryu_moerbei_kozo_papier-800.webp 800w,
+             assets/img/unryu_moerbei_kozo_papier-1200.webp 1200w,
+             assets/img/unryu_moerbei_kozo_papier.webp 1588w"
+     sizes="(min-width: 900px) 50vw, 92vw" alt="Unryu kozo: papier met lange zichtbare vezels" width="1588" height="1588" loading="lazy" decoding="async">
                 <span class="swatch__loep" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="4.5"></circle><path d="M10.5 10.5 14.5 14.5M7 5v4M5 7h4"></path></svg></span>
               </button>
               <figcaption>Unryu kozo</figcaption>
             </figure>
             <figure class="swatch" data-omschrijving="Met manillahennep, iets geliger van kleur.">
               <button class="swatch__knop" type="button" data-monster>
-                <img src="assets/img/kinwashi_kozo_washi.webp" alt="Kinwashi: kozo-papier met manillahennep-vezels" width="1588" height="1588" loading="lazy">
+                <img src="assets/img/kinwashi_kozo_washi.webp"
+     srcset="assets/img/kinwashi_kozo_washi-400.webp 400w,
+             assets/img/kinwashi_kozo_washi-800.webp 800w,
+             assets/img/kinwashi_kozo_washi-1200.webp 1200w,
+             assets/img/kinwashi_kozo_washi.webp 1588w"
+     sizes="(min-width: 900px) 50vw, 92vw" alt="Kinwashi: kozo-papier met manillahennep-vezels" width="1588" height="1588" loading="lazy" decoding="async">
                 <span class="swatch__loep" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="4.5"></circle><path d="M10.5 10.5 14.5 14.5M7 5v4M5 7h4"></path></svg></span>
               </button>
               <figcaption>Kinwashi</figcaption>
@@ -265,7 +290,7 @@
   <div class="wrap wrap--wide">
     <div class="site-footer__grid">
       <div>
-        <img class="site-footer__logo" src="assets/img/logo.webp" alt="OostersLicht" width="1600" height="298" loading="lazy">
+        <img class="site-footer__logo" src="assets/img/logo.webp" alt="OostersLicht" width="720" height="134" loading="lazy" decoding="async">
         <p class="site-footer__tagline">
           Handgemaakte lampen van massief hout en Japans papier, uit de werkplaats
           in Driebergen-Rijsenburg.

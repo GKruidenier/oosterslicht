@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-letters="mincho">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,8 +12,8 @@
 <link rel="preload" href="assets/fonts/shippori-mincho-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/zen-kaku-latin.woff2" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.classList.add('js')</script>
-<script src="js/theme.js?v=3"></script>
-<link rel="stylesheet" href="css/style.css?v=154">
+<script src="js/theme.js?v=4"></script>
+<link rel="stylesheet" href="css/style.css?v=155">
 <link rel="stylesheet" href="css/themes.css?v=4">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="nl_NL">
@@ -106,7 +106,7 @@
 <header class="site-header">
   <div class="wrap wrap--wide site-header__inner">
     <a class="site-header__logo" href="/" aria-label="OostersLicht, naar de homepagina">
-      <img src="assets/img/logo.webp" alt="OostersLicht" width="1600" height="298">
+      <img src="assets/img/logo.webp" alt="OostersLicht" width="720" height="134" decoding="async">
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu openen">
       <span class="nav-toggle__bar"></span>
@@ -156,11 +156,19 @@
                  src="assets/img/kawa_hanglamp_uitsnede.webp" alt="Hanglamp Kawa van esdoornhout met kozo washi"
                  width="399" height="1191" loading="lazy">
             <img class="slider__slide" data-caption="Esdoornhout · kozo washi"
-                 src="assets/img/kawa_hanglamp.webp" alt="Hanglamp Kawa van esdoornhout met kozo washi"
-                 width="1066" height="1600" loading="lazy">
+                 src="assets/img/kawa_hanglamp.webp"
+                 srcset="assets/img/kawa_hanglamp-400.webp 400w,
+                         assets/img/kawa_hanglamp-800.webp 800w,
+                         assets/img/kawa_hanglamp.webp 1066w"
+                 sizes="(min-width: 900px) 30vw, 92vw" alt="Hanglamp Kawa van esdoornhout met kozo washi"
+                 width="1066" height="1600" loading="lazy" decoding="async">
             <img class="slider__slide" data-caption="Esdoornhout · kozo washi"
-                 src="assets/img/kawa-hanglampen-cluster.webp" alt="Groep hanglampen Kawa aan een houten balkenplafond"
-                 width="1066" height="1599" loading="lazy">
+                 src="assets/img/kawa-hanglampen-cluster.webp"
+                 srcset="assets/img/kawa-hanglampen-cluster-400.webp 400w,
+                         assets/img/kawa-hanglampen-cluster-800.webp 800w,
+                         assets/img/kawa-hanglampen-cluster.webp 1066w"
+                 sizes="(min-width: 900px) 50vw, 92vw" alt="Groep hanglampen Kawa aan een houten balkenplafond"
+                 width="1066" height="1599" loading="lazy" decoding="async">
           </div>
           <button class="slider__zoom" type="button" aria-label="Foto vergroten">
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14.5 14.5M7 5v4M5 7h4"/></svg>
@@ -208,7 +216,10 @@
       <div class="grid">
         <a class="card" href="lamp-koyo.html" data-reveal>
           <div class="card__media card__media--cutout">
-            <img src="assets/img/koyo_esdoorn_wandlamp_uitsnede.webp" alt="Wandlamp Koyo van esdoornhout met een esdoornblad in het papier" width="735" height="1273" loading="lazy">
+            <img src="assets/img/koyo_esdoorn_wandlamp_uitsnede.webp"
+     srcset="assets/img/koyo_esdoorn_wandlamp_uitsnede-400.webp 400w,
+             assets/img/koyo_esdoorn_wandlamp_uitsnede.webp 735w"
+     sizes="(min-width: 900px) 30vw, 92vw" alt="Wandlamp Koyo van esdoornhout met een esdoornblad in het papier" width="735" height="1273" loading="lazy" decoding="async">
           </div>
           <div class="card__foot">
             <div>
@@ -224,7 +235,10 @@
 
         <a class="card" href="lamp-torii.html" data-reveal data-reveal-delay="1">
           <div class="card__media card__media--cutout">
-            <img src="assets/img/torii_japanse_wandlamp.webp" alt="Wandlamp Torii van notenhout met unryu kozo" width="618" height="1140" loading="lazy">
+            <img src="assets/img/torii_japanse_wandlamp.webp"
+     srcset="assets/img/torii_japanse_wandlamp-400.webp 400w,
+             assets/img/torii_japanse_wandlamp.webp 618w"
+     sizes="(min-width: 900px) 30vw, 92vw" alt="Wandlamp Torii van notenhout met unryu kozo" width="618" height="1140" loading="lazy" decoding="async">
           </div>
           <div class="card__foot">
             <div>
@@ -240,7 +254,10 @@
 
         <a class="card" href="lamp-take.html" data-reveal data-reveal-delay="2">
           <div class="card__media card__media--cutout">
-            <img src="assets/img/tafellamp_take.webp" alt="Tafellamp Take van notenhout met unryu kozo" width="695" height="1149" loading="lazy">
+            <img src="assets/img/tafellamp_take.webp"
+     srcset="assets/img/tafellamp_take-400.webp 400w,
+             assets/img/tafellamp_take.webp 695w"
+     sizes="(min-width: 900px) 30vw, 92vw" alt="Tafellamp Take van notenhout met unryu kozo" width="695" height="1149" loading="lazy" decoding="async">
           </div>
           <div class="card__foot">
             <div>
@@ -267,7 +284,7 @@
   <div class="wrap wrap--wide">
     <div class="site-footer__grid">
       <div>
-        <img class="site-footer__logo" src="assets/img/logo.webp" alt="OostersLicht" width="1600" height="298" loading="lazy">
+        <img class="site-footer__logo" src="assets/img/logo.webp" alt="OostersLicht" width="720" height="134" loading="lazy" decoding="async">
         <p class="site-footer__tagline">
           Handgemaakte lampen van massief hout en Japans papier, uit de werkplaats
           in Driebergen-Rijsenburg.
