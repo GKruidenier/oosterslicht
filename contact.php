@@ -11,7 +11,7 @@
 
 // Waar de aanvragen heen gaan. Hier mag elk adres staan, ook een persoonlijk
 // adres bij Gmail of Outlook; de mail wordt gewoon daarheen bezorgd.
-$ONTVANGER  = 'info@oosterslicht.nl';
+$ONTVANGER  = 'kruidenier.jelle@gmail.com';
 
 // Namens wie de server mailt. Dit MOET een adres op het eigen domein zijn.
 // Hetzelfde adres als hierboven gebruiken mag en is de eenvoudigste keuze.
@@ -38,8 +38,16 @@ $BEVESTIGING = true;
 
 // Het adres dat in die bevestiging staat als iemand wil reageren. Zet hier
 // geen noreply-adres neer: dan schrijft iemand met een aanvulling in het
-// luchtledige. Het mag hetzelfde adres zijn als $ONTVANGER.
-$ANTWOORDADRES = $ONTVANGER;
+// luchtledige. Het mag hetzelfde adres zijn als $ONTVANGER, maar hoeft niet.
+//
+// Hier staat met opzet iets anders. De aanvraag zelf komt binnen op het
+// adres hierboven, maar de klant krijgt het domeinadres te zien: dat is wat
+// op de site staat en het blijft gelden als de mailbox erachter verandert.
+//
+// Let op: dit adres staat ook in de Reply-To van de bevestiging. Antwoordt
+// een klant op die mail, dan komt dat hier binnen en niet bij $ONTVANGER.
+// Deze mailbox moet dus gelezen worden of doorsturen.
+$ANTWOORDADRES = 'info@oosterslicht.nl';
 
 $BEDANKT = 'bedankt.html';
 $FOUT    = 'contact.html?fout=1#formulier';
