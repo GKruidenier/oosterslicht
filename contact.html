@@ -116,7 +116,7 @@
           <h1 class="page-head__title">Neem contact op<br><span class="accent">met Jelle</span></h1>
         </div>
         <p class="page-head__text">
-          Wilt u een lamp aanvragen, of een andere vraag? Vul
+          Wilt u een lamp aanvragen of heeft u een vraag? Vul
           het formulier in. Jelle zal binnen een paar werkdagen reageren. Bellen of direct mailen kan ook.
         </p>
       </div>
@@ -220,7 +220,7 @@
                       <option data-staal="eiken">Eiken</option>
                       <option>In overleg</option>
                     </select>
-                    <span class="field__hint">Hier staan alleen de houtsoorten waarin deze lamp gemaakt wordt. Wilt u een andere, kies dan &ldquo;In overleg&rdquo;.</span>
+                    <span class="field__hint">Hier staan de standaard beschikbare houtsoorten. Bespreekt u liever een andere houtsoort? Kies dan &ldquo;In overleg&rdquo;.</span>
                     <p class="staal-keuze" data-staal-keuze hidden></p>
                   </div>
 
@@ -258,7 +258,7 @@
                   </div>
 
                   <div class="field" data-veld="detaillering">
-                    <label for="detaillering">Wensen voor de detaillering <span class="field__optioneel">optioneel</span></label>
+                    <label for="detaillering">Aanvullende wensen <span class="field__optioneel">optioneel</span></label>
                     <textarea id="detaillering" name="detaillering[1]" rows="3" placeholder="Bijvoorbeeld een afwijkende maat of een specifiek motief"></textarea>
                     <span class="field__hint">Houtsoort, papier en detaillering neemt Jelle daarna met u door.</span>
                   </div>
@@ -267,7 +267,7 @@
                     <label for="beschrijving">Beschrijf uw idee <span class="req" aria-hidden="true">*</span></label>
                     <textarea id="beschrijving" name="beschrijving[1]" rows="5" data-required
                               placeholder="Bijvoorbeeld: een hanglamp boven een eettafel van twee meter, in donker hout, met een warm en gedempt licht"></textarea>
-                    <span class="field__hint">Een paar zinnen is genoeg. Jelle neemt daarna contact op om vorm, hout, papier en detaillering door te nemen.</span>
+                    <span class="field__hint">Een korte beschrijving is voldoende. Jelle neemt daarna contact op om vorm, hout, papier en detaillering door te nemen.</span>
                   </div>
 
                   <div class="field" data-veld="bestanden" hidden>
@@ -325,21 +325,15 @@
               </div>
             </fieldset>
 
-            <!-- Hoort bij een bestelling; bij een vraag is er niets te bestellen,
-                 dan verbergt js/site.js deze regel. -->
-            <p class="form-aanvraag" data-alleen-bestelling>
-              Dit is een aanvraag, geen bestelling. Jelle neemt uw aanvraag in behandeling en zal met u overleggen wat de mogelijkheden zijn.
-            </p>
-
             <button class="btn btn--solid" type="submit">
               Verstuur uw bericht
               <svg class="btn__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12 12 4M12 4H5.5M12 4v6.5"/></svg>
             </button>
 
+            <p class="form-aanvraag" data-alleen-bestelling>Dit is een aanvraag, geen bestelling.</p>
+
             <p class="field__hint field__hint--spaced">
-              Velden met <span class="req" aria-hidden="true">*</span><span class="visueel-verborgen">een sterretje</span> zijn verplicht.
-              De levertijd spreekt u af in overleg; die staat in het voorstel dat
-              daarop volgt.
+              Velden met een sterretje (<span class="req" aria-hidden="true">*</span>) zijn verplicht.
             </p>
           </form>
         </div>
