@@ -46,6 +46,18 @@ titel, de description, de `og:description` en de tekenaantallen.
 3. Ctrl+S — Excel vraagt of je de tab-indeling wilt behouden; zeg ja
 4. `python seo.py toepassen`
 5. `python seo.py controleer`
+6. Commit de gewijzigde pagina's
+7. `python seo.py sitemap` — en commit daarna ook `sitemap.xml`
+
+Stap 7 komt ná de commit en niet ervoor. `sitemap` haalt de datum uit de
+git-historie, en een wijziging die nog niet gecommit is bestaat daar nog niet:
+draai je hem te vroeg, dan blijft de oude datum staan. Vergeet je hem, dan
+meldt `controleer` het de volgende keer als waarschuwing.
+
+Sluit Excel als je klaar bent. Een `seo.tsv` die openblijft terwijl er
+intussen aan de HTML wordt gewerkt, is een verouderde kopie: een latere
+`toepassen` zet dan de oude teksten terug over de nieuwe heen. Begin daarom
+altijd met `bewerken` (of `export`), nooit met een tabel die nog openstaat.
 
 De kolommen `bestand` en `indexeerbaar` blijven ongemoeid: daarmee weet het
 script waar een regel heen moet. De tekenaantallen hoef je niet bij te werken,
@@ -82,6 +94,11 @@ python seo.py sitemap
 
 Zet elke `lastmod` op de datum van de laatste commit van dat bestand. Dit was
 het openstaande punt uit hoofdstuk 7: de sitemap werkte zichzelf niet bij.
+
+Hoort bij elke wijziging aan een pagina, niet alleen bij titels en
+descriptions: ook als je paginatekst aanpast, verandert de datum waarop die
+pagina voor het laatst gewijzigd is. Altijd na de commit, zie stap 7
+hierboven.
 
 ### Wat het niet doet
 
