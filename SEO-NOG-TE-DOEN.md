@@ -45,14 +45,14 @@ titel, de description, de `og:description` en de tekenaantallen.
 2. Wijzig de kolommen `titel`, `description` of `og:description`
 3. Ctrl+S — Excel vraagt of je de tab-indeling wilt behouden; zeg ja
 4. `python seo.py toepassen`
-5. `python seo.py controleer`
-6. Commit de gewijzigde pagina's
-7. `python seo.py sitemap` — en commit daarna ook `sitemap.xml`
+5. `python seo.py sitemap`
+6. `python seo.py controleer`
+7. Commit alles in één keer: de pagina's en `sitemap.xml`
 
-Stap 7 komt ná de commit en niet ervoor. `sitemap` haalt de datum uit de
-git-historie, en een wijziging die nog niet gecommit is bestaat daar nog niet:
-draai je hem te vroeg, dan blijft de oude datum staan. Vergeet je hem, dan
-meldt `controleer` het de volgende keer als waarschuwing.
+`sitemap` geeft een pagina met wijzigingen die nog niet gecommit zijn de
+datum van vandaag, en anders de datum van de laatste commit. Daardoor kan hij
+vóór de commit, en gaan pagina en sitemap samen mee. Vergeet je hem, dan
+waarschuwt `controleer` in stap 6.
 
 Sluit Excel als je klaar bent. Een `seo.tsv` die openblijft terwijl er
 intussen aan de HTML wordt gewerkt, is een verouderde kopie: een latere
@@ -92,13 +92,15 @@ ooit aan een controle bij het uitrollen wilt hangen.
 python seo.py sitemap
 ```
 
-Zet elke `lastmod` op de datum van de laatste commit van dat bestand. Dit was
-het openstaande punt uit hoofdstuk 7: de sitemap werkte zichzelf niet bij.
+Zet elke `lastmod` op de datum waarop de pagina voor het laatst veranderd is:
+vandaag als er nog niet-gecommitte wijzigingen in zitten, anders de datum van
+de laatste commit. Dit was het openstaande punt uit hoofdstuk 7: de sitemap
+werkte zichzelf niet bij.
 
 Hoort bij elke wijziging aan een pagina, niet alleen bij titels en
 descriptions: ook als je paginatekst aanpast, verandert de datum waarop die
-pagina voor het laatst gewijzigd is. Altijd na de commit, zie stap 7
-hierboven.
+pagina voor het laatst gewijzigd is. Draai hem vlak voor je commit, dan gaan
+pagina en sitemap samen mee.
 
 ### Wat het niet doet
 

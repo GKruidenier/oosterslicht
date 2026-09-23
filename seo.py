@@ -12,11 +12,14 @@ tabel.
     python seo.py bewerken      exporteert en opent de tabel meteen in Excel
     python seo.py export        schrijft seo.tsv, zonder hem te openen
     python seo.py toepassen     leest seo.tsv terug de HTML in
-    python seo.py sitemap       werkt de lastmod-datums bij uit de git-historie
+    python seo.py sitemap       werkt de lastmod-datums bij; een pagina met
+                                wijzigingen die nog niet gecommit zijn krijgt
+                                de datum van vandaag
 
 Alleen de standaardbibliotheek, dus er valt niets te installeren.
 """
 
+import datetime
 import glob
 import html
 import io
@@ -197,12 +200,22 @@ def controleer_schema(d, m):
             m.fout(b, "verwijst naar %s maar definieert hem nergens" % ident)
 
 
+def _git(*args):
+    uit = subprocess.check_output(["git"] + list(args), stderr=subprocess.STDOUT)
+    return uit.decode("utf-8", "replace").strip()
+
+
 def git_datum(bestand):
+    """De datum waarop een pagina voor het laatst veranderd is.
+
+    Heeft het bestand wijzigingen die nog niet gecommit zijn, dan is dat
+    vandaag. Zo kan de sitemap bijgewerkt worden vóór de commit, en gaan de
+    pagina en de sitemap in dezelfde commit mee. Anders de datum van de
+    laatste commit waarin het bestand zat."""
     try:
-        uit = subprocess.check_output(
-            ["git", "log", "-1", "--format=%ad", "--date=short", "--", bestand],
-            stderr=subprocess.STDOUT)
-        return uit.decode("utf-8", "replace").strip()
+        if _git("status", "--porcelain", "--", bestand):
+            return datetime.date.today().isoformat()
+        return _git("log", "-1", "--format=%ad", "--date=short", "--", bestand)
     except Exception:
         return ""
 
