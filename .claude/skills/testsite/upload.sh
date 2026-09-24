@@ -28,7 +28,8 @@ REMOTE_ROOT="/public_html"
 CURL_OPTS=(--netrc-file "$NETRC" --ssl-reqd --tls-max 1.2 --connect-timeout 15 --max-time 300 -sS)
 
 # Bestanden die nooit mee mogen: bronmateriaal, werkbestanden, systeemrommel.
-UITSLUITEN='^(\.git/|\.claude/|\.impeccable/|_originelen/|_schetsen/|_fontkeuze/|fotos_claude_website/|ONGEBRUIKTE-BESTANDEN\.txt$|\.gitignore$|.*/\.DS_Store$|\.DS_Store$|Thumbs\.db$|desktop\.ini$)'
+# stijlenlab.html is een interne ontwerppagina en hoort niet op de server.
+UITSLUITEN='^(stijlenlab\.html$|\.git/|\.claude/|\.impeccable/|_originelen/|_schetsen/|_fontkeuze/|fotos_claude_website/|ONGEBRUIKTE-BESTANDEN\.txt$|\.gitignore$|.*/\.DS_Store$|\.DS_Store$|Thumbs\.db$|desktop\.ini$)'
 
 # De site zelf: wat er bij --alles meegaat.
 # .htaccess en sitemap.xml horen hier beslist bij. Zonder .htaccess mist de
@@ -117,7 +118,11 @@ case "$ACTIE" in
   alles)
     kleur "Hele site naar $HOST$REMOTE_ROOT"
     mislukt=0
-    for f in "${SITE_BESTANDEN[@]}"; do [ -f "$f" ] && { upload_bestand "$f" "$f" || mislukt=1; }; done
+    for f in "${SITE_BESTANDEN[@]}"; do
+      [ -f "$f" ] || continue
+      printf '%s' "$f" | grep -Eq "$UITSLUITEN" && continue
+      upload_bestand "$f" "$f" || mislukt=1
+    done
     for m in "${SITE_MAPPEN[@]}"; do
       [ -d "$m" ] || continue
       while IFS= read -r f; do

@@ -75,8 +75,8 @@ map en komen op dezelfde plek op de server terecht.
 .claude/skills/testsite/upload.sh --verwijder mailtest.php phpcheck.php
 ```
 
-Bronmateriaal en werkbestanden worden altijd overgeslagen: `_originelen/`,
-`_schetsen/`, `_fontkeuze/`, `fotos_claude_website/`, `.git/`, `.claude/` en
+Bronmateriaal en werkbestanden worden altijd overgeslagen: `stijlenlab.html`,
+`_originelen/`, `_schetsen/`, `_fontkeuze/`, `fotos_claude_website/`, `.git/`, `.claude/` en
 systeemrommel. `--alles` stuurt de HTML-bestanden, `contact.php`,
 `favicon.ico`, `robots.txt`, `sitemap.xml`, `.htaccess`, `.user.ini` en de
 mappen `assets`, `css`, `js`.
