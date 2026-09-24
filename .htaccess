@@ -41,7 +41,7 @@ RewriteCond %{HTTPS} =on [OR]
 RewriteCond %{HTTP:X-Forwarded-Proto} =https
 RewriteRule ^ - [E=OL_BEVEILIGD:1]
 
-# De testomgeving draait op test.oosterslicht.nl, zonder certificaat. Zonder
+# De testomgeving draait op test.oosterslicht.nl. Zonder
 # deze uitzondering zou de regel hieronder elk verzoek op de testsite naar de
 # live site sturen, en is er op de test dus niets meer te zien of te meten.
 # De doorstuurtabel eronder blijft daar wel gewoon werken.

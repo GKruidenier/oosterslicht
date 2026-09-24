@@ -183,7 +183,7 @@ uploadscript hem niet meestuurde; dat is verholpen, maar controleer het.
 
 ```powershell
 curl.exe -s -o NUL -w "%{http_code}`n" https://www.oosterslicht.nl/bestaat-niet-xyz/
-curl.exe -s https://www.oosterslicht.nl/meditatielampen/onzin/ | Select-String 'bestaat niet meer'
+curl.exe -s https://www.oosterslicht.nl/meditatielampen/onzin/ | Select-String 'kunnen we niet vinden'
 ```
 
 Wil zien: `404`, en de tweede regel moet de tekst vinden. Die tweede
