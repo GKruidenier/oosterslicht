@@ -676,14 +676,12 @@
     var LAMPVELDEN = {
       /* De houtsoorten komen uit de specificatie op de productpagina en zijn
          per lamp verschillend: alleen de Koyo wordt in alle zes gemaakt. Bij
-         de Yin en de Yang gaat de keuze over de kap. Bij de Yang staat onder
-         het menu dat de detaillering altijd esdoorn is. "In overleg"
+         de Yin en de Yang gaat de keuze over de kap. "In overleg"
          staat overal bij, want elke pagina zegt "andere soorten op aanvraag".
 
          Het papier is bij elke Japanse lamp vrij te kiezen uit alle drie. */
       'Vloerlamp Yin':      { hout: ['Noten', 'In overleg'], papier: 1 },
-      'Vloerlamp Yang':     { hout: ['Kers', 'Iep', 'Noten', 'In overleg'], papier: 1,
-                              vast: 'een esdoornhouten frame' },
+      'Vloerlamp Yang':     { hout: ['Kers', 'Iep', 'Noten', 'In overleg'], papier: 1 },
       'Hanglamp Kawa':      { hout: ['Esdoorn', 'In overleg'], papier: 1 },
       'Wandlamp Koyo':      { hout: 1, papier: 1, blad: 1, afmeting: 1 },
       'Wandlamp Torii':     { hout: ['Noten', 'In overleg'], papier: 1 },
