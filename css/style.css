@@ -3850,7 +3850,7 @@ p:last-child {
   }
 }
 
-/* De richtprijs onder de lampkeuze. Iets steviger dan .field__hint: dit is het
+/* De prijs onder de lampkeuze. Iets steviger dan .field__hint: dit is het
    enige bedrag in het hele formulier en het hoort niet weg te vallen. */
 .veld-prijs {
   margin: var(--space-3xs) 0 0;

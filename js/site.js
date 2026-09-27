@@ -809,8 +809,8 @@
           prijsEl.hidden = true;
           prijsEl.textContent = '';
         } else {
-          prijsEl.innerHTML = 'Richtprijs <strong>&euro; ' + tarief + '</strong> incl. btw. ' +
-            'Een andere houtsoort, maat of afwerking kan de prijs veranderen.';
+          prijsEl.innerHTML = 'Prijs <strong>&euro; ' + tarief + '</strong> incl. btw. ' +
+            'Aanvullende wensen, zoals een andere maat of aangepaste detaillering, kunnen de prijs veranderen.';
           prijsEl.hidden = false;
         }
       }
