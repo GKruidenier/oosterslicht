@@ -1035,9 +1035,11 @@
       var notice = document.createElement('p');
       notice.className = 'notice';
       notice.setAttribute('role', 'status');
-      notice.textContent =
-        'Uw keuze uit de collectie is alvast ingevuld (' + filled.join(', ') +
-        '). U kunt alles hieronder nog aanpassen.';
+      var lampSel = form.querySelector('#lamp');
+      notice.textContent = lampSel && lampSel.value === 'Volledig op maat'
+        ? 'U heeft gekozen voor een lamp volledig op maat. Beschrijf hieronder uw idee.'
+        : 'Uw keuze uit de collectie is alvast ingevuld (' + filled.join(', ') +
+          '). U kunt alles hieronder nog aanpassen.';
       form.prepend(notice);
     })();
 
