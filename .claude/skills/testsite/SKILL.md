@@ -81,6 +81,25 @@ systeemrommel. `--alles` stuurt de HTML-bestanden, `contact.php`,
 `favicon.ico`, `robots.txt`, `sitemap.xml`, `.htaccess`, `.user.ini` en de
 mappen `assets`, `css`, `js`.
 
+## Naar de live site
+
+Met `--live` gaat alles naar `www.oosterslicht.nl`, via een eigen FTP-account
+in `~/.claude/oosterslicht-live.netrc` (of `OOSTERSLICHT_LIVE_NETRC`). Zet
+test en live nooit samen in één netrc-bestand.
+
+```bash
+.claude/skills/testsite/upload.sh --live --lijst            # kijken mag altijd
+.claude/skills/testsite/upload.sh --live --alles --proef    # eerst dit
+.claude/skills/testsite/upload.sh --live --alles --bevestig # dan pas dit
+```
+
+Schrijven naar live weigert zonder `--bevestig`, en ook als er
+niet-gecommitte wijzigingen zijn: wat live staat moet altijd in git staan.
+Upload naar live pas nadat dezelfde versie op de testsite is gecontroleerd.
+
+Let op: een wachtwoord dat met `#` begint leest curl in een netrc-bestand als
+commentaar. Dat geeft `530 Login authentication failed`.
+
 ## Achteraf controleren
 
 Omdat de DNS ontbreekt, wijs je de naam zelf even aan:

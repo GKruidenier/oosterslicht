@@ -2,12 +2,47 @@
 #
 # Zet bestanden op de testsite (test.oosterslicht.nl) via FTPS.
 #
+# Met --live gaat alles naar de echte site (www.oosterslicht.nl), via een
+# eigen FTP-account in een eigen netrc-bestand. Schrijven naar live vraagt
+# daarnaast --bevestig, en kan alleen als alle wijzigingen gecommit zijn:
+# op de live site staat nooit iets wat niet in git staat.
+#
 # De inloggegevens staan NIET in dit bestand en niet in de repository, maar in
 # een netrc-bestand buiten het project. Zie SKILL.md.
 #
 set -u
 
-NETRC="${OOSTERSLICHT_NETRC:-$HOME/.claude/oosterslicht-test.netrc}"
+kleur() { printf '%s\n' "$*" >&2; }
+fout()  { printf 'FOUT: %s\n' "$*" >&2; exit 1; }
+
+DRYRUN=0
+LIVE=0
+BEVESTIGD=0
+ACTIE="upload"
+ARGS=()
+for a in "$@"; do
+  case "$a" in
+    --proef|--dry-run) DRYRUN=1 ;;
+    --alles|--all)     ACTIE="alles" ;;
+    --lijst|--list)    ACTIE="lijst" ;;
+    --verwijder|--rm)  ACTIE="verwijder" ;;
+    --live)            LIVE=1 ;;
+    --bevestig)        BEVESTIGD=1 ;;
+    -*) fout "onbekende optie: $a" ;;
+    *)  ARGS+=("$a") ;;
+  esac
+done
+
+# Test en live hebben elk een eigen netrc-bestand met één account. Nooit beide
+# in één bestand: het script neemt de eerste machine-regel, en dan kan een
+# upload stilletjes op de verkeerde site belanden.
+if [ "$LIVE" = 1 ]; then
+  NETRC="${OOSTERSLICHT_LIVE_NETRC:-$HOME/.claude/oosterslicht-live.netrc}"
+  DOELNAAM="LIVE (www.oosterslicht.nl)"
+else
+  NETRC="${OOSTERSLICHT_NETRC:-$HOME/.claude/oosterslicht-test.netrc}"
+  DOELNAAM="testsite (test.oosterslicht.nl)"
+fi
 # De hostnaam staat niet in dit bestand. Deze repository is openbaar, en een
 # hostnaam met de gebruikersnaam eronder wijst een aanvaller precies aan waar
 # hij moet proberen. Hij wordt gelezen uit de machine-regel van het
@@ -40,25 +75,17 @@ UITSLUITEN='^(stijlenlab\.html$|\.git/|\.claude/|\.impeccable/|_originelen/|_sch
 SITE_BESTANDEN=(*.html contact.php favicon.ico robots.txt sitemap.xml .htaccess .user.ini)
 SITE_MAPPEN=(assets css js)
 
-kleur() { printf '%s\n' "$*" >&2; }
-fout()  { printf 'FOUT: %s\n' "$*" >&2; exit 1; }
-
 [ -r "$NETRC" ] || fout "geen inloggegevens gevonden op $NETRC (zie SKILL.md)"
 [ -n "$HOST" ]  || fout "geen hostnaam gevonden; zet een machine-regel in $NETRC of OOSTERSLICHT_HOST"
 
-DRYRUN=0
-ACTIE="upload"
-ARGS=()
-for a in "$@"; do
-  case "$a" in
-    --proef|--dry-run) DRYRUN=1 ;;
-    --alles|--all)     ACTIE="alles" ;;
-    --lijst|--list)    ACTIE="lijst" ;;
-    --verwijder|--rm)  ACTIE="verwijder" ;;
-    -*) fout "onbekende optie: $a" ;;
-    *)  ARGS+=("$a") ;;
-  esac
-done
+# Live wordt nooit per ongeluk beschreven. Kijken (--lijst) en een proefdraai
+# mogen altijd; alles wat iets verandert vraagt --bevestig en een schone
+# werkmap, zodat wat live staat altijd terug te vinden is in git.
+if [ "$LIVE" = 1 ] && [ "$ACTIE" != "lijst" ] && [ "$DRYRUN" = 0 ]; then
+  [ "$BEVESTIGD" = 1 ] || fout "dit schrijft naar de LIVE site; voeg --bevestig toe als dat de bedoeling is (eerst --proef?)"
+  [ -z "$(git status --porcelain 2>/dev/null)" ] || fout "er zijn niet-gecommitte wijzigingen; commit eerst, zodat live gelijk is aan git"
+fi
+kleur "Doel: $DOELNAAM"
 
 remote_pad() { printf 'ftp://%s%s/%s' "$HOST" "$REMOTE_ROOT" "$1"; }
 

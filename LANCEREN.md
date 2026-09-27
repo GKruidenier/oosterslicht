@@ -108,9 +108,13 @@ sprong niet meer op de testsite bent.
 
 ## 2. De uitrol
 
+Zonder `--live` gaat alles naar de testsite, niet naar de echte site. Het
+live-account staat in `~/.claude/oosterslicht-live.netrc`. Maak eerst een
+reservekopie van wat er live staat.
+
 ```powershell
-.claude/skills/testsite/upload.sh --alles --proef
-.claude/skills/testsite/upload.sh --alles
+.claude/skills/testsite/upload.sh --live --alles --proef
+.claude/skills/testsite/upload.sh --live --alles --bevestig
 ```
 
 Doe eerst de proefdraai en kijk of `.htaccess` en `sitemap.xml` in de lijst
@@ -123,7 +127,7 @@ vóór het schrijven. Breekt de overdracht af, dan staat er 0 bytes op de server
 en geeft die pagina een lege 200 zonder foutmelding. Controleer daarna:
 
 ```powershell
-.claude/skills/testsite/upload.sh --lijst
+.claude/skills/testsite/upload.sh --live --lijst
 ```
 
 Wil zien: geen enkel bestand van 0 bytes.
