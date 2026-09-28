@@ -4,15 +4,18 @@
 #
 # Dit bestand doet vier dingen, in deze volgorde:
 #
-#   1. het domein vastzetten op één adres (https + www)
-#   2. elke URL van de oude site uit 2016 doorsturen naar de nieuwe pagina
+#   1. elke URL van de oude site uit 2016 doorsturen naar de nieuwe pagina
+#   2. het domein vastzetten op één adres (https + www)
 #   3. wat definitief weg is netjes als weg melden
 #   4. comprimeren en cachen
 #
-# De volgorde is niet vrijblijvend. De canonicalisatie moet vóór de
-# doorstuurtabel staan, anders krijgt iemand die op een oude non-www-URL
-# binnenkomt twee sprongen achter elkaar. Google volgt die wel, maar elke
-# extra sprong kost waarde en tijd.
+# De volgorde is niet vrijblijvend. De doorstuurtabel moet vóór de
+# canonicalisatie staan. Elke regel in de tabel wijst al rechtstreeks naar
+# https://www.oosterslicht.nl, dus een oud adres komt zo in één sprong aan,
+# ook als het via http:// of zonder www binnenkomt - en zo stond de oude
+# site in Google. Andersom gaat zo'n adres eerst naar https://www en pas
+# daarna naar de nieuwe pagina: twee sprongen. Google volgt die wel, maar
+# elke extra sprong kost waarde en tijd.
 #
 # Let op: de hosting draait LiteSpeed. Die leest dit bestand wel, maar
 # negeert php_value-regels. PHP-instellingen staan daarom in .user.ini.
@@ -26,38 +29,7 @@ RewriteEngine On
 RewriteBase /
 
 
-# --- 1. Eén adres voor de hele site --------------------------------------
-#
-# Nu serveren www en non-www allebei een 200, en bestaat elke pagina zowel
-# met als zonder https. Dat zijn vier adressen voor één pagina. Hieronder
-# wordt alles in één sprong naar https://www.oosterslicht.nl gebracht.
-#
-# De eerste twee regels bepalen of de verbinding al beveiligd is. Achter een
-# proxy of loadbalancer staat %{HTTPS} soms niet, maar komt het antwoord via
-# de header X-Forwarded-Proto binnen; zonder die tweede controle zou de site
-# zichzelf eindeloos naar https blijven sturen.
-
-RewriteCond %{HTTPS} =on [OR]
-RewriteCond %{HTTP:X-Forwarded-Proto} =https
-RewriteRule ^ - [E=OL_BEVEILIGD:1]
-
-# De testomgeving draait op test.oosterslicht.nl. Zonder
-# deze uitzondering zou de regel hieronder elk verzoek op de testsite naar de
-# live site sturen, en is er op de test dus niets meer te zien of te meten.
-# De doorstuurtabel eronder blijft daar wel gewoon werken.
-RewriteCond %{HTTP_HOST} ^test\.oosterslicht\.nl$ [NC]
-RewriteRule ^ - [E=OL_TEST:1]
-
-# Lees de drie regels hieronder als: "niet de testsite, EN (nog geen https, OF
-# nog niet www)". Apache bindt het [OR] aan het aangrenzende paar; de losse
-# regel ervoor geldt daar bovenop.
-RewriteCond %{ENV:OL_TEST} !=1
-RewriteCond %{ENV:OL_BEVEILIGD} !=1 [OR]
-RewriteCond %{HTTP_HOST} !^www\.oosterslicht\.nl$ [NC]
-RewriteRule ^(.*)$ https://www.oosterslicht.nl/$1 [R=301,L,NE]
-
-
-# --- 2. De oude site doorsturen ------------------------------------------
+# --- 1. De oude site doorsturen ------------------------------------------
 #
 # De oude site had tien pagina's, elk bereikbaar als map én als
 # .../index.php. Beide vormen zitten in de patronen hieronder verwerkt met
@@ -118,6 +90,37 @@ RewriteRule ^lampmateriaal/washi-papier-van-moerbeiboom-jinwashi-van-hennep/?(in
 # De maker, en het contactformulier dat eronder hing.
 RewriteRule ^sinoloog-en-meubelmaker-van-meubelmakers-vakschool/contact/?(index\.php)?$ https://www.oosterslicht.nl/contact.html [R=301,L,NE,NC]
 RewriteRule ^sinoloog-en-meubelmaker-van-meubelmakers-vakschool/?(index\.php)?$ https://www.oosterslicht.nl/maakproces.html [R=301,L,NE,NC]
+
+
+# --- 2. Eén adres voor de hele site --------------------------------------
+#
+# Nu serveren www en non-www allebei een 200, en bestaat elke pagina zowel
+# met als zonder https. Dat zijn vier adressen voor één pagina. Hieronder
+# wordt alles in één sprong naar https://www.oosterslicht.nl gebracht.
+#
+# De eerste twee regels bepalen of de verbinding al beveiligd is. Achter een
+# proxy of loadbalancer staat %{HTTPS} soms niet, maar komt het antwoord via
+# de header X-Forwarded-Proto binnen; zonder die tweede controle zou de site
+# zichzelf eindeloos naar https blijven sturen.
+
+RewriteCond %{HTTPS} =on [OR]
+RewriteCond %{HTTP:X-Forwarded-Proto} =https
+RewriteRule ^ - [E=OL_BEVEILIGD:1]
+
+# De testomgeving draait op test.oosterslicht.nl. Zonder
+# deze uitzondering zou de regel hieronder elk verzoek op de testsite naar de
+# live site sturen, en is er op de test dus niets meer te zien of te meten.
+# De doorstuurtabel hierboven werkt daar wel gewoon.
+RewriteCond %{HTTP_HOST} ^test\.oosterslicht\.nl$ [NC]
+RewriteRule ^ - [E=OL_TEST:1]
+
+# Lees de drie regels hieronder als: "niet de testsite, EN (nog geen https, OF
+# nog niet www)". Apache bindt het [OR] aan het aangrenzende paar; de losse
+# regel ervoor geldt daar bovenop.
+RewriteCond %{ENV:OL_TEST} !=1
+RewriteCond %{ENV:OL_BEVEILIGD} !=1 [OR]
+RewriteCond %{HTTP_HOST} !^www\.oosterslicht\.nl$ [NC]
+RewriteRule ^(.*)$ https://www.oosterslicht.nl/$1 [R=301,L,NE]
 
 
 # --- 3. Wat definitief weg is --------------------------------------------
